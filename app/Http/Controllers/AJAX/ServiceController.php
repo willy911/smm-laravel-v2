@@ -16,6 +16,7 @@ namespace App\Http\Controllers\AJAX;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order\Order;
+use App\Models\Order\OrderReview;
 use App\Models\Service\Service;
 use App\Models\Service\ServiceFavorite;
 use App\Models\User\User;
@@ -153,6 +154,41 @@ class ServiceController extends Controller
             'completed' => $summary['completed'] ?? ['count' => 0, 'percentage' => 0],
             'failed' => $summary['failed'] ?? ['count' => 0, 'percentage' => 0],
         ];
+
+        $approvedReviewsQuery = OrderReview::where('service_id', $target->id)->where('status', '1');
+        $target->total_ratings = (clone $approvedReviewsQuery)->count();
+        $target->avg_ratings = round((float) ((clone $approvedReviewsQuery)->avg('rating') ?? 0), 2);
+
+        $target->reviews = OrderReview::with('user:id,username')
+            ->where('service_id', $target->id)
+            ->where('status', '1')
+            ->latest('id')
+            ->limit(10)
+            ->get()
+            ->map(function ($review) {
+                return [
+                    'id' => $review->id,
+                    'rating' => $review->rating,
+                    'message' => $review->message,
+                    'created_at' => optional($review->created_at)->format('Y-m-d H:i:s'),
+                    'user' => $review->user ? ['username' => $review->user->username] : null,
+                ];
+            })->values();
+
+        if (auth()->check()) {
+            $completedOrder = Order::where('user_id', auth()->id())
+                ->where('service_id', $target->id)
+                ->where('status', 'completed')
+                ->orderByDesc('id')
+                ->first();
+            $hasReviewed = OrderReview::where('user_id', auth()->id())->where('service_id', $target->id)->exists();
+            $target->can_review = (bool) ($completedOrder && ! $hasReviewed);
+            $target->review_order_id = $completedOrder && ! $hasReviewed ? $completedOrder->id : null;
+        } else {
+            $target->can_review = false;
+            $target->review_order_id = null;
+        }
+
         return response()->json([
             'status'  => true,
             'service' => $target,

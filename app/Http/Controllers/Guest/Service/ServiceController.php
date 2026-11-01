@@ -41,6 +41,10 @@ class ServiceController extends Controller
                 ], 429);
             }
             // RateLimiter::hit($rateKey);
+            $orderColumn = $request->input('order.column') === 'category'
+                ? ServiceCategory::select('name')->whereColumn('service_categories.id', 'services.service_category_id')
+                : $request->input('order.column');
+            $orderDirection = $request->input('order.direction') === 'asc' ? 'asc' : 'desc';
             $tableItems = Service::with([
                 'serviceCategory',
                 'orders' => fn($query) => $query->select('id', 'service_id', 'quantity', 'created_at', 'updated_at')->where('status', 'completed')->latest('id')->limit(10),
@@ -103,7 +107,14 @@ class ServiceController extends Controller
                         'description',
                     ], 'LIKE', '%' . ($request->input('filter.search')) . '%');
                 }
-            })->orderBy($request->input('order.column'), $request->input('order.direction'))->paginate($request->input('length') ?: 30)->onEachSide(1);
+            })->orderBy($orderColumn, $orderDirection)
+                ->withCount(['orderReviews as total_ratings' => function ($query) {
+                    $query->where('status', '1');
+                }])
+                ->withAvg(['orderReviews as avg_ratings' => function ($query) {
+                    $query->where('status', '1');
+                }], 'rating')
+                ->paginate($request->input('length') ?: 30)->onEachSide(1);
             $tableItems->getCollection()->transform(function ($item) {
                 $item->avg_quantity = $item->get_avg_quantity;
                 $item->avg_time = $item->get_avg_time;
@@ -157,6 +168,7 @@ class ServiceController extends Controller
                                     'count' => $row->count,
                                 ];
                             }),
+                        'serviceCategoryGroups' => ServiceCategoryGroup::orderByRaw('ISNULL(sort_number), sort_number ASC, id ASC')->get(['id', 'name', 'type', 'icon', 'emoji']),
                         'others' => array_values(array_filter([
                             auth()->check() ? [
                                 'value' => 'favorite',
