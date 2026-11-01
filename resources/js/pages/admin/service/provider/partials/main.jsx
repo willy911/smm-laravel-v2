@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+﻿import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
@@ -1140,50 +1140,38 @@ export default function Main({ form }) {
             },
         },
         {
-            name: 'Mirai Pedia',
-            alias: 'MP',
+            name: 'Flazpedia',
+            alias: 'FP',
             locale: 'id',
             is_refill_support: true,
             is_cancel_support: true,
-            default_parameters: [
-                { key: 'api_key', value: '' },
-                { key: 'secret_key', value: '' },
-            ],
+            default_parameters: [{ key: 'key', value: '' }],
             configs: {
                 account: {
-                    endpoint: 'https://mirai-pedia.com/api/account/profile',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'balance' },
                     ],
                     parse_response: {
-                        balance: 'data.balance',
+                        balance: 'balance',
                     },
                     example_response: JSON.stringify(
                         {
-                            status: true,
-                            data: {
-                                username: 'user',
-                                full_name: 'user name',
-                                email: 'user@domain.com',
-                                whatsapp: '081234xxxxx',
-                                balance: 0,
-                                orders: 0,
-                                deposits: 0,
-                                joined_at: '2017-01-01',
-                            },
+                            balance: '100.00',
+                            currency: 'IDR',
                         },
                         null,
                         4,
                     ),
                 },
                 services: {
-                    endpoint: 'https://mirai-pedia.com/api/services',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'services' },
                     ],
                     profit_configs: {
                         type: 'percentage',
@@ -1191,92 +1179,75 @@ export default function Main({ form }) {
                         display_value: 10,
                     },
                     parse_response: {
-                        looping: 'data',
-                        id: 'id',
+                        looping: '',
+                        id: 'service',
                         category: 'category',
                         name: 'name',
-                        price: 'price',
+                        price: 'rate',
                         min: 'min',
                         max: 'max',
-                        description: 'description',
+                        description: '',
                         is_refill_support: 'refill',
                         is_cancel_support: 'cancel',
-                        refill_days: 'refill_days',
+                        refill_days: '',
                         refill_available_in_hours: '',
                         type: 'type',
                     },
                     parse_text: {
                         name: [{ from: 'jhondelton', to: 'jhonroot.dev' }],
                         type: {
-                            primary: 'primary',
-                            package: 'package',
-                            custom_comments: 'custom_comments',
-                            custom_comments_package: 'custom_comments_package',
-                            comment_likes: 'comment_likes',
-                            comment_replies: 'comment_replies',
-                            mentions_hashtag: 'mentions_hashtag',
-                            mentions_with_hashtags: 'mentions_with_hashtags',
-                            mentions_custom_list: 'mentions_custom_list',
-                            mentions_user_followers: 'mentions_user_followers',
-                            mentions_media_likers: 'mentions_media_likers',
-                            poll: 'poll',
+                            primary: 'Default',
+                            package: 'Package',
+                            custom_comments: 'Custom Comments',
+                            custom_comments_package: 'Custom Comments Package',
+                            comment_likes: 'Comment Likes',
+                            comment_replies: 'Comment Replies',
+                            mentions_hashtag: 'Mentions Hashtag',
+                            mentions_with_hashtags: 'Mentions With Hashtags',
+                            mentions_custom_list: 'Mentions Custom List',
+                            mentions_user_followers: 'Mentions User Followers',
+                            mentions_media_likers: 'Mentions Media Likers',
+                            poll: 'Poll',
                             subscriptions: 'Subscriptions',
                         },
                     },
                     example_response: JSON.stringify(
-                        {
-                            status: true,
-                            data: [
-                                {
-                                    id: 1,
-                                    type: 'custom_comments',
-                                    category: 'Instagram Custom Comments',
-                                    name: 'Instagram Custom Comments S1',
-                                    price: 10000,
-                                    min: 100,
-                                    max: 1000,
-                                    refill: true,
-                                    cancel: true,
-                                    refill_days: 30,
-                                    description: '-',
-                                    avg_quantity: 100,
-                                    avg_time_in_seconds: 13580,
-                                    avg_time_in_human: '3 jam 46 menit 20 detik',
-                                    created_at: '2024-01-01 00:00:01',
-                                    updated_at: '2024-01-01 00:01:00',
-                                },
-                                {
-                                    id: 2,
-                                    type: 'primary',
-                                    category: 'Instagram Followers',
-                                    name: 'Instagram Followers S1',
-                                    price: 5000,
-                                    min: 100,
-                                    max: 500,
-                                    refill: true,
-                                    cancel: false,
-                                    refill_days: 30,
-                                    description: '-',
-                                    avg_quantity: 67,
-                                    avg_time_in_seconds: 2407,
-                                    avg_time_in_human: '40 menit 7 detik',
-                                    created_at: '2024-01-01 00:00:01',
-                                    updated_at: '2024-01-01 00:01:00',
-                                },
-                            ],
-                        },
+                        [
+                            {
+                                service: 1,
+                                name: 'Followers',
+                                type: 'Default',
+                                category: 'First Category',
+                                rate: '0.90',
+                                min: '50',
+                                max: '10000',
+                                refill: true,
+                                cancel: true,
+                            },
+                            {
+                                service: 2,
+                                name: 'Comments',
+                                type: 'Custom Comments',
+                                category: 'Second Category',
+                                rate: '8',
+                                min: '10',
+                                max: '1500',
+                                refill: false,
+                                cancel: true,
+                            },
+                        ],
                         null,
                         4,
                     ),
                 },
                 order_create: {
-                    endpoint: 'https://mirai-pedia.com/api/order/create',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
-                        { key: 'service_id', type: 'service_id' },
-                        { key: 'target', type: 'order_target' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'add' },
+                        { key: 'service', type: 'service_id' },
+                        { key: 'link', type: 'order_target' },
                         { key: 'quantity', type: 'order_quantity' },
                         { key: 'comments', type: 'order_comments' },
                         { key: 'usernames', type: 'order_usernames' },
@@ -1287,167 +1258,132 @@ export default function Main({ form }) {
                         { key: 'answer_number', type: 'order_answer_number' },
                     ],
                     parse_response: {
-                        order_id: 'data.id',
+                        order_id: 'order',
                     },
                     example_response: JSON.stringify(
                         {
-                            status: true,
-                            data: {
-                                id: '1',
-                                service_id: 1,
-                                service_name: 'Service Name',
-                                target: 'example_target',
-                                quantity: 1000,
-                                price: 100,
-                                status: 'pending',
-                                start_count: 0,
-                                remains: 0,
-                                initial_balance: 500,
-                                final_balance: 400,
-                                created_at: '2024-01-01 00:00:01',
-                                updated_at: '2024-01-01 00:01:00',
-                            },
+                            order: 123,
                         },
                         null,
                         4,
                     ),
                 },
                 order_status: {
-                    endpoint: 'https://mirai-pedia.com/api/order/status',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     send_request_as_bulk: 0,
                     order_id_separator: ',',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
-                        { key: 'id', type: 'order_id' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'status' },
+                        { key: 'order', type: 'order_id' },
                     ],
                     parse_response: {
-                        status: 'data.status',
-                        start_count: 'data.start_count',
-                        remains: 'data.remains',
+                        status: 'status',
+                        start_count: 'start_count',
+                        remains: 'remains',
                     },
                     parse_text: {
                         status: {
-                            pending: 'pending',
-                            processing: 'processing',
-                            in_progress: 'in_progress',
-                            completed: 'completed',
-                            error: 'error',
-                            partial: 'partial',
-                            canceled: 'canceled',
+                            pending: 'Pending',
+                            processing: 'Processing',
+                            in_progress: 'In Progress',
+                            completed: 'Completed',
+                            error: 'Error',
+                            partial: 'Partial',
+                            canceled: 'Canceled',
                         },
                     },
                     example_response: JSON.stringify(
                         {
-                            status: true,
-                            data: {
-                                success: 'pesanan ditemukan',
-                                id: '1',
-                                service_id: 1,
-                                service_name: 'Service Name',
-                                target: 'example_target',
-                                quantity: 1000,
-                                price: 100,
-                                status: 'pending',
-                                start_count: 0,
-                                remains: 0,
-                                initial_balance: 500,
-                                final_balance: 400,
-                                created_at: '2024-01-01 00:00:01',
-                                updated_at: '2024-01-01 00:01:00',
-                            },
+                            start_count: '100',
+                            status: 'Completed',
+                            remains: '157',
                         },
                         null,
                         4,
                     ),
                 },
                 order_refill_create: {
-                    endpoint: 'https://mirai-pedia.com/api/order/refill/create',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     send_request_as_bulk: 0,
                     order_id_separator: ',',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
-                        { key: 'id', type: 'order_id' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'refill' },
+                        { key: 'order', type: 'order_id' },
                     ],
                     parse_response: {
                         looping: '',
-                        order_refill_id: 'data.id',
+                        order_refill_id: 'refill',
                     },
                     example_response: JSON.stringify(
                         {
-                            status: true,
-                            data: {
-                                id: '1',
-                                status: 'pending',
-                                created_at: '2024-04-14 09:15:23',
-                                updated_at: '2024-04-14 09:15:23',
-                            },
+                            refill: '1',
                         },
                         null,
                         4,
                     ),
                 },
                 order_refill_status: {
-                    endpoint: 'https://mirai-pedia.com/api/order/refill/status',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     send_request_as_bulk: 0,
                     order_id_separator: ',',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
-                        { key: 'id', type: 'order_refill_id' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'refill_status' },
+                        { key: 'refill', type: 'order_refill_id' },
                     ],
                     parse_response: {
-                        status: 'data.status',
+                        status: 'status',
                     },
                     parse_text: {
                         status: {
-                            pending: 'pending',
-                            processing: 'processing',
-                            in_progress: 'in_progress',
-                            completed: 'completed',
-                            error: 'error',
-                            rejected: 'rejected',
+                            pending: 'Pending',
+                            processing: 'Processing',
+                            in_progress: 'In Progress',
+                            completed: 'Completed',
+                            error: 'Error',
+                            rejected: 'Rejected',
                         },
                     },
                     example_response: JSON.stringify(
                         {
-                            status: true,
-                            data: {
-                                id: '1',
-                                status: 'pending',
-                                created_at: '2024-04-14 09:15:23',
-                                updated_at: '2024-04-14 09:15:23',
-                            },
+                            status: 'Completed',
                         },
                         null,
                         4,
                     ),
                 },
                 order_cancel_create: {
-                    endpoint: 'https://mirai-pedia.com/api/order/cancel/create',
+                    endpoint: 'https://flazpedia.com/api/v2',
                     method: 'post',
                     send_request_as_bulk: 0,
                     order_id_separator: ',',
                     params: [
-                        { key: 'api_key', type: 'default_parameter' },
-                        { key: 'secret_key', type: 'default_parameter' },
-                        { key: 'id', type: 'order_id' },
+                        { key: 'key', type: 'default_parameter' },
+                        { key: 'action', type: 'custom', value: 'cancel' },
+                        { key: 'orders', type: 'order_id' },
                     ],
                     parse_response: {
                         looping: '',
-                        order_cancel_id: 'data.id',
+                        order_cancel_id: 'cancel',
                     },
                     example_response: JSON.stringify(
-                        {
-                            status: true,
-                            data: {
-                                id: '1',
+                        [
+                            {
+                                order: 9,
+                                cancel: {
+                                    error: 'Incorrect order ID',
+                                },
                             },
-                        },
+                            {
+                                order: 2,
+                                cancel: 1,
+                            },
+                        ],
                         null,
                         4,
                     ),
@@ -2033,8 +1969,8 @@ export default function Main({ form }) {
     };
 
     useEffect(() => {
-        if (form.data.miraipedia) {
-            setConfigs('Mirai Pedia');
+        if (form.data.flazpedia) {
+            setConfigs('Flazpedia');
         }
     }, []);
 
@@ -2240,9 +2176,9 @@ export default function Main({ form }) {
                     </div>
                 </div>
                 <div className="grid items-start gap-4 lg:grid-cols-4">
-                    <div className={cn('grid gap-2', form.data.miraipedia && 'hidden')}>
+                    <div className={cn('grid gap-2', form.data.flazpedia && 'hidden')}>
                         <Label>Type</Label>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="typeManual"
                                 checked={form.data.service.provider.type === 'manual'}
@@ -2258,7 +2194,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="typeManual">Manual</Label>
                         </div>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="typeAuto"
                                 checked={form.data.service.provider.type === 'auto'}
@@ -2276,9 +2212,9 @@ export default function Main({ form }) {
                         </div>
                         {form.invalid('service.provider.type') && <InputError message={form.errors['service.provider.type']} />}
                     </div>
-                    <div className={cn('grid gap-2', form.data.miraipedia && 'hidden')}>
+                    <div className={cn('grid gap-2', form.data.flazpedia && 'hidden')}>
                         <Label>Support</Label>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="isRefillSupport"
                                 checked={form.data.service.provider.is_refill_support}
@@ -2294,7 +2230,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="isRefillSupport">Order Refill</Label>
                         </div>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="isCancelSupport"
                                 checked={form.data.service.provider.is_cancel_support}
@@ -2311,9 +2247,9 @@ export default function Main({ form }) {
                             <Label htmlFor="isCancelSupport">Order Cancellation</Label>
                         </div>
                     </div>
-                    <div className={cn('grid gap-2', form.data.miraipedia && 'hidden')}>
+                    <div className={cn('grid gap-2', form.data.flazpedia && 'hidden')}>
                         <Label>Quick API Setup</Label>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="apiV2"
                                 checked={form.data.service.provider.quick_setup === 'v2'}
@@ -2323,7 +2259,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="apiV2">V2</Label>
                         </div>
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="smmIndo"
                                 checked={form.data.service.provider.quick_setup === 'smmindo'}
@@ -2336,7 +2272,7 @@ export default function Main({ form }) {
                     </div>
                     <div className="grid gap-2">
                         <Label>Recommended Providers</Label>
-                        {/* <div className={cn("flex items-center space-x-2", form.data.miraipedia && 'hidden')}>
+                        {/* <div className={cn("flex items-center space-x-2", form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="recommendedProvidersMedanPedia"
                                 checked={form.data.service.provider.name === 'Medan Pedia'}
@@ -2346,7 +2282,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="recommendedProvidersMedanPedia">Medan Pedia</Label>
                         </div> */}
-                        {/* <div className={cn("flex items-center space-x-2", form.data.miraipedia && 'hidden')}>
+                        {/* <div className={cn("flex items-center space-x-2", form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="recommendedProvidersProviderSMM"
                                 checked={form.data.service.provider.name === 'Provider SMM'}
@@ -2356,7 +2292,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="recommendedProvidersProviderSMM">ProviderSMM.id</Label>
                         </div>
-                        <div className={cn("flex items-center space-x-2", form.data.miraipedia && 'hidden')}>
+                        <div className={cn("flex items-center space-x-2", form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="recommendedProvidersIndoPedia"
                                 checked={form.data.service.provider.name === 'Indo Pedia'}
@@ -2366,7 +2302,7 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="recommendedProvidersIndoPedia">Indo Pedia</Label>
                         </div>
-                        <div className={cn("flex items-center space-x-2", form.data.miraipedia && 'hidden')}>
+                        <div className={cn("flex items-center space-x-2", form.data.flazpedia && 'hidden')}>
                             <Checkbox
                                 id="recommendedProvidersBisnisPanel"
                                 checked={form.data.service.provider.name === 'Bisnis Panel'}
@@ -2376,15 +2312,15 @@ export default function Main({ form }) {
                             />
                             <Label htmlFor="recommendedProvidersBisnisPanel">Bisnis Panel</Label>
                         </div> */}
-                        <div className={cn('flex items-center space-x-2', form.data.miraipedia && 'hidden')}>
+                        <div className={cn('flex items-center space-x-2', form.data.flazpedia && 'hidden')}>
                             <Checkbox
-                                id="recommendedProvidersMiraiPedia"
-                                checked={form.data.service.provider.name === 'Mirai Pedia'}
+                                id="recommendedProvidersflazpedia"
+                                checked={form.data.service.provider.name === 'Flazpedia'}
                                 onCheckedChange={(checked) => {
-                                    setConfigs('Mirai Pedia');
+                                    setConfigs('Flazpedia');
                                 }}
                             />
-                            <Label htmlFor="recommendedProvidersMiraiPedia">Mirai Pedia</Label>
+                            <Label htmlFor="recommendedProvidersflazpedia">Flazpedia</Label>
                         </div>
                     </div>
                 </div>

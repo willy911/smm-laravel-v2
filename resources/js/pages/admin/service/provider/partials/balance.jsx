@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+﻿import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { Label } from '@/components/ui/label';
@@ -63,7 +63,7 @@ export default function Balance({ form }) {
                             }}
                             onBlur={() => form.validate('service.provider_configuration.account.endpoint')}
                             aria-invalid={form.invalid('service.provider_configuration.account.endpoint')}
-                            readOnly={form.data.miraipedia}
+                            readOnly={form.data.flazpedia}
                         />
                         {form.invalid('service.provider_configuration.account.endpoint') && (
                             <InputError message={form.errors['service.provider_configuration.account.endpoint']} />

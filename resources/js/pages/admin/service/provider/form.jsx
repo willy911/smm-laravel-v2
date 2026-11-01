@@ -1,4 +1,4 @@
-import {
+﻿import {
     AlertDialog,
     AlertDialogAction,
     AlertDialogCancel,
@@ -65,7 +65,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
         isUpdate ? route('admin.services.providers.update', { target: target.id }) : route('admin.services.providers.store'),
         {
             _method: method,
-            miraipedia: false,
+            flazpedia: false,
             service: {
                 provider: {
                     quick_setup: '',
@@ -515,7 +515,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
     useEffect(() => {
         form.setData((data) => ({
             _method: method,
-            miraipedia: false,
+            flazpedia: false,
             service: {
                 provider: {
                     quick_setup: '',
@@ -693,7 +693,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
         if (isCreateDialogOpened && target?.id !== undefined && form.data.service.provider_configuration.services.profit_configs.type === 'fixed') {
             form.setData((data) => ({
                 ...data,
-                miraipedia: false,
+                flazpedia: false,
                 service: {
                     ...data.service,
                     provider_configuration: {
