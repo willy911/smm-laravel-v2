@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "تأكيد البريد الإلكتروني",
+        "check-email": "يرجى التحقق من البريد المرسل إلى <b>{{email}}<\/b> لتفعيل حسابك.",
+        "resend-in-seconds": "إعادة الإرسال خلال {{seconds}} ثانية",
+        "button": "إعادة إرسال رسالة التفعيل",
+        "toast": {
+            "email-verified-successful": "تم التحقق من البريد الإلكتروني بنجاح.",
+            "email-resent-successful": "تم إعادة إرسال بريد التحقق بنجاح."
+        },
+        "log": {
+            "email-verified-successful": "إجراء التحقق من البريد الإلكتروني."
+        }
+    },
+    "settings": {
+        "update-profile-button": "تحديث الملف الشخصي",
+        "update-api-button": "تحديث API",
+        "toast": {
+            "update-profile-successful": "تم تحديث الملف الشخصي بنجاح.",
+            "update-api-successful": "تم تحديث API بنجاح.",
+            "update-notification-successful": "تم تحديث الإشعارات بنجاح."
+        },
+        "log": {
+            "update-api-successful": "تحديث بيانات API.",
+            "update-profile-successful": "تحديث ملف الحساب الشخصي."
+        }
+    }
+}

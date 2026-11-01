@@ -1,0 +1,7 @@
+{
+    "labels": {
+        "users-this-month": "Gráfico de Nuevos Usuarios Este Mes",
+        "orders-this-month": "Gráfico de Pedidos Este Mes",
+        "deposits-this-month": "Gráfico de Depósitos Este Mes"
+    }
+}

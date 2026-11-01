@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "إعدادات رسوم الخدمة",
+        "admin-fee-type": "نوع رسوم الخدمة",
+        "admin-fee-value": "قيمة رسوم الخدمة",
+        "payment-target": "هدف الدفع",
+        "payment-gateway": "بوابة الدفع",
+        "payment-gateway-payment-code": "رمز طريقة الدفع (بوابة الدفع)",
+        "bonus-configs": "إعدادات المكافأة",
+        "bonus-value": "قيمة المكافأة",
+        "min-and-max-payment": "الحد الأدنى والأقصى للدفع"
+    }
+}

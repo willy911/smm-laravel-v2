@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Crea Ordine!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> con quantità media ordine <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Visualizza Esempio Obiettivo Ordine",
+        "order-target-example": "Esempio di obiettivo dell'ordine"
+    },
+    "toast": {
+        "refill-successful": "Richiesta ricarica ordine creata con successo.",
+        "cancel-successful": "Richiesta annullamento ordine creata con successo.",
+        "invalid-order-id": "ID Ordine non valido.",
+        "wait-previous-order": "Per favore attendi che l'ordine precedente venga elaborato prima.",
+        "min-quantity": "La quantità minima è {{min}}.",
+        "max-quantity": "La quantità massima è {{max}}.",
+        "mass-order-not-supported": "Questo servizio non supporta ordini in massa.",
+        "order-created-with-target": "Ordine con ID <strong>{{order_id}}<\/strong> = Obiettivo <strong>{{order_target}}<\/strong> creato con successo.",
+        "service-not-available": "Il servizio non è disponibile.",
+        "order-created": "Ordine creato con successo.",
+        "insufficient-balance": "Il tuo saldo è insufficiente, Deposita Ora!"
+    },
+    "log": {
+        "create-successful": "Creazione Ordine con ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Creazione Ordine (API) con ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Creazione Ordine (Web - Singolo) con ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Creazione Ordine (Web - Massa) con ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Creazione Ricarica Ordine con ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Creazione Annullamento Ordine con ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "Il rimborso per l’ordine con ID <b>{{order_id}}<\/b> è stato completato con successo."
+    }
+}

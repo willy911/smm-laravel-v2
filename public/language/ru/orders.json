@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Создать заказ!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> со средним количеством заказов <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Посмотреть пример цели заказа",
+        "order-target-example": "Пример цели заказа"
+    },
+    "toast": {
+        "refill-successful": "Запрос на пополнение заказа успешно создан.",
+        "cancel-successful": "Запрос на отмену заказа успешно создан.",
+        "invalid-order-id": "Недействительный ID заказа.",
+        "wait-previous-order": "Пожалуйста, дождитесь, пока предыдущий заказ будет обработан.",
+        "min-quantity": "Минимальное количество: {{min}}.",
+        "max-quantity": "Максимальное количество: {{max}}.",
+        "mass-order-not-supported": "Эта услуга не поддерживает массовые заказы.",
+        "order-created-with-target": "Заказ с ID <strong>{{order_id}}<\/strong> = Цель <strong>{{order_target}}<\/strong> успешно создан.",
+        "service-not-available": "Услуга недоступна.",
+        "order-created": "Заказ успешно создан.",
+        "insufficient-balance": "Ваш баланс недостаточен, пополните сейчас!"
+    },
+    "log": {
+        "create-successful": "Создан заказ с ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Создан заказ (API) с ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Создан заказ (Веб - Единичный) с ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Создан заказ (Веб - Массовый) с ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Создано пополнение заказа с ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Создана отмена заказа с ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "Возврат средств по заказу с ID <b>{{order_id}}<\/b> выполнен успешно."
+    }
+}

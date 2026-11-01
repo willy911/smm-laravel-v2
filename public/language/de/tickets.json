@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "Ticket Senden!"
+    },
+    "edit": {
+        "button": "Ticket Antworten!"
+    },
+    "labels": {
+        "department": "Abteilung",
+        "subject": "Betreff",
+        "data-id": "Bestell-\/Einzahlungs-ID",
+        "request": "Anfrage",
+        "message": "Nachricht",
+        "ticket-information": "Ticket-Informationen"
+    },
+    "toast": {
+        "limit-exceeded": "Sie haben das Limit für die Ticket-Erstellung überschritten, bitte warten Sie, bis das vorherige Ticket bearbeitet wurde.",
+        "create-successful": "Ticket mit ID <b>{{ticket_id}}<\/b> erfolgreich erstellt.",
+        "reply-successful": "Ticket mit ID <b>{{ticket_id}}<\/b> erfolgreich beantwortet."
+    },
+    "log": {
+        "create-successful": "Ticket mit ID <b>{{ticket_id}}<\/b> erstellen.",
+        "reply-successful": "Antwort auf Ticket mit ID <b>{{ticket_id}}<\/b> erstellen."
+    }
+}

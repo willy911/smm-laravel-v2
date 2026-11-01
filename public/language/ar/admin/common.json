@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "المسؤول",
+        "admin": "المسؤول",
+        "provider": "المزود",
+        "updated-columns": "الأعمدة المحدثة",
+        "is-api-access-enabled": "الوصول إلى API",
+        "custom-price-type": "نوع السعر المخصص",
+        "custom-price-value": "قيمة السعر المخصص",
+        "custom-price-fixed": "رقم ثابت",
+        "custom-price-percentage": "نسبة مئوية",
+        "profit-configs": "إعدادات الربح",
+        "profit-type": "نوع الربح",
+        "profit-value": "قيمة الربح",
+        "profit-fixed": "رقم ثابت",
+        "profit-percentage": "نسبة مئوية",
+        "alias": "الاسم المستعار",
+        "last-balance": "الرصيد الأخير",
+        "original-price": "سعر الشراء",
+        "sell-price": "سعر البيع"
+    },
+    "actions": {
+        "mark-item-as": "وضع علامة كـ <item>{{as}}<\/item>",
+        "sort-item": "ترتيب {{item}}",
+        "create-item": "إضافة {{item}}",
+        "edit-item": "تعديل {{item}}",
+        "fetch-item": "جلب {{item}}",
+        "delete-item": "حذف {{item}}",
+        "trash": "نقل إلى سلة المهملات",
+        "close": "إغلاق التذكرة",
+        "restore": "استعادة",
+        "destroy": "حذف نهائي"
+    },
+    "toast": {
+        "create-successful": "تمت إضافة {{item}} برقم <b>{{id}}<\/b> بنجاح.",
+        "update-successful": "تم تحديث {{item}} برقم <b>{{id}}<\/b> بنجاح.",
+        "switch-successful": "تم تحديث {{column}} {{item}} برقم <b>{{id}}<\/b> بنجاح.",
+        "trash-successful": "تم نقل {{item}} برقم <b>{{id}}<\/b> إلى سلة المهملات بنجاح.",
+        "close-successful": "تم إغلاق التذكرة <b>{{id}}<\/b> بنجاح.",
+        "restore-successful": "تمت استعادة {{item}} برقم <b>{{id}}<\/b> بنجاح.",
+        "destroy-successful": "تم حذف {{item}} برقم <b>{{id}}<\/b> نهائياً بنجاح.",
+        "sort-successful": "تم تحديث ترتيب {{item}} بنجاح."
+    },
+    "log": {
+        "create-successful": "إنشاء {{item}} برقم <b>{{id}}<\/b>.",
+        "update-successful": "تحديث {{item}} برقم <b>{{id}}<\/b>.",
+        "switch-successful": "تحديث {{item}} برقم <b>{{id}}<\/b>, العمود <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "نقل {{item}} برقم <b>{{id}}<\/b> إلى سلة المهملات.",
+        "close-successful": "إغلاق التذكرة <b>{{id}}<\/b>.",
+        "restore-successful": "استعادة {{item}} برقم <b>{{id}}<\/b>.",
+        "destroy-successful": "حذف {{item}} برقم <b>{{id}}<\/b> نهائياً.",
+        "sort-successful": "تحديث ترتيب {{item}}."
+    },
+    "status": {
+        "pending": "قيد الانتظار",
+        "waiting": "بانتظار المعالجة",
+        "success": "ناجح",
+        "approved": "موافق عليه",
+        "expired": "منتهي الصلاحية",
+        "canceled": "ملغى",
+        "open": "مفتوح",
+        "answered": "تم الرد",
+        "user-reply": "رد المستخدم",
+        "closed": "مغلق",
+        "completed": "مكتمل",
+        "processing": "قيد المعالجة",
+        "in-progress": "قيد التنفيذ",
+        "error": "خطأ",
+        "partial": "جزئي",
+        "rejected": "مرفوض",
+        "active": "نشط",
+        "inactive": "غير نشط"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "إغلاق النموذج؟",
+            "description": "لديك تغييرات غير محفوظة.",
+            "cancel-button": "لا، إلغاء",
+            "confirm-button": "نعم، إغلاق دون حفظ!"
+        },
+        "trash": {
+            "title": "هل أنت متأكد تماماً؟",
+            "description": "نقل {{item}} <b>{{value}}<\/b> إلى سلة المهملات.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، متابعة!"
+        },
+        "restore": {
+            "title": "هل أنت متأكد تماماً؟",
+            "description": "استعادة {{item}} <b>{{value}}<\/b> من سلة المهملات.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، متابعة!"
+        },
+        "destroy": {
+            "title": "هل أنت متأكد تماماً؟",
+            "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا الإجراء إلى حذف {{item}} <b>{{value}}<\/b> نهائياً من قاعدة البيانات.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، متابعة!"
+        },
+        "close": {
+            "title": "إغلاق التذكرة؟",
+            "description": "إغلاق التذكرة <b>{{id}}<\/b>.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، إغلاق!"
+        }
+    }
+}

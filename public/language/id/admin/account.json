@@ -1,0 +1,25 @@
+{
+    "labels": {
+        "title": "Pengaturan Akun",
+        "profile": "Profil",
+        "change-password": "Ganti Kata Sandi",
+        "username": "Username",
+        "full-name": "Nama Lengkap",
+        "current-password": "Kata Sandi Saat Ini",
+        "new-password": "Kata Sandi Baru",
+        "confirm-new-password": "Konfirmasi Kata Sandi Baru",
+        "update-profile": "Simpan Profil",
+        "update-password": "Ubah Kata Sandi",
+        "please-wait": "Mohon tunggu..."
+    },
+    "toast": {
+        "update-profile-successful": "Profil berhasil diperbarui.",
+        "update-password-successful": "Kata Sandi berhasil diperbarui.",
+        "current-password-incorrect": "Kata Sandi saat ini salah.",
+        "invalid-input": "Periksa kembali masukan Anda.",
+        "exception": "Terjadi kesalahan, silakan coba lagi."
+    },
+    "log": {
+        "update-password-successful": "Memperbarui kata sandi."
+    }
+}

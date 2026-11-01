@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "¡Crear Pedido!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> con cantidad promedio de pedidos <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Ver Ejemplo de Objetivo del Pedido",
+        "order-target-example": "Ejemplo de objetivo del pedido"
+    },
+    "toast": {
+        "refill-successful": "Solicitud de recarga de pedido creada exitosamente.",
+        "cancel-successful": "Solicitud de cancelación de pedido creada exitosamente.",
+        "invalid-order-id": "ID de Pedido no válido.",
+        "wait-previous-order": "Por favor espera a que se procese el pedido anterior primero.",
+        "min-quantity": "La cantidad mínima es {{min}}.",
+        "max-quantity": "La cantidad máxima es {{max}}.",
+        "mass-order-not-supported": "Este servicio no admite pedidos masivos.",
+        "order-created-with-target": "Pedido con ID <strong>{{order_id}}<\/strong> = Objetivo <strong>{{order_target}}<\/strong> creado exitosamente.",
+        "service-not-available": "El servicio no está disponible.",
+        "order-created": "Pedido creado exitosamente.",
+        "insufficient-balance": "Tu saldo es insuficiente, ¡Deposita Ahora!"
+    },
+    "log": {
+        "create-successful": "Creando Pedido con ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Creando Pedido (API) con ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Creando Pedido (Web - Individual) con ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Creando Pedido (Web - Masivo) con ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Creando Recarga de Pedido con ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Creando Cancelación de Pedido con ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "El reembolso del pedido con ID <b>{{order_id}}<\/b> se ha realizado correctamente."
+    }
+}

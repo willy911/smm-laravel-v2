@@ -1,0 +1,116 @@
+{
+    "title": "API Docs",
+    "description": {
+        "paragraph-1": "An API (Application Programming Interface) is a set of commands, functions, and protocols that can be used by programmers when building software, creating stable and fast interconnections between systems.",
+        "paragraph-2": "This API is a pathway that partners and hosts can use to interact between programs. The API can be used to make requests such as checking account balance, checking service prices, checking transaction status, and creating new transactions.",
+        "paragraph-3": "Connecting to this API requires basic knowledge of computer programming. If you do not understand the documentation we provide, please contact us.",
+        "paragraph-4": "Some things to note for API connection include:",
+        "bullet-1": "We wrap all HTTP Responses in <strong>JSON<\/strong> format.",
+        "bullet-2": "All HTTP Requests are sent as <strong>POST<\/strong> Requests.",
+        "bullet-3": "Please Whitelist your IP in your account settings."
+    },
+    "labels": {
+        "preparation": "Preparation",
+        "profile": "Profile",
+        "services": "Service List",
+        "create-order": "Create Order",
+        "status-order": "Order Status",
+        "create-order-refill": "Create Order Refill",
+        "status-order-refill": "Order Refill Status",
+        "create-order-cancel": "Order Cancellation",
+        "endpoint": "Endpoint",
+        "body-request": "Request Body",
+        "example-request": "Example Request",
+        "example-response": "Example Response",
+        "parameter": "Parameter",
+        "type": "Data Type",
+        "required": "Required",
+        "description": "Description",
+        "success": "Success",
+        "fail": "Fail"
+    },
+    "fields": {
+        "api-key": {
+            "required": "Yes",
+            "description": "API Key configured in API settings"
+        },
+        "secret-key": {
+            "required": "Yes",
+            "description": "Secret Key configured in API settings"
+        },
+        "is-favorites": {
+            "required": "No",
+            "description": "Fill with <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">true<\/code> to display favorite services"
+        },
+        "id": {
+            "required": "Yes",
+            "description": "Order ID, separate with commas (,) for bulk checking"
+        },
+        "order-id": {
+            "required": "Yes",
+            "description": "Order ID"
+        },
+        "order-refill-id": {
+            "required": "Yes",
+            "description": "Order refill ID"
+        },
+        "service-id": {
+            "required": "Yes",
+            "description": "Service ID, see more"
+        },
+        "target": {
+            "required": "Yes",
+            "description": "Order target, such as username\/link\/other"
+        },
+        "quantity": {
+            "required": "Yes",
+            "description": "Order quantity"
+        },
+        "usernames": {
+            "required": "Yes",
+            "description": "List of usernames separated by <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> or <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtags": {
+            "required": "Yes",
+            "description": "List of hashtags separated by <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> or <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtag": {
+            "required": "Yes",
+            "description": "Hashtag to capture\/search for usernames"
+        },
+        "username": {
+            "required": "Yes",
+            "description": "Comment owner username"
+        },
+        "media": {
+            "required": "Yes",
+            "description": "Media URL to capture\/search for likers"
+        },
+        "answer-number": {
+            "required": "Yes",
+            "description": "Answer number from the list of choices"
+        },
+        "comments": {
+            "required": "Yes",
+            "description": "List of comments separated by <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> or <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        }
+    },
+    "responses": {
+        "total-order-count": "Total order amount",
+        "total-deposit-count": "Total deposit amount",
+        "api-key-required": "api_key is required.",
+        "secret-key-required": "secret_key is required.",
+        "ip-not-whitelisted": "Your IP {{ip}} is not listed in the IP Whitelist.",
+        "service-id-required": "service_id is required.",
+        "service-id-numeric": "service_id must be a number.",
+        "service-id-invalid": "The selected service_id is invalid.",
+        "quantity-numeric": "quantity must be a number.",
+        "quantity-min": "quantity must be at least {{min}}.",
+        "insufficient-balance": "Insufficient balance.",
+        "service-not-available": "Service not available.",
+        "no-data-found": "no orders found.",
+        "data-found": "orders found.",
+        "id-invalid": "The selected ID is invalid.",
+        "order-cannot-be-refilled": "Order cannot be refilled."
+    }
+}

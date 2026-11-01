@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Administrador",
+        "admin": "Administrador",
+        "provider": "Proveedor",
+        "updated-columns": "Columnas Actualizadas",
+        "is-api-access-enabled": "Acceso API",
+        "custom-price-type": "Tipo de Precio Personalizado",
+        "custom-price-value": "Valor de Precio Personalizado",
+        "custom-price-fixed": "Cantidad Fija",
+        "custom-price-percentage": "Porcentaje",
+        "profit-configs": "Configuración de Beneficios",
+        "profit-type": "Tipo de Beneficio",
+        "profit-value": "Valor del Beneficio",
+        "profit-fixed": "Cantidad Fija",
+        "profit-percentage": "Porcentaje",
+        "alias": "Alias",
+        "last-balance": "Saldo Final",
+        "original-price": "Precio de Compra",
+        "sell-price": "Precio de Venta"
+    },
+    "actions": {
+        "mark-item-as": "Marcar como <item>{{as}}<\/item>",
+        "sort-item": "Ordenar {{item}}",
+        "create-item": "Agregar {{item}}",
+        "edit-item": "Editar {{item}}",
+        "fetch-item": "Obtener {{item}}",
+        "delete-item": "Eliminar {{item}}",
+        "trash": "Mover a papelera",
+        "close": "Cerrar Ticket",
+        "restore": "Restaurar",
+        "destroy": "Eliminar Permanentemente"
+    },
+    "toast": {
+        "create-successful": "{{item}} con ID <b>{{id}}<\/b> agregado exitosamente.",
+        "update-successful": "{{item}} con ID <b>{{id}}<\/b> actualizado exitosamente.",
+        "switch-successful": "{{column}} {{item}} con ID <b>{{id}}<\/b> actualizado exitosamente.",
+        "trash-successful": "{{item}} con ID <b>{{id}}<\/b> movido a papelera exitosamente.",
+        "close-successful": "{{item}} con ID <b>{{id}}<\/b> cerrado exitosamente.",
+        "restore-successful": "{{item}} con ID <b>{{id}}<\/b> restaurado exitosamente.",
+        "destroy-successful": "{{item}} con ID <b>{{id}}<\/b> eliminado permanentemente exitosamente.",
+        "sort-successful": "Orden de {{item}} actualizado exitosamente."
+    },
+    "log": {
+        "create-successful": "Creando {{item}} con ID <b>{{id}}<\/b>.",
+        "update-successful": "Actualizando {{item}} con ID <b>{{id}}<\/b>.",
+        "switch-successful": "Actualizando {{item}} con ID <b>{{id}}<\/b>, columna <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Moviendo {{item}} con ID <b>{{id}}<\/b> a papelera.",
+        "close-successful": "Cerrando {{item}} con ID <b>{{id}}<\/b>.",
+        "restore-successful": "Restaurando {{item}} con ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Eliminando {{item}} con ID <b>{{id}}<\/b> permanentemente.",
+        "sort-successful": "Actualizando orden de {{item}}."
+    },
+    "status": {
+        "pending": "Pendiente",
+        "waiting": "En espera",
+        "success": "Exitoso",
+        "approved": "Aprobado",
+        "expired": "Expirado",
+        "canceled": "Cancelado",
+        "open": "Abierto",
+        "answered": "Respondido",
+        "user-reply": "Respuesta del usuario",
+        "closed": "Cerrado",
+        "completed": "Completado",
+        "processing": "Procesando",
+        "in-progress": "En progreso",
+        "error": "Error",
+        "partial": "Parcial",
+        "rejected": "Rechazado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "¿Cerrar formulario?",
+            "description": "Tienes cambios sin guardar.",
+            "cancel-button": "No, Cancelar",
+            "confirm-button": "¡Sí, Cerrar sin guardar!"
+        },
+        "trash": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Mover {{item}} <b>{{value}}<\/b> a la papelera.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Continuar!"
+        },
+        "restore": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Restaurar {{item}} <b>{{value}}<\/b> de la papelera.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Continuar!"
+        },
+        "destroy": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Esta acción no se puede deshacer. Esta acción eliminará {{item}} <b>{{value}}<\/b> permanentemente de la base de datos.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Continuar!"
+        },
+        "close": {
+            "title": "¿Cerrar Ticket?",
+            "description": "Cerrar ticket <b>{{id}}<\/b>.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Cerrar!"
+        }
+    }
+}

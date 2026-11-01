@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "Diperbarui",
+            "price-increased": "Harga Naik",
+            "price-decreased": "Harga Turun",
+            "enabled": "Diaktifkan",
+            "disabled": "Dinonaktifkan",
+            "added": "Ditambahkan",
+            "deleted": "Dihapus"
+        },
+        "description": {
+            "min-updated": "Pembaruan jumlah minimal layanan dari {{from}} ke {{to}}.",
+            "max-updated": "Pembaruan jumlah maksimal layanan dari {{from}} ke {{to}}.",
+            "price-increased": "Kenaikan Harga dari {{from}} ke {{to}}.",
+            "price-decreased": "Penurunan Harga dari {{from}} ke {{to}}.",
+            "enabled": "Layanan diaktifkan.",
+            "disabled": "Layanan dinonaktifkan.",
+            "added": "Layanan ditambahkan.",
+            "deleted": "Layanan dihapus."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Layanan berhasil ditambahkan ke favorit.",
+        "removed-from-favorites": "Layanan berhasil dihapus dari favorit.",
+        "invalid-service-id": "ID Layanan tidak valid.",
+        "no-services-found": "Tidak ada layanan ditemukan.",
+        "no-categories-found": "Tidak ada kategori layanan ditemukan."
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Sipariş Oluştur!"
+    },
+    "labels": {
+        "average-time-and-quantity": "Ortalama sipariş miktarı <span class=\"font-medium text-green-600\">{{quantity}}<\/span> olan <span class=\"font-medium text-green-600\">{{time}}<\/span>",
+        "view-order-target-example": "Sipariş Hedef Örneğini Görüntüle",
+        "order-target-example": "Sipariş Hedefi Örneği"
+    },
+    "toast": {
+        "refill-successful": "Sipariş dolum isteği başarıyla oluşturuldu.",
+        "cancel-successful": "Sipariş iptal isteği başarıyla oluşturuldu.",
+        "invalid-order-id": "Geçersiz Sipariş ID'si.",
+        "wait-previous-order": "Lütfen önceki siparişin önce işlenmesini bekleyin.",
+        "min-quantity": "Minimum miktar {{min}}.",
+        "max-quantity": "Maksimum miktar {{max}}.",
+        "mass-order-not-supported": "Bu hizmet toplu siparişi desteklemiyor.",
+        "order-created-with-target": "<strong>{{order_id}}<\/strong> ID'li sipariş = Hedef <strong>{{order_target}}<\/strong> başarıyla oluşturuldu.",
+        "service-not-available": "Hizmet mevcut değil.",
+        "order-created": "Sipariş başarıyla oluşturuldu.",
+        "insufficient-balance": "Bakiyeniz yetersiz, Şimdi Para Yatırın!"
+    },
+    "log": {
+        "create-successful": "<b>{{order_id}}<\/b> ID'li Sipariş oluşturuluyor.",
+        "create-api-successful": "<b>{{order_id}}<\/b> ID'li Sipariş (API) oluşturuluyor.",
+        "create-single-successful": "<b>{{order_id}}<\/b> ID'li Sipariş (Web - Tekil) oluşturuluyor.",
+        "create-mass-successful": "<b>{{order_id}}<\/b> ID'li Sipariş (Web - Toplu) oluşturuluyor.",
+        "refill-successful": "<b>{{order_refill_id}}<\/b> ID'li Sipariş Doldurma oluşturuluyor.",
+        "cancel-successful": "<b>{{order_cancel_id}}<\/b> ID'li Sipariş İptali oluşturuluyor.",
+        "refund-successful": "ID <b>{{order_id}}<\/b> olan sipariş için geri ödeme başarıyla tamamlandı."
+    }
+}

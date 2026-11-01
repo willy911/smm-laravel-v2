@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "إنشاء إيداع!",
+        "steps": {
+            "select-payment-method": "اختر طريقة الدفع",
+            "enter-amount": "أدخل مبلغ الإيداع",
+            "enter-e-wallet-number": "أدخل رقم المحفظة الإلكترونية"
+        }
+    },
+    "detail": {
+        "button": "إلغاء الإيداع!",
+        "cancel-dialog": {
+            "title": "هل أنت متأكد تماماً؟",
+            "description": "إلغاء الإيداع برقم <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، إلغاء!"
+        }
+    },
+    "labels": {
+        "complete-payment": "يرجى إتمام الدفع.",
+        "deposit-amount": "مبلغ الإيداع",
+        "total-balance": "إجمالي الرصيد",
+        "total-payment": "إجمالي الدفع",
+        "e-wallet-number": "رقم المحفظة الإلكترونية",
+        "unique-code": "الرمز الفريد",
+        "payment-status": "حالة الدفع",
+        "expires-in": "ينتهي خلال",
+        "expires-text": "متبقي {{hours}} ساعة، {{minutes}} دقيقة، {{seconds}} ثانية",
+        "virtual-account-number": "رقم الحساب الافتراضي",
+        "payment-code": "رمز الدفع",
+        "payment-target": "هدف الدفع",
+        "payment-link": "رابط الدفع",
+        "qr-code": "رمز QR"
+    },
+    "toast": {
+        "unpaid-payment": "يرجى سداد دفعتك على الإيداع السابق.",
+        "payment-not-available": "طريقة الدفع غير متاحة حالياً. يرجى استخدام طريقة أخرى.",
+        "create-successful": "يرجى سداد دفعتك.",
+        "cancel-successful": "تم إلغاء الإيداع برقم <b>{{deposit_id}}<\/b> بنجاح."
+    },
+    "log": {
+        "process-successful": "تمت معالجة الإيداع ذو المعرف <b>{{deposit_id}}<\/b> بنجاح.",
+        "create-successful": "إنشاء إيداع برقم <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "إلغاء الإيداع برقم <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "تحويل الرصيد من المسؤول."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "هل أنت متأكد تماماً؟",
+            "description": "إلغاء {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، متابعة!"
+        },
+        "approve": {
+            "title": "هل أنت متأكد تمامًا؟",
+            "description": "الموافقة على {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "إلغاء",
+            "confirm-button": "نعم، تابع!"
+        }
+    }
+}

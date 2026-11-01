@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'labels' => [
+        'title' => 'Profit & Loss Report',
+        'period' => 'Period',
+        'start' => 'From date...',
+        'end' => 'To date...',
+        'revenue' => 'Revenue (orders.price)',
+        'modal' => 'Cost (price - profit)',
+        'profit' => 'Net Profit',
+        'margin' => 'Margin',
+        'transactions' => 'Transactions',
+        'per_day' => 'Daily Breakdown',
+        'date' => 'Date',
+        'order_count' => 'Orders',
+        'actions' => 'Actions',
+        'export' => 'Export CSV',
+        'reset' => 'Reset',
+        'apply' => 'Apply',
+        'loading' => 'Please wait...',
+        'empty' => 'No data in this period.',
+        'export-success' => 'Export started. The CSV file will be downloaded automatically.',
+    ],
+];

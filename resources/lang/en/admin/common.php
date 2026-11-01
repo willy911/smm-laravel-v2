@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Admins',
+        'admin' => 'Admin',
+        'provider' => 'Provider',
+        'updated_columns' => 'Updated Columns',
+        'is_api_access_enabled' => 'API Access',
+        'custom_price_type' => 'Custom Price Type',
+        'custom_price_value' => 'Custom Price Value',
+        'custom_price_fixed' => 'Custom Price Fixed',
+        'custom_price_percentage' => 'Custom Price Percentage',
+        'profit_configs' => 'Profit Configurations',
+        'profit_type' => 'Profit Type',
+        'profit_value' => 'Profit Value',
+        'profit_fixed' => 'Fixed Amount',
+        'profit_percentage' => 'Percentage',
+        'alias' => 'Alias',
+        'last_balance' => 'Last Balance',
+        'original_price' => 'Original Price',
+        'sell_price' => 'Sell Price',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Mark as <item>:as</item>',
+        'sort_item' => 'Sort :item',
+        'create_item' => 'Add :item',
+        'edit_item' => 'Edit :item',
+        'fetch_item' => 'Fetch :item',
+        'delete_item' => 'Delete :item',
+        'trash' => 'Move to trash',
+        'close' => 'Close Ticket',
+        'restore' => 'Restore',
+        'destroy' => 'Delete Permanently',
+    ],
+
+    'toast' => [
+        'create_successful' => ':item with ID <b>:id</b> successfully added.',
+        'update_successful' => ':item with ID <b>:id</b> successfully updated.',
+        'switch_successful' => ':column :item with ID <b>:id</b> successfully updated.',
+        'trash_successful' => ':item with ID <b>:id</b> successfully moved to trash.',
+        'close_successful' => ':item with ID <b>:id</b> successfully closed.',
+        'restore_successful' => ':item with ID <b>:id</b> successfully restored.',
+        'destroy_successful' => ':item with ID <b>:id</b> successfully deleted permanently.',
+        'sort_successful' => ':item order successfully updated.',
+    ],
+
+    'log' => [
+        'create_successful' => 'Created :item with ID <b>:id</b>.',
+        'update_successful' => 'Updated :item with ID <b>:id</b>.',
+        'switch_successful' => 'Updated :item with ID <b>:id</b>, column <b>:column:</b> :from → :to.',
+        'trash_successful' => 'Moved :item with ID <b>:id</b> to trash.',
+        'close_successful' => 'Closed :item with ID <b>:id</b>.',
+        'restore_successful' => 'Restored :item with ID <b>:id</b>.',
+        'destroy_successful' => 'Deleted :item with ID <b>:id</b> permanently.',
+        'sort_successful' => 'Updated :item order.',
+    ],
+
+    'status' => [
+        'pending' => 'Pending',
+        'waiting' => 'Waiting',
+        'success' => 'Success',
+        'approved' => 'Approved',
+        'expired' => 'Expired',
+        'canceled' => 'Canceled',
+        'open' => 'Open',
+        'answered' => 'Answered',
+        'user_reply' => 'User Reply',
+        'closed' => 'Closed',
+        'completed' => 'Completed',
+        'processing' => 'Processing',
+        'in_progress' => 'In Progress',
+        'error' => 'Error',
+        'partial' => 'Partial',
+        'rejected' => 'Rejected',
+        'active' => 'Active',
+        'inactive' => 'Inactive',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Close form?',
+            'description' => 'You have unsaved changes.',
+            'cancel_button' => 'No, Cancel',
+            'confirm_button' => 'Yes, Close without saving!',
+        ],
+        'trash' => [
+            'title' => 'Are you absolutely sure?',
+            'description' => 'Move :item <b>:value</b> to the trash folder.',
+            'cancel_button' => 'Cancel',
+            'confirm_button' => 'Yes, Continue!',
+        ],
+        'restore' => [
+            'title' => 'Are you absolutely sure?',
+            'description' => 'Restore :item <b>:value</b> from the trash folder.',
+            'cancel_button' => 'Cancel',
+            'confirm_button' => 'Yes, Continue!',
+        ],
+        'destroy' => [
+            'title' => 'Are you absolutely sure?',
+            'description' => 'This action cannot be undone. This action will permanently delete :item <b>:value</b> from the database.',
+            'cancel_button' => 'Cancel',
+            'confirm_button' => 'Yes, Continue!',
+        ],
+        'close' => [
+            'title' => 'Close Ticket?',
+            'description' => 'Close ticket <b>:id</b>.',
+            'cancel_button' => 'Cancel',
+            'confirm_button' => 'Yes, Close!',
+        ],
+    ]
+];

@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "¡Crear Depósito!",
+        "steps": {
+            "select-payment-method": "Seleccionar Método de Pago",
+            "enter-amount": "Ingresar Cantidad del Depósito",
+            "enter-e-wallet-number": "Ingresar No. de Billetera Electrónica"
+        }
+    },
+    "detail": {
+        "button": "¡Cancelar Depósito!",
+        "cancel-dialog": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Cancelar Depósito con ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Cancelar!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Por favor completa el pago.",
+        "deposit-amount": "Cantidad del Depósito",
+        "total-balance": "Saldo Total",
+        "total-payment": "Pago Total",
+        "e-wallet-number": "No. de Billetera Electrónica",
+        "unique-code": "Código Único",
+        "payment-status": "Estado del Pago",
+        "expires-in": "Expira En",
+        "expires-text": "Quedan {{hours}} horas, {{minutes}} minutos, {{seconds}} segundos",
+        "virtual-account-number": "No. de Cuenta Virtual",
+        "payment-code": "Código de Pago",
+        "payment-target": "Destino del Pago",
+        "payment-link": "Enlace de Pago",
+        "qr-code": "Código QR"
+    },
+    "toast": {
+        "unpaid-payment": "Por favor completa el pago de tu depósito anterior.",
+        "payment-not-available": "El método de pago no está disponible actualmente. Por favor usa otro método.",
+        "create-successful": "Por favor completa tu pago.",
+        "cancel-successful": "Depósito con ID <b>{{deposit_id}}<\/b> cancelado exitosamente."
+    },
+    "log": {
+        "process-successful": "El depósito con ID <b>{{deposit_id}}<\/b> se ha procesado correctamente.",
+        "create-successful": "Creando depósito con ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Cancelando depósito con ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Transferencia de saldo del administrador."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Cancelar {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "¡Sí, Continuar!"
+        },
+        "approve": {
+            "title": "¿Estás completamente seguro?",
+            "description": "Aprobar {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Cancelar",
+            "confirm-button": "Sí, continuar!"
+        }
+    }
+}

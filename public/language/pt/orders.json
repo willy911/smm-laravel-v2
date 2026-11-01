@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Criar Pedido!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> com quantidade média de pedidos <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Ver Exemplo de Alvo de Pedido",
+        "order-target-example": "Exemplo de destino do pedido"
+    },
+    "toast": {
+        "refill-successful": "Pedido de recarga de pedido criado com sucesso.",
+        "cancel-successful": "Pedido de cancelamento de pedido criado com sucesso.",
+        "invalid-order-id": "ID do Pedido inválido.",
+        "wait-previous-order": "Aguarde o processamento do pedido anterior primeiro.",
+        "min-quantity": "A quantidade mínima é {{min}}.",
+        "max-quantity": "A quantidade máxima é {{max}}.",
+        "mass-order-not-supported": "Este serviço não suporta pedidos em massa.",
+        "order-created-with-target": "Pedido com ID <strong>{{order_id}}<\/strong> = Alvo <strong>{{order_target}}<\/strong> criado com sucesso.",
+        "service-not-available": "Serviço não disponível.",
+        "order-created": "Pedido criado com sucesso.",
+        "insufficient-balance": "Seu saldo é insuficiente, Deposite Agora!"
+    },
+    "log": {
+        "create-successful": "Criando Pedido com ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Criando Pedido (API) com ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Criando Pedido (Web - Único) com ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Criando Pedido (Web - Massa) com ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Criando Recarga de Pedido com ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Criando Cancelamento de Pedido com ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "O reembolso do pedido com ID <b>{{order_id}}<\/b> foi realizado com sucesso."
+    }
+}

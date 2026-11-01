@@ -1,0 +1,115 @@
+{
+    "description": {
+        "paragraph-1": "Ang API (Application Programming Interface) ay isang koleksyon ng mga utos, function, at protocol na maaaring gamitin ng mga programmer sa pagbuo ng software, upang makalikha ng matatag at mabilis na koneksyon sa pagitan ng mga sistema.",
+        "paragraph-2": "Ang API na ito ay isang daanan na maaaring gamitin ng mga partner at host upang makipag-ugnayan sa pagitan ng mga programa. Maaari itong gamitin upang magsagawa ng mga request tulad ng pag-check ng balanse ng account, pag-check ng presyo ng serbisyo, pag-check ng status ng transaksyon, at paggawa ng bagong transaksyon.",
+        "paragraph-3": "Ang koneksyon sa API na ito ay nangangailangan ng pangunahing kaalaman sa computer programming. Kung hindi mo nauunawaan ang dokumentasyong aming ibinigay, mangyaring makipag-ugnayan sa amin.",
+        "paragraph-4": "Narito ang ilang mahahalagang bagay na dapat isaalang-alang para sa koneksyon ng API:",
+        "bullet-1": "Ibinabalot namin ang lahat ng HTTP Response sa format na <strong>JSON<\/strong>.",
+        "bullet-2": "Lahat ng HTTP Request ay ipinapadala bilang <strong>POST<\/strong> Request.",
+        "bullet-3": "Mangyaring i-whitelist ang IP sa mga setting ng iyong account."
+    },
+    "labels": {
+        "preparation": "Paghahanda",
+        "profile": "Profile",
+        "services": "Listahan ng mga Serbisyo",
+        "create-order": "Gumawa ng Order",
+        "status-order": "Status ng Order",
+        "create-order-refill": "Gumawa ng Refill ng Order",
+        "status-order-refill": "Status ng Refill ng Order",
+        "create-order-cancel": "Pagkansela ng Order",
+        "endpoint": "Endpoint",
+        "body-request": "Body Request",
+        "example-request": "Halimbawa ng Request",
+        "example-response": "Halimbawa ng Response",
+        "parameter": "Parameter",
+        "type": "Uri ng Data",
+        "required": "Kinakailangan",
+        "description": "Paglalarawan",
+        "success": "Tagumpay",
+        "fail": "Nabigo"
+    },
+    "fields": {
+        "api-key": {
+            "required": "Oo",
+            "description": "API Key na itinakda sa mga setting ng API"
+        },
+        "secret-key": {
+            "required": "Oo",
+            "description": "Secret Key na itinakda sa mga setting ng API"
+        },
+        "is-favorites": {
+            "required": "Hindi",
+            "description": "Ilagay ang <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">true<\/code> upang ipakita ang mga paboritong serbisyo"
+        },
+        "id": {
+            "required": "Oo",
+            "description": "Order ID, paghiwalayin gamit ang kuwit (,) para sa maramihang pag-check"
+        },
+        "order-id": {
+            "required": "Oo",
+            "description": "Order ID"
+        },
+        "order-refill-id": {
+            "required": "Oo",
+            "description": "Order Refill ID"
+        },
+        "service-id": {
+            "required": "Oo",
+            "description": "Service ID, tingnan ang detalye"
+        },
+        "target": {
+            "required": "Oo",
+            "description": "Target ng order, tulad ng username\/link\/iba pa"
+        },
+        "quantity": {
+            "required": "Oo",
+            "description": "Dami ng order"
+        },
+        "usernames": {
+            "required": "Oo",
+            "description": "Listahan ng mga username na pinaghihiwalay ng <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtags": {
+            "required": "Oo",
+            "description": "Listahan ng mga hashtag na pinaghihiwalay ng <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtag": {
+            "required": "Oo",
+            "description": "Hashtag para sa pagkuha\/paghahanap ng username"
+        },
+        "username": {
+            "required": "Oo",
+            "description": "Username ng may-ari ng komento"
+        },
+        "media": {
+            "required": "Oo",
+            "description": "Media URL para sa pagkuha\/paghahanap ng listahan ng mga nag-like"
+        },
+        "answer-number": {
+            "required": "Oo",
+            "description": "Numero ng sagot mula sa listahan ng mga pagpipilian"
+        },
+        "comments": {
+            "required": "Oo",
+            "description": "Listahan ng mga komento na pinaghihiwalay ng <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        }
+    },
+    "responses": {
+        "total-order-count": "Kabuuang bilang ng mga order",
+        "total-deposit-count": "Kabuuang bilang ng mga deposit",
+        "api-key-required": "Kinakailangan ang api_key.",
+        "secret-key-required": "Kinakailangan ang secret_key.",
+        "ip-not-whitelisted": "Ang iyong IP {{ip}} ay hindi nakalista sa IP Whitelist.",
+        "service-id-required": "Kinakailangan ang service_id.",
+        "service-id-numeric": "Ang service_id ay dapat isang numero.",
+        "service-id-invalid": "Ang napiling service_id ay hindi wasto.",
+        "quantity-numeric": "Ang quantity ay dapat isang numero.",
+        "quantity-min": "Ang minimum na halaga ng quantity ay {{min}}.",
+        "insufficient-balance": "Hindi sapat ang iyong balanse.",
+        "service-not-available": "Hindi available ang serbisyo.",
+        "no-data-found": "Walang nahanap na mga order.",
+        "data-found": "May nahanap na mga order.",
+        "id-invalid": "Ang napiling id ay hindi wasto.",
+        "order-cannot-be-refilled": "Hindi maaaring i-refill ang order."
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "Aggiornato",
+            "price-increased": "Prezzo Aumentato",
+            "price-decreased": "Prezzo Diminuito",
+            "enabled": "Abilitato",
+            "disabled": "Disabilitato",
+            "added": "Aggiunto",
+            "deleted": "Eliminato"
+        },
+        "description": {
+            "min-updated": "Aggiornamento quantità minima servizio da {{from}} a {{to}}.",
+            "max-updated": "Aggiornamento quantità massima servizio da {{from}} a {{to}}.",
+            "price-increased": "Aumento Prezzo da {{from}} a {{to}}.",
+            "price-decreased": "Diminuzione Prezzo da {{from}} a {{to}}.",
+            "enabled": "Servizio abilitato.",
+            "disabled": "Servizio disabilitato.",
+            "added": "Servizio aggiunto.",
+            "deleted": "Servizio eliminato."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Servizio aggiunto con successo ai preferiti.",
+        "removed-from-favorites": "Servizio rimosso con successo dai preferiti.",
+        "invalid-service-id": "ID Servizio non valido.",
+        "no-services-found": "Nessun servizio trovato.",
+        "no-categories-found": "Nessuna categoria servizio trovata."
+    }
+}

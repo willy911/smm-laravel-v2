@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Админы",
+        "admin": "Админ",
+        "provider": "Поставщик",
+        "updated-columns": "Обновленные столбцы",
+        "is-api-access-enabled": "Доступ к API",
+        "custom-price-type": "Тип персонализированной цены",
+        "custom-price-value": "Значение персонализированной цены",
+        "custom-price-fixed": "Фиксированное число",
+        "custom-price-percentage": "Процент",
+        "profit-configs": "Конфигурация прибыли",
+        "profit-type": "Тип прибыли",
+        "profit-value": "Значение прибыли",
+        "profit-fixed": "Фиксированное число",
+        "profit-percentage": "Процент",
+        "alias": "Псевдоним",
+        "last-balance": "Последний баланс",
+        "original-price": "Цена покупки",
+        "sell-price": "Цена продажи"
+    },
+    "actions": {
+        "mark-item-as": "Отметить как <item>{{as}}<\/item>",
+        "sort-item": "Сортировать {{item}}",
+        "create-item": "Добавить {{item}}",
+        "edit-item": "Изменить {{item}}",
+        "fetch-item": "Получить {{item}}",
+        "delete-item": "Удалить {{item}}",
+        "trash": "Переместить в корзину",
+        "close": "Закрыть Ticket",
+        "restore": "Восстановить",
+        "destroy": "Удалить навсегда"
+    },
+    "toast": {
+        "create-successful": "{{item}} с ID <b>{{id}}<\/b> успешно добавлен.",
+        "update-successful": "{{item}} с ID <b>{{id}}<\/b> успешно обновлен.",
+        "switch-successful": "Столбец {{column}} {{item}} с ID <b>{{id}}<\/b> успешно обновлен.",
+        "trash-successful": "{{item}} с ID <b>{{id}}<\/b> успешно перемещен в корзину.",
+        "close-successful": "{{item}} с ID <b>{{id}}<\/b> успешно закрыт.",
+        "restore-successful": "{{item}} с ID <b>{{id}}<\/b> успешно восстановлен.",
+        "destroy-successful": "{{item}} с ID <b>{{id}}<\/b> успешно удален навсегда.",
+        "sort-successful": "Порядок {{item}} успешно обновлен."
+    },
+    "log": {
+        "create-successful": "Создан {{item}} с ID <b>{{id}}<\/b>.",
+        "update-successful": "Обновлен {{item}} с ID <b>{{id}}<\/b>.",
+        "switch-successful": "Обновлен {{item}} с ID <b>{{id}}<\/b>, столбец <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Перемещен {{item}} с ID <b>{{id}}<\/b> в корзину.",
+        "close-successful": "Закрыт {{item}} с ID <b>{{id}}<\/b>.",
+        "restore-successful": "Восстановлен {{item}} с ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Удален {{item}} с ID <b>{{id}}<\/b> навсегда.",
+        "sort-successful": "Обновлен порядок {{item}}."
+    },
+    "status": {
+        "pending": "В ожидании",
+        "waiting": "Ожидание",
+        "success": "Успешно",
+        "approved": "Одобрено",
+        "expired": "Истекло",
+        "canceled": "Отменено",
+        "open": "Открыто",
+        "answered": "Отвечено",
+        "user-reply": "Ответ пользователя",
+        "closed": "Закрыто",
+        "completed": "Завершено",
+        "processing": "Обработка",
+        "in-progress": "Выполняется",
+        "error": "Ошибка",
+        "partial": "Частично",
+        "rejected": "Отклонено",
+        "active": "Активен",
+        "inactive": "Неактивен"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Закрыть форму?",
+            "description": "У вас есть несохраненные изменения.",
+            "cancel-button": "Нет, отмена",
+            "confirm-button": "Да, закрыть без сохранения!"
+        },
+        "trash": {
+            "title": "Вы абсолютно уверены?",
+            "description": "Переместить {{item}} <b>{{value}}<\/b> в папку корзины.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, продолжить!"
+        },
+        "restore": {
+            "title": "Вы абсолютно уверены?",
+            "description": "Восстановить {{item}} <b>{{value}}<\/b> из папки корзины.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, продолжить!"
+        },
+        "destroy": {
+            "title": "Вы абсолютно уверены?",
+            "description": "Это действие необратимо. Будет навсегда удалено {{item}} <b>{{value}}<\/b> из базы данных.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, продолжить!"
+        },
+        "close": {
+            "title": "Закрыть Ticket?",
+            "description": "Закрыть ticket <b>{{id}}<\/b>.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, закрыть!"
+        }
+    }
+}

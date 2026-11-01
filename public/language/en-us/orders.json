@@ -1,0 +1,38 @@
+{
+    "title": "Orders",
+    "create": {
+        "title": "Create",
+        "button": "Create Order!"
+    },
+    "list": {
+        "title": "List"
+    },
+    "refill": {
+        "title": "Refill"
+    },
+    "labels": {
+        "view-order-target-example": "View Order Target Example",
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> with an average order quantity <span class=\"font-medium text-green-600\">{{quantity}}<\/span>"
+    },
+    "toast": {
+        "refill-successful": "Order refill request created successfully.",
+        "cancel-successful": "Order cancellation request created successfully.",
+        "invalid-order-id": "Invalid order ID.",
+        "wait-previous-order": "Please wait for the previous order to be processed first.",
+        "min-quantity": "Minimum quantity is {{min}}.",
+        "max-quantity": "Maximum quantity is {{max}}.",
+        "mass-order-not-supported": "This service does not support mass orders.",
+        "order-created-with-target": "Order with ID <strong>{{order_id}}<\/strong> = Target <strong>{{order_target}}<\/strong> created successfully.",
+        "service-not-available": "Service not available.",
+        "order-created": "Order created successfully.",
+        "insufficient-balance": "Your balance is insufficient. Deposit now!"
+    },
+    "log": {
+        "create-successful": "Created order with ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Created order (API) with ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Created order (Web - Single) with ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Created order (Web - Mass) with ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Created order refill with ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Created order cancellation with ID <b>{{order_cancel_id}}<\/b>."
+    }
+}

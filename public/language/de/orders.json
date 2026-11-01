@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Bestellung Erstellen!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> mit durchschnittlicher Bestellmenge <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Beispiel für Bestellziel Anzeigen",
+        "order-target-example": "Beispiel für das Bestellziel"
+    },
+    "toast": {
+        "refill-successful": "Anfrage zur Nachfüllung der Bestellung erfolgreich erstellt.",
+        "cancel-successful": "Anfrage zur Stornierung der Bestellung erfolgreich erstellt.",
+        "invalid-order-id": "Bestell-ID ungültig.",
+        "wait-previous-order": "Bitte warten Sie, bis die vorherige Bestellung zuerst bearbeitet wurde.",
+        "min-quantity": "Die Mindestmenge beträgt {{min}}.",
+        "max-quantity": "Die Höchstmenge beträgt {{max}}.",
+        "mass-order-not-supported": "Dieser Service unterstützt keine Massenbestellungen.",
+        "order-created-with-target": "Bestellung mit ID <strong>{{order_id}}<\/strong> = Ziel <strong>{{order_target}}<\/strong> erfolgreich erstellt.",
+        "service-not-available": "Der Service ist nicht verfügbar.",
+        "order-created": "Bestellung erfolgreich erstellt.",
+        "insufficient-balance": "Ihr Saldo ist unzureichend, Jetzt Einzahlen!"
+    },
+    "log": {
+        "create-successful": "Bestellung mit ID <b>{{order_id}}<\/b> erstellen.",
+        "create-api-successful": "Bestellung (API) mit ID <b>{{order_id}}<\/b> erstellen.",
+        "create-single-successful": "Bestellung (Web - Einzeln) mit ID <b>{{order_id}}<\/b> erstellen.",
+        "create-mass-successful": "Bestellung (Web - Massen) mit ID <b>{{order_id}}<\/b> erstellen.",
+        "refill-successful": "Nachfüllung der Bestellung mit ID <b>{{order_refill_id}}<\/b> erstellen.",
+        "cancel-successful": "Stornierung der Bestellung mit ID <b>{{order_cancel_id}}<\/b> erstellen.",
+        "refund-successful": "Die Rückerstattung für die Bestellung mit der ID <b>{{order_id}}<\/b> war erfolgreich."
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "labels": {
+        "service-provider-order-id": "Anbieter-Bestell-ID",
+        "service-provider-order-refill-id": "Anbieter-Nachfüll-ID"
+    }
+}

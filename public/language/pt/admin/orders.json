@@ -1,0 +1,6 @@
+{
+    "labels": {
+        "service-provider-order-id": "ID do Pedido do Provedor",
+        "service-provider-order-refill-id": "ID de Recarga do Provedor"
+    }
+}

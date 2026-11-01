@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "E-posta Doğrulaması",
+        "check-email": "Hesabınızı doğrulamak için lütfen <b>{{email}}<\/b> adresine gönderilen e-postayı kontrol edin.",
+        "resend-in-seconds": "{{seconds}} saniye içinde tekrar gönder",
+        "button": "Doğrulama E-postasını Yeniden Gönder",
+        "toast": {
+            "email-verified-successful": "E-posta başarıyla doğrulandı.",
+            "email-resent-successful": "Doğrulama e-postası başarıyla yeniden gönderildi."
+        },
+        "log": {
+            "email-verified-successful": "E-posta doğrulaması yapılıyor."
+        }
+    },
+    "settings": {
+        "update-profile-button": "Profili Güncelle",
+        "update-api-button": "API'yi Güncelle",
+        "toast": {
+            "update-profile-successful": "Profil başarıyla güncellendi.",
+            "update-api-successful": "API başarıyla güncellendi.",
+            "update-notification-successful": "Bildirim başarıyla güncellendi."
+        },
+        "log": {
+            "update-api-successful": "API verileri güncelleniyor.",
+            "update-profile-successful": "Hesap profili güncelleniyor."
+        }
+    }
+}

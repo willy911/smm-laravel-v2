@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Gumawa ng Deposit!",
+        "steps": {
+            "select-payment-method": "Pumili ng Paraan ng Pagbabayad",
+            "enter-amount": "Ilagay ang Halaga ng Deposit",
+            "enter-e-wallet-number": "Ilagay ang E-Wallet Number"
+        }
+    },
+    "detail": {
+        "button": "Kanselahin ang Deposit!",
+        "cancel-dialog": {
+            "title": "Sigurado ka ba?",
+            "description": "Kanselahin ang Deposit na may ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Kanselahin!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Mangyaring kumpletuhin ang pagbabayad.",
+        "deposit-amount": "Halaga ng Deposit",
+        "total-balance": "Kabuuang Balanse",
+        "total-payment": "Kabuuang Bayad",
+        "e-wallet-number": "E-Wallet Number",
+        "unique-code": "Natatanging Code",
+        "payment-status": "Status ng Pagbabayad",
+        "expires-in": "Mag-e-expire Sa",
+        "expires-text": "Natitirang {{hours}} oras, {{minutes}} minuto, {{seconds}} segundo",
+        "virtual-account-number": "Virtual Account Number",
+        "payment-code": "Payment Code",
+        "payment-target": "Target ng Pagbabayad",
+        "payment-link": "Payment Link",
+        "qr-code": "QR Code"
+    },
+    "toast": {
+        "unpaid-payment": "Mangyaring bayaran muna ang iyong nakaraang deposit.",
+        "payment-not-available": "Ang paraan ng pagbabayad ay kasalukuyang hindi magagamit. Mangyaring gumamit ng ibang paraan.",
+        "create-successful": "Mangyaring kumpletuhin ang iyong pagbabayad.",
+        "cancel-successful": "Ang Deposit na may ID <b>{{deposit_id}}<\/b> ay matagumpay na nakansela."
+    },
+    "log": {
+        "process-successful": "Ang Deposit na may ID <b>{{deposit_id}}<\/b> ay matagumpay na naproseso.",
+        "create-successful": "Gumawa ng deposit na may ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Kinansela ang deposit na may ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Paglipat ng balanse mula sa admin."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Sigurado ka ba?",
+            "description": "Kanselahin ang {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Magpatuloy!"
+        },
+        "approve": {
+            "title": "Sigurado ka ba?",
+            "description": "Aprubahan ang {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Magpatuloy!"
+        }
+    }
+}

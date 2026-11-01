@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Os usuários que se cadastrarem usando este link se tornarão automaticamente seus indicados.",
+        "balance-transfer-notice": "A comissão será transferida para o seu saldo principal.",
+        "bank-transfer-notice": "A comissão será transferida para a sua conta bancária."
+    },
+    "labels": {
+        "affiliate-balance": "Saldo de Afiliado",
+        "commission-available": "Comissão Disponível",
+        "total-referrals": "Total de Indicações",
+        "total-earnings": "Ganhos Totais",
+        "withdrawal-history": "Histórico de Saques",
+        "your-affiliate-link": "Seu Link de Afiliado",
+        "withdraw-commission": "Sacar Comissão"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Solicitado um saque de comissão no valor de <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "O saque de comissão de <b>{{amount}}<\/b> para a conta bancária foi realizado com sucesso.",
+        "commission-withdrawal-to-balance-successful": "O saque de comissão de <b>{{amount}}<\/b> para o saldo principal foi realizado com sucesso.",
+        "commission-received": "Recebida uma comissão de <b>{{amount}}<\/b> do depósito do usuário <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "O valor é obrigatório.",
+        "bank-name-required": "O nome do banco é obrigatório.",
+        "bank-account-name-required": "O nome do titular da conta é obrigatório.",
+        "bank-account-number-required": "O número da conta bancária é obrigatório.",
+        "min-withdrawal": "O valor mínimo de saque é <b>{{amount}}<\/b>.",
+        "max-withdrawal": "O valor máximo de saque é <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "O saque da comissão foi criado com sucesso."
+    }
+}

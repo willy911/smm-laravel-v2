@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Yöneticiler',
+        'admin' => 'Yönetici',
+        'provider' => 'Sağlayıcı',
+        'updated_columns' => 'Güncellenen Sütunlar',
+        'is_api_access_enabled' => 'API Erişimi',
+        'custom_price_type' => 'Özel Fiyat Tipi',
+        'custom_price_value' => 'Özel Fiyat Değeri',
+        'custom_price_fixed' => 'Sabit Miktar',
+        'custom_price_percentage' => 'Yüzde',
+        'profit_configs' => 'Kâr Yapılandırmaları',
+        'profit_type' => 'Kâr Tipi',
+        'profit_value' => 'Kâr Değeri',
+        'profit_fixed' => 'Sabit Miktar',
+        'profit_percentage' => 'Yüzde',
+        'alias' => 'Takma Ad',
+        'last_balance' => 'Son Bakiye',
+        'original_price' => 'Alış Fiyatı',
+        'sell_price' => 'Satış Fiyatı',
+    ],
+
+    'actions' => [
+        'mark_item_as' => '<item>:as</item> olarak işaretle',
+        'sort_item' => ':item Sırala',
+        'create_item' => ':item Ekle',
+        'edit_item' => ':item Düzenle',
+        'fetch_item' => ':item Çek',
+        'delete_item' => ':item Sil',
+        'trash' => 'Çöpe Taşı',
+        'close' => 'Ticketi Kapat',
+        'restore' => 'Geri Yükle',
+        'destroy' => 'Kalıcı Olarak Sil',
+    ],
+
+    'toast' => [
+        'create_successful' => '<b>:id</b> ID\'li :item başarıyla eklendi.',
+        'update_successful' => '<b>:id</b> ID\'li :item başarıyla güncellendi.',
+        'switch_successful' => '<b>:id</b> ID\'li :item için :column başarıyla güncellendi.',
+        'trash_successful' => '<b>:id</b> ID\'li :item başarıyla çöpe taşındı.',
+        'close_successful' => '<b>:id</b> ID\'li :item başarıyla kapatıldı.',
+        'restore_successful' => '<b>:id</b> ID\'li :item başarıyla geri yüklendi.',
+        'destroy_successful' => '<b>:id</b> ID\'li :item kalıcı olarak başarıyla silindi.',
+        'sort_successful' => ':item sıralaması başarıyla güncellendi.',
+    ],
+
+    'log' => [
+        'create_successful' => '<b>:id</b> ID\'li :item oluşturuluyor.',
+        'update_successful' => '<b>:id</b> ID\'li :item güncelleniyor.',
+        'switch_successful' => '<b>:id</b> ID\'li :item güncelleniyor, <b>:column:</b> :from → :to.',
+        'trash_successful' => '<b>:id</b> ID\'li :item çöpe taşınıyor.',
+        'close_successful' => '<b>:id</b> ID\'li :item kapatılıyor.',
+        'restore_successful' => '<b>:id</b> ID\'li :item geri yükleniyor.',
+        'destroy_successful' => '<b>:id</b> ID\'li :item kalıcı olarak siliniyor.',
+        'sort_successful' => ':item sıralaması güncelleniyor.',
+    ],
+
+    'status' => [
+        'pending' => 'Beklemede',
+        'waiting' => 'Bekliyor',
+        'success' => 'Başarılı',
+        'approved' => 'Onaylandı',
+        'expired' => 'Süresi Doldu',
+        'canceled' => 'İptal Edildi',
+        'open' => 'Açık',
+        'answered' => 'Yanıtlandı',
+        'user_reply' => 'Kullanıcı Yanıtı',
+        'closed' => 'Kapalı',
+        'completed' => 'Tamamlandı',
+        'processing' => 'İşleniyor',
+        'in_progress' => 'Devam Ediyor',
+        'error' => 'Hata',
+        'partial' => 'Kısmi',
+        'rejected' => 'Reddedildi',
+        'active' => 'Aktif',
+        'inactive' => 'Pasif',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Formu kapatılsın mı?',
+            'description' => 'Kaydedilmemiş değişiklikleriniz var.',
+            'cancel_button' => 'Hayır, İptal Et',
+            'confirm_button' => 'Evet, Kaydetmeden Kapat!',
+        ],
+        'trash' => [
+            'title' => 'Gerçekten emin misiniz?',
+            'description' => ':item <b>:value</b> çöp klasörüne taşı.',
+            'cancel_button' => 'İptal',
+            'confirm_button' => 'Evet, Devam Et!',
+        ],
+        'restore' => [
+            'title' => 'Gerçekten emin misiniz?',
+            'description' => ':item <b>:value</b> çöp klasöründen geri yükle.',
+            'cancel_button' => 'İptal',
+            'confirm_button' => 'Evet, Devam Et!',
+        ],
+        'destroy' => [
+            'title' => 'Gerçekten emin misiniz?',
+            'description' => 'Bu işlem geri alınamaz. Bu, :item <b>:value</b>\'yi veritabanından kalıcı olarak silecektir.',
+            'cancel_button' => 'İptal',
+            'confirm_button' => 'Evet, Devam Et!',
+        ],
+        'close' => [
+            'title' => 'Ticketi Kapat?',
+            'description' => 'Ticketi <b>:id</b> kapat.',
+            'cancel_button' => 'İptal',
+            'confirm_button' => 'Evet, Kapat!',
+        ],
+    ]
+];

@@ -1,0 +1,17 @@
+{
+    "description": {
+        "hero": "Descubra artigos interessantes, dicas, tutoriais e as informações mais recentes de {{website_name}}.",
+        "category": "Descubra artigos por tópico"
+    },
+    "labels": {
+        "tags": "Tags",
+        "popular-tags": "Tags Populares",
+        "latest-articles": "Artigos Recentes",
+        "all-articles": "Todos os Artigos",
+        "related-articles": "Artigos Relacionados"
+    },
+    "empty": {
+        "title": "Artigo Não Encontrado",
+        "description": "O artigo que você está procurando não está disponível ou ainda não foi publicado. Tente usar outras palavras-chave."
+    }
+}

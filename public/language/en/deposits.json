@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Create Deposit!",
+        "steps": {
+            "select-payment-method": "Select Payment",
+            "enter-amount": "Enter Deposit Amount",
+            "enter-e-wallet-number": "Enter E-Wallet Number"
+        }
+    },
+    "detail": {
+        "button": "Cancel Deposit!",
+        "cancel-dialog": {
+            "title": "Are you absolutely sure?",
+            "description": "Cancel Deposit with ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Cancel!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Please complete the payment.",
+        "deposit-amount": "Deposit Amount",
+        "total-balance": "Total Balance",
+        "total-payment": "Total Payment",
+        "e-wallet-number": "E-Wallet Number",
+        "unique-code": "Unique Code",
+        "payment-status": "Payment Status",
+        "expires-in": "Expires In",
+        "expires-text": "{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds remaining",
+        "virtual-account-number": "Virtual Account Number",
+        "payment-code": "Payment Code",
+        "payment-target": "Payment Target",
+        "payment-link": "Payment Link",
+        "qr-code": "QR Code"
+    },
+    "toast": {
+        "unpaid-payment": "Please settle your payment for the previous deposit.",
+        "payment-not-available": "Payment method is currently unavailable. Please use another method.",
+        "create-successful": "Please settle your payment.",
+        "cancel-successful": "Deposit with ID <b>{{deposit_id}}<\/b> successfully cancelled."
+    },
+    "log": {
+        "process-successful": "Deposit with ID <b>{{deposit_id}}<\/b> has been successfully processed.",
+        "create-successful": "Created deposit with ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Cancelled deposit with ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Balance transfer from admin."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Are you absolutely sure?",
+            "description": "Cancel {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "approve": {
+            "title": "Are you absolutely sure?",
+            "description": "Approve {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        }
+    }
+}

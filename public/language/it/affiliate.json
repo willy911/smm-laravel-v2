@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Gli utenti che si registrano utilizzando questo link diventeranno automaticamente tuoi referral.",
+        "balance-transfer-notice": "La commissione verrà trasferita al tuo saldo principale.",
+        "bank-transfer-notice": "La commissione verrà trasferita sul tuo conto bancario."
+    },
+    "labels": {
+        "affiliate-balance": "Saldo Affiliato",
+        "commission-available": "Commissione Disponibile",
+        "total-referrals": "Referral Totali",
+        "total-earnings": "Guadagni Totali",
+        "withdrawal-history": "Cronologia Prelievi",
+        "your-affiliate-link": "Il Tuo Link Affiliato",
+        "withdraw-commission": "Preleva Commissione"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Richiesto un prelievo della commissione di <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "Il prelievo della commissione di <b>{{amount}}<\/b> sul conto bancario è stato completato con successo.",
+        "commission-withdrawal-to-balance-successful": "Il prelievo della commissione di <b>{{amount}}<\/b> sul saldo principale è stato completato con successo.",
+        "commission-received": "Ricevuta una commissione di <b>{{amount}}<\/b> dal deposito dell’utente <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "L’importo è obbligatorio.",
+        "bank-name-required": "Il nome della banca è obbligatorio.",
+        "bank-account-name-required": "Il nome del titolare del conto è obbligatorio.",
+        "bank-account-number-required": "Il numero del conto bancario è obbligatorio.",
+        "min-withdrawal": "L’importo minimo di prelievo è <b>{{amount}}<\/b>.",
+        "max-withdrawal": "L’importo massimo di prelievo è <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Il prelievo della commissione è stato creato con successo."
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "labels": {
+        "admin-fee-configs": "Konfigurasi Biaya Layanan",
+        "payment-target": "Tujuan Pembayaran",
+        "payment-gateway": "Payment Gateway",
+        "payment-gateway-payment-code": "Kode Metode Pembayaran (Payment Gateway)"
+    }
+}

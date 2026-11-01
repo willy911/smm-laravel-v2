@@ -1,0 +1,115 @@
+{
+    "description": {
+        "paragraph-1": "API (Application Programming Interface) è un insieme di comandi, funzioni e protocolli che possono essere utilizzati dai programmatori durante la creazione di software, creando interconnessioni stabili e veloci tra sistemi.",
+        "paragraph-2": "Questa API è il percorso che può essere utilizzato da partner o host per interagire tra programmi. L'API può essere utilizzata per effettuare richieste come controllare il saldo dell'account, controllare il prezzo del servizio, controllare lo stato della transazione e creare nuove transazioni.",
+        "paragraph-3": "Questa connessione API richiede conoscenze di base sulla programmazione informatica. Se non comprendi la documentazione che forniamo, ti preghiamo di contattarci.",
+        "paragraph-4": "Ci sono diverse cose da considerare per la connessione API, tra cui:",
+        "bullet-1": "Avvolgiamo tutte le risposte HTTP in formato <strong>JSON<\/strong>.",
+        "bullet-2": "Tutte le richieste HTTP vengono inviate come richieste <strong>POST<\/strong>.",
+        "bullet-3": "Per favore aggiungi la tua IP alla whitelist nelle impostazioni dell'account."
+    },
+    "labels": {
+        "preparation": "Preparazione",
+        "profile": "Profilo",
+        "services": "Elenco Servizi",
+        "create-order": "Crea Ordine",
+        "status-order": "Stato Ordine",
+        "create-order-refill": "Crea Ricarica Ordine",
+        "status-order-refill": "Stato Ricarica Ordine",
+        "create-order-cancel": "Annullamento Ordine",
+        "endpoint": "Endpoint",
+        "body-request": "Corpo Richiesta",
+        "example-request": "Esempio Richiesta",
+        "example-response": "Esempio Risposta",
+        "parameter": "Parametro",
+        "type": "Tipo di Dato",
+        "required": "Obbligatorio",
+        "description": "Descrizione",
+        "success": "Successo",
+        "fail": "Fallito"
+    },
+    "fields": {
+        "api-key": {
+            "required": "Sì",
+            "description": "Chiave API configurata nelle impostazioni API"
+        },
+        "secret-key": {
+            "required": "Sì",
+            "description": "Chiave Segreta configurata nelle impostazioni API"
+        },
+        "is-favorites": {
+            "required": "No",
+            "description": "Compila con <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">true<\/code> per visualizzare i servizi preferiti"
+        },
+        "id": {
+            "required": "Sì",
+            "description": "ID ordine, separati da virgola (,) per controllo in massa"
+        },
+        "order-id": {
+            "required": "Sì",
+            "description": "ID ordine"
+        },
+        "order-refill-id": {
+            "required": "Sì",
+            "description": "ID ricarica ordine"
+        },
+        "service-id": {
+            "required": "Sì",
+            "description": "ID Servizio, vedi di più"
+        },
+        "target": {
+            "required": "Sì",
+            "description": "Obiettivo ordine, come username\/link\/altro"
+        },
+        "quantity": {
+            "required": "Sì",
+            "description": "Quantità ordine"
+        },
+        "usernames": {
+            "required": "Sì",
+            "description": "Elenco username separati da <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtags": {
+            "required": "Sì",
+            "description": "Elenco hashtag separati da <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtag": {
+            "required": "Sì",
+            "description": "Hashtag per catturare\/cercare username"
+        },
+        "username": {
+            "required": "Sì",
+            "description": "Username del proprietario del commento"
+        },
+        "media": {
+            "required": "Sì",
+            "description": "URL Media per catturare\/cercare l'elenco dei mi piace"
+        },
+        "answer-number": {
+            "required": "Sì",
+            "description": "Numero risposta dall'elenco delle opzioni"
+        },
+        "comments": {
+            "required": "Sì",
+            "description": "Elenco commenti separati da <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> o <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        }
+    },
+    "responses": {
+        "total-order-count": "Numero totale di ordini",
+        "total-deposit-count": "Numero totale di depositi",
+        "api-key-required": "api_key è obbligatorio.",
+        "secret-key-required": "secret_key è obbligatorio.",
+        "ip-not-whitelisted": "Il tuo IP {{ip}} non è registrato nella Whitelist IP.",
+        "service-id-required": "service_id è obbligatorio.",
+        "service-id-numeric": "service_id deve essere un numero.",
+        "service-id-invalid": "Il service_id selezionato non è valido.",
+        "quantity-numeric": "quantity deve essere un numero.",
+        "quantity-min": "quantity deve essere almeno {{min}}.",
+        "insufficient-balance": "Il tuo saldo è insufficiente.",
+        "service-not-available": "Il servizio non è disponibile.",
+        "no-data-found": "nessun ordine trovato.",
+        "data-found": "ordini trovati.",
+        "id-invalid": "l'id selezionato non è valido.",
+        "order-cannot-be-refilled": "l'ordine non può essere ricaricato."
+    }
+}

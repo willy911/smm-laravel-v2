@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Los usuarios que se registren usando este enlace se convertirán automáticamente en tus referidos.",
+        "balance-transfer-notice": "La comisión se transferirá a su saldo principal.",
+        "bank-transfer-notice": "La comisión se transferirá a su cuenta bancaria."
+    },
+    "labels": {
+        "affiliate-balance": "Saldo de Afiliado",
+        "commission-available": "Comisión Disponible",
+        "total-referrals": "Total de Referidos",
+        "total-earnings": "Ganancias Totales",
+        "withdrawal-history": "Historial de Retiros",
+        "your-affiliate-link": "Tu Enlace de Afiliado",
+        "withdraw-commission": "Retirar Comisión"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Se solicitó un retiro de comisión de <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "El retiro de comisión de <b>{{amount}}<\/b> a la cuenta bancaria fue exitoso.",
+        "commission-withdrawal-to-balance-successful": "El retiro de comisión de <b>{{amount}}<\/b> al saldo principal fue exitoso.",
+        "commission-received": "Se recibió una comisión de <b>{{amount}}<\/b> del depósito del usuario <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "El monto es obligatorio.",
+        "bank-name-required": "El nombre del banco es obligatorio.",
+        "bank-account-name-required": "El nombre del titular de la cuenta es obligatorio.",
+        "bank-account-number-required": "El número de cuenta bancaria es obligatorio.",
+        "min-withdrawal": "El monto mínimo de retiro es <b>{{amount}}<\/b>.",
+        "max-withdrawal": "El monto máximo de retiro es <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "El retiro de comisión se ha creado correctamente."
+    }
+}

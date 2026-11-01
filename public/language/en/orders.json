@@ -1,0 +1,35 @@
+{
+    "create": {
+        "button": "Create Order!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> with an average order quantity of <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "View Order Target Example",
+        "order-target-example": "Order Target Example"
+    },
+    "toast": {
+        "refill-successful": "Order refill request successfully created.",
+        "cancel-successful": "Order cancellation request successfully created.",
+        "invalid-order-id": "Invalid Order ID.",
+        "wait-previous-order": "Please wait for the previous order to be processed first.",
+        "min-quantity": "Minimum quantity is {{min}}.",
+        "max-quantity": "Maximum quantity is {{max}}.",
+        "mass-order-not-supported": "This service does not support mass orders.",
+        "order-created-with-target": "Order with ID <strong>{{order_id}}<\/strong> = Target <strong>{{order_target}}<\/strong> successfully created.",
+        "service-not-available": "Service not available.",
+        "order-created": "Order successfully created.",
+        "insufficient-balance": "Insufficient balance. Deposit Now!",
+        "review-successful": "Review submitted successfully. It will appear after admin moderation.",
+        "already-reviewed": "You have already reviewed this service."
+    },
+    "log": {
+        "create-successful": "Created Order with ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Created Order (API) with ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Created Order (Web - Single) with ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Created Order (Web - Mass) with ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Created Order Refill with ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Created Order Cancellation with ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "The refund for the order with ID <b>{{order_id}}<\/b> was successful.",
+        "review-successful": "Submitted a review for order ID <b>{{order_id}}<\/b>."
+    }
+}

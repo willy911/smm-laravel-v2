@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Benutzer, die sich über diesen Link registrieren, werden automatisch zu Ihren Empfehlungen.",
+        "balance-transfer-notice": "Die Provision wird auf Ihr Hauptguthaben übertragen.",
+        "bank-transfer-notice": "Die Provision wird auf Ihr Bankkonto überwiesen."
+    },
+    "labels": {
+        "affiliate-balance": "Affiliate-Guthaben",
+        "commission-available": "Verfügbare Provision",
+        "total-referrals": "Gesamtanzahl der Empfehlungen",
+        "total-earnings": "Gesamteinnahmen",
+        "withdrawal-history": "Auszahlungsverlauf",
+        "your-affiliate-link": "Ihr Affiliate-Link",
+        "withdraw-commission": "Provision auszahlen"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Eine Provisionsauszahlung in Höhe von <b>{{amount}}<\/b> wurde beantragt.",
+        "commission-withdrawal-to-bank-successful": "Die Provisionsauszahlung in Höhe von <b>{{amount}}<\/b> auf das Bankkonto war erfolgreich.",
+        "commission-withdrawal-to-balance-successful": "Die Provisionsauszahlung in Höhe von <b>{{amount}}<\/b> auf das Hauptguthaben war erfolgreich.",
+        "commission-received": "Provision in Höhe von <b>{{amount}}<\/b> aus der Einzahlung des Benutzers <b>{{user}}<\/b> erhalten."
+    },
+    "toast": {
+        "amount-required": "Der Betrag ist erforderlich.",
+        "bank-name-required": "Der Bankname ist erforderlich.",
+        "bank-account-name-required": "Der Name des Kontoinhabers ist erforderlich.",
+        "bank-account-number-required": "Die Kontonummer ist erforderlich.",
+        "min-withdrawal": "Der Mindestbetrag für die Auszahlung beträgt <b>{{amount}}<\/b>.",
+        "max-withdrawal": "Der Höchstbetrag für die Auszahlung beträgt <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Die Provisionsauszahlung wurde erfolgreich erstellt."
+    }
+}

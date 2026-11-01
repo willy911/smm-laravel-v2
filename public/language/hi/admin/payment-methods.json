@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "व्यवस्थापक शुल्क कॉन्फ़िगरेशन",
+        "admin-fee-type": "व्यवस्थापक शुल्क प्रकार",
+        "admin-fee-value": "व्यवस्थापक शुल्क मूल्य",
+        "payment-target": "भुगतान लक्ष्य",
+        "payment-gateway": "भुगतान गेटवे",
+        "payment-gateway-payment-code": "भुगतान विधि कोड (भुगतान गेटवे)",
+        "bonus-configs": "बोनस कॉन्फ़िगरेशन",
+        "bonus-value": "बोनस मूल्य",
+        "min-and-max-payment": "न्यूनतम और अधिकतम भुगतान"
+    }
+}

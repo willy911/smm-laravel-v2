@@ -1,0 +1,11 @@
+<?php
+
+return [
+    'welcome'  => 'Benvenuto',
+    'latest_5_news' => '5 Notizie Più Recenti',
+
+    'community' => [
+        'title'       => 'Unisciti alla Nostra Comunità',
+        'description' => 'Resta connesso con la nostra comunità! Unisciti al nostro gruppo WhatsApp o Telegram per ricevere aggiornamenti, discussioni e altro ancora.',
+    ],
+];

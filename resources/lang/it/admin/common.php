@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Amministratori',
+        'admin' => 'Amministratore',
+        'provider' => 'Fornitore',
+        'updated_columns' => 'Colonne Aggiornate',
+        'is_api_access_enabled' => 'Accesso API',
+        'custom_price_type' => 'Tipo di Prezzo Personalizzato',
+        'custom_price_value' => 'Valore del Prezzo Personalizzato',
+        'custom_price_fixed' => 'Importo Fisso',
+        'custom_price_percentage' => 'Percentuale',
+        'profit_configs' => 'Configurazione Profitto',
+        'profit_type' => 'Tipo di Profitto',
+        'profit_value' => 'Valore del Profitto',
+        'profit_fixed' => 'Importo Fisso',
+        'profit_percentage' => 'Percentuale',
+        'alias' => 'Alias',
+        'last_balance' => 'Saldo Finale',
+        'original_price' => 'Prezzo di Acquisto',
+        'sell_price' => 'Prezzo di Vendita',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Segna come <item>:as</item>',
+        'sort_item' => 'Ordina :item',
+        'create_item' => 'Aggiungi :item',
+        'edit_item' => 'Modifica :item',
+        'fetch_item' => 'Recupera :item',
+        'delete_item' => 'Elimina :item',
+        'trash' => 'Sposta nel cestino',
+        'close' => 'Chiudi Ticket',
+        'restore' => 'Ripristina',
+        'destroy' => 'Elimina Definitivamente',
+    ],
+
+    'toast' => [
+        'create_successful'    => ':item con ID <b>:id</b> aggiunto con successo.',
+        'update_successful'    => ':item con ID <b>:id</b> aggiornato con successo.',
+        'switch_successful'    => ':column :item con ID <b>:id</b> aggiornato con successo.',
+        'trash_successful'    => ':item con ID <b>:id</b> spostato nel cestino con successo.',
+        'close_successful'    => ':item con ID <b>:id</b> chiuso con successo.',
+        'restore_successful'    => ':item con ID <b>:id</b> ripristinato con successo.',
+        'destroy_successful'    => ':item con ID <b>:id</b> eliminato definitivamente con successo.',
+        'sort_successful'    => 'Ordine di :item aggiornato con successo.',
+    ],
+
+    'log' => [
+        'create_successful' => 'Creazione di :item con ID <b>:id</b>.',
+        'update_successful' => 'Aggiornamento di :item con ID <b>:id</b>.',
+        'switch_successful' => 'Aggiornamento di :item con ID <b>:id</b>, colonna <b>:column:</b> :from → :to.',
+        'trash_successful'    => 'Spostamento di :item con ID <b>:id</b> nel cestino.',
+        'close_successful'    => 'Chiusura di :item con ID <b>:id</b>.',
+        'restore_successful'    => 'Ripristino di :item con ID <b>:id</b>.',
+        'destroy_successful'    => 'Eliminazione definitiva di :item con ID <b>:id</b>.',
+        'sort_successful'    => 'Aggiornamento dell\'ordine di :item.',
+    ],
+
+    'status' => [
+        'pending' => 'In attesa',
+        'waiting' => 'In attesa',
+        'success' => 'Riuscito',
+        'approved' => 'Approvato',
+        'expired' => 'Scaduto',
+        'canceled' => 'Annullato',
+        'open' => 'Aperto',
+        'answered' => 'Risposto',
+        'user_reply' => 'Risposta utente',
+        'closed' => 'Chiuso',
+        'completed' => 'Completato',
+        'processing' => 'In elaborazione',
+        'in_progress' => 'In corso',
+        'error' => 'Errore',
+        'partial' => 'Parziale',
+        'rejected' => 'Rifiutato',
+        'active' => 'Attivo',
+        'inactive' => 'Inattivo',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Chiudere il modulo?',
+            'description' => 'Hai modifiche non salvate.',
+            'cancel_button' => 'No, Annulla',
+            'confirm_button' => 'Sì, Chiudi Senza Salvare!',
+        ],
+        'trash' => [
+            'title' => 'Sei veramente sicuro?',
+            'description' => 'Sposta :item <b>:value</b> nella cartella cestino.',
+            'cancel_button' => 'Annulla',
+            'confirm_button' => 'Sì, Continua!',
+        ],
+        'restore' => [
+            'title' => 'Sei veramente sicuro?',
+            'description' => 'Ripristina :item <b>:value</b> dalla cartella cestino.',
+            'cancel_button' => 'Annulla',
+            'confirm_button' => 'Sì, Continua!',
+        ],
+        'destroy' => [
+            'title' => 'Sei veramente sicuro?',
+            'description' => 'Questa azione non può essere annullata. Questa azione eliminerà definitivamente :item <b>:value</b> dal database.',
+            'cancel_button' => 'Annulla',
+            'confirm_button' => 'Sì, Continua!',
+        ],
+        'close' => [
+            'title' => 'Chiudere il Ticket?',
+            'description' => 'Chiudere il ticket <b>:id</b>.',
+            'cancel_button' => 'Annulla',
+            'confirm_button' => 'Sì, Chiudere!',
+        ],
+    ]
+];

@@ -1,0 +1,17 @@
+<?php
+
+return [
+    'title' => 'Admins',
+
+    'create' => [
+        'title' => 'Create',
+    ],
+
+    'list' => [
+        'title' => 'List',
+    ],
+
+    'role' => [
+        'title' => 'Role/Access',
+    ],
+];

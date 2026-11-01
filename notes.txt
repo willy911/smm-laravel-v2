@@ -1,0 +1,12 @@
+- Customize Warna Web
+- API V2
+- Custom Price by Percentage - Done
+- Discount All Services by Percentage (User) - Done
+- Tag System Website Blog - Done
+- Drip feed, Subs Service Types
+- Mass Action Update Service Category - Done
+- Mass Action Edit Servce Description - Done
+- Mass Action Refund Orders - Done
+- Edit Start Count & Remains Orders (Partial) - Done
+- Affiliate - Done
+- Admin Roles

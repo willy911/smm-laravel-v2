@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Конфигурации комиссии",
+        "admin-fee-type": "Тип комиссии",
+        "admin-fee-value": "Значение комиссии",
+        "payment-target": "Цель платежа",
+        "payment-gateway": "Платежный шлюз",
+        "payment-gateway-payment-code": "Код метода оплаты (Платежный шлюз)",
+        "bonus-configs": "Конфигурации бонуса",
+        "bonus-value": "Значение бонуса",
+        "min-and-max-payment": "Мин. и Макс. платеж"
+    }
+}

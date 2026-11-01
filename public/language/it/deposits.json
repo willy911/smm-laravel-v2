@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Crea Deposito!",
+        "steps": {
+            "select-payment-method": "Seleziona Pagamento",
+            "enter-amount": "Inserisci Importo Deposito",
+            "enter-e-wallet-number": "Inserisci N. E-Wallet"
+        }
+    },
+    "detail": {
+        "button": "Annulla Deposito!",
+        "cancel-dialog": {
+            "title": "Sei veramente sicuro?",
+            "description": "Annulla Deposito con ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Annulla!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Per favore completa il pagamento.",
+        "deposit-amount": "Importo Deposito",
+        "total-balance": "Saldo Totale",
+        "total-payment": "Pagamento Totale",
+        "e-wallet-number": "N. E-Wallet",
+        "unique-code": "Codice Unico",
+        "payment-status": "Stato Pagamento",
+        "expires-in": "Scade Tra",
+        "expires-text": "{{hours}} ore, {{minutes}} minuti, {{seconds}} secondi rimanenti",
+        "virtual-account-number": "N. Conto Virtuale",
+        "payment-code": "Codice Pagamento",
+        "payment-target": "Destinazione Pagamento",
+        "payment-link": "Link Pagamento",
+        "qr-code": "Codice QR"
+    },
+    "toast": {
+        "unpaid-payment": "Per favore salda il pagamento per il deposito precedente.",
+        "payment-not-available": "Il metodo di pagamento non è attualmente disponibile. Per favore usa un altro metodo.",
+        "create-successful": "Per favore salda il pagamento.",
+        "cancel-successful": "Deposito con ID <b>{{deposit_id}}<\/b> annullato con successo."
+    },
+    "log": {
+        "process-successful": "Il deposito con ID <b>{{deposit_id}}<\/b> è stato elaborato con successo.",
+        "create-successful": "Creazione deposito con ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Annullamento deposito con ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Trasferimento saldo dall'amministratore."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Sei veramente sicuro?",
+            "description": "Annulla {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Continua!"
+        },
+        "approve": {
+            "title": "Sei assolutamente sicuro?",
+            "description": "Approva {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, continua!"
+        }
+    }
+}

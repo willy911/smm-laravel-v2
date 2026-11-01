@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Админы',
+        'admin' => 'Админ',
+        'provider' => 'Поставщик',
+        'updated_columns' => 'Обновленные столбцы',
+        'is_api_access_enabled' => 'Доступ к API',
+        'custom_price_type' => 'Тип персонализированной цены',
+        'custom_price_value' => 'Значение персонализированной цены',
+        'custom_price_fixed' => 'Фиксированное число',
+        'custom_price_percentage' => 'Процент',
+        'profit_configs' => 'Конфигурация прибыли',
+        'profit_type' => 'Тип прибыли',
+        'profit_value' => 'Значение прибыли',
+        'profit_fixed' => 'Фиксированное число',
+        'profit_percentage' => 'Процент',
+        'alias' => 'Псевдоним',
+        'last_balance' => 'Последний баланс',
+        'original_price' => 'Цена покупки',
+        'sell_price' => 'Цена продажи',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Отметить как <item>:as</item>',
+        'sort_item' => 'Сортировать :item',
+        'create_item' => 'Добавить :item',
+        'edit_item' => 'Изменить :item',
+        'fetch_item' => 'Получить :item',
+        'delete_item' => 'Удалить :item',
+        'trash' => 'Переместить в корзину',
+        'close' => 'Закрыть Ticket',
+        'restore' => 'Восстановить',
+        'destroy' => 'Удалить навсегда',
+    ],
+
+    'toast' => [
+        'create_successful' => ':item с ID <b>:id</b> успешно добавлен.',
+        'update_successful' => ':item с ID <b>:id</b> успешно обновлен.',
+        'switch_successful' => 'Столбец :column :item с ID <b>:id</b> успешно обновлен.',
+        'trash_successful' => ':item с ID <b>:id</b> успешно перемещен в корзину.',
+        'close_successful' => ':item с ID <b>:id</b> успешно закрыт.',
+        'restore_successful' => ':item с ID <b>:id</b> успешно восстановлен.',
+        'destroy_successful' => ':item с ID <b>:id</b> успешно удален навсегда.',
+        'sort_successful' => 'Порядок :item успешно обновлен.',
+    ],
+
+    'log' => [
+        'create_successful' => 'Создан :item с ID <b>:id</b>.',
+        'update_successful' => 'Обновлен :item с ID <b>:id</b>.',
+        'switch_successful' => 'Обновлен :item с ID <b>:id</b>, столбец <b>:column:</b> :from → :to.',
+        'trash_successful' => 'Перемещен :item с ID <b>:id</b> в корзину.',
+        'close_successful' => 'Закрыт :item с ID <b>:id</b>.',
+        'restore_successful' => 'Восстановлен :item с ID <b>:id</b>.',
+        'destroy_successful' => 'Удален :item с ID <b>:id</b> навсегда.',
+        'sort_successful' => 'Обновлен порядок :item.',
+    ],
+
+    'status' => [
+        'pending' => 'В ожидании',
+        'waiting' => 'Ожидание',
+        'success' => 'Успешно',
+        'approved' => 'Одобрено',
+        'expired' => 'Истекло',
+        'canceled' => 'Отменено',
+        'open' => 'Открыто',
+        'answered' => 'Отвечено',
+        'user_reply' => 'Ответ пользователя',
+        'closed' => 'Закрыто',
+        'completed' => 'Завершено',
+        'processing' => 'Обработка',
+        'in_progress' => 'Выполняется',
+        'error' => 'Ошибка',
+        'partial' => 'Частично',
+        'rejected' => 'Отклонено',
+        'active' => 'Активен',
+        'inactive' => 'Неактивен',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Закрыть форму?',
+            'description' => 'У вас есть несохраненные изменения.',
+            'cancel_button' => 'Нет, отмена',
+            'confirm_button' => 'Да, закрыть без сохранения!',
+        ],
+        'trash' => [
+            'title' => 'Вы абсолютно уверены?',
+            'description' => 'Переместить :item <b>:value</b> в папку корзины.',
+            'cancel_button' => 'Отмена',
+            'confirm_button' => 'Да, продолжить!',
+        ],
+        'restore' => [
+            'title' => 'Вы абсолютно уверены?',
+            'description' => 'Восстановить :item <b>:value</b> из папки корзины.',
+            'cancel_button' => 'Отмена',
+            'confirm_button' => 'Да, продолжить!',
+        ],
+        'destroy' => [
+            'title' => 'Вы абсолютно уверены?',
+            'description' => 'Это действие необратимо. Будет навсегда удалено :item <b>:value</b> из базы данных.',
+            'cancel_button' => 'Отмена',
+            'confirm_button' => 'Да, продолжить!',
+        ],
+        'close' => [
+            'title' => 'Закрыть Ticket?',
+            'description' => 'Закрыть ticket <b>:id</b>.',
+            'cancel_button' => 'Отмена',
+            'confirm_button' => 'Да, закрыть!',
+        ],
+    ]
+];

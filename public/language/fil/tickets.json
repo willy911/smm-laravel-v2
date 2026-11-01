@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "Magpadala ng Ticket!"
+    },
+    "edit": {
+        "button": "Sagutin ang Ticket!"
+    },
+    "labels": {
+        "department": "Departamento",
+        "subject": "Paksa",
+        "data-id": "Order\/Deposit ID",
+        "request": "Kahilingan",
+        "message": "Mensahe",
+        "ticket-information": "Impormasyon ng Ticket"
+    },
+    "toast": {
+        "limit-exceeded": "Lumampas ka na sa limitasyon ng paggawa ng ticket. Mangyaring hintayin muna na maproseso ang naunang ticket.",
+        "create-successful": "Matagumpay na nagawa ang ticket na may ID <b>{{ticket_id}}<\/b>.",
+        "reply-successful": "Matagumpay na nasagot ang ticket na may ID <b>{{ticket_id}}<\/b>."
+    },
+    "log": {
+        "create-successful": "Gumawa ng ticket na may ID <b>{{ticket_id}}<\/b>.",
+        "reply-successful": "Gumawa ng sagot sa ticket na may ID <b>{{ticket_id}}<\/b>."
+    }
+}

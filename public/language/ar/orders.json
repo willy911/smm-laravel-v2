@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "إنشاء طلب!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> بمتوسط كمية الطلب <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "عرض مثال على هدف الطلب",
+        "order-target-example": "مثال على هدف الطلب"
+    },
+    "toast": {
+        "refill-successful": "تم إنشاء طلب إعادة تعبئة الطلب بنجاح.",
+        "cancel-successful": "تم إنشاء طلب إلغاء الطلب بنجاح.",
+        "invalid-order-id": "رقم الطلب غير صالح.",
+        "wait-previous-order": "يرجى انتظار معالجة الطلب السابق أولاً.",
+        "min-quantity": "الحد الأدنى للكمية هو {{min}}.",
+        "max-quantity": "الحد الأقصى للكمية هو {{max}}.",
+        "mass-order-not-supported": "هذه الخدمة لا تدعم الطلبات الجماعية.",
+        "order-created-with-target": "تم إنشاء الطلب برقم <strong>{{order_id}}<\/strong> = الهدف <strong>{{order_target}}<\/strong> بنجاح.",
+        "service-not-available": "الخدمة غير متاحة.",
+        "order-created": "تم إنشاء الطلب بنجاح.",
+        "insufficient-balance": "رصيدك غير كافٍ، قم بالإيداع الآن!"
+    },
+    "log": {
+        "create-successful": "إنشاء طلب برقم <b>{{order_id}}<\/b>.",
+        "create-api-successful": "إنشاء طلب (API) برقم <b>{{order_id}}<\/b>.",
+        "create-single-successful": "إنشاء طلب (ويب - فردي) برقم <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "إنشاء طلب (ويب - جماعي) برقم <b>{{order_id}}<\/b>.",
+        "refill-successful": "إنشاء إعادة تعبئة الطلب برقم <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "إنشاء إلغاء الطلب برقم <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "تم استرداد المبلغ للطلب برقم <b>{{order_id}}<\/b> بنجاح."
+    }
+}

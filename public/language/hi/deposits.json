@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "जमा करें!",
+        "steps": {
+            "select-payment-method": "भुगतान चुनें",
+            "enter-amount": "जमा राशि दर्ज करें",
+            "enter-e-wallet-number": "ई-वॉलेट नंबर दर्ज करें"
+        }
+    },
+    "detail": {
+        "button": "जमा रद्द करें!",
+        "cancel-dialog": {
+            "title": "क्या आप वाकई निश्चित हैं?",
+            "description": "ID <strong>{{deposit_id}}<\/strong> के साथ जमा रद्द करें।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, रद्द करें!"
+        }
+    },
+    "labels": {
+        "complete-payment": "कृपया भुगतान पूरा करें।",
+        "deposit-amount": "जमा राशि",
+        "total-balance": "कुल शेष राशि",
+        "total-payment": "कुल भुगतान",
+        "e-wallet-number": "ई-वॉलेट नंबर",
+        "unique-code": "अद्वितीय कोड",
+        "payment-status": "भुगतान की स्थिति",
+        "expires-in": "समाप्त होगा",
+        "expires-text": "{{hours}} घंटे, {{minutes}} मिनट, {{seconds}} सेकंड शेष",
+        "virtual-account-number": "वर्चुअल खाता संख्या",
+        "payment-code": "भुगतान कोड",
+        "payment-target": "भुगतान लक्ष्य",
+        "payment-link": "भुगतान लिंक",
+        "qr-code": "क्यूआर कोड"
+    },
+    "toast": {
+        "unpaid-payment": "कृपया पिछली जमा राशि पर अपना भुगतान पूरा करें।",
+        "payment-not-available": "भुगतान विधि उपयोग के लिए उपलब्ध नहीं है। कृपया कोई अन्य विधि उपयोग करें।",
+        "create-successful": "कृपया अपना भुगतान पूरा करें।",
+        "cancel-successful": "ID <b>{{deposit_id}}<\/b> के साथ जमा सफलतापूर्वक रद्द कर दी गई।"
+    },
+    "log": {
+        "process-successful": "आईडी <b>{{deposit_id}}<\/b> वाला जमा सफलतापूर्वक संसाधित किया गया है.",
+        "create-successful": "ID <b>{{deposit_id}}<\/b> के साथ जमा बनाया जा रहा है।",
+        "cancel-successful": "ID <b>{{deposit_id}}<\/b> के साथ जमा रद्द किया जा रहा है।",
+        "balance-transfer": "व्यवस्थापक से शेष राशि का हस्तांतरण।"
+    },
+    "dialog": {
+        "cancel": {
+            "title": "क्या आप वाकई निश्चित हैं?",
+            "description": "{{item}} <b>{{value}}<\/b> को रद्द करें।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, जारी रखें!"
+        },
+        "approve": {
+            "title": "क्या आप पूरी तरह से सुनिश्चित हैं?",
+            "description": "{{item}} <b>{{value}}<\/b> को स्वीकृत करें।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, जारी रखें!"
+        }
+    }
+}

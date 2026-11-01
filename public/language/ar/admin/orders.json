@@ -1,0 +1,6 @@
+{
+    "labels": {
+        "service-provider-order-id": "رقم طلب المزود",
+        "service-provider-order-refill-id": "رقم إعادة التعبئة للمزود"
+    }
+}

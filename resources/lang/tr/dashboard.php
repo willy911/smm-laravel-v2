@@ -1,0 +1,11 @@
+<?php
+
+return [
+    'welcome' => 'Hoş geldiniz',
+    'latest_5_news' => 'Son 5 Haber',
+
+    'community' => [
+        'title' => 'Topluluğumuza Katılın',
+        'description' => 'Topluluğumuzla bağlantıda kalın! Güncellemeler, tartışmalar ve daha fazlası için WhatsApp veya Telegram grubumuza katılın.',
+    ],
+];

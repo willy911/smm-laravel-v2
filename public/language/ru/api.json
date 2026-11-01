@@ -1,0 +1,115 @@
+{
+    "description": {
+        "paragraph-1": "API (Application Programming Interface) — это набор команд, функций и протоколов, которые программисты могут использовать при создании программного обеспечения, что обеспечивает стабильное и быстрое взаимодействие между системами.",
+        "paragraph-2": "Этот API — путь, который могут использовать партнеры и хосты для взаимодействия между программами. API можно использовать для выполнения запросов, таких как проверка баланса аккаунта, проверка цен на услуги, проверка статуса транзакций и создание новых транзакций.",
+        "paragraph-3": "Для подключения к API требуются базовые знания в области компьютерного программирования. Если вы не понимаете предоставленную нами документацию, пожалуйста, свяжитесь с нами.",
+        "paragraph-4": "Вот несколько моментов, на которые следует обратить внимание при подключении к API:",
+        "bullet-1": "Мы оборачиваем все HTTP-ответы в формате <strong>JSON<\/strong>.",
+        "bullet-2": "Все HTTP-запросы отправляются как <strong>POST<\/strong>-запросы.",
+        "bullet-3": "Пожалуйста, добавьте свой IP в белый список в настройках вашего аккаунта."
+    },
+    "labels": {
+        "preparation": "Подготовка",
+        "profile": "Профиль",
+        "services": "Список услуг",
+        "create-order": "Создать заказ",
+        "status-order": "Статус заказа",
+        "create-order-refill": "Создать пополнение заказа",
+        "status-order-refill": "Статус пополнения заказа",
+        "create-order-cancel": "Отмена заказа",
+        "endpoint": "Конечная точка",
+        "body-request": "Тело запроса",
+        "example-request": "Пример запроса",
+        "example-response": "Пример ответа",
+        "parameter": "Параметр",
+        "type": "Тип данных",
+        "required": "Обязательный",
+        "description": "Описание",
+        "success": "Успех",
+        "fail": "Сбой"
+    },
+    "fields": {
+        "api-key": {
+            "required": "Да",
+            "description": "API Ключ, установленный в настройках API"
+        },
+        "secret-key": {
+            "required": "Да",
+            "description": "Секретный ключ, установленный в настройках API"
+        },
+        "is-favorites": {
+            "required": "Нет",
+            "description": "Заполните <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">true<\/code> для отображения избранных услуг"
+        },
+        "id": {
+            "required": "Да",
+            "description": "ID заказа, разделите запятой (,) для массовой проверки"
+        },
+        "order-id": {
+            "required": "Да",
+            "description": "ID заказа"
+        },
+        "order-refill-id": {
+            "required": "Да",
+            "description": "ID пополнения заказа"
+        },
+        "service-id": {
+            "required": "Да",
+            "description": "ID Услуги, см. подробнее"
+        },
+        "target": {
+            "required": "Да",
+            "description": "Цель заказа, например, имя пользователя\/ссылка\/другое"
+        },
+        "quantity": {
+            "required": "Да",
+            "description": "Количество заказа"
+        },
+        "usernames": {
+            "required": "Да",
+            "description": "Список имен пользователей, разделенных <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> или <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtags": {
+            "required": "Да",
+            "description": "Список хэштегов, разделенных <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> или <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        },
+        "hashtag": {
+            "required": "Да",
+            "description": "Хэштег для захвата\/поиска имен пользователей"
+        },
+        "username": {
+            "required": "Да",
+            "description": "Имя пользователя владельца комментария"
+        },
+        "media": {
+            "required": "Да",
+            "description": "URL медиа для захвата\/поиска списка лайков"
+        },
+        "answer-number": {
+            "required": "Да",
+            "description": "Номер ответа из списка выбора"
+        },
+        "comments": {
+            "required": "Да",
+            "description": "Список комментариев, разделенных <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> или <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code>"
+        }
+    },
+    "responses": {
+        "total-order-count": "Общее количество заказов",
+        "total-deposit-count": "Общее количество депозитов",
+        "api-key-required": "api_key является обязательным.",
+        "secret-key-required": "secret_key является обязательным.",
+        "ip-not-whitelisted": "Ваш IP {{ip}} не зарегистрирован в белом списке IP.",
+        "service-id-required": "service_id является обязательным.",
+        "service-id-numeric": "service_id должен быть числом.",
+        "service-id-invalid": "Выбранный service_id недействителен.",
+        "quantity-numeric": "quantity должен быть числом.",
+        "quantity-min": "Минимальное значение quantity — {{min}}.",
+        "insufficient-balance": "Ваш баланс недостаточен.",
+        "service-not-available": "Услуга недоступна.",
+        "no-data-found": "заказы не найдены.",
+        "data-found": "заказы найдены.",
+        "id-invalid": "Выбранный id недействителен.",
+        "order-cannot-be-refilled": "заказ не может быть пополнен."
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Pengguna yang mendaftar menggunakan link ini akan otomatis menjadi referral Anda.",
+        "balance-transfer-notice": "Komisi akan dipindahkan ke saldo utama Anda.",
+        "bank-transfer-notice": "Komisi akan dikirimkan ke rekening bank Anda."
+    },
+    "labels": {
+        "affiliate-balance": "Saldo Afiliasi",
+        "commission-available": "Komisi Tersedia",
+        "total-referrals": "Total Referral",
+        "total-earnings": "Total Pendapatan",
+        "withdrawal-history": "Riwayat Pencairan",
+        "your-affiliate-link": "Link Afiliasi Kamu",
+        "withdraw-commission": "Cairkan Komisi"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Mengajukan pencairan komisi sebesar <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "Pencairan komisi sebesar <b>{{amount}}<\/b> ke rekening bank berhasil.",
+        "commission-withdrawal-to-balance-successful": "Pencairan komisi sebesar <b>{{amount}}<\/b> ke saldo utama berhasil.",
+        "commission-received": "Menerima komisi sebesar <b>{{amount}}<\/b> dari deposit pengguna <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "Jumlah wajib diisi.",
+        "bank-name-required": "Nama bank wajib diisi.",
+        "bank-account-name-required": "Nama pemilik rekening wajib diisi.",
+        "bank-account-number-required": "Nomor rekening wajib diisi.",
+        "min-withdrawal": "Jumlah minimal pencairan adalah <b>{{amount}}<\/b>.",
+        "max-withdrawal": "Jumlah maksimal pencairan adalah <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Pencairan komisi berhasil dibuat."
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "محدث",
+            "price-increased": "ارتفع السعر",
+            "price-decreased": "انخفض السعر",
+            "enabled": "مفعل",
+            "disabled": "معطل",
+            "added": "تمت الإضافة",
+            "deleted": "تم الحذف"
+        },
+        "description": {
+            "min-updated": "تحديث الحد الأدنى للكمية للخدمة من {{from}} إلى {{to}}.",
+            "max-updated": "تحديث الحد الأقصى للكمية للخدمة من {{from}} إلى {{to}}.",
+            "price-increased": "زيادة السعر من {{from}} إلى {{to}}.",
+            "price-decreased": "انخفاض السعر من {{from}} إلى {{to}}.",
+            "enabled": "تم تفعيل الخدمة.",
+            "disabled": "تم تعطيل الخدمة.",
+            "added": "تمت إضافة الخدمة.",
+            "deleted": "تم حذف الخدمة."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "تمت إضافة الخدمة إلى المفضلة بنجاح.",
+        "removed-from-favorites": "تمت إزالة الخدمة من المفضلة بنجاح.",
+        "invalid-service-id": "رقم الخدمة غير صالح.",
+        "no-services-found": "لم يتم العثور على خدمات.",
+        "no-categories-found": "لم يتم العثور على فئات الخدمات."
+    }
+}

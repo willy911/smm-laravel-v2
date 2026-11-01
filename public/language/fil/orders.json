@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "Gumawa ng Order!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> na may average na dami ng order na <span class=\"font-medium text-green-600\">{{quantity}}<\/span>",
+        "view-order-target-example": "Tingnan ang Halimbawa ng Target ng Order",
+        "order-target-example": "Halimbawa ng Target ng Order"
+    },
+    "toast": {
+        "refill-successful": "Matagumpay na nagawa ang request para sa refill ng order.",
+        "cancel-successful": "Matagumpay na nagawa ang request para sa pagkansela ng order.",
+        "invalid-order-id": "Hindi valid ang Order ID.",
+        "wait-previous-order": "Mangyaring hintayin munang maproseso ang nakaraang order.",
+        "min-quantity": "Ang minimum na dami ay {{min}}.",
+        "max-quantity": "Ang maximum na dami ay {{max}}.",
+        "mass-order-not-supported": "Hindi sinusuportahan ng serbisyong ito ang mass order.",
+        "order-created-with-target": "Matagumpay na nagawa ang order na may ID <strong>{{order_id}}<\/strong> = Target <strong>{{order_target}}<\/strong>.",
+        "service-not-available": "Hindi available ang serbisyo.",
+        "order-created": "Matagumpay na nagawa ang order.",
+        "insufficient-balance": "Hindi sapat ang iyong balanse, Mag-deposit ngayon!"
+    },
+    "log": {
+        "create-successful": "Gumawa ng Order na may ID <b>{{order_id}}<\/b>.",
+        "create-api-successful": "Gumawa ng Order (API) na may ID <b>{{order_id}}<\/b>.",
+        "create-single-successful": "Gumawa ng Order (Web - Single) na may ID <b>{{order_id}}<\/b>.",
+        "create-mass-successful": "Gumawa ng Order (Web - Mass) na may ID <b>{{order_id}}<\/b>.",
+        "refill-successful": "Gumawa ng Refill ng Order na may ID <b>{{order_refill_id}}<\/b>.",
+        "cancel-successful": "Gumawa ng Pagkansela ng Order na may ID <b>{{order_cancel_id}}<\/b>.",
+        "refund-successful": "Naibalik ang bayad para sa Order na may ID <b>{{order_id}}<\/b>."
+    }
+}

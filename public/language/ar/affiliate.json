@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "سيصبح المستخدم الذي يسجل باستخدام هذا الرابط تابعًا لك تلقائيًا.",
+        "balance-transfer-notice": "سيتم تحويل العمولة إلى رصيدك الرئيسي.",
+        "bank-transfer-notice": "سيتم تحويل العمولة إلى حسابك البنكي."
+    },
+    "labels": {
+        "affiliate-balance": "رصيد التسويق بالعمولة",
+        "commission-available": "العمولة المتاحة",
+        "total-referrals": "إجمالي الإحالات",
+        "total-earnings": "إجمالي الأرباح",
+        "withdrawal-history": "سجل السحب",
+        "your-affiliate-link": "رابط الإحالة الخاص بك",
+        "withdraw-commission": "سحب العمولة"
+    },
+    "log": {
+        "requested-commission-withdrawal": "تم تقديم طلب سحب عمولة بقيمة <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "تم سحب العمولة بقيمة <b>{{amount}}<\/b> إلى الحساب البنكي بنجاح.",
+        "commission-withdrawal-to-balance-successful": "تم سحب العمولة بقيمة <b>{{amount}}<\/b> إلى الرصيد الرئيسي بنجاح.",
+        "commission-received": "تم استلام عمولة بقيمة <b>{{amount}}<\/b> من إيداع المستخدم <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "المبلغ مطلوب.",
+        "bank-name-required": "اسم البنك مطلوب.",
+        "bank-account-name-required": "اسم صاحب الحساب مطلوب.",
+        "bank-account-number-required": "رقم الحساب البنكي مطلوب.",
+        "min-withdrawal": "الحد الأدنى للسحب هو <b>{{amount}}<\/b>.",
+        "max-withdrawal": "الحد الأقصى للسحب هو <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "تم إنشاء طلب سحب العمولة بنجاح."
+    }
+}

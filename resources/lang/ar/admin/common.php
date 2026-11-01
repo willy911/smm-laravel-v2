@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'المسؤول',
+        'admin' => 'المسؤول',
+        'provider' => 'المزود',
+        'updated_columns' => 'الأعمدة المحدثة',
+        'is_api_access_enabled' => 'الوصول إلى API',
+        'custom_price_type' => 'نوع السعر المخصص',
+        'custom_price_value' => 'قيمة السعر المخصص',
+        'custom_price_fixed' => 'رقم ثابت',
+        'custom_price_percentage' => 'نسبة مئوية',
+        'profit_configs' => 'إعدادات الربح',
+        'profit_type' => 'نوع الربح',
+        'profit_value' => 'قيمة الربح',
+        'profit_fixed' => 'رقم ثابت',
+        'profit_percentage' => 'نسبة مئوية',
+        'alias' => 'الاسم المستعار',
+        'last_balance' => 'الرصيد الأخير',
+        'original_price' => 'سعر الشراء',
+        'sell_price' => 'سعر البيع',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'وضع علامة كـ <item>:as</item>',
+        'sort_item' => 'ترتيب :item',
+        'create_item' => 'إضافة :item',
+        'edit_item' => 'تعديل :item',
+        'fetch_item' => 'جلب :item',
+        'delete_item' => 'حذف :item',
+        'trash' => 'نقل إلى سلة المهملات',
+        'close' => 'إغلاق التذكرة',
+        'restore' => 'استعادة',
+        'destroy' => 'حذف نهائي',
+    ],
+
+    'toast' => [
+        'create_successful'    => 'تمت إضافة :item برقم <b>:id</b> بنجاح.',
+        'update_successful'    => 'تم تحديث :item برقم <b>:id</b> بنجاح.',
+        'switch_successful'    => 'تم تحديث :column :item برقم <b>:id</b> بنجاح.',
+        'trash_successful'    => 'تم نقل :item برقم <b>:id</b> إلى سلة المهملات بنجاح.',
+        'close_successful'    => 'تم إغلاق التذكرة <b>:id</b> بنجاح.',
+        'restore_successful'    => 'تمت استعادة :item برقم <b>:id</b> بنجاح.',
+        'destroy_successful'    => 'تم حذف :item برقم <b>:id</b> نهائياً بنجاح.',
+        'sort_successful'    => 'تم تحديث ترتيب :item بنجاح.',
+    ],
+
+    'log' => [
+        'create_successful' => 'إنشاء :item برقم <b>:id</b>.',
+        'update_successful' => 'تحديث :item برقم <b>:id</b>.',
+        'switch_successful' => 'تحديث :item برقم <b>:id</b>, العمود <b>:column:</b> :from → :to.',
+        'trash_successful'    => 'نقل :item برقم <b>:id</b> إلى سلة المهملات.',
+        'close_successful'    => 'إغلاق التذكرة <b>:id</b>.',
+        'restore_successful'    => 'استعادة :item برقم <b>:id</b>.',
+        'destroy_successful'    => 'حذف :item برقم <b>:id</b> نهائياً.',
+        'sort_successful'    => 'تحديث ترتيب :item.',
+    ],
+
+    'status' => [
+        'pending' => 'قيد الانتظار',
+        'waiting' => 'بانتظار المعالجة',
+        'success' => 'ناجح',
+        'approved' => 'موافق عليه',
+        'expired' => 'منتهي الصلاحية',
+        'canceled' => 'ملغى',
+        'open' => 'مفتوح',
+        'answered' => 'تم الرد',
+        'user_reply' => 'رد المستخدم',
+        'closed' => 'مغلق',
+        'completed' => 'مكتمل',
+        'processing' => 'قيد المعالجة',
+        'in_progress' => 'قيد التنفيذ',
+        'error' => 'خطأ',
+        'partial' => 'جزئي',
+        'rejected' => 'مرفوض',
+        'active' => 'نشط',
+        'inactive' => 'غير نشط',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'إغلاق النموذج؟',
+            'description' => 'لديك تغييرات غير محفوظة.',
+            'cancel_button' => 'لا، إلغاء',
+            'confirm_button' => 'نعم، إغلاق دون حفظ!',
+        ],
+        'trash' => [
+            'title' => 'هل أنت متأكد تماماً؟',
+            'description' => 'نقل :item <b>:value</b> إلى سلة المهملات.',
+            'cancel_button' => 'إلغاء',
+            'confirm_button' => 'نعم، متابعة!',
+        ],
+        'restore' => [
+            'title' => 'هل أنت متأكد تماماً؟',
+            'description' => 'استعادة :item <b>:value</b> من سلة المهملات.',
+            'cancel_button' => 'إلغاء',
+            'confirm_button' => 'نعم، متابعة!',
+        ],
+        'destroy' => [
+            'title' => 'هل أنت متأكد تماماً؟',
+            'description' => 'لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا الإجراء إلى حذف :item <b>:value</b> نهائياً من قاعدة البيانات.',
+            'cancel_button' => 'إلغاء',
+            'confirm_button' => 'نعم، متابعة!',
+        ],
+        'close' => [
+            'title' => 'إغلاق التذكرة؟',
+            'description' => 'إغلاق التذكرة <b>:id</b>.',
+            'cancel_button' => 'إلغاء',
+            'confirm_button' => 'نعم، إغلاق!',
+        ],
+    ]
+];

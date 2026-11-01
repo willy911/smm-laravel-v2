@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Configuración de Tarifa de Servicio",
+        "admin-fee-type": "Tipo de Tarifa de Servicio",
+        "admin-fee-value": "Valor de Tarifa de Servicio",
+        "payment-target": "Destino del Pago",
+        "payment-gateway": "Pasarela de Pago",
+        "payment-gateway-payment-code": "Código de Método de Pago (Pasarela de Pago)",
+        "bonus-configs": "Configuración de Bonificación",
+        "bonus-value": "Valor de Bonificación",
+        "min-and-max-payment": "Pago Mín. y Máx."
+    }
+}

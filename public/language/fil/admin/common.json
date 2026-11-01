@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Mga Admin",
+        "admin": "Admin",
+        "provider": "Tagapagbigay",
+        "updated-columns": "Na-update na mga Kolum",
+        "is-api-access-enabled": "Access sa API",
+        "custom-price-type": "Uri ng Custom Price",
+        "custom-price-value": "Halaga ng Custom Price",
+        "custom-price-fixed": "Nakatakdang Halaga",
+        "custom-price-percentage": "Porsiyento",
+        "profit-configs": "Konfigurasyon ng Kita",
+        "profit-type": "Uri ng Kita",
+        "profit-value": "Halaga ng Kita",
+        "profit-fixed": "Nakatakdang Halaga",
+        "profit-percentage": "Porsiyento",
+        "alias": "Alias",
+        "last-balance": "Huling Balanse",
+        "original-price": "Orihinal na Presyo",
+        "sell-price": "Presyo ng Benta"
+    },
+    "actions": {
+        "mark-item-as": "Markahan bilang <item>{{as}}<\/item>",
+        "sort-item": "Ayusin ang {{item}}",
+        "create-item": "Magdagdag ng {{item}}",
+        "edit-item": "I-edit ang {{item}}",
+        "fetch-item": "Kunin ang {{item}}",
+        "delete-item": "Tanggalin ang {{item}}",
+        "trash": "Ilipat sa Basura",
+        "close": "Isara ang Tiket",
+        "restore": "Ibalik",
+        "destroy": "Permanenteng Tanggalin"
+    },
+    "toast": {
+        "create-successful": "Matagumpay na naidagdag ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "update-successful": "Matagumpay na na-update ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "switch-successful": "Matagumpay na na-update ang {{column}} ng {{item}} na may ID <b>{{id}}<\/b>.",
+        "trash-successful": "Matagumpay na nailipat ang {{item}} na may ID <b>{{id}}<\/b> sa basura.",
+        "close-successful": "Matagumpay na naisara ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "restore-successful": "Matagumpay na naibalik ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Permanenteng natanggal ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "sort-successful": "Matagumpay na na-update ang pagkakasunod ng {{item}}."
+    },
+    "log": {
+        "create-successful": "Lumikha ng {{item}} na may ID <b>{{id}}<\/b>.",
+        "update-successful": "Na-update ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "switch-successful": "Na-update ang {{item}} na may ID <b>{{id}}<\/b>, kolum <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Inilipat ang {{item}} na may ID <b>{{id}}<\/b> sa basura.",
+        "close-successful": "Naisara ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "restore-successful": "Naibalik ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Permanenteng tinanggal ang {{item}} na may ID <b>{{id}}<\/b>.",
+        "sort-successful": "Na-update ang pagkakasunod ng {{item}}."
+    },
+    "status": {
+        "pending": "Nakabinbin",
+        "waiting": "Naghihintay",
+        "success": "Matagumpay",
+        "approved": "Naaprubahan",
+        "expired": "Nag-expire",
+        "canceled": "Kinansela",
+        "open": "Bukas",
+        "answered": "Nasagot",
+        "user-reply": "Sagot ng User",
+        "closed": "Sarado",
+        "completed": "Nakumpleto",
+        "processing": "Pinoproseso",
+        "in-progress": "Isinasagawa",
+        "error": "Error",
+        "partial": "Bahagya",
+        "rejected": "Tinanggihan",
+        "active": "Aktibo",
+        "inactive": "Hindi Aktibo"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Isara ang form?",
+            "description": "Mayroon kang mga pagbabagong hindi pa nai-save.",
+            "cancel-button": "Hindi, Kanselahin",
+            "confirm-button": "Oo, Isara nang walang pag-save!"
+        },
+        "trash": {
+            "title": "Sigurado ka ba?",
+            "description": "Ilipat ang {{item}} <b>{{value}}<\/b> sa folder ng basura.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Magpatuloy!"
+        },
+        "restore": {
+            "title": "Sigurado ka ba?",
+            "description": "Ibalik ang {{item}} <b>{{value}}<\/b> mula sa folder ng basura.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Magpatuloy!"
+        },
+        "destroy": {
+            "title": "Sigurado ka ba?",
+            "description": "Hindi na mababawi ang aksyong ito. Permanenteng tatanggalin ang {{item}} <b>{{value}}<\/b> mula sa database.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Magpatuloy!"
+        },
+        "close": {
+            "title": "Isara ang Tiket?",
+            "description": "Isara ang tiket <b>{{id}}<\/b>.",
+            "cancel-button": "Kanselahin",
+            "confirm-button": "Oo, Isara!"
+        }
+    }
+}

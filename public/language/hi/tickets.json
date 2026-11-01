@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "टिकट भेजें!"
+    },
+    "edit": {
+        "button": "टिकट का जवाब दें!"
+    },
+    "labels": {
+        "department": "विभाग",
+        "subject": "विषय",
+        "data-id": "आदेश\/जमा ID",
+        "request": "अनुरोध",
+        "message": "संदेश",
+        "ticket-information": "टिकट जानकारी"
+    },
+    "toast": {
+        "limit-exceeded": "आपने टिकट बनाने की सीमा पार कर दी है, कृपया पिछले टिकट के संसाधित होने की प्रतीक्षा करें।",
+        "create-successful": "ID <b>{{ticket_id}}<\/b> वाला टिकट सफलतापूर्वक बनाया गया।",
+        "reply-successful": "ID <b>{{ticket_id}}<\/b> वाले टिकट का सफलतापूर्वक जवाब दिया गया।"
+    },
+    "log": {
+        "create-successful": "ID <b>{{ticket_id}}<\/b> वाला टिकट बनाया गया।",
+        "reply-successful": "ID <b>{{ticket_id}}<\/b> वाले टिकट का जवाब बनाया गया।"
+    }
+}

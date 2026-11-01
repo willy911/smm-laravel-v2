@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "Pagpapatunay ng Email",
+        "check-email": "Pakisuri ang iyong email sa <b>{{email}}<\/b> upang mapatunayan ang iyong account.",
+        "resend-in-seconds": "Ipadala muli sa loob ng {{seconds}}",
+        "button": "Ipadala Muli ang Email ng Pagpapatunay",
+        "toast": {
+            "email-verified-successful": "Matagumpay na napagtibay ang email.",
+            "email-resent-successful": "Matagumpay na naipadala muli ang email ng pagpapatunay."
+        },
+        "log": {
+            "email-verified-successful": "Isinagawa ang pagpapatunay ng email."
+        }
+    },
+    "settings": {
+        "update-profile-button": "I-update ang Profile",
+        "update-api-button": "I-update ang API",
+        "toast": {
+            "update-profile-successful": "Matagumpay na na-update ang profile.",
+            "update-api-successful": "Matagumpay na na-update ang API.",
+            "update-notification-successful": "Matagumpay na na-update ang mga notipikasyon."
+        },
+        "log": {
+            "update-api-successful": "In-update ang data ng API.",
+            "update-profile-successful": "In-update ang profile ng account."
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "जो उपयोगकर्ता इस लिंक का उपयोग करके पंजीकरण करेंगे, वे स्वचालित रूप से आपके रेफरल बन जाएंगे।",
+        "balance-transfer-notice": "कमीशन आपके मुख्य बैलेंस में ट्रांसफर कर दिया जाएगा।",
+        "bank-transfer-notice": "कमीशन आपके बैंक खाते में ट्रांसफर कर दिया जाएगा।"
+    },
+    "labels": {
+        "affiliate-balance": "एफिलिएट बैलेंस",
+        "commission-available": "उपलब्ध कमीशन",
+        "total-referrals": "कुल रेफरल",
+        "total-earnings": "कुल कमाई",
+        "withdrawal-history": "निकासी इतिहास",
+        "your-affiliate-link": "आपका एफिलिएट लिंक",
+        "withdraw-commission": "कमीशन निकालें"
+    },
+    "log": {
+        "requested-commission-withdrawal": "<b>{{amount}}<\/b> की कमीशन निकासी का अनुरोध किया गया।",
+        "commission-withdrawal-to-bank-successful": "<b>{{amount}}<\/b> की कमीशन बैंक खाते में सफलतापूर्वक स्थानांतरित की गई।",
+        "commission-withdrawal-to-balance-successful": "<b>{{amount}}<\/b> की कमीशन मुख्य बैलेंस में सफलतापूर्वक स्थानांतरित की गई।",
+        "commission-received": "उपयोगकर्ता <b>{{user}}<\/b> की जमा राशि से <b>{{amount}}<\/b> का कमीशन प्राप्त हुआ।"
+    },
+    "toast": {
+        "amount-required": "राशि आवश्यक है।",
+        "bank-name-required": "बैंक का नाम आवश्यक है।",
+        "bank-account-name-required": "खाता धारक का नाम आवश्यक है।",
+        "bank-account-number-required": "बैंक खाता संख्या आवश्यक है।",
+        "min-withdrawal": "न्यूनतम निकासी राशि <b>{{amount}}<\/b> है।",
+        "max-withdrawal": "अधिकतम निकासी राशि <b>{{amount}}<\/b> है।",
+        "commission-withdrawal-successful": "कमीशन निकासी सफलतापूर्वक बनाई गई है।"
+    }
+}

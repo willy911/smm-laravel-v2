@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "Подтверждение электронной почты",
+        "check-email": "Пожалуйста, проверьте свою почту по адресу <b>{{email}}<\/b>, чтобы подтвердить свою учетную запись.",
+        "resend-in-seconds": "Повторная отправка через {{seconds}} секунд",
+        "button": "Отправить письмо для подтверждения снова",
+        "toast": {
+            "email-verified-successful": "Email успешно подтвержден.",
+            "email-resent-successful": "Письмо для подтверждения email успешно отправлено повторно."
+        },
+        "log": {
+            "email-verified-successful": "Выполнена верификация email."
+        }
+    },
+    "settings": {
+        "update-profile-button": "Обновить профиль",
+        "update-api-button": "Обновить API",
+        "toast": {
+            "update-profile-successful": "Профиль успешно обновлен.",
+            "update-api-successful": "API успешно обновлен.",
+            "update-notification-successful": "Уведомления успешно обновлены."
+        },
+        "log": {
+            "update-api-successful": "Обновление данных API.",
+            "update-profile-successful": "Обновление профиля аккаунта."
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "İşlem Ücreti Yapılandırmaları",
+        "admin-fee-type": "İşlem Ücreti Tipi",
+        "admin-fee-value": "İşlem Ücreti Değeri",
+        "payment-target": "Ödeme Hedefi",
+        "payment-gateway": "Ödeme Ağ Geçidi",
+        "payment-gateway-payment-code": "Ödeme Ağ Geçidi Ödeme Metodu Kodu",
+        "bonus-configs": "Bonus Yapılandırmaları",
+        "bonus-value": "Bonus Değeri",
+        "min-and-max-payment": "Min. & Maks. Ödeme"
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "title": "Ranking",
+    "month-name": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ],
+    "top-10-orders-in-month": "Top 10 Orders of {{month}}",
+    "top-10-deposits-in-month": "Top 10 Deposits of {{month}}",
+    "top-10-services-in-month": "Top 10 Services of {{month}}",
+    "no-orders-yet": "No orders yet",
+    "no-deposits-yet": "No deposits yet",
+    "no-services-yet": "No services yet",
+    "orders-count": "orders"
+}

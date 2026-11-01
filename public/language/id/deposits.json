@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Buat Deposit!",
+        "steps": {
+            "select-payment-method": "Pilih Pembayaran",
+            "enter-amount": "Masukkan Jumlah Deposit",
+            "enter-e-wallet-number": "Masukkan No. E-Wallet"
+        }
+    },
+    "detail": {
+        "button": "Batalkan Deposit!",
+        "cancel-dialog": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Batalkan Deposit dengan ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Batalkan!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Harap selesaikan pembayaran.",
+        "deposit-amount": "Jumlah Deposit",
+        "total-balance": "Total Saldo",
+        "total-payment": "Total Pembayaran",
+        "e-wallet-number": "No. E-Wallet",
+        "unique-code": "Kode Unik",
+        "payment-status": "Status Pembayaran",
+        "expires-in": "Kadaluwarsa Dalam",
+        "expires-text": "{{hours}} jam, {{minutes}} menit, {{seconds}} detik tersisa",
+        "virtual-account-number": "No. Virtual Account",
+        "payment-code": "Kode Pembayaran",
+        "payment-target": "Target Pembayaran",
+        "payment-link": "Link Pembayaran",
+        "qr-code": "Kode QR"
+    },
+    "toast": {
+        "unpaid-payment": "Silahkan lunasi pembayaran anda pada deposit sebelumnya.",
+        "payment-not-available": "Metode Pembayaran sedang tidak dapat digunakan. Silahkan gunakan metode lain.",
+        "create-successful": "Silahkan lunasi pembayaran anda.",
+        "cancel-successful": "Deposit dengan ID <b>{{deposit_id}}<\/b> berhasil dibatalkan."
+    },
+    "log": {
+        "process-successful": "Deposit dengan ID <b>{{deposit_id}}<\/b> berhasil diproses.",
+        "create-successful": "Membuat deposit dengan ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Membatalkan deposit dengan ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Transfer saldo dari admin."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Batalkan {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Lanjutkan!"
+        },
+        "approve": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Setujui {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Lanjutkan!"
+        }
+    }
+}

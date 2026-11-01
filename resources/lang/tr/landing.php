@@ -1,0 +1,82 @@
+<?php
+
+return [
+    'nav' => [
+        'home' => 'Ana Sayfa',
+        'featured_services' => 'Öne Çıkan Hizmetler',
+        'services' => 'Hizmet Listesi',
+        'faqs' => 'Sıkça Sorulan Sorular',
+    ],
+
+    'hero' => [
+        'description' => 'SMMKita, Facebook, Instagram, Twitter ve diğer platformlar için hizmetlerle sosyal medya görünürlüğünüzü artırmak için pratik çözümler sunar.',
+    ],
+
+    'our_services' => [
+        'title' => 'Neden :website_name?',
+        'subtitle' => 'Çünkü ihtiyacınız olan hizmetleri sunuyoruz — hızlı, güvenilir ve beklentilerinize uygun.',
+        'items' => [
+            'quality_service' => [
+                'name' => 'Kaliteli Hizmet',
+                'description' => 'Sunduğumuz her hizmet, tutarlı, gerçekçi ve kullanıcı beklentilerini karşılayan sonuçları garanti etmek için sıkı bir kürasyon sürecinden geçmiştir.',
+            ],
+            'competitive_price' => [
+                'name' => 'Rekabetçi Fiyat',
+                'description' => 'Kaliteden ödün vermeden rekabetçi fiyatlar — verimliliğe önem veren bayi ve son kullanıcılar için ideal.',
+            ],
+            'support' => [
+                'name' => '7/24 Destek',
+                'description' => 'Destek ekibimiz her zaman hazırdır. Karşılaştığınız her türlü soru veya sorunla, istediğiniz zaman yardımcı olmaya hazırız.',
+            ],
+            'ease_of_use' => [
+                'name' => 'Kullanım Kolaylığı',
+                'description' => 'Arayüz, kullanıcıların tüm ihtiyaçlarını hızlı ve kafa karışıklığı olmadan yönetebilmeleri için sezgisel olarak tasarlanmıştır.',
+            ],
+            'business_partner' => [
+                'name' => 'İş Büyümenizin Ortağı',
+                'description' => 'Biz sadece bir hizmet sağlayıcı değiliz — markanızın ve işinizin sürdürülebilir büyümesini desteklemeye hazır bir ortağız.',
+            ],
+            'professional_quality' => [
+                'name' => 'Profesyonel Kalite',
+                'description' => 'Yüksek performans, büyük ölçeklenebilirlik ve sürekli üstün hizmet için ajanslar ve dijital pazarlamacılar tarafından güvenilir.',
+            ],
+        ],
+    ],
+
+    'featured_services' => [
+        'title' => 'Öne Çıkan Hizmetlerimiz',
+        'subtitle' => 'En iyi kalite, maksimum destek ve tatmin edici sonuçlar sunan öne çıkan hizmetlerimizi keşfedin.',
+    ],
+
+    'faqs' => [
+        'title' => 'Sıkça Sorulan Sorular',
+        'subtitle' => 'Başka sorularınız mı var? Bize ulaşmaktan çekinmeyin — ekibimiz size en kısa sürede yardımcı olmaya hazır.',
+        'items' => [
+            [
+                'value' => 'faq-1',
+                'question' => ':website_name nedir?',
+                'answer' => 'SMMKita, takipçi, beğeni, izlenme ve diğer sosyal medya hizmetlerini otomatik, hızlı ve uygun fiyatlarla satın almak için güvenilir bir SMM Panel platformudur. Hesabınızı, işinizi veya markanızı anında desteklemek için doğru çözüm.',
+            ],
+            [
+                'value' => 'faq-2',
+                'question' => 'Hizmetleriniz güvenli midir?',
+                'answer' => 'Evet, hizmetlerimiz tamamen güvenlidir. Giriş bilgilerinizi veya şifrenizi asla istemeyiz. Tüm süreçler otomatik olarak yürütülür ve platformun gizlilik politikalarına uygundur.',
+            ],
+            [
+                'value' => 'faq-3',
+                'question' => 'Siparişimin işlenmesi ne kadar sürer?',
+                'answer' => 'İşlem süresi hizmet türüne bağlıdır. Genellikle siparişler 1-2 saat içinde işlenmeye başlar ve seçilen hacme ve hizmete bağlı olarak birkaç saatten 48 saate kadar tamamlanır.',
+            ],
+            [
+                'value' => 'faq-4',
+                'question' => 'Siparişlerim garanti altında mı?',
+                'answer' => 'Bazı hizmetlerimiz, belirli bir süre içinde takipçi veya beğeni düşüşü olması durumunda dolum garantisi ile birlikte gelir. Lütfen garanti ayrıntılarını hizmet açıklamasında kontrol edin.',
+            ],
+            [
+                'value' => 'faq-5',
+                'question' => ':website_name RESTful API\'yi destekliyor mu?',
+                'answer' => 'Evet, bakiyenizi kontrol etmenizi, hizmet listesini görüntülemenizi, sipariş oluşturmanızı ve sipariş durumunu otomatik olarak izlemenizi sağlayan bir RESTful API sunuyoruz.',
+            ],
+        ],
+    ],
+];

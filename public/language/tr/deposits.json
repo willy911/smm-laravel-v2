@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Para Yatır!",
+        "steps": {
+            "select-payment-method": "Ödeme Seç",
+            "enter-amount": "Yatırılacak Miktarı Girin",
+            "enter-e-wallet-number": "E-Cüzdan No. Girin"
+        }
+    },
+    "detail": {
+        "button": "Para Yatırma İşlemini İptal Et!",
+        "cancel-dialog": {
+            "title": "Gerçekten emin misiniz?",
+            "description": "<strong>{{deposit_id}}<\/strong> ID'li Para Yatırma İşlemini İptal Et.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, İptal Et!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Lütfen ödemeyi tamamlayın.",
+        "deposit-amount": "Yatırılan Miktar",
+        "total-balance": "Toplam Bakiye",
+        "total-payment": "Toplam Ödeme",
+        "e-wallet-number": "E-Cüzdan No.",
+        "unique-code": "Benzersiz Kod",
+        "payment-status": "Ödeme Durumu",
+        "expires-in": "Kalan Süre",
+        "expires-text": "{{hours}} saat, {{minutes}} dakika, {{seconds}} saniye kaldı",
+        "virtual-account-number": "Sanal Hesap No.",
+        "payment-code": "Ödeme Kodu",
+        "payment-target": "Ödeme Hedefi",
+        "payment-link": "Ödeme Bağlantısı",
+        "qr-code": "QR Kod"
+    },
+    "toast": {
+        "unpaid-payment": "Lütfen önceki para yatırma işleminiz için ödemenizi yapın.",
+        "payment-not-available": "Ödeme Yöntemi şu anda kullanılamıyor. Lütfen başka bir yöntem kullanın.",
+        "create-successful": "Lütfen ödemenizi yapın.",
+        "cancel-successful": "<b>{{deposit_id}}<\/b> ID'li Para Yatırma İşlemi başarıyla iptal edildi."
+    },
+    "log": {
+        "process-successful": "Kimliği <b>{{deposit_id}}<\/b> olan para yatırma işlemi başarıyla işlendi.",
+        "create-successful": "<b>{{deposit_id}}<\/b> ID'li para yatırma işlemi oluşturuluyor.",
+        "cancel-successful": "<b>{{deposit_id}}<\/b> ID'li para yatırma işlemi iptal ediliyor.",
+        "balance-transfer": "Yöneticiden bakiye transferi."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Gerçekten emin misiniz?",
+            "description": "{{item}} <b>{{value}}<\/b> İptal Et.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, Devam Et!"
+        },
+        "approve": {
+            "title": "Bundan tamamen emin misiniz?",
+            "description": "{{item}} <b>{{value}}<\/b> onaylansın.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, devam et!"
+        }
+    }
+}

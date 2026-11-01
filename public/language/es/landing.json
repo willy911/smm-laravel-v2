@@ -1,0 +1,76 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "featured-services": "Servicios Destacados",
+        "services": "Lista de Servicios",
+        "faqs": "Preguntas Frecuentes"
+    },
+    "hero": {
+        "description": "Wuzz Panel ofrece soluciones prácticas para aumentar tu exposición en redes sociales, con servicios para Facebook, Instagram, Twitter y otras plataformas."
+    },
+    "our-services": {
+        "title": "¿Por qué {{website_name}}?",
+        "subtitle": "Porque proporcionamos los servicios que necesitas — rápidos, confiables y acordes a tus expectativas.",
+        "items": {
+            "quality-service": {
+                "name": "Servicio de Calidad",
+                "description": "Cada servicio que proporcionamos ha pasado por una curación estricta para garantizar resultados consistentes, reales y satisfactorios según las expectativas del usuario."
+            },
+            "competitive-price": {
+                "name": "Precios Competitivos",
+                "description": "Precios competitivos sin sacrificar la calidad — ideal para revendedores y usuarios finales que priorizan la eficiencia."
+            },
+            "support": {
+                "name": "Soporte 24\/7",
+                "description": "Nuestro equipo de soporte siempre está listo en cualquier momento. Cualquier pregunta o problema que enfrentes, estamos aquí para ayudar en cualquier momento."
+            },
+            "ease-of-use": {
+                "name": "Facilidad de Uso",
+                "description": "Interfaz diseñada intuitivamente para que los usuarios puedan gestionar todas sus necesidades rápidamente y sin confusión."
+            },
+            "business-partner": {
+                "name": "Socio de Crecimiento de tu Negocio",
+                "description": "No somos solo proveedores de servicios — somos un socio listo para apoyar el crecimiento de tu marca y negocio de manera sostenible."
+            },
+            "professional-quality": {
+                "name": "Calidad Profesional",
+                "description": "Confiable por agencias y especialistas en marketing digital por alto rendimiento, gran escalabilidad y servicios consistentemente superiores."
+            }
+        }
+    },
+    "featured-services": {
+        "title": "Nuestros Servicios Destacados",
+        "subtitle": "Descubre nuestros servicios destacados — mejor calidad, soporte máximo y resultados satisfactorios."
+    },
+    "faqs": {
+        "title": "Preguntas Frecuentes",
+        "subtitle": "¿Otras preguntas? No dudes en contactarnos — nuestro equipo está listo para ayudarte lo antes posible.",
+        "items": [
+            {
+                "value": "faq-1",
+                "question": "¿Qué es {{website_name}}?",
+                "answer": "Wuzz Panel es una plataforma de Panel SMM confiable para comprar seguidores, me gusta, visualizaciones y otros servicios de redes sociales automáticamente, rápidamente y a precios asequibles. La solución perfecta para impulsar tu cuenta, negocio o marca instantáneamente."
+            },
+            {
+                "value": "faq-2",
+                "question": "¿Son seguros nuestros servicios?",
+                "answer": "Sí, nuestros servicios son completamente seguros. Nunca solicitamos acceso de inicio de sesión o tu contraseña. Todos los procesos funcionan automáticamente y cumplen con la política de privacidad de la plataforma."
+            },
+            {
+                "value": "faq-3",
+                "question": "¿Cuánto tiempo tarda en procesarse mi pedido?",
+                "answer": "El tiempo de procesamiento depende del tipo de servicio. Generalmente los pedidos se procesan en 1-2 horas y se completan en unas pocas horas hasta 48 horas, dependiendo del volumen y el servicio seleccionado."
+            },
+            {
+                "value": "faq-4",
+                "question": "¿Mi pedido tiene garantía?",
+                "answer": "Algunos de nuestros servicios vienen con garantía de recarga si hay una disminución de seguidores o me gusta dentro de un período determinado. Por favor verifica los detalles de la garantía en la descripción del servicio."
+            },
+            {
+                "value": "faq-5",
+                "question": "¿{{website_name}} admite RESTful API?",
+                "answer": "Sí, proporcionamos RESTful API que te permite verificar el saldo, ver la lista de servicios, crear pedidos y monitorear el estado de los pedidos automáticamente."
+            }
+        ]
+    }
+}

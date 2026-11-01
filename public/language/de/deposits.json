@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Einzahlung Erstellen!",
+        "steps": {
+            "select-payment-method": "Zahlungsmethode Auswählen",
+            "enter-amount": "Einzahlungsbetrag Eingeben",
+            "enter-e-wallet-number": "E-Wallet-Nr. Eingeben"
+        }
+    },
+    "detail": {
+        "button": "Einzahlung Stornieren!",
+        "cancel-dialog": {
+            "title": "Sind Sie sich wirklich sicher?",
+            "description": "Einzahlung mit ID <strong>{{deposit_id}}<\/strong> stornieren.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Stornieren!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Bitte Zahlung abschließen.",
+        "deposit-amount": "Einzahlungsbetrag",
+        "total-balance": "Gesamtsaldo",
+        "total-payment": "Gesamtzahlung",
+        "e-wallet-number": "E-Wallet-Nr.",
+        "unique-code": "Eindeutiger Code",
+        "payment-status": "Zahlungsstatus",
+        "expires-in": "Läuft Ab In",
+        "expires-text": "{{hours}} Stunden, {{minutes}} Minuten, {{seconds}} Sekunden verbleibend",
+        "virtual-account-number": "Virtuelle Kontonummer",
+        "payment-code": "Zahlungscode",
+        "payment-target": "Zahlungsziel",
+        "payment-link": "Zahlungslink",
+        "qr-code": "QR-Code"
+    },
+    "toast": {
+        "unpaid-payment": "Bitte begleichen Sie Ihre Zahlung für die vorherige Einzahlung.",
+        "payment-not-available": "Die Zahlungsmethode ist derzeit nicht verfügbar. Bitte verwenden Sie eine andere Methode.",
+        "create-successful": "Bitte begleichen Sie Ihre Zahlung.",
+        "cancel-successful": "Einzahlung mit ID <b>{{deposit_id}}<\/b> erfolgreich storniert."
+    },
+    "log": {
+        "process-successful": "Die Einzahlung mit der ID <b>{{deposit_id}}<\/b> wurde erfolgreich verarbeitet.",
+        "create-successful": "Einzahlung mit ID <b>{{deposit_id}}<\/b> erstellen.",
+        "cancel-successful": "Einzahlung mit ID <b>{{deposit_id}}<\/b> stornieren.",
+        "balance-transfer": "Saldoübertragung vom Administrator."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Sind Sie sich wirklich sicher?",
+            "description": "{{item}} <b>{{value}}<\/b> stornieren.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Fortfahren!"
+        },
+        "approve": {
+            "title": "Sind Sie wirklich sicher?",
+            "description": "{{item}} <b>{{value}}<\/b> genehmigen.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, fortfahren!"
+        }
+    }
+}

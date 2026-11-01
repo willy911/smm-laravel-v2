@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Configurações de Taxa de Serviço",
+        "admin-fee-type": "Tipo de Taxa de Serviço",
+        "admin-fee-value": "Valor da Taxa de Serviço",
+        "payment-target": "Alvo do Pagamento",
+        "payment-gateway": "Gateway de Pagamento",
+        "payment-gateway-payment-code": "Código do Método de Pagamento (Gateway de Pagamento)",
+        "bonus-configs": "Configurações de Bônus",
+        "bonus-value": "Valor do Bônus",
+        "min-and-max-payment": "Pagamento Mín. e Máx."
+    }
+}

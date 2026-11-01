@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "Verificação de Email",
+        "check-email": "Por favor, verifique o email enviado para <b>{{email}}<\/b> para confirmar a sua conta.",
+        "resend-in-seconds": "Reenviar em {{seconds}} segundos",
+        "button": "Reenviar Email de Verificação",
+        "toast": {
+            "email-verified-successful": "Email verificata con successo.",
+            "email-resent-successful": "Email di verifica inviata nuovamente con successo."
+        },
+        "log": {
+            "email-verified-successful": "Esecuzione verifica email."
+        }
+    },
+    "settings": {
+        "update-profile-button": "Aggiorna Profilo",
+        "update-api-button": "Aggiorna API",
+        "toast": {
+            "update-profile-successful": "Profilo aggiornato con successo.",
+            "update-api-successful": "API aggiornata con successo.",
+            "update-notification-successful": "Notifiche aggiornate con successo."
+        },
+        "log": {
+            "update-api-successful": "Aggiornamento dati API.",
+            "update-profile-successful": "Aggiornamento profilo account."
+        }
+    }
+}

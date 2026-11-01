@@ -1,0 +1,30 @@
+{
+    "labels": {
+        "id": "ID",
+        "type": "Tipe",
+        "status": "Status",
+        "user": "Pengguna",
+        "provider": "Penyedia",
+        "service": "Layanan",
+        "order-id": "ID Pesanan",
+        "order-refill-id": "ID Refill Pesanan",
+        "order-cancel-id": "ID Pembatalan Pesanan",
+        "created-at": "Tgl. Dibuat",
+        "logs": "Log",
+        "account-profile": "Profil Akun",
+        "order-create": "Pembuatan Pesanan",
+        "order-status": "Cek Status Pesanan",
+        "order-cancel-create": "Pembatalan Pesanan",
+        "order-refill-create": "Pembuatan Isi Ulang Pesanan",
+        "order-refill-status": "Cek Status Isi Ulang Pesanan",
+        "fetch-services": "Ambil Layanan",
+        "success": "Berhasil",
+        "fail": "Gagal",
+        "success-fail": "Berhasil \/ Gagal",
+        "view-log": "Lihat Log",
+        "menu": "Log Response Provider"
+    },
+    "empty": {
+        "logs": "Tidak ada log."
+    }
+}

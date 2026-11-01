@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Administrator',
+        'admin' => 'Administrator',
+        'provider' => 'Anbieter',
+        'updated_columns' => 'Aktualisierte Spalten',
+        'is_api_access_enabled' => 'API-Zugriff',
+        'custom_price_type' => 'Typ des benutzerdefinierten Preises',
+        'custom_price_value' => 'Wert des benutzerdefinierten Preises',
+        'custom_price_fixed' => 'Fester Betrag',
+        'custom_price_percentage' => 'Prozentsatz',
+        'profit_configs' => 'Gewinnkonfiguration',
+        'profit_type' => 'Gewinnart',
+        'profit_value' => 'Gewinnwert',
+        'profit_fixed' => 'Fester Betrag',
+        'profit_percentage' => 'Prozentsatz',
+        'alias' => 'Alias',
+        'last_balance' => 'Letzter Saldo',
+        'original_price' => 'Einkaufspreis',
+        'sell_price' => 'Verkaufspreis',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Als <item>:as</item> markieren',
+        'sort_item' => ':item sortieren',
+        'create_item' => ':item hinzufügen',
+        'edit_item' => ':item bearbeiten',
+        'fetch_item' => ':item abrufen',
+        'delete_item' => ':item löschen',
+        'trash' => 'In Papierkorb verschieben',
+        'close' => 'Tiket schließen',
+        'restore' => 'Wiederherstellen',
+        'destroy' => 'Permanent löschen',
+    ],
+
+    'toast' => [
+        'create_successful'    => ':item mit ID <b>:id</b> erfolgreich hinzugefügt.',
+        'update_successful'    => ':item mit ID <b>:id</b> erfolgreich aktualisiert.',
+        'switch_successful'    => ':column :item mit ID <b>:id</b> erfolgreich aktualisiert.',
+        'trash_successful'    => ':item mit ID <b>:id</b> erfolgreich in Papierkorb verschoben.',
+        'close_successful'    => ':item mit ID <b>:id</b> erfolgreich geschlossen.',
+        'restore_successful'    => ':item mit ID <b>:id</b> erfolgreich wiederhergestellt.',
+        'destroy_successful'    => ':item mit ID <b>:id</b> erfolgreich permanent gelöscht.',
+        'sort_successful'    => 'Reihenfolge von :item erfolgreich aktualisiert.',
+    ],
+
+    'log' => [
+        'create_successful' => ':item mit ID <b>:id</b> erstellen.',
+        'update_successful' => ':item mit ID <b>:id</b> aktualisieren.',
+        'switch_successful' => ':item mit ID <b>:id</b> aktualisieren, Spalte <b>:column:</b> :from → :to.',
+        'trash_successful'    => ':item mit ID <b>:id</b> in Papierkorb verschieben.',
+        'close_successful'    => ':item mit ID <b>:id</b> erfolgreich geschlossen.',
+        'restore_successful'    => ':item mit ID <b>:id</b> wiederherstellen.',
+        'destroy_successful'    => ':item mit ID <b>:id</b> permanent löschen.',
+        'sort_successful'    => 'Reihenfolge von :item aktualisieren.',
+    ],
+
+    'status' => [
+        'pending' => 'Ausstehend',
+        'waiting' => 'Wartend',
+        'success' => 'Erfolgreich',
+        'approved' => 'Genehmigt',
+        'expired' => 'Abgelaufen',
+        'canceled' => 'Storniert',
+        'open' => 'Offen',
+        'answered' => 'Beantwortet',
+        'user_reply' => 'Benutzerantwort',
+        'closed' => 'Geschlossen',
+        'completed' => 'Abgeschlossen',
+        'processing' => 'In Bearbeitung',
+        'in_progress' => 'In Ausführung',
+        'error' => 'Fehler',
+        'partial' => 'Teilweise',
+        'rejected' => 'Abgelehnt',
+        'active' => 'Aktiv',
+        'inactive' => 'Inaktiv',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Formular schließen?',
+            'description' => 'Sie haben ungespeicherte Änderungen.',
+            'cancel_button' => 'Nein, Abbrechen',
+            'confirm_button' => 'Ja, Ohne Speichern Schließen!',
+        ],
+        'trash' => [
+            'title' => 'Sind Sie sich wirklich sicher?',
+            'description' => ':item <b>:value</b> in den Papierkorb verschieben.',
+            'cancel_button' => 'Abbrechen',
+            'confirm_button' => 'Ja, Fortfahren!',
+        ],
+        'restore' => [
+            'title' => 'Sind Sie sich wirklich sicher?',
+            'description' => ':item <b>:value</b> aus dem Papierkorb wiederherstellen.',
+            'cancel_button' => 'Abbrechen',
+            'confirm_button' => 'Ja, Fortfahren!',
+        ],
+        'destroy' => [
+            'title' => 'Sind Sie sich wirklich sicher?',
+            'description' => 'Diese Aktion kann nicht rückgängig gemacht werden. Diese Aktion wird :item <b>:value</b> permanent aus der Datenbank löschen.',
+            'cancel_button' => 'Abbrechen',
+            'confirm_button' => 'Ja, Fortfahren!',
+        ],
+        'close' => [
+            'title' => 'Tiket schließen?',
+            'description' => 'Tiket <b>:id</b> schließen.',
+            'cancel_button' => 'Abbrechen',
+            'confirm_button' => 'Ja, Schließen!',
+        ],
+    ]
+];

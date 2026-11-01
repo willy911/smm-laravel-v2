@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "Обновлено",
+            "price-increased": "Цена повышена",
+            "price-decreased": "Цена снижена",
+            "enabled": "Включено",
+            "disabled": "Отключено",
+            "added": "Добавлено",
+            "deleted": "Удалено"
+        },
+        "description": {
+            "min-updated": "Обновление минимального количества услуги с {{from}} до {{to}}.",
+            "max-updated": "Обновление максимального количества услуги с {{from}} до {{to}}.",
+            "price-increased": "Повышение цены с {{from}} до {{to}}.",
+            "price-decreased": "Снижение цены с {{from}} до {{to}}.",
+            "enabled": "Услуга включена.",
+            "disabled": "Услуга отключена.",
+            "added": "Услуга добавлена.",
+            "deleted": "Услуга удалена."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Услуга успешно добавлена в избранное.",
+        "removed-from-favorites": "Услуга успешно удалена из избранного.",
+        "invalid-service-id": "Недействительный ID услуги.",
+        "no-services-found": "Услуги не найдены.",
+        "no-categories-found": "Категории услуг не найдены."
+    }
+}

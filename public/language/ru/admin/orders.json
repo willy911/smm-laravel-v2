@@ -1,0 +1,6 @@
+{
+    "labels": {
+        "service-provider-order-id": "ID заказа поставщика",
+        "service-provider-order-refill-id": "ID пополнения поставщика"
+    }
+}

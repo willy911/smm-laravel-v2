@@ -1,0 +1,271 @@
+{
+    "labels": {
+        "id": "ID",
+        "password": "Password",
+        "new-password": "New Password",
+        "current-password": "Current Password",
+        "username": "Username",
+        "full-name": "Full Name",
+        "whatsapp": "Whatsapp",
+        "telegram": "Telegram",
+        "email": "Email",
+        "remember-me": "Remember me",
+        "language": "Language",
+        "currency": "Currency",
+        "search": "Search",
+        "select": "Select",
+        "all": "All",
+        "created-at": "Created At",
+        "updated-at": "Updated At",
+        "deleted-at": "Deleted At",
+        "ip-address": "IP Address",
+        "user-agent": "UA",
+        "content": "Content",
+        "balance": "Balance",
+        "users": "Users",
+        "orders": "Orders",
+        "deposits": "Deposits",
+        "tickets": "Tickets",
+        "others": "Others",
+        "order": "Order",
+        "deposit": "Deposit",
+        "ticket": "Ticket",
+        "other": "Other",
+        "menu": "Menu",
+        "total": "Total",
+        "credit": "Credit",
+        "debit": "Debit",
+        "type": "Type",
+        "category": "Category",
+        "amount": "Amount",
+        "initial-balance": "Initial Balance",
+        "final-balance": "Final Balance",
+        "profile": "Profile",
+        "notification": "Notification",
+        "api-key": "API Key",
+        "secret-key": "Secret Key",
+        "whitelist-ip": "Whitelist IP",
+        "status": "Status",
+        "speedup": "Speedup",
+        "refill": "Refill",
+        "cancel": "Cancel",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "service": "Service",
+        "started-at": "Start",
+        "ended-at": "End",
+        "process-time": "Process Time",
+        "quantity": "Quantity",
+        "services": "Services",
+        "description": "Description",
+        "name": "Name",
+        "minimum": "Min.",
+        "maximum": "Max.",
+        "average-time": "Average Time",
+        "price": "Price",
+        "group": "Group",
+        "my-favorite": "My Favorite",
+        "custom-price": "Custom Price",
+        "recommended": "Recommended",
+        "best-seller": "Best Seller",
+        "yes": "Yes",
+        "no": "No",
+        "day": "Days",
+        "last-update": "Last Update",
+        "order-id": "Order ID",
+        "target": "Target",
+        "start-count": "Start Count",
+        "remains": "Remains",
+        "ordered-via": "Ordered Via",
+        "refund": "Refund",
+        "service-name": "Service Name",
+        "single-order": "Single Order",
+        "mass-order": "Mass Order",
+        "service-favorite": "Favorite Service",
+        "or": "or",
+        "hashtag": "Hashtag",
+        "hashtags": "Hashtags",
+        "media-url": "Media URL",
+        "answer-number": "Answer Number",
+        "comments": "Comments",
+        "usernames": "Usernames",
+        "total-price": "Total Price",
+        "order-summary": "Order Summary",
+        "service-information": "Service Information",
+        "support": "Support",
+        "social-media": "Social Media",
+        "tos": "Terms of Service",
+        "here": "here",
+        "recommended-services": "Recommended Services",
+        "best-seller-services": "Best-Selling Services This Month"
+    },
+    "placeholders": {
+        "select": "Select...",
+        "selected": "selected...",
+        "select-item": "Select {{item}}...",
+        "search": "Type something...",
+        "whitelist-ip": "Separate with commas (,) — e.g: 192.1.1.1,192.1.1.2",
+        "order-mass": "format = target,quantity, separate using new lines, example:\nusername,100\nyourname,100",
+        "separate-usernames-by-line": "Separate each username by a new line",
+        "separate-quantities-by-line": "Separate each quantity by a new line",
+        "separate-hashtags-by-line": "Separate each hashtag by a new line",
+        "start": "Start",
+        "end": "End",
+        "from": "From",
+        "to": "To",
+        "quick-select": {
+            "title": "Quick Select",
+            "60-days-ago": "60 days ago",
+            "30-days-ago": "30 days ago",
+            "7-days-ago": "7 days ago",
+            "yesterday": "Yesterday",
+            "today": "Today"
+        }
+    },
+    "buttons": {
+        "mass-actions": "Mass Actions",
+        "submit": "Submit",
+        "cancel": "Cancel"
+    },
+    "actions": {
+        "copy": {
+            "code": "Copy Code",
+            "id": "Copy ID",
+            "default": "Copy"
+        },
+        "filter": {
+            "open": "Open Filters",
+            "close": "Close Filters",
+            "clear": "Clear"
+        },
+        "navigate": {
+            "back": "Back",
+            "view": "View",
+            "visit": "Visit"
+        },
+        "create": {
+            "order": "Order",
+            "deposit": "Deposit"
+        },
+        "send": {
+            "email": "Send Email",
+            "ticket": "Send Ticket",
+            "message": "Send Message"
+        },
+        "reply": {
+            "ticket": "Reply Ticket"
+        },
+        "service-favorite": {
+            "add": "Add to Favorites",
+            "remove": "Remove from Favorites"
+        },
+        "order-request": {
+            "refill": "Refill Request",
+            "cancel": "Cancellation Request"
+        },
+        "dont-show-again": "Don't show again"
+    },
+    "filters": {
+        "all": "All"
+    },
+    "loading": {
+        "please-wait": "Please wait..."
+    },
+    "toast": {
+        "error": "Error!",
+        "success": "Success!",
+        "invalid-input": "Please check your input.",
+        "throttle": "Too many requests. Please try again in {{seconds}} seconds.",
+        "exception": "An error occurred, please reload this page.",
+        "text-copied": "Text copied to clipboard.",
+        "copy-failed": "Could not copy text to clipboard.",
+        "welcome": "Welcome <b>{{name}}<\/b>.",
+        "date-invalid-range": "\"Start\" date cannot be greater than \"end\" date."
+    },
+    "empty": {
+        "no-data-found": "No data found.",
+        "no-data-yet": "No data yet."
+    },
+    "summary": {
+        "total": "Total",
+        "pending": "Pending",
+        "processing": "Processing",
+        "success": "Success",
+        "fail": "Failed",
+        "active": "Active",
+        "inactive": "Inactive"
+    },
+    "status": {
+        "pending": "Pending",
+        "success": "Success",
+        "expired": "Expired",
+        "canceled": "Canceled",
+        "open": "Open",
+        "answered": "Answered",
+        "user-reply": "User Reply",
+        "closed": "Closed",
+        "completed": "Completed",
+        "processing": "Processing",
+        "in-progress": "In Progress",
+        "error": "Error",
+        "partial": "Partial",
+        "rejected": "Rejected"
+    },
+    "tooltips": {
+        "remaining-of": "{{percent}}% - remaining {{remains}} of {{of}}",
+        "close-detail": "Close Details",
+        "open-detail": "Open Details"
+    },
+    "datatable": {
+        "previous": "Previous",
+        "next": "Next",
+        "rows-per-page": "{{count}} Rows",
+        "columns": "Columns",
+        "columns-toggle": "Toggle Columns",
+        "showing-entries": "Showing {{from}} to {{to}} of {{total}} entries",
+        "rows-selected": "({{count}} rows selected)"
+    },
+    "contact-dialog": {
+        "title": "Contact Us",
+        "description": "Need help? Don't hesitate to contact us!",
+        "ticket": {
+            "title": "Ticket Support",
+            "description": "Order & Deposit complaints"
+        },
+        "email": {
+            "title": "Email",
+            "description": "Business\/Partnership inquiries"
+        },
+        "whatsapp": {
+            "title": "Whatsapp",
+            "description": "24\/7 Support"
+        },
+        "telegram": {
+            "title": "Telegram",
+            "description": "24\/7 Support"
+        },
+        "instagram": {
+            "title": "Instagram",
+            "description": "Latest web updates"
+        },
+        "facebook": {
+            "title": "Facebook",
+            "description": "Latest web updates"
+        },
+        "tiktok": {
+            "title": "Tiktok",
+            "description": "Latest web updates"
+        },
+        "google-maps": {
+            "title": "Address",
+            "description": "Visit us for direct inquiries"
+        }
+    },
+    "leaderboard": {
+        "title": "Leaderboard",
+        "top-10-orders-in-month": "Top 10 Orders in {{month}}",
+        "top-10-deposits-in-month": "Top 10 Deposits in {{month}}",
+        "top-10-services-in-month": "Top 10 Services in {{month}}"
+    }
+}

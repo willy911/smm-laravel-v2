@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "Kirim Tiket!"
+    },
+    "edit": {
+        "button": "Balas Tiket!"
+    },
+    "labels": {
+        "department": "Departemen",
+        "subject": "Subjek",
+        "data-id": "ID Pesanan\/Deposit",
+        "request": "Permintaan",
+        "message": "Pesan",
+        "ticket-information": "Informasi Tiket"
+    },
+    "toast": {
+        "limit-exceeded": "Anda melebihi batas pembuatan tiket, silahkan tunggu tiket sebelumnya diproses.",
+        "create-successful": "Tiket dengan ID <b>{{ticket_id}}<\/b> berhasil dibuat.",
+        "reply-successful": "Tiket dengan ID <b>{{ticket_id}}<\/b> berhasil dibalas."
+    },
+    "log": {
+        "create-successful": "Membuat tiket dengan ID <b>{{ticket_id}}<\/b>.",
+        "reply-successful": "Membuat balasan tiket dengan ID <b>{{ticket_id}}<\/b>."
+    }
+}

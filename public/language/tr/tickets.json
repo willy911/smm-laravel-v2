@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "Bilet Gönder!"
+    },
+    "edit": {
+        "button": "Bileti Yanıtla!"
+    },
+    "labels": {
+        "department": "Departman",
+        "subject": "Konu",
+        "data-id": "Sipariş\/Para Yatırma ID'si",
+        "request": "Talep",
+        "message": "Mesaj",
+        "ticket-information": "Bilet Bilgileri"
+    },
+    "toast": {
+        "limit-exceeded": "Bilet oluşturma sınırını aştınız, lütfen önceki biletin işlenmesini bekleyin.",
+        "create-successful": "<b>{{ticket_id}}<\/b> ID'li bilet başarıyla oluşturuldu.",
+        "reply-successful": "<b>{{ticket_id}}<\/b> ID'li bilet başarıyla yanıtlandı."
+    },
+    "log": {
+        "create-successful": "<b>{{ticket_id}}<\/b> ID'li bilet oluşturuluyor.",
+        "reply-successful": "<b>{{ticket_id}}<\/b> ID'li bilete yanıt oluşturuluyor."
+    }
+}

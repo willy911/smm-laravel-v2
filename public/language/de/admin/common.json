@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Administrator",
+        "admin": "Administrator",
+        "provider": "Anbieter",
+        "updated-columns": "Aktualisierte Spalten",
+        "is-api-access-enabled": "API-Zugriff",
+        "custom-price-type": "Typ des benutzerdefinierten Preises",
+        "custom-price-value": "Wert des benutzerdefinierten Preises",
+        "custom-price-fixed": "Fester Betrag",
+        "custom-price-percentage": "Prozentsatz",
+        "profit-configs": "Gewinnkonfiguration",
+        "profit-type": "Gewinnart",
+        "profit-value": "Gewinnwert",
+        "profit-fixed": "Fester Betrag",
+        "profit-percentage": "Prozentsatz",
+        "alias": "Alias",
+        "last-balance": "Letzter Saldo",
+        "original-price": "Einkaufspreis",
+        "sell-price": "Verkaufspreis"
+    },
+    "actions": {
+        "mark-item-as": "Als <item>{{as}}<\/item> markieren",
+        "sort-item": "{{item}} sortieren",
+        "create-item": "{{item}} hinzufügen",
+        "edit-item": "{{item}} bearbeiten",
+        "fetch-item": "{{item}} abrufen",
+        "delete-item": "{{item}} löschen",
+        "trash": "In Papierkorb verschieben",
+        "close": "Tiket schließen",
+        "restore": "Wiederherstellen",
+        "destroy": "Permanent löschen"
+    },
+    "toast": {
+        "create-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich hinzugefügt.",
+        "update-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich aktualisiert.",
+        "switch-successful": "{{column}} {{item}} mit ID <b>{{id}}<\/b> erfolgreich aktualisiert.",
+        "trash-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich in Papierkorb verschoben.",
+        "close-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich geschlossen.",
+        "restore-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich wiederhergestellt.",
+        "destroy-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich permanent gelöscht.",
+        "sort-successful": "Reihenfolge von {{item}} erfolgreich aktualisiert."
+    },
+    "log": {
+        "create-successful": "{{item}} mit ID <b>{{id}}<\/b> erstellen.",
+        "update-successful": "{{item}} mit ID <b>{{id}}<\/b> aktualisieren.",
+        "switch-successful": "{{item}} mit ID <b>{{id}}<\/b> aktualisieren, Spalte <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "{{item}} mit ID <b>{{id}}<\/b> in Papierkorb verschieben.",
+        "close-successful": "{{item}} mit ID <b>{{id}}<\/b> erfolgreich geschlossen.",
+        "restore-successful": "{{item}} mit ID <b>{{id}}<\/b> wiederherstellen.",
+        "destroy-successful": "{{item}} mit ID <b>{{id}}<\/b> permanent löschen.",
+        "sort-successful": "Reihenfolge von {{item}} aktualisieren."
+    },
+    "status": {
+        "pending": "Ausstehend",
+        "waiting": "Wartend",
+        "success": "Erfolgreich",
+        "approved": "Genehmigt",
+        "expired": "Abgelaufen",
+        "canceled": "Storniert",
+        "open": "Offen",
+        "answered": "Beantwortet",
+        "user-reply": "Benutzerantwort",
+        "closed": "Geschlossen",
+        "completed": "Abgeschlossen",
+        "processing": "In Bearbeitung",
+        "in-progress": "In Ausführung",
+        "error": "Fehler",
+        "partial": "Teilweise",
+        "rejected": "Abgelehnt",
+        "active": "Aktiv",
+        "inactive": "Inaktiv"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Formular schließen?",
+            "description": "Sie haben ungespeicherte Änderungen.",
+            "cancel-button": "Nein, Abbrechen",
+            "confirm-button": "Ja, Ohne Speichern Schließen!"
+        },
+        "trash": {
+            "title": "Sind Sie sich wirklich sicher?",
+            "description": "{{item}} <b>{{value}}<\/b> in den Papierkorb verschieben.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Fortfahren!"
+        },
+        "restore": {
+            "title": "Sind Sie sich wirklich sicher?",
+            "description": "{{item}} <b>{{value}}<\/b> aus dem Papierkorb wiederherstellen.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Fortfahren!"
+        },
+        "destroy": {
+            "title": "Sind Sie sich wirklich sicher?",
+            "description": "Diese Aktion kann nicht rückgängig gemacht werden. Diese Aktion wird {{item}} <b>{{value}}<\/b> permanent aus der Datenbank löschen.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Fortfahren!"
+        },
+        "close": {
+            "title": "Tiket schließen?",
+            "description": "Tiket <b>{{id}}<\/b> schließen.",
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Ja, Schließen!"
+        }
+    }
+}

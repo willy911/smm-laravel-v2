@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Amministratori",
+        "admin": "Amministratore",
+        "provider": "Fornitore",
+        "updated-columns": "Colonne Aggiornate",
+        "is-api-access-enabled": "Accesso API",
+        "custom-price-type": "Tipo di Prezzo Personalizzato",
+        "custom-price-value": "Valore del Prezzo Personalizzato",
+        "custom-price-fixed": "Importo Fisso",
+        "custom-price-percentage": "Percentuale",
+        "profit-configs": "Configurazione Profitto",
+        "profit-type": "Tipo di Profitto",
+        "profit-value": "Valore del Profitto",
+        "profit-fixed": "Importo Fisso",
+        "profit-percentage": "Percentuale",
+        "alias": "Alias",
+        "last-balance": "Saldo Finale",
+        "original-price": "Prezzo di Acquisto",
+        "sell-price": "Prezzo di Vendita"
+    },
+    "actions": {
+        "mark-item-as": "Segna come <item>{{as}}<\/item>",
+        "sort-item": "Ordina {{item}}",
+        "create-item": "Aggiungi {{item}}",
+        "edit-item": "Modifica {{item}}",
+        "fetch-item": "Recupera {{item}}",
+        "delete-item": "Elimina {{item}}",
+        "trash": "Sposta nel cestino",
+        "close": "Chiudi Ticket",
+        "restore": "Ripristina",
+        "destroy": "Elimina Definitivamente"
+    },
+    "toast": {
+        "create-successful": "{{item}} con ID <b>{{id}}<\/b> aggiunto con successo.",
+        "update-successful": "{{item}} con ID <b>{{id}}<\/b> aggiornato con successo.",
+        "switch-successful": "{{column}} {{item}} con ID <b>{{id}}<\/b> aggiornato con successo.",
+        "trash-successful": "{{item}} con ID <b>{{id}}<\/b> spostato nel cestino con successo.",
+        "close-successful": "{{item}} con ID <b>{{id}}<\/b> chiuso con successo.",
+        "restore-successful": "{{item}} con ID <b>{{id}}<\/b> ripristinato con successo.",
+        "destroy-successful": "{{item}} con ID <b>{{id}}<\/b> eliminato definitivamente con successo.",
+        "sort-successful": "Ordine di {{item}} aggiornato con successo."
+    },
+    "log": {
+        "create-successful": "Creazione di {{item}} con ID <b>{{id}}<\/b>.",
+        "update-successful": "Aggiornamento di {{item}} con ID <b>{{id}}<\/b>.",
+        "switch-successful": "Aggiornamento di {{item}} con ID <b>{{id}}<\/b>, colonna <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Spostamento di {{item}} con ID <b>{{id}}<\/b> nel cestino.",
+        "close-successful": "Chiusura di {{item}} con ID <b>{{id}}<\/b>.",
+        "restore-successful": "Ripristino di {{item}} con ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Eliminazione definitiva di {{item}} con ID <b>{{id}}<\/b>.",
+        "sort-successful": "Aggiornamento dell'ordine di {{item}}."
+    },
+    "status": {
+        "pending": "In attesa",
+        "waiting": "In attesa",
+        "success": "Riuscito",
+        "approved": "Approvato",
+        "expired": "Scaduto",
+        "canceled": "Annullato",
+        "open": "Aperto",
+        "answered": "Risposto",
+        "user-reply": "Risposta utente",
+        "closed": "Chiuso",
+        "completed": "Completato",
+        "processing": "In elaborazione",
+        "in-progress": "In corso",
+        "error": "Errore",
+        "partial": "Parziale",
+        "rejected": "Rifiutato",
+        "active": "Attivo",
+        "inactive": "Inattivo"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Chiudere il modulo?",
+            "description": "Hai modifiche non salvate.",
+            "cancel-button": "No, Annulla",
+            "confirm-button": "Sì, Chiudi Senza Salvare!"
+        },
+        "trash": {
+            "title": "Sei veramente sicuro?",
+            "description": "Sposta {{item}} <b>{{value}}<\/b> nella cartella cestino.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Continua!"
+        },
+        "restore": {
+            "title": "Sei veramente sicuro?",
+            "description": "Ripristina {{item}} <b>{{value}}<\/b> dalla cartella cestino.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Continua!"
+        },
+        "destroy": {
+            "title": "Sei veramente sicuro?",
+            "description": "Questa azione non può essere annullata. Questa azione eliminerà definitivamente {{item}} <b>{{value}}<\/b> dal database.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Continua!"
+        },
+        "close": {
+            "title": "Chiudere il Ticket?",
+            "description": "Chiudere il ticket <b>{{id}}<\/b>.",
+            "cancel-button": "Annulla",
+            "confirm-button": "Sì, Chiudere!"
+        }
+    }
+}

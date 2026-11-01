@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Yöneticiler",
+        "admin": "Yönetici",
+        "provider": "Sağlayıcı",
+        "updated-columns": "Güncellenen Sütunlar",
+        "is-api-access-enabled": "API Erişimi",
+        "custom-price-type": "Özel Fiyat Tipi",
+        "custom-price-value": "Özel Fiyat Değeri",
+        "custom-price-fixed": "Sabit Miktar",
+        "custom-price-percentage": "Yüzde",
+        "profit-configs": "Kâr Yapılandırmaları",
+        "profit-type": "Kâr Tipi",
+        "profit-value": "Kâr Değeri",
+        "profit-fixed": "Sabit Miktar",
+        "profit-percentage": "Yüzde",
+        "alias": "Takma Ad",
+        "last-balance": "Son Bakiye",
+        "original-price": "Alış Fiyatı",
+        "sell-price": "Satış Fiyatı"
+    },
+    "actions": {
+        "mark-item-as": "<item>{{as}}<\/item> olarak işaretle",
+        "sort-item": "{{item}} Sırala",
+        "create-item": "{{item}} Ekle",
+        "edit-item": "{{item}} Düzenle",
+        "fetch-item": "{{item}} Çek",
+        "delete-item": "{{item}} Sil",
+        "trash": "Çöpe Taşı",
+        "close": "Ticketi Kapat",
+        "restore": "Geri Yükle",
+        "destroy": "Kalıcı Olarak Sil"
+    },
+    "toast": {
+        "create-successful": "<b>{{id}}<\/b> ID'li {{item}} başarıyla eklendi.",
+        "update-successful": "<b>{{id}}<\/b> ID'li {{item}} başarıyla güncellendi.",
+        "switch-successful": "<b>{{id}}<\/b> ID'li {{item}} için {{column}} başarıyla güncellendi.",
+        "trash-successful": "<b>{{id}}<\/b> ID'li {{item}} başarıyla çöpe taşındı.",
+        "close-successful": "<b>{{id}}<\/b> ID'li {{item}} başarıyla kapatıldı.",
+        "restore-successful": "<b>{{id}}<\/b> ID'li {{item}} başarıyla geri yüklendi.",
+        "destroy-successful": "<b>{{id}}<\/b> ID'li {{item}} kalıcı olarak başarıyla silindi.",
+        "sort-successful": "{{item}} sıralaması başarıyla güncellendi."
+    },
+    "log": {
+        "create-successful": "<b>{{id}}<\/b> ID'li {{item}} oluşturuluyor.",
+        "update-successful": "<b>{{id}}<\/b> ID'li {{item}} güncelleniyor.",
+        "switch-successful": "<b>{{id}}<\/b> ID'li {{item}} güncelleniyor, <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "<b>{{id}}<\/b> ID'li {{item}} çöpe taşınıyor.",
+        "close-successful": "<b>{{id}}<\/b> ID'li {{item}} kapatılıyor.",
+        "restore-successful": "<b>{{id}}<\/b> ID'li {{item}} geri yükleniyor.",
+        "destroy-successful": "<b>{{id}}<\/b> ID'li {{item}} kalıcı olarak siliniyor.",
+        "sort-successful": "{{item}} sıralaması güncelleniyor."
+    },
+    "status": {
+        "pending": "Beklemede",
+        "waiting": "Bekliyor",
+        "success": "Başarılı",
+        "approved": "Onaylandı",
+        "expired": "Süresi Doldu",
+        "canceled": "İptal Edildi",
+        "open": "Açık",
+        "answered": "Yanıtlandı",
+        "user-reply": "Kullanıcı Yanıtı",
+        "closed": "Kapalı",
+        "completed": "Tamamlandı",
+        "processing": "İşleniyor",
+        "in-progress": "Devam Ediyor",
+        "error": "Hata",
+        "partial": "Kısmi",
+        "rejected": "Reddedildi",
+        "active": "Aktif",
+        "inactive": "Pasif"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Formu kapatılsın mı?",
+            "description": "Kaydedilmemiş değişiklikleriniz var.",
+            "cancel-button": "Hayır, İptal Et",
+            "confirm-button": "Evet, Kaydetmeden Kapat!"
+        },
+        "trash": {
+            "title": "Gerçekten emin misiniz?",
+            "description": "{{item}} <b>{{value}}<\/b> çöp klasörüne taşı.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, Devam Et!"
+        },
+        "restore": {
+            "title": "Gerçekten emin misiniz?",
+            "description": "{{item}} <b>{{value}}<\/b> çöp klasöründen geri yükle.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, Devam Et!"
+        },
+        "destroy": {
+            "title": "Gerçekten emin misiniz?",
+            "description": "Bu işlem geri alınamaz. Bu, {{item}} <b>{{value}}<\/b>'yi veritabanından kalıcı olarak silecektir.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, Devam Et!"
+        },
+        "close": {
+            "title": "Ticketi Kapat?",
+            "description": "Ticketi <b>{{id}}<\/b> kapat.",
+            "cancel-button": "İptal",
+            "confirm-button": "Evet, Kapat!"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "labels": {
+        "users-this-month": "इस माह नए उपयोगकर्ताओं का ग्राफ",
+        "orders-this-month": "इस माह के ऑर्डर का ग्राफ",
+        "deposits-this-month": "इस माह की जमा राशि का ग्राफ"
+    }
+}

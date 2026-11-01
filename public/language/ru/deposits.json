@@ -1,0 +1,61 @@
+{
+    "create": {
+        "button": "Создать депозит!",
+        "steps": {
+            "select-payment-method": "Выберите способ оплаты",
+            "enter-amount": "Введите сумму депозита",
+            "enter-e-wallet-number": "Введите номер электронного кошелька"
+        }
+    },
+    "detail": {
+        "button": "Отменить депозит!",
+        "cancel-dialog": {
+            "title": "Вы абсолютно уверены?",
+            "description": "Отменить депозит с ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, отменить!"
+        }
+    },
+    "labels": {
+        "complete-payment": "Пожалуйста, завершите оплату.",
+        "deposit-amount": "Сумма депозита",
+        "total-balance": "Общий баланс",
+        "total-payment": "Общая сумма к оплате",
+        "e-wallet-number": "Номер электронного кошелька",
+        "unique-code": "Уникальный код",
+        "payment-status": "Статус оплаты",
+        "expires-in": "Истекает через",
+        "expires-text": "Осталось {{hours}} ч, {{minutes}} мин, {{seconds}} сек",
+        "virtual-account-number": "Номер виртуального счета",
+        "payment-code": "Код платежа",
+        "payment-target": "Цель платежа",
+        "payment-link": "Ссылка на оплату",
+        "qr-code": "QR-код"
+    },
+    "toast": {
+        "unpaid-payment": "Пожалуйста, оплатите предыдущий депозит.",
+        "payment-not-available": "Способ оплаты временно недоступен. Пожалуйста, используйте другой метод.",
+        "create-successful": "Пожалуйста, завершите оплату.",
+        "cancel-successful": "Депозит с ID <b>{{deposit_id}}<\/b> успешно отменен."
+    },
+    "log": {
+        "process-successful": "Депозит с ID <b>{{deposit_id}}<\/b> был успешно обработан.",
+        "create-successful": "Создан депозит с ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Отменен депозит с ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Перевод баланса от администратора."
+    },
+    "dialog": {
+        "cancel": {
+            "title": "Вы абсолютно уверены?",
+            "description": "Отменить {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, продолжить!"
+        },
+        "approve": {
+            "title": "Вы уверены?",
+            "description": "Одобрить {{item}} <b>{{value}}<\/b>.",
+            "cancel-button": "Отмена",
+            "confirm-button": "Да, продолжить!"
+        }
+    }
+}

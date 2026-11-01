@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "Verifikasi Email",
+        "check-email": "Silakan periksa email Anda di <b>{{email}}<\/b> untuk memverifikasi akun Anda.",
+        "resend-in-seconds": "Kirim ulang dalam {{seconds}}",
+        "button": "Kirim Ulang Email Verifikasi",
+        "toast": {
+            "email-verified-successful": "Email berhasil diverifikasi.",
+            "email-resent-successful": "Email verifikasi berhasil dikirim ulang."
+        },
+        "log": {
+            "email-verified-successful": "Melakukan verifikasi email."
+        }
+    },
+    "settings": {
+        "update-profile-button": "Perbarui Profil",
+        "update-api-button": "Perbarui API",
+        "toast": {
+            "update-profile-successful": "Profil berhasil diperbarui.",
+            "update-api-successful": "API berhasil diperbarui.",
+            "update-notification-successful": "Notifikasi berhasil diperbarui."
+        },
+        "log": {
+            "update-api-successful": "Memperbarui data API.",
+            "update-profile-successful": "Memperbarui profil akun."
+        }
+    }
+}

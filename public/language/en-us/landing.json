@@ -1,0 +1,76 @@
+{
+    "nav": {
+        "home": "Home",
+        "featured-services": "Featured Services",
+        "services": "Services",
+        "faqs": "FAQs"
+    },
+    "hero": {
+        "description": "Wuzz Panel offers a practical solution to boost your social media exposure, with services for Facebook, Instagram, Twitter, and other platforms."
+    },
+    "our-services": {
+        "title": "Why Choose {{website_name}}?",
+        "subtitle": "We provide the services you need — fast, reliable, and aligned with your expectations.",
+        "items": {
+            "quality-service": {
+                "name": "Quality Service",
+                "description": "Every service we offer has gone through strict curation to ensure consistent, real, and satisfying results that meet user expectations."
+            },
+            "competitive-price": {
+                "name": "Competitive Pricing",
+                "description": "Competitive prices without compromising quality — ideal for both resellers and end users who value efficiency."
+            },
+            "support": {
+                "name": "24\/7 Support",
+                "description": "Our support team is always available. Whatever questions or issues you face, we're here to help at any time."
+            },
+            "ease-of-use": {
+                "name": "Ease of Use",
+                "description": "The interface is intuitively designed so users can manage all needs quickly and without confusion."
+            },
+            "business-partner": {
+                "name": "Your Business Growth Partner",
+                "description": "We're not just a service provider — we're your partner, ready to support the growth of your brand and business sustainably."
+            },
+            "professional-quality": {
+                "name": "Professional Quality",
+                "description": "Trusted by agencies and digital marketers for high performance, great scalability, and consistently superior services."
+            }
+        }
+    },
+    "featured-services": {
+        "title": "Our Featured Services",
+        "subtitle": "Discover our top services — the best quality, maximum support, and satisfying results."
+    },
+    "faqs": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Have more questions? Don't hesitate to contact us — our team is ready to assist you as soon as possible.",
+        "items": [
+            {
+                "value": "faq-1",
+                "question": "What is {{website_name}}?",
+                "answer": "Wuzz Panel is a trusted SMM panel platform for buying followers, likes, views, and other social media services — automatically, quickly, and affordably. It's the perfect solution to instantly boost your account, business, or brand."
+            },
+            {
+                "value": "faq-2",
+                "question": "Is your service safe to use?",
+                "answer": "Yes, our service is completely safe. We never ask for your login credentials or passwords. All processes are automated and follow the platform's privacy policies."
+            },
+            {
+                "value": "faq-3",
+                "question": "How long does it take to process my order?",
+                "answer": "Order processing time depends on the selected service. Most orders begin processing within 1-2 hours and are usually completed within a few hours to 48 hours, depending on the service volume and type."
+            },
+            {
+                "value": "faq-4",
+                "question": "Is my order guaranteed?",
+                "answer": "Some of our services come with a refill guarantee if there's a reduction in followers or likes within a certain period. Please check the service description for guarantee details."
+            },
+            {
+                "value": "faq-5",
+                "question": "Does {{website_name}} support a RESTful API?",
+                "answer": "Yes, we provide a RESTful API that allows you to check your balance, view the list of services, place orders, and monitor order status automatically."
+            }
+        ]
+    }
+}

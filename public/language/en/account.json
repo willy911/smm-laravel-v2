@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "Email Verification",
+        "check-email": "Please check your email at <b>{{email}}<\/b> to verify your account.",
+        "resend-in-seconds": "Resend In {{seconds}}",
+        "button": "Resend Verification Email",
+        "toast": {
+            "email-verified-successful": "Email successfully verified.",
+            "email-resent-successful": "Verification email successfully resent."
+        },
+        "log": {
+            "email-verified-successful": "Performed email verification."
+        }
+    },
+    "settings": {
+        "update-profile-button": "Update Profile",
+        "update-api-button": "Update API",
+        "toast": {
+            "update-profile-successful": "Profile successfully updated.",
+            "update-api-successful": "API successfully updated.",
+            "update-notification-successful": "Notification successfully updated."
+        },
+        "log": {
+            "update-api-successful": "Updated API data.",
+            "update-profile-successful": "Updated account profile."
+        }
+    }
+}

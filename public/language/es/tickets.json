@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "¡Enviar Ticket!"
+    },
+    "edit": {
+        "button": "¡Responder Ticket!"
+    },
+    "labels": {
+        "department": "Departamento",
+        "subject": "Asunto",
+        "data-id": "ID de Pedido\/Depósito",
+        "request": "Solicitud",
+        "message": "Mensaje",
+        "ticket-information": "Información del Ticket"
+    },
+    "toast": {
+        "limit-exceeded": "Has excedido el límite de creación de tickets, por favor espera a que se procese el ticket anterior.",
+        "create-successful": "Ticket con ID <b>{{ticket_id}}<\/b> creado exitosamente.",
+        "reply-successful": "Ticket con ID <b>{{ticket_id}}<\/b> respondido exitosamente."
+    },
+    "log": {
+        "create-successful": "Creando ticket con ID <b>{{ticket_id}}<\/b>.",
+        "reply-successful": "Creando respuesta de ticket con ID <b>{{ticket_id}}<\/b>."
+    }
+}

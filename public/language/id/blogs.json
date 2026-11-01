@@ -1,0 +1,17 @@
+{
+    "description": {
+        "hero": "Temukan artikel menarik, tips, tutorial, dan informasi terbaru dari {{website_name}}.",
+        "category": "Temukan artikel berdasarkan topik"
+    },
+    "labels": {
+        "tags": "Tags",
+        "popular-tags": "Tag Populer",
+        "latest-articles": "Artikel Terbaru",
+        "all-articles": "Semua Artikel",
+        "related-articles": "Artikel Terkait"
+    },
+    "empty": {
+        "title": "Artikel Tidak Ditemukan",
+        "description": "Artikel yang Anda cari tidak tersedia atau belum dipublikasikan. Coba gunakan kata kunci lain."
+    }
+}

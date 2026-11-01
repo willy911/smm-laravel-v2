@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Admin',
+        'admin' => 'Admin',
+        'provider' => 'Penyedia',
+        'updated_columns' => 'Kolom Yang Diperbarui',
+        'is_api_access_enabled' => 'Akses API',
+        'custom_price_type' => 'Tipe Harga Khusus',
+        'custom_price_value' => 'Nilai Harga Khusus',
+        'custom_price_fixed' => 'Angka Pasti',
+        'custom_price_percentage' => 'Persentase',
+        'profit_configs' => 'Konfigurasi Keuntungan',
+        'profit_type' => 'Tipe Keuntungan',
+        'profit_value' => 'Nilai Keuntungan',
+        'profit_fixed' => 'Angka Pasti',
+        'profit_percentage' => 'Persentase',
+        'alias' => 'Alias',
+        'last_balance' => 'Saldo Terakhir',
+        'original_price' => 'Harga Beli',
+        'sell_price' => 'Harga Jual',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Tandai sebagai <item>:as</item>',
+        'sort_item' => 'Urutkan :item',
+        'create_item' => 'Tambah :item',
+        'edit_item' => 'Ubah :item',
+        'fetch_item' => 'Ambil :item',
+        'delete_item' => 'Hapus :item',
+        'trash' => 'Pindahkan ke sampah',
+        'close' => 'Tutup Tiket',
+        'restore' => 'Pulihkan',
+        'destroy' => 'Hapus Permanen',
+    ],
+
+    'toast' => [
+        'create_successful'    => ':item dengan ID <b>:id</b> berhasil ditambahkan.',
+        'update_successful'    => ':item dengan ID <b>:id</b> berhasil diperbarui.',
+        'switch_successful'    => ':column :item dengan ID <b>:id</b> berhasil diperbarui.',
+        'trash_successful'    => ':item dengan ID <b>:id</b> berhasil dipindahkan ke sampah.',
+        'close_successful'    => ':item dengan ID <b>:id</b> berhasil ditutup.',
+        'restore_successful'    => ':item dengan ID <b>:id</b> berhasil dipulihkan.',
+        'destroy_successful'    => ':item dengan ID <b>:id</b> berhasil dihapus secara permanen.',
+        'sort_successful'    => 'Urutan :item berhasil diperbarui.',
+    ],
+
+    'log' => [
+        'create_successful' => 'Membuat :item dengan ID <b>:id</b>.',
+        'update_successful' => 'Memperbarui :item dengan ID <b>:id</b>.',
+        'switch_successful' => 'Memperbarui :item dengan ID <b>:id</b>, kolom <b>:column:</b> :from → :to.',
+        'trash_successful'    => 'Memindahkan :item dengan ID <b>:id</b> ke sampah.',
+        'close_successful'    => 'Menutup :item dengan ID <b>:id</b>.',
+        'restore_successful'    => 'Memulihkan :item dengan ID <b>:id</b>.',
+        'destroy_successful'    => 'Menghapus :item dengan ID <b>:id</b> secara permanen.',
+        'sort_successful'    => 'Memperbarui urutan :item.',
+    ],
+
+    'status' => [
+        'pending'  => 'Pending',
+        'waiting'  => 'Waiting',
+        'success'  => 'Success',
+        'approved'  => 'Approved',
+        'expired'  => 'Expired',
+        'canceled'  => 'Canceled',
+        'open'  => 'Open',
+        'answered'  => 'Answered',
+        'user_reply'  => 'User Reply',
+        'closed'  => 'Closed',
+        'completed'  => 'Completed',
+        'processing'  => 'Processing',
+        'in_progress'  => 'In Progress',
+        'error'  => 'Error',
+        'partial'  => 'Partial',
+        'rejected'  => 'Rejected',
+        'active' => 'Aktif',
+        'inactive' => 'Nonaktif',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Tutup formulir?',
+            'description' => 'Anda memiliki perubahan yang belum disimpan.',
+            'cancel_button' => 'Tidak, Batalkan',
+            'confirm_button' => 'Ya, Tutup tanpa simpan!',
+        ],
+        'trash' => [
+            'title' => 'Apakah Anda benar-benar yakin?',
+            'description' => 'Pindahkan :item <b>:value</b> ke folder sampah.',
+            'cancel_button' => 'Batalkan',
+            'confirm_button' => 'Ya, Lanjutkan!',
+        ],
+        'restore' => [
+            'title' => 'Apakah Anda benar-benar yakin?',
+            'description' => 'Pulihkan :item <b>:value</b> dari folder sampah.',
+            'cancel_button' => 'Batalkan',
+            'confirm_button' => 'Ya, Lanjutkan!',
+        ],
+        'destroy' => [
+            'title' => 'Apakah Anda benar-benar yakin?',
+            'description' => 'Tindakan ini tidak dapat dibatalkan. Tindakan ini akan menghapus :item <b>:value</b> secara permanen database.',
+            'cancel_button' => 'Batalkan',
+            'confirm_button' => 'Ya, Lanjutkan!',
+        ],
+        'close' => [
+            'title' => 'Tutup Tiket?',
+            'description' => 'Tutup tiket <b>:id</b>.',
+            'cancel_button' => 'Batalkan',
+            'confirm_button' => 'Ya, Tutup!',
+        ],
+    ]
+];

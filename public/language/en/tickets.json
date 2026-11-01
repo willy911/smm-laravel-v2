@@ -1,0 +1,25 @@
+{
+    "create": {
+        "button": "Submit Ticket!"
+    },
+    "edit": {
+        "button": "Reply Ticket!"
+    },
+    "labels": {
+        "department": "Department",
+        "subject": "Subject",
+        "data-id": "Order\/Deposit ID",
+        "request": "Request",
+        "message": "Message",
+        "ticket-information": "Ticket Information"
+    },
+    "toast": {
+        "limit-exceeded": "You exceeded the ticket creation limit, please wait for the previous ticket to be processed.",
+        "create-successful": "Ticket with ID <b>{{ticket_id}}<\/b> successfully created.",
+        "reply-successful": "Ticket with ID <b>{{ticket_id}}<\/b> successfully replied."
+    },
+    "log": {
+        "create-successful": "Created ticket with ID <b>{{ticket_id}}<\/b>.",
+        "reply-successful": "Created ticket reply with ID <b>{{ticket_id}}<\/b>."
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "labels": {
+        "service-provider-order-id": "Provider Order ID",
+        "service-provider-order-refill-id": "Provider Refill ID"
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "Güncellendi",
+            "price-increased": "Fiyat Arttı",
+            "price-decreased": "Fiyat Düştü",
+            "enabled": "Etkinleştirildi",
+            "disabled": "Devre Dışı Bırakıldı",
+            "added": "Eklendi",
+            "deleted": "Silindi"
+        },
+        "description": {
+            "min-updated": "Hizmetin minimum miktarı {{from}} değerinden {{to}} değerine güncellendi.",
+            "max-updated": "Hizmetin maksimum miktarı {{from}} değerinden {{to}} değerine güncellendi.",
+            "price-increased": "Fiyat {{from}} değerinden {{to}} değerine yükseldi.",
+            "price-decreased": "Fiyat {{from}} değerinden {{to}} değerine düştü.",
+            "enabled": "Hizmet etkinleştirildi.",
+            "disabled": "Hizmet devre dışı bırakıldı.",
+            "added": "Hizmet eklendi.",
+            "deleted": "Hizmet silindi."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Hizmet başarıyla favorilere eklendi.",
+        "removed-from-favorites": "Hizmet başarıyla favorilerden kaldırıldı.",
+        "invalid-service-id": "Geçersiz Hizmet ID'si.",
+        "no-services-found": "Hizmet bulunamadı.",
+        "no-categories-found": "Hizmet kategorisi bulunamadı."
+    }
+}

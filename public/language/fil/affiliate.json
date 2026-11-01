@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Ang mga user na magrerehistro gamit ang link na ito ay awtomatikong magiging referral mo.",
+        "balance-transfer-notice": "Ililipat ang komisyon sa iyong pangunahing balanse.",
+        "bank-transfer-notice": "Ililipat ang komisyon sa iyong bank account."
+    },
+    "labels": {
+        "affiliate-balance": "Affiliate Balance",
+        "commission-available": "Available na Komisyon",
+        "total-referrals": "Kabuuang Referral",
+        "total-earnings": "Kabuuang Kita",
+        "withdrawal-history": "Kasaysayan ng Withdrawal",
+        "your-affiliate-link": "Iyong Affiliate Link",
+        "withdraw-commission": "I-withdraw ang Komisyon"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Humiling ng withdrawal ng komisyon na <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "Matagumpay ang withdrawal ng komisyon na <b>{{amount}}<\/b> papunta sa bank account.",
+        "commission-withdrawal-to-balance-successful": "Matagumpay ang withdrawal ng komisyon na <b>{{amount}}<\/b> papunta sa pangunahing balanse.",
+        "commission-received": "Nakatanggap ng komisyon na <b>{{amount}}<\/b> mula sa deposito ng user na <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "Kinakailangan ang halaga.",
+        "bank-name-required": "Kinakailangan ang pangalan ng bangko.",
+        "bank-account-name-required": "Kinakailangan ang pangalan ng may-ari ng account.",
+        "bank-account-number-required": "Kinakailangan ang numero ng account.",
+        "min-withdrawal": "Ang minimum na halaga ng withdrawal ay <b>{{amount}}<\/b>.",
+        "max-withdrawal": "Ang maximum na halaga ng withdrawal ay <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Matagumpay na nalikha ang withdrawal ng komisyon."
+    }
+}

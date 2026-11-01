@@ -1,0 +1,71 @@
+{
+    "labels": {
+        "admins": "Admins",
+        "users": "Users",
+        "user": "User",
+        "last-signin": "Last Signin",
+        "is-api-access-enabled": "API Access",
+        "min-deposit": "Minimum Deposit"
+    },
+    "actions": {
+        "mark-item-as": "Mark as <item>{{as}}<\/item>",
+        "create-item": "Create {{item}}",
+        "edit-item": "Edit {{item}}",
+        "trash": "Move to Trash",
+        "restore": "Restore",
+        "destroy": "Delete Permanently"
+    },
+    "toast": {
+        "create-successful": "{{item}} with ID <b>{{id}}<\/b> successfully created.",
+        "update-successful": "{{item}} with ID <b>{{id}}<\/b> successfully updated.",
+        "switch-successful": "{{column}} of {{item}} with ID <b>{{id}}<\/b> successfully updated.",
+        "trash-successful": "{{item}} with ID <b>{{id}}<\/b> successfully moved to trash.",
+        "restore-successful": "{{item}} with ID <b>{{id}}<\/b> successfully restored.",
+        "destroy-successful": "{{item}} with ID <b>{{id}}<\/b> permanently deleted.",
+        "invalid-id": "Invalid ID."
+    },
+    "log": {
+        "create-successful": "Created {{item}} with ID <b>{{id}}<\/b>.",
+        "update-successful": "Updated {{item}} with ID <b>{{id}}<\/b>.",
+        "switch-successful": "Updated {{item}} with ID <b>{{id}}<\/b>, column {{column}} from <b>{{from}}<\/b> -> <b>{{to}}<\/b>.",
+        "trash-successful": "Moved {{item}} with ID <b>{{id}}<\/b> to trash.",
+        "restore-successful": "Restored {{item}} with ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Permanently deleted {{item}} with ID <b>{{id}}<\/b>."
+    },
+    "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Close form?",
+            "description": "You have unsaved changes.",
+            "cancel-button": "No, Cancel",
+            "confirm-button": "Yes, Close without saving!"
+        },
+        "trash": {
+            "title": "Are you sure?",
+            "description": "Move {{item}} <b>{{value}}<\/b> to the trash folder.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "restore": {
+            "title": "Are you sure?",
+            "description": "Restore {{item}} <b>{{value}}<\/b> from the trash folder.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "destroy": {
+            "title": "Are you sure?",
+            "description": "This action cannot be undone. It will permanently delete {{item}} <b>{{value}}<\/b> from the database.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "close": {
+            "title": "Close Ticket?",
+            "description": "Close ticket <b>{{id}}<\/b>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Close!"
+        }
+    }
+}

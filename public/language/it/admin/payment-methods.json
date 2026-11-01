@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Configurazione Commissioni di Servizio",
+        "admin-fee-type": "Tipo di Commissione di Servizio",
+        "admin-fee-value": "Valore della Commissione di Servizio",
+        "payment-target": "Destinazione Pagamento",
+        "payment-gateway": "Gateway di Pagamento",
+        "payment-gateway-payment-code": "Codice Metodo di Pagamento (Gateway di Pagamento)",
+        "bonus-configs": "Configurazione Bonus",
+        "bonus-value": "Valore del Bonus",
+        "min-and-max-payment": "Min. & Max. Pagamento"
+    }
+}

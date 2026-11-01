@@ -1,0 +1,28 @@
+{
+    "email-verification": {
+        "title": "ईमेल सत्यापन",
+        "check-email": "कृपया अपना खाता सत्यापित करने के लिए <b>{{email}}<\/b> पर भेजे गए ईमेल की जाँच करें।",
+        "resend-in-seconds": "{{seconds}} सेकंड में पुनः भेजें",
+        "button": "वेरिफिकेशन ईमेल फिर से भेजें",
+        "toast": {
+            "email-verified-successful": "ईमेल सफलतापूर्वक सत्यापित किया गया।",
+            "email-resent-successful": "सत्यापन ईमेल सफलतापूर्वक फिर से भेजा गया।"
+        },
+        "log": {
+            "email-verified-successful": "ईमेल सत्यापन किया जा रहा है।"
+        }
+    },
+    "settings": {
+        "update-profile-button": "प्रोफ़ाइल अपडेट करें",
+        "update-api-button": "एपीआई अपडेट करें",
+        "toast": {
+            "update-profile-successful": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।",
+            "update-api-successful": "एपीआई सफलतापूर्वक अपडेट की गई।",
+            "update-notification-successful": "अधिसूचना सफलतापूर्वक अपडेट की गई।"
+        },
+        "log": {
+            "update-api-successful": "एपीआई डेटा अपडेट किया जा रहा है।",
+            "update-profile-successful": "खाता प्रोफ़ाइल अपडेट की जा रही है।"
+        }
+    }
+}

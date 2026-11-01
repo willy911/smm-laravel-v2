@@ -1,0 +1,111 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'व्यवस्थापक',
+        'admin' => 'व्यवस्थापक',
+        'provider' => 'प्रदाता',
+        'updated_columns' => 'अपडेट किए गए कॉलम',
+        'is_api_access_enabled' => 'एपीआई एक्सेस',
+        'custom_price_type' => 'कस्टम प्राइस टाइप',
+        'custom_price_value' => 'कस्टम प्राइस वैल्यू',
+        'custom_price_fixed' => 'निश्चित राशि',
+        'custom_price_percentage' => 'प्रतिशत',
+        'profit_configs' => 'लाभ कॉन्फ़िगरेशन',
+        'profit_type' => 'लाभ प्रकार',
+        'profit_value' => 'लाभ मूल्य',
+        'profit_fixed' => 'निश्चित राशि',
+        'profit_percentage' => 'प्रतिशत',
+        'alias' => 'उपनाम',
+        'last_balance' => 'अंतिम शेष राशि',
+        'original_price' => 'खरीद मूल्य',
+        'sell_price' => 'विक्रय मूल्य',
+    ],
+
+    'actions' => [
+        'mark_item_as' => '<item>:as</item> के रूप में चिह्नित करें',
+        'sort_item' => ':item क्रमबद्ध करें',
+        'create_item' => ':item जोड़ें',
+        'edit_item' => ':item संपादित करें',
+        'fetch_item' => ':item प्राप्त करें',
+        'delete_item' => ':item हटाएँ',
+        'trash' => 'ट्रैश में ले जाएँ',
+        'close' => 'टिकेट बंद करें',
+        'restore' => 'पुनर्स्थापित करें',
+        'destroy' => 'स्थायी रूप से हटाएँ',
+    ],
+
+    'toast' => [
+        'create_successful' => 'ID <b>:id</b> के साथ :item सफलतापूर्वक जोड़ा गया।',
+        'update_successful' => 'ID <b>:id</b> के साथ :item सफलतापूर्वक अपडेट किया गया।',
+        'switch_successful' => 'ID <b>:id</b> के साथ :item का :column सफलतापूर्वक अपडेट किया गया।',
+        'trash_successful' => 'ID <b>:id</b> के साथ :item सफलतापूर्वक ट्रैश में ले जाया गया।',
+        'restore_successful' => 'ID <b>:id</b> के साथ :item सफलतापूर्वक पुनर्स्थापित किया गया।',
+        'destroy_successful' => 'ID <b>:id</b> के साथ :item स्थायी रूप से हटा दिया गया।',
+        'sort_successful' => ':item का क्रम सफलतापूर्वक अपडेट किया गया।',
+    ],
+
+    'log' => [
+        'create_successful' => 'ID <b>:id</b> के साथ :item बनाया जा रहा है।',
+        'update_successful' => 'ID <b>:id</b> के साथ :item अपडेट किया जा रहा है।',
+        'switch_successful' => 'ID <b>:id</b> के साथ :item अपडेट किया जा रहा है, कॉलम <b>:column:</b> :from → :to।',
+        'trash_successful' => 'ID <b>:id</b> के साथ :item को ट्रैश में ले जाया जा रहा है।',
+        'restore_successful' => 'ID <b>:id</b> के साथ :item पुनर्स्थापित किया जा रहा है।',
+        'destroy_successful' => 'ID <b>:id</b> के साथ :item को स्थायी रूप से हटाया जा रहा है।',
+        'sort_successful' => ':item का क्रम अपडेट किया जा रहा है।',
+    ],
+
+    'status' => [
+        'pending' => 'लंबित',
+        'waiting' => 'प्रतीक्षारत',
+        'success' => 'सफल',
+        'approved' => 'स्वीकृत',
+        'expired' => 'समाप्त',
+        'canceled' => 'रद्द',
+        'open' => 'खुला',
+        'answered' => 'उत्तर दिया गया',
+        'user_reply' => 'उपयोगकर्ता का उत्तर',
+        'closed' => 'बंद',
+        'completed' => 'पूर्ण',
+        'processing' => 'प्रसंस्करण में',
+        'in_progress' => 'प्रगति में',
+        'error' => 'त्रुटि',
+        'partial' => 'आंशिक',
+        'rejected' => 'अस्वीकृत',
+        'active' => 'सक्रिय',
+        'inactive' => 'निष्क्रिय',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'फॉर्म बंद करें?',
+            'description' => 'आपके पास ऐसे बदलाव हैं जो सहेजे नहीं गए हैं।',
+            'cancel_button' => 'नहीं, रद्द करें',
+            'confirm_button' => 'हाँ, बिना सहेजे बंद करें!',
+        ],
+        'trash' => [
+            'title' => 'क्या आप वाकई निश्चित हैं?',
+            'description' => ':item <b>:value</b> को ट्रैश फ़ोल्डर में ले जाएँ।',
+            'cancel_button' => 'रद्द करें',
+            'confirm_button' => 'हाँ, जारी रखें!',
+        ],
+        'restore' => [
+            'title' => 'क्या आप वाकई निश्चित हैं?',
+            'description' => ':item <b>:value</b> को ट्रैश फ़ोल्डर से पुनर्स्थापित करें।',
+            'cancel_button' => 'रद्द करें',
+            'confirm_button' => 'हाँ, जारी रखें!',
+        ],
+        'destroy' => [
+            'title' => 'क्या आप वाकई निश्चित हैं?',
+            'description' => 'यह कार्रवाई पूर्ववत नहीं की जा सकती। यह :item <b>:value</b> को डेटाबेस से स्थायी रूप से हटा देगी।',
+            'cancel_button' => 'रद्द करें',
+            'confirm_button' => 'हाँ, जारी रखें!',
+        ],
+        'close' => [
+            'title' => 'टिकेट बंद करें?',
+            'description' => 'टिकेट <b>:id</b> बंद करें।',
+            'cancel_button' => 'रद्द करें',
+            'confirm_button' => 'हाँ, बंद करें!',
+        ],
+    ]
+];

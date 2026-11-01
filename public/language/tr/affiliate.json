@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Bu bağlantıyı kullanarak kayıt olan kullanıcılar otomatik olarak sizin referansınız olacaktır.",
+        "balance-transfer-notice": "Komisyon ana bakiyenize aktarılacaktır.",
+        "bank-transfer-notice": "Komisyon banka hesabınıza aktarılacaktır."
+    },
+    "labels": {
+        "affiliate-balance": "Affiliate Bakiyesi",
+        "commission-available": "Kullanılabilir Komisyon",
+        "total-referrals": "Toplam Referans",
+        "total-earnings": "Toplam Kazanç",
+        "withdrawal-history": "Çekim Geçmişi",
+        "your-affiliate-link": "Affiliate Bağlantınız",
+        "withdraw-commission": "Komisyonu Çek"
+    },
+    "log": {
+        "requested-commission-withdrawal": "<b>{{amount}}<\/b> tutarında komisyon çekim talebi oluşturuldu.",
+        "commission-withdrawal-to-bank-successful": "<b>{{amount}}<\/b> tutarındaki komisyon banka hesabına başarıyla aktarıldı.",
+        "commission-withdrawal-to-balance-successful": "<b>{{amount}}<\/b> tutarındaki komisyon ana bakiyeye başarıyla aktarıldı.",
+        "commission-received": "<b>{{user}}<\/b> kullanıcısının yatırımı üzerinden <b>{{amount}}<\/b> komisyon alındı."
+    },
+    "toast": {
+        "amount-required": "Tutar zorunludur.",
+        "bank-name-required": "Banka adı zorunludur.",
+        "bank-account-name-required": "Hesap sahibinin adı zorunludur.",
+        "bank-account-number-required": "Banka hesap numarası zorunludur.",
+        "min-withdrawal": "Minimum çekim tutarı <b>{{amount}}<\/b> değerindedir.",
+        "max-withdrawal": "Maksimum çekim tutarı <b>{{amount}}<\/b> değerindedir.",
+        "commission-withdrawal-successful": "Komisyon çekim talebi başarıyla oluşturuldu."
+    }
+}

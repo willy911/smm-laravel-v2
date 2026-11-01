@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Admin",
+        "admin": "Admin",
+        "provider": "Penyedia",
+        "updated-columns": "Kolom Yang Diperbarui",
+        "is-api-access-enabled": "Akses API",
+        "custom-price-type": "Tipe Harga Khusus",
+        "custom-price-value": "Nilai Harga Khusus",
+        "custom-price-fixed": "Angka Pasti",
+        "custom-price-percentage": "Persentase",
+        "profit-configs": "Konfigurasi Keuntungan",
+        "profit-type": "Tipe Keuntungan",
+        "profit-value": "Nilai Keuntungan",
+        "profit-fixed": "Angka Pasti",
+        "profit-percentage": "Persentase",
+        "alias": "Alias",
+        "last-balance": "Saldo Terakhir",
+        "original-price": "Harga Beli",
+        "sell-price": "Harga Jual"
+    },
+    "actions": {
+        "mark-item-as": "Tandai sebagai <item>{{as}}<\/item>",
+        "sort-item": "Urutkan {{item}}",
+        "create-item": "Tambah {{item}}",
+        "edit-item": "Ubah {{item}}",
+        "fetch-item": "Ambil {{item}}",
+        "delete-item": "Hapus {{item}}",
+        "trash": "Pindahkan ke sampah",
+        "close": "Tutup Tiket",
+        "restore": "Pulihkan",
+        "destroy": "Hapus Permanen"
+    },
+    "toast": {
+        "create-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil ditambahkan.",
+        "update-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil diperbarui.",
+        "switch-successful": "{{column}} {{item}} dengan ID <b>{{id}}<\/b> berhasil diperbarui.",
+        "trash-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil dipindahkan ke sampah.",
+        "close-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil ditutup.",
+        "restore-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil dipulihkan.",
+        "destroy-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil dihapus secara permanen.",
+        "sort-successful": "Urutan {{item}} berhasil diperbarui."
+    },
+    "log": {
+        "create-successful": "Membuat {{item}} dengan ID <b>{{id}}<\/b>.",
+        "update-successful": "Memperbarui {{item}} dengan ID <b>{{id}}<\/b>.",
+        "switch-successful": "Memperbarui {{item}} dengan ID <b>{{id}}<\/b>, kolom <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Memindahkan {{item}} dengan ID <b>{{id}}<\/b> ke sampah.",
+        "close-successful": "Menutup {{item}} dengan ID <b>{{id}}<\/b>.",
+        "restore-successful": "Memulihkan {{item}} dengan ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Menghapus {{item}} dengan ID <b>{{id}}<\/b> secara permanen.",
+        "sort-successful": "Memperbarui urutan {{item}}."
+    },
+    "status": {
+        "pending": "Pending",
+        "waiting": "Waiting",
+        "success": "Success",
+        "approved": "Approved",
+        "expired": "Expired",
+        "canceled": "Canceled",
+        "open": "Open",
+        "answered": "Answered",
+        "user-reply": "User Reply",
+        "closed": "Closed",
+        "completed": "Completed",
+        "processing": "Processing",
+        "in-progress": "In Progress",
+        "error": "Error",
+        "partial": "Partial",
+        "rejected": "Rejected",
+        "active": "Aktif",
+        "inactive": "Nonaktif"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Tutup formulir?",
+            "description": "Anda memiliki perubahan yang belum disimpan.",
+            "cancel-button": "Tidak, Batalkan",
+            "confirm-button": "Ya, Tutup tanpa simpan!"
+        },
+        "trash": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Pindahkan {{item}} <b>{{value}}<\/b> ke folder sampah.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Lanjutkan!"
+        },
+        "restore": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Pulihkan {{item}} <b>{{value}}<\/b> dari folder sampah.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Lanjutkan!"
+        },
+        "destroy": {
+            "title": "Apakah Anda benar-benar yakin?",
+            "description": "Tindakan ini tidak dapat dibatalkan. Tindakan ini akan menghapus {{item}} <b>{{value}}<\/b> secara permanen database.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Lanjutkan!"
+        },
+        "close": {
+            "title": "Tutup Tiket?",
+            "description": "Tutup tiket <b>{{id}}<\/b>.",
+            "cancel-button": "Batalkan",
+            "confirm-button": "Ya, Tutup!"
+        }
+    }
+}

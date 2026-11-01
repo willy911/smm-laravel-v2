@@ -1,0 +1,57 @@
+{
+    "title": "Deposits",
+    "create": {
+        "title": "Create",
+        "button": "Create Deposit!",
+        "steps": {
+            "select-payment-method": "Select Payment Method",
+            "enter-amount": "Enter Deposit Amount",
+            "enter-e-wallet-number": "Enter E-Wallet Number"
+        }
+    },
+    "detail": {
+        "title": "Please complete the payment.",
+        "button": "Cancel Deposit!",
+        "cancel-dialog": {
+            "title": "Are you sure?",
+            "description": "Cancel Deposit with ID <strong>{{deposit_id}}<\/strong>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Cancel!"
+        }
+    },
+    "list": {
+        "title": "List"
+    },
+    "labels": {
+        "payment-method": "Payment Method",
+        "minimum": "Minimum",
+        "maximum": "Maximum",
+        "bonus": "Bonus",
+        "admin-fee": "Service Fee",
+        "no-admin-fee": "No Service Fee",
+        "deposit-amount": "Deposit Amount",
+        "total-balance": "Total Balance",
+        "total-payment": "Total Payment",
+        "e-wallet-number": "E-Wallet Number",
+        "unique-code": "Unique Code",
+        "payment-status": "Payment Status",
+        "expires-in": "Expires In",
+        "expires-text": "{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds remaining",
+        "virtual-account-number": "Virtual Account Number",
+        "payment-code": "Payment Code",
+        "payment-target": "Payment Target",
+        "payment-link": "Payment Link",
+        "qr-code": "QR Code"
+    },
+    "toast": {
+        "unpaid-payment": "Please complete payment on your previous deposit.",
+        "payment-not-available": "The selected payment method is currently unavailable. Please use an alternative method.",
+        "create-successful": "Deposit created. Please complete the payment.",
+        "cancel-successful": "Deposit <b>{{deposit_id}}<\/b> canceled successfully."
+    },
+    "log": {
+        "create-successful": "Created deposit with ID <b>{{deposit_id}}<\/b>.",
+        "cancel-successful": "Canceled deposit with ID <b>{{deposit_id}}<\/b>.",
+        "balance-transfer": "Balance transfer from admin."
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Konfigurasyon ng Service Fee",
+        "admin-fee-type": "Uri ng Service Fee",
+        "admin-fee-value": "Halaga ng Service Fee",
+        "payment-target": "Target ng Pagbabayad",
+        "payment-gateway": "Payment Gateway",
+        "payment-gateway-payment-code": "Payment Method Code (Payment Gateway)",
+        "bonus-configs": "Konfigurasyon ng Bonus",
+        "bonus-value": "Halaga ng Bonus",
+        "min-and-max-payment": "Minimum at Maximum na Pagbabayad"
+    }
+}

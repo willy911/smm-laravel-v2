@@ -1,0 +1,38 @@
+{
+    "title": "Services",
+    "list": {
+        "title": "List"
+    },
+    "monitoring": {
+        "title": "Monitoring"
+    },
+    "updates": {
+        "title": "Updates",
+        "labels": {
+            "updated": "Updated",
+            "price-increased": "Price Increased",
+            "price-decreased": "Price Decreased",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "added": "Added",
+            "deleted": "Deleted"
+        },
+        "description": {
+            "min-updated": "Minimum quantity updated from {{from}} to {{to}}.",
+            "max-updated": "Maximum quantity updated from {{from}} to {{to}}.",
+            "price-increased": "Price increased from {{from}} to {{to}}.",
+            "price-decreased": "Price decreased from {{from}} to {{to}}.",
+            "enabled": "Service enabled.",
+            "disabled": "Service disabled.",
+            "added": "Service added.",
+            "deleted": "Service deleted."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Service successfully added to favorites.",
+        "removed-from-favorites": "Service successfully removed from favorites.",
+        "invalid-service-id": "Invalid service ID.",
+        "no-services-found": "No services found.",
+        "no-categories-found": "No service categories found."
+    }
+}

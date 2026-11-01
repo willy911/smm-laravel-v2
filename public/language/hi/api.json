@@ -1,0 +1,115 @@
+{
+    "description": {
+        "paragraph-1": "एपीआई (एप्लिकेशन प्रोग्रामिंग इंटरफ़ेस) कमांड, फ़ंक्शंस और प्रोटोकॉल का एक समूह है जिसका उपयोग प्रोग्रामर सॉफ्टवेयर बनाते समय कर सकते हैं, जिससे सिस्टम के बीच एक स्थिर और तेज़ इंटरकनेक्शन बनता है।",
+        "paragraph-2": "यह एपीआई एक ऐसा मार्ग है जिसका उपयोग पार्टनर और होस्ट प्रोग्राम के बीच इंटरैक्ट करने के लिए कर सकते हैं। एपीआई का उपयोग खाता शेष (अकाउंट बैलेंस) की जांच, सेवा की कीमत की जांच, लेनदेन की स्थिति की जांच और एक नया लेनदेन बनाने जैसे अनुरोधों को करने के लिए किया जा सकता है।",
+        "paragraph-3": "इस एपीआई कनेक्शन के लिए कंप्यूटर प्रोग्रामिंग के बुनियादी ज्ञान की आवश्यकता होती है। यदि आप हमारे द्वारा प्रदान किए गए दस्तावेज़ों को नहीं समझते हैं, तो कृपया हमसे संपर्क करें।",
+        "paragraph-4": "एपीआई कनेक्शन के लिए कुछ बातों पर ध्यान देना आवश्यक है, जिनमें शामिल हैं:",
+        "bullet-1": "हम सभी HTTP Response को <strong>JSON<\/strong> फॉर्मेट में रैप करते हैं।",
+        "bullet-2": "सभी HTTP Request को <strong>POST<\/strong> Request के रूप में भेजा जाता है।",
+        "bullet-3": "कृपया अपने अकाउंट सेटिंग्स में आईपी को Whitelist (श्वेतसूचीबद्ध) करें।"
+    },
+    "labels": {
+        "preparation": "तैयारी",
+        "profile": "प्रोफ़ाइल",
+        "services": "सेवाओं की सूची",
+        "create-order": "ऑर्डर बनाएं",
+        "status-order": "ऑर्डर की स्थिति",
+        "create-order-refill": "ऑर्डर रीफिल बनाएं",
+        "status-order-refill": "ऑर्डर रीफिल की स्थिति",
+        "create-order-cancel": "ऑर्डर रद्द करना",
+        "endpoint": "एंडपॉइंट",
+        "body-request": "बॉडी रिक्वेस्ट (अनुरोध का मुख्य भाग)",
+        "example-request": "अनुरोध का उदाहरण",
+        "example-response": "Response का उदाहरण",
+        "parameter": "पैरामीटर",
+        "type": "डेटा टाइप (डेटा का प्रकार)",
+        "required": "आवश्यक",
+        "description": "विवरण",
+        "success": "सफलता",
+        "fail": "विफलता"
+    },
+    "fields": {
+        "api-key": {
+            "required": "हाँ",
+            "description": "एपीआई सेटिंग में सेट की गई एपीआई कुंजी (API Key)"
+        },
+        "secret-key": {
+            "required": "हाँ",
+            "description": "एपीआई सेटिंग में सेट की गई Secret Key"
+        },
+        "is-favorites": {
+            "required": "नहीं",
+            "description": "पसंदीदा सेवाओं को प्रदर्शित करने के लिए <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">true<\/code> से भरें"
+        },
+        "id": {
+            "required": "हाँ",
+            "description": "ऑर्डर आईडी, थोक जांच के लिए अल्पविराम (,) से अलग करें"
+        },
+        "order-id": {
+            "required": "हाँ",
+            "description": "ऑर्डर आईडी"
+        },
+        "order-refill-id": {
+            "required": "हाँ",
+            "description": "ऑर्डर रीफिल आईडी"
+        },
+        "service-id": {
+            "required": "हाँ",
+            "description": "सेवा आईडी, अधिक देखें"
+        },
+        "target": {
+            "required": "हाँ",
+            "description": "ऑर्डर का लक्ष्य, जैसे उपयोगकर्ता नाम\/लिंक\/अन्य"
+        },
+        "quantity": {
+            "required": "हाँ",
+            "description": "ऑर्डर की मात्रा"
+        },
+        "usernames": {
+            "required": "हाँ",
+            "description": "उपयोगकर्ता नामों की सूची <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> या <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code> से अलग की गई"
+        },
+        "hashtags": {
+            "required": "हाँ",
+            "description": "हैशटैग की सूची <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> या <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code> से अलग की गई"
+        },
+        "hashtag": {
+            "required": "हाँ",
+            "description": "उपयोगकर्ता नाम को कैप्चर\/खोजने के लिए हैशटैग"
+        },
+        "username": {
+            "required": "हाँ",
+            "description": "टिप्पणी मालिक का उपयोगकर्ता नाम"
+        },
+        "media": {
+            "required": "हाँ",
+            "description": "पसंद करने वालों की सूची को कैप्चर\/खोजने के लिए मीडिया यूआरएल"
+        },
+        "answer-number": {
+            "required": "हाँ",
+            "description": "विकल्पों की सूची में से उत्तर संख्या"
+        },
+        "comments": {
+            "required": "हाँ",
+            "description": "टिप्पणियों की सूची <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\r\\n<\/code> या <code class=\"bg-muted rounded px-1 py-0.5 text-destructive\">\\n<\/code> से अलग की गई"
+        }
+    },
+    "responses": {
+        "total-order-count": "ऑर्डर की कुल संख्या",
+        "total-deposit-count": "जमा (डिपॉजिट) की कुल संख्या",
+        "api-key-required": "api_key आवश्यक है।",
+        "secret-key-required": "secret_key आवश्यक है।",
+        "ip-not-whitelisted": "आपका आईपी {{ip}} Whitelist (श्वेतसूची) में पंजीकृत नहीं है।",
+        "service-id-required": "service_id आवश्यक है।",
+        "service-id-numeric": "service_id संख्यात्मक होना चाहिए।",
+        "service-id-invalid": "चयनित service_id अमान्य है।",
+        "quantity-numeric": "quantity संख्यात्मक होना चाहिए।",
+        "quantity-min": "quantity का न्यूनतम मान {{min}} होना चाहिए।",
+        "insufficient-balance": "आपका बैलेंस अपर्याप्त है।",
+        "service-not-available": "सेवा उपलब्ध नहीं है।",
+        "no-data-found": "कोई ऑर्डर नहीं मिला।",
+        "data-found": "ऑर्डर मिला।",
+        "id-invalid": "चयनित आईडी अमान्य है।",
+        "order-cannot-be-refilled": "ऑर्डर को रीफिल नहीं किया जा सकता।"
+    }
+}

@@ -1,0 +1,104 @@
+{
+    "labels": {
+        "admins": "व्यवस्थापक",
+        "admin": "व्यवस्थापक",
+        "provider": "प्रदाता",
+        "updated-columns": "अपडेट किए गए कॉलम",
+        "is-api-access-enabled": "एपीआई एक्सेस",
+        "custom-price-type": "कस्टम प्राइस टाइप",
+        "custom-price-value": "कस्टम प्राइस वैल्यू",
+        "custom-price-fixed": "निश्चित राशि",
+        "custom-price-percentage": "प्रतिशत",
+        "profit-configs": "लाभ कॉन्फ़िगरेशन",
+        "profit-type": "लाभ प्रकार",
+        "profit-value": "लाभ मूल्य",
+        "profit-fixed": "निश्चित राशि",
+        "profit-percentage": "प्रतिशत",
+        "alias": "उपनाम",
+        "last-balance": "अंतिम शेष राशि",
+        "original-price": "खरीद मूल्य",
+        "sell-price": "विक्रय मूल्य"
+    },
+    "actions": {
+        "mark-item-as": "<item>{{as}}<\/item> के रूप में चिह्नित करें",
+        "sort-item": "{{item}} क्रमबद्ध करें",
+        "create-item": "{{item}} जोड़ें",
+        "edit-item": "{{item}} संपादित करें",
+        "fetch-item": "{{item}} प्राप्त करें",
+        "delete-item": "{{item}} हटाएँ",
+        "trash": "ट्रैश में ले जाएँ",
+        "close": "टिकेट बंद करें",
+        "restore": "पुनर्स्थापित करें",
+        "destroy": "स्थायी रूप से हटाएँ"
+    },
+    "toast": {
+        "create-successful": "ID <b>{{id}}<\/b> के साथ {{item}} सफलतापूर्वक जोड़ा गया।",
+        "update-successful": "ID <b>{{id}}<\/b> के साथ {{item}} सफलतापूर्वक अपडेट किया गया।",
+        "switch-successful": "ID <b>{{id}}<\/b> के साथ {{item}} का {{column}} सफलतापूर्वक अपडेट किया गया।",
+        "trash-successful": "ID <b>{{id}}<\/b> के साथ {{item}} सफलतापूर्वक ट्रैश में ले जाया गया।",
+        "restore-successful": "ID <b>{{id}}<\/b> के साथ {{item}} सफलतापूर्वक पुनर्स्थापित किया गया।",
+        "destroy-successful": "ID <b>{{id}}<\/b> के साथ {{item}} स्थायी रूप से हटा दिया गया।",
+        "sort-successful": "{{item}} का क्रम सफलतापूर्वक अपडेट किया गया।"
+    },
+    "log": {
+        "create-successful": "ID <b>{{id}}<\/b> के साथ {{item}} बनाया जा रहा है।",
+        "update-successful": "ID <b>{{id}}<\/b> के साथ {{item}} अपडेट किया जा रहा है।",
+        "switch-successful": "ID <b>{{id}}<\/b> के साथ {{item}} अपडेट किया जा रहा है, कॉलम <b>{{column}}:<\/b> {{from}} → {{to}}।",
+        "trash-successful": "ID <b>{{id}}<\/b> के साथ {{item}} को ट्रैश में ले जाया जा रहा है।",
+        "restore-successful": "ID <b>{{id}}<\/b> के साथ {{item}} पुनर्स्थापित किया जा रहा है।",
+        "destroy-successful": "ID <b>{{id}}<\/b> के साथ {{item}} को स्थायी रूप से हटाया जा रहा है।",
+        "sort-successful": "{{item}} का क्रम अपडेट किया जा रहा है।"
+    },
+    "status": {
+        "pending": "लंबित",
+        "waiting": "प्रतीक्षारत",
+        "success": "सफल",
+        "approved": "स्वीकृत",
+        "expired": "समाप्त",
+        "canceled": "रद्द",
+        "open": "खुला",
+        "answered": "उत्तर दिया गया",
+        "user-reply": "उपयोगकर्ता का उत्तर",
+        "closed": "बंद",
+        "completed": "पूर्ण",
+        "processing": "प्रसंस्करण में",
+        "in-progress": "प्रगति में",
+        "error": "त्रुटि",
+        "partial": "आंशिक",
+        "rejected": "अस्वीकृत",
+        "active": "सक्रिय",
+        "inactive": "निष्क्रिय"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "फॉर्म बंद करें?",
+            "description": "आपके पास ऐसे बदलाव हैं जो सहेजे नहीं गए हैं।",
+            "cancel-button": "नहीं, रद्द करें",
+            "confirm-button": "हाँ, बिना सहेजे बंद करें!"
+        },
+        "trash": {
+            "title": "क्या आप वाकई निश्चित हैं?",
+            "description": "{{item}} <b>{{value}}<\/b> को ट्रैश फ़ोल्डर में ले जाएँ।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, जारी रखें!"
+        },
+        "restore": {
+            "title": "क्या आप वाकई निश्चित हैं?",
+            "description": "{{item}} <b>{{value}}<\/b> को ट्रैश फ़ोल्डर से पुनर्स्थापित करें।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, जारी रखें!"
+        },
+        "destroy": {
+            "title": "क्या आप वाकई निश्चित हैं?",
+            "description": "यह कार्रवाई पूर्ववत नहीं की जा सकती। यह {{item}} <b>{{value}}<\/b> को डेटाबेस से स्थायी रूप से हटा देगी।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, जारी रखें!"
+        },
+        "close": {
+            "title": "टिकेट बंद करें?",
+            "description": "टिकेट <b>{{id}}<\/b> बंद करें।",
+            "cancel-button": "रद्द करें",
+            "confirm-button": "हाँ, बंद करें!"
+        }
+    }
+}

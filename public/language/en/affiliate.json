@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Users who register using this link will automatically become your referral.",
+        "balance-transfer-notice": "The commission will be transferred to your main balance.",
+        "bank-transfer-notice": "The commission will be transferred to your bank account."
+    },
+    "labels": {
+        "affiliate-balance": "Affiliate Balance",
+        "commission-available": "Available Commission",
+        "total-referrals": "Total Referrals",
+        "total-earnings": "Total Earnings",
+        "withdrawal-history": "Withdrawal History",
+        "your-affiliate-link": "Your Affiliate Link",
+        "withdraw-commission": "Withdraw Commission"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Requested a commission withdrawal of <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "Commission withdrawal of <b>{{amount}}<\/b> to the bank account was successful.",
+        "commission-withdrawal-to-balance-successful": "Commission withdrawal of <b>{{amount}}<\/b> to the main balance was successful.",
+        "commission-received": "Received a commission of <b>{{amount}}<\/b> from a deposit made by user <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "Amount is required.",
+        "bank-name-required": "Bank name is required.",
+        "bank-account-name-required": "Account holder name is required.",
+        "bank-account-number-required": "Bank account number is required.",
+        "min-withdrawal": "The minimum withdrawal amount is <b>{{amount}}<\/b>.",
+        "max-withdrawal": "The maximum withdrawal amount is <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Commission withdrawal has been successfully created."
+    }
+}

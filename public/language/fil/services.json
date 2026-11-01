@@ -1,0 +1,30 @@
+{
+    "updates": {
+        "labels": {
+            "updated": "Na-update",
+            "price-increased": "Tumaas ang Presyo",
+            "price-decreased": "Bumaba ang Presyo",
+            "enabled": "Pinagana",
+            "disabled": "Hindi Pinagana",
+            "added": "Idinagdag",
+            "deleted": "Tinanggal"
+        },
+        "description": {
+            "min-updated": "Na-update ang minimum na dami ng serbisyo mula {{from}} hanggang {{to}}.",
+            "max-updated": "Na-update ang maximum na dami ng serbisyo mula {{from}} hanggang {{to}}.",
+            "price-increased": "Tumaas ang presyo mula {{from}} hanggang {{to}}.",
+            "price-decreased": "Bumaba ang presyo mula {{from}} hanggang {{to}}.",
+            "enabled": "Ang serbisyo ay pinagana.",
+            "disabled": "Ang serbisyo ay hindi pinagana.",
+            "added": "Ang serbisyo ay idinagdag.",
+            "deleted": "Ang serbisyo ay tinanggal."
+        }
+    },
+    "toast": {
+        "added-to-favorites": "Matagumpay na naidagdag ang serbisyo sa mga paborito.",
+        "removed-from-favorites": "Matagumpay na natanggal ang serbisyo mula sa mga paborito.",
+        "invalid-service-id": "Hindi wasto ang Service ID.",
+        "no-services-found": "Walang serbisyong natagpuan.",
+        "no-categories-found": "Walang natagpuang kategorya ng serbisyo."
+    }
+}

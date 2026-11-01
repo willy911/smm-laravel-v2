@@ -1,0 +1,30 @@
+{
+    "labels": {
+        "id": "ID",
+        "type": "Type",
+        "status": "Status",
+        "user": "User",
+        "provider": "Provider",
+        "service": "Service",
+        "order-id": "Order ID",
+        "order-refill-id": "Order Refill ID",
+        "order-cancel-id": "Order Cancel ID",
+        "created-at": "Created At",
+        "logs": "Log",
+        "account-profile": "Account Profile",
+        "order-create": "Order Create",
+        "order-status": "Order Status Check",
+        "order-cancel-create": "Order Cancel",
+        "order-refill-create": "Order Refill Create",
+        "order-refill-status": "Order Refill Status Check",
+        "fetch-services": "Fetch Services",
+        "success": "Success",
+        "fail": "Fail",
+        "success-fail": "Success \/ Fail",
+        "view-log": "View Log",
+        "menu": "Provider Response Log"
+    },
+    "empty": {
+        "logs": "No log available."
+    }
+}

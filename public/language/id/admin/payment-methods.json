@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Konfigurasi Biaya Layanan",
+        "admin-fee-type": "Tipe Biaya Layanan",
+        "admin-fee-value": "Nilai Biaya Layanan",
+        "payment-target": "Tujuan Pembayaran",
+        "payment-gateway": "Payment Gateway",
+        "payment-gateway-payment-code": "Kode Metode Pembayaran (Payment Gateway)",
+        "bonus-configs": "Konfigurasi Bonus",
+        "bonus-value": "Nilai Bonus",
+        "min-and-max-payment": "Min. & Maks. Pembayaran"
+    }
+}

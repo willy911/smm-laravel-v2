@@ -1,0 +1,25 @@
+{
+    "labels": {
+        "title": "Account Settings",
+        "profile": "Profile",
+        "change-password": "Change Password",
+        "username": "Username",
+        "full-name": "Full Name",
+        "current-password": "Current Password",
+        "new-password": "New Password",
+        "confirm-new-password": "Confirm New Password",
+        "update-profile": "Save Profile",
+        "update-password": "Change Password",
+        "please-wait": "Please wait..."
+    },
+    "toast": {
+        "update-profile-successful": "Profile updated successfully.",
+        "update-password-successful": "Password updated successfully.",
+        "current-password-incorrect": "The current password is incorrect.",
+        "invalid-input": "Please check your input.",
+        "exception": "An error occurred, please try again."
+    },
+    "log": {
+        "update-password-successful": "Updated the password."
+    }
+}

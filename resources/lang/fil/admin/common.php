@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Mga Admin',
+        'admin' => 'Admin',
+        'provider' => 'Tagapagbigay',
+        'updated_columns' => 'Na-update na mga Kolum',
+        'is_api_access_enabled' => 'Access sa API',
+        'custom_price_type' => 'Uri ng Custom Price',
+        'custom_price_value' => 'Halaga ng Custom Price',
+        'custom_price_fixed' => 'Nakatakdang Halaga',
+        'custom_price_percentage' => 'Porsiyento',
+        'profit_configs' => 'Konfigurasyon ng Kita',
+        'profit_type' => 'Uri ng Kita',
+        'profit_value' => 'Halaga ng Kita',
+        'profit_fixed' => 'Nakatakdang Halaga',
+        'profit_percentage' => 'Porsiyento',
+        'alias' => 'Alias',
+        'last_balance' => 'Huling Balanse',
+        'original_price' => 'Orihinal na Presyo',
+        'sell_price' => 'Presyo ng Benta',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Markahan bilang <item>:as</item>',
+        'sort_item' => 'Ayusin ang :item',
+        'create_item' => 'Magdagdag ng :item',
+        'edit_item' => 'I-edit ang :item',
+        'fetch_item' => 'Kunin ang :item',
+        'delete_item' => 'Tanggalin ang :item',
+        'trash' => 'Ilipat sa Basura',
+        'close' => 'Isara ang Tiket',
+        'restore' => 'Ibalik',
+        'destroy' => 'Permanenteng Tanggalin',
+    ],
+
+    'toast' => [
+        'create_successful'  => 'Matagumpay na naidagdag ang :item na may ID <b>:id</b>.',
+        'update_successful'  => 'Matagumpay na na-update ang :item na may ID <b>:id</b>.',
+        'switch_successful'  => 'Matagumpay na na-update ang :column ng :item na may ID <b>:id</b>.',
+        'trash_successful'   => 'Matagumpay na nailipat ang :item na may ID <b>:id</b> sa basura.',
+        'close_successful'   => 'Matagumpay na naisara ang :item na may ID <b>:id</b>.',
+        'restore_successful' => 'Matagumpay na naibalik ang :item na may ID <b>:id</b>.',
+        'destroy_successful' => 'Permanenteng natanggal ang :item na may ID <b>:id</b>.',
+        'sort_successful'    => 'Matagumpay na na-update ang pagkakasunod ng :item.',
+    ],
+
+    'log' => [
+        'create_successful'  => 'Lumikha ng :item na may ID <b>:id</b>.',
+        'update_successful'  => 'Na-update ang :item na may ID <b>:id</b>.',
+        'switch_successful'  => 'Na-update ang :item na may ID <b>:id</b>, kolum <b>:column:</b> :from → :to.',
+        'trash_successful'   => 'Inilipat ang :item na may ID <b>:id</b> sa basura.',
+        'close_successful'   => 'Naisara ang :item na may ID <b>:id</b>.',
+        'restore_successful' => 'Naibalik ang :item na may ID <b>:id</b>.',
+        'destroy_successful' => 'Permanenteng tinanggal ang :item na may ID <b>:id</b>.',
+        'sort_successful'    => 'Na-update ang pagkakasunod ng :item.',
+    ],
+
+    'status' => [
+        'pending' => 'Nakabinbin',
+        'waiting' => 'Naghihintay',
+        'success' => 'Matagumpay',
+        'approved' => 'Naaprubahan',
+        'expired' => 'Nag-expire',
+        'canceled' => 'Kinansela',
+        'open' => 'Bukas',
+        'answered' => 'Nasagot',
+        'user_reply' => 'Sagot ng User',
+        'closed' => 'Sarado',
+        'completed' => 'Nakumpleto',
+        'processing' => 'Pinoproseso',
+        'in_progress' => 'Isinasagawa',
+        'error' => 'Error',
+        'partial' => 'Bahagya',
+        'rejected' => 'Tinanggihan',
+        'active' => 'Aktibo',
+        'inactive' => 'Hindi Aktibo',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => 'Isara ang form?',
+            'description' => 'Mayroon kang mga pagbabagong hindi pa nai-save.',
+            'cancel_button' => 'Hindi, Kanselahin',
+            'confirm_button' => 'Oo, Isara nang walang pag-save!',
+        ],
+        'trash' => [
+            'title' => 'Sigurado ka ba?',
+            'description' => 'Ilipat ang :item <b>:value</b> sa folder ng basura.',
+            'cancel_button' => 'Kanselahin',
+            'confirm_button' => 'Oo, Magpatuloy!',
+        ],
+        'restore' => [
+            'title' => 'Sigurado ka ba?',
+            'description' => 'Ibalik ang :item <b>:value</b> mula sa folder ng basura.',
+            'cancel_button' => 'Kanselahin',
+            'confirm_button' => 'Oo, Magpatuloy!',
+        ],
+        'destroy' => [
+            'title' => 'Sigurado ka ba?',
+            'description' => 'Hindi na mababawi ang aksyong ito. Permanenteng tatanggalin ang :item <b>:value</b> mula sa database.',
+            'cancel_button' => 'Kanselahin',
+            'confirm_button' => 'Oo, Magpatuloy!',
+        ],
+        'close' => [
+            'title' => 'Isara ang Tiket?',
+            'description' => 'Isara ang tiket <b>:id</b>.',
+            'cancel_button' => 'Kanselahin',
+            'confirm_button' => 'Oo, Isara!',
+        ],
+    ]
+];

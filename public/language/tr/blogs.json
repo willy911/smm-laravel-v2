@@ -1,0 +1,17 @@
+{
+    "description": {
+        "hero": "{{website_name}} üzerinden ilgi çekici makaleleri, ipuçlarını, eğitimleri ve en güncel bilgileri keşfedin.",
+        "category": "Konuya göre makaleleri keşfedin"
+    },
+    "labels": {
+        "tags": "Etiketler",
+        "popular-tags": "Popüler Etiketler",
+        "latest-articles": "Son Makaleler",
+        "all-articles": "Tüm Makaleler",
+        "related-articles": "İlgili Makaleler"
+    },
+    "empty": {
+        "title": "Makale Bulunamadı",
+        "description": "Aradığınız makale mevcut değil veya henüz yayınlanmadı. Lütfen farklı anahtar kelimeler kullanmayı deneyin."
+    }
+}

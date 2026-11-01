@@ -1,0 +1,32 @@
+{
+    "create": {
+        "button": "ऑर्डर बनाएं!"
+    },
+    "labels": {
+        "average-time-and-quantity": "<span class=\"font-medium text-green-600\">{{time}}<\/span> औसत ऑर्डर मात्रा <span class=\"font-medium text-green-600\">{{quantity}}<\/span> के साथ",
+        "view-order-target-example": "ऑर्डर लक्ष्य का उदाहरण देखें",
+        "order-target-example": "ऑर्डर लक्ष्य का उदाहरण"
+    },
+    "toast": {
+        "refill-successful": "ऑर्डर रिफिल अनुरोध सफलतापूर्वक बनाया गया।",
+        "cancel-successful": "ऑर्डर रद्द करने का अनुरोध सफलतापूर्वक बनाया गया।",
+        "invalid-order-id": "ऑर्डर ID अमान्य है।",
+        "wait-previous-order": "कृपया पिछले ऑर्डर के पहले संसाधित होने तक प्रतीक्षा करें।",
+        "min-quantity": "न्यूनतम मात्रा {{min}} है।",
+        "max-quantity": "अधिकतम मात्रा {{max}} है।",
+        "mass-order-not-supported": "यह सेवा सामूहिक ऑर्डर का समर्थन नहीं करती है।",
+        "order-created-with-target": "ऑर्डर ID <strong>{{order_id}}<\/strong> = लक्ष्य <strong>{{order_target}}<\/strong> के साथ सफलतापूर्वक बनाया गया।",
+        "service-not-available": "सेवा उपलब्ध नहीं है।",
+        "order-created": "ऑर्डर सफलतापूर्वक बनाया गया।",
+        "insufficient-balance": "आपका बैलेंस अपर्याप्त है, अभी जमा करें!"
+    },
+    "log": {
+        "create-successful": "ID <b>{{order_id}}<\/b> के साथ ऑर्डर बनाया जा रहा है।",
+        "create-api-successful": "ID <b>{{order_id}}<\/b> के साथ ऑर्डर (API) बनाया जा रहा है।",
+        "create-single-successful": "ID <b>{{order_id}}<\/b> के साथ ऑर्डर (वेब - एकल) बनाया जा रहा है।",
+        "create-mass-successful": "ID <b>{{order_id}}<\/b> के साथ ऑर्डर (वेब - सामूहिक) बनाया जा रहा है।",
+        "refill-successful": "ID <b>{{order_refill_id}}<\/b> के साथ ऑर्डर रिफिल बनाया जा रहा है।",
+        "cancel-successful": "ID <b>{{order_cancel_id}}<\/b> के साथ ऑर्डर रद्द करना बनाया जा रहा है।",
+        "refund-successful": "ऑर्डर आईडी <b>{{order_id}}<\/b> के लिए रिफंड सफलतापूर्वक किया गया है।"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "labels": {
+        "admin-fee-configs": "Service Fee Configurations",
+        "admin-fee-type": "Service Fee Type",
+        "admin-fee-value": "Service Fee Value",
+        "payment-target": "Payment Target",
+        "payment-gateway": "Payment Gateway",
+        "payment-gateway-payment-code": "Payment Method Code (Payment Gateway)",
+        "bonus-configs": "Bonus Configurations",
+        "bonus-value": "Bonus Value",
+        "min-and-max-payment": "Min. & Max. Payment"
+    }
+}

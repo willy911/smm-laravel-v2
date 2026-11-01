@@ -1,0 +1,33 @@
+{
+    "title": "Account",
+    "activity-log": {
+        "title": "Activity Log"
+    },
+    "signin-log": {
+        "title": "Sign-in History"
+    },
+    "balance-log": {
+        "title": "Balance History"
+    },
+    "settings": {
+        "title": "Settings",
+        "update-profile-button": "Update Profile",
+        "update-api-button": "Update API",
+        "toast": {
+            "update-profile-successful": "Profile updated successfully.",
+            "update-api-successful": "API updated successfully.",
+            "update-notification-successful": "Notifications updated successfully."
+        },
+        "log": {
+            "update-api-successful": "Updated API data.",
+            "update-profile-successful": "Updated account profile."
+        }
+    },
+    "toast": {
+        "email-verified-successful": "Email successfully verified.",
+        "email-resent-successful": "Verification email resent successfully."
+    },
+    "log": {
+        "email-verified-successful": "Verify email."
+    }
+}

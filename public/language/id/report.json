@@ -1,0 +1,42 @@
+{
+    "labels": {
+        "title": "Laporan Pesanan",
+        "orders": "Pesanan",
+        "deposits": "Deposit",
+        "order": "Pesanan",
+        "deposit": "Deposit",
+        "report": "Laporan",
+        "list": "Daftar",
+        "transactions": "Transaksi",
+        "date-range": "Rentang Tanggal",
+        "from": "Dari tanggal...",
+        "to": "Sampai tanggal...",
+        "apply": "Terapkan",
+        "reset": "Reset",
+        "loading": "Mohon tunggu...",
+        "empty": "Tidak ada data pada periode ini.",
+        "id": "ID",
+        "created-at": "Tanggal",
+        "service": "Layanan",
+        "target": "Target",
+        "quantity": "Jumlah",
+        "price": "Harga",
+        "status": "Status",
+        "payment-method": "Metode Pembayaran",
+        "amount": "Jumlah Deposit",
+        "bonus": "Bonus",
+        "admin-fee": "Biaya Admin",
+        "total-payment": "Total Pembayaran",
+        "total-balance": "Total Saldo",
+        "showing-rows": "Menampilkan {{count}} transaksi terbaru."
+    },
+    "summary": {
+        "total": "Total",
+        "pending": "Menunggu",
+        "processing": "Diproses",
+        "completed": "Selesai",
+        "success": "Berhasil",
+        "failed": "Gagal",
+        "profit": "Laba Bersih"
+    }
+}

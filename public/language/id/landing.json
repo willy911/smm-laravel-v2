@@ -1,0 +1,76 @@
+{
+    "nav": {
+        "home": "Beranda",
+        "featured-services": "Layanan Unggulan",
+        "services": "Daftar Layanan",
+        "faqs": "Pertanyaan Umum"
+    },
+    "hero": {
+        "description": "Wuzz Panel menawarkan solusi praktis untuk meningkatkan eksposur media sosial Anda, dengan layanan untuk Facebook, Instagram, Twitter, dan platform lainnya."
+    },
+    "our-services": {
+        "title": "Kenapa Harus {{website_name}}?",
+        "subtitle": "Karena kami menyediakan layanan yang Anda butuhkan — cepat, andal, dan sesuai harapan Anda.",
+        "items": {
+            "quality-service": {
+                "name": "Layanan Berkualitas",
+                "description": "Setiap layanan yang kami sediakan telah melalui kurasi ketat untuk menjamin hasil yang konsisten, real, dan memuaskan sesuai ekspektasi pengguna."
+            },
+            "competitive-price": {
+                "name": "Harga Kompetitif",
+                "description": "Harga bersaing tanpa mengorbankan kualitas — ideal untuk reseller maupun pengguna akhir yang mengutamakan efisiensi."
+            },
+            "support": {
+                "name": "Dukungan 24\/7",
+                "description": "Tim dukungan kami selalu siap sedia setiap saat. Apapun pertanyaan atau masalah yang anda hadapi, kami siap membantu kapan saja."
+            },
+            "ease-of-use": {
+                "name": "Kemudahan Penggunaan",
+                "description": "Antarmuka dirancang intuitif agar pengguna bisa mengelola semua kebutuhan dengan cepat dan tanpa kebingungan."
+            },
+            "business-partner": {
+                "name": "Mitra Pertumbuhan Bisnis Anda",
+                "description": "Kami bukan sekadar penyedia layanan — kami adalah partner yang siap mendukung pertumbuhan brand dan bisnis Anda secara berkelanjutan."
+            },
+            "professional-quality": {
+                "name": "Kualitas Profesional",
+                "description": "Dipercaya agensi dan digital marketer untuk performa tinggi, skalabilitas besar, dan layanan yang konsisten unggul."
+            }
+        }
+    },
+    "featured-services": {
+        "title": "Layanan Unggulan Kami",
+        "subtitle": "Temukan layanan unggulan kami — kualitas terbaik, dukungan maksimal, dan hasil yang memuaskan."
+    },
+    "faqs": {
+        "title": "Pertanyaan Umum",
+        "subtitle": "Pertanyaan lain? Jangan ragu untuk menghubungi kami — tim kami siap membantu Anda secepat mungkin.",
+        "items": [
+            {
+                "value": "faq-1",
+                "question": "Apa itu {{website_name}}?",
+                "answer": "Wuzz Panel adalah platform SMM Panel terpercaya untuk membeli followers, likes, views, dan layanan media sosial lainnya secara otomatis, cepat, dan terjangkau. Solusi tepat untuk boosting akun, bisnis, atau brand Anda secara instan."
+            },
+            {
+                "value": "faq-2",
+                "question": "Apakah layanan kami aman digunakan?",
+                "answer": "Ya, layanan kami sepenuhnya aman. Kami tidak pernah meminta akses login atau kata sandi Anda. Semua proses berjalan otomatis dan mematuhi kebijakan privasi platform."
+            },
+            {
+                "value": "faq-3",
+                "question": "Berapa lama pesanan saya diproses?",
+                "answer": "Waktu pemrosesan tergantung pada jenis layanan. Biasanya pesanan diproses dalam 1-2 jam dan selesai dalam beberapa jam hingga 48 jam, tergantung volume dan layanan yang dipilih."
+            },
+            {
+                "value": "faq-4",
+                "question": "Apakah pesanan saya bergaransi?",
+                "answer": "Beberapa layanan kami dilengkapi dengan garansi refill jika terjadi pengurangan followers atau likes dalam periode tertentu. Silahkan cek detail garansi di deskripsi layanan."
+            },
+            {
+                "value": "faq-5",
+                "question": "Apakah {{website_name}} mendukung RESTful API?",
+                "answer": "Ya, kami menyediakan RESTful API yang memungkinkan Anda untuk mengecek saldo, melihat daftar layanan, membuat pesanan, dan memantau status pesanan secara otomatis."
+            }
+        ]
+    }
+}

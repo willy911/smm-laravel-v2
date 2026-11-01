@@ -1,0 +1,106 @@
+{
+    "labels": {
+        "admins": "Admins",
+        "admin": "Admin",
+        "provider": "Provider",
+        "updated-columns": "Updated Columns",
+        "is-api-access-enabled": "API Access",
+        "custom-price-type": "Custom Price Type",
+        "custom-price-value": "Custom Price Value",
+        "custom-price-fixed": "Custom Price Fixed",
+        "custom-price-percentage": "Custom Price Percentage",
+        "profit-configs": "Profit Configurations",
+        "profit-type": "Profit Type",
+        "profit-value": "Profit Value",
+        "profit-fixed": "Fixed Amount",
+        "profit-percentage": "Percentage",
+        "alias": "Alias",
+        "last-balance": "Last Balance",
+        "original-price": "Original Price",
+        "sell-price": "Sell Price"
+    },
+    "actions": {
+        "mark-item-as": "Mark as <item>{{as}}<\/item>",
+        "sort-item": "Sort {{item}}",
+        "create-item": "Add {{item}}",
+        "edit-item": "Edit {{item}}",
+        "fetch-item": "Fetch {{item}}",
+        "delete-item": "Delete {{item}}",
+        "trash": "Move to trash",
+        "close": "Close Ticket",
+        "restore": "Restore",
+        "destroy": "Delete Permanently"
+    },
+    "toast": {
+        "create-successful": "{{item}} with ID <b>{{id}}<\/b> successfully added.",
+        "update-successful": "{{item}} with ID <b>{{id}}<\/b> successfully updated.",
+        "switch-successful": "{{column}} {{item}} with ID <b>{{id}}<\/b> successfully updated.",
+        "trash-successful": "{{item}} with ID <b>{{id}}<\/b> successfully moved to trash.",
+        "close-successful": "{{item}} with ID <b>{{id}}<\/b> successfully closed.",
+        "restore-successful": "{{item}} with ID <b>{{id}}<\/b> successfully restored.",
+        "destroy-successful": "{{item}} with ID <b>{{id}}<\/b> successfully deleted permanently.",
+        "sort-successful": "{{item}} order successfully updated."
+    },
+    "log": {
+        "create-successful": "Created {{item}} with ID <b>{{id}}<\/b>.",
+        "update-successful": "Updated {{item}} with ID <b>{{id}}<\/b>.",
+        "switch-successful": "Updated {{item}} with ID <b>{{id}}<\/b>, column <b>{{column}}:<\/b> {{from}} → {{to}}.",
+        "trash-successful": "Moved {{item}} with ID <b>{{id}}<\/b> to trash.",
+        "close-successful": "Closed {{item}} with ID <b>{{id}}<\/b>.",
+        "restore-successful": "Restored {{item}} with ID <b>{{id}}<\/b>.",
+        "destroy-successful": "Deleted {{item}} with ID <b>{{id}}<\/b> permanently.",
+        "sort-successful": "Updated {{item}} order."
+    },
+    "status": {
+        "pending": "Pending",
+        "waiting": "Waiting",
+        "success": "Success",
+        "approved": "Approved",
+        "expired": "Expired",
+        "canceled": "Canceled",
+        "open": "Open",
+        "answered": "Answered",
+        "user-reply": "User Reply",
+        "closed": "Closed",
+        "completed": "Completed",
+        "processing": "Processing",
+        "in-progress": "In Progress",
+        "error": "Error",
+        "partial": "Partial",
+        "rejected": "Rejected",
+        "active": "Active",
+        "inactive": "Inactive"
+    },
+    "dialog": {
+        "unsaved": {
+            "title": "Close form?",
+            "description": "You have unsaved changes.",
+            "cancel-button": "No, Cancel",
+            "confirm-button": "Yes, Close without saving!"
+        },
+        "trash": {
+            "title": "Are you absolutely sure?",
+            "description": "Move {{item}} <b>{{value}}<\/b> to the trash folder.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "restore": {
+            "title": "Are you absolutely sure?",
+            "description": "Restore {{item}} <b>{{value}}<\/b> from the trash folder.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "destroy": {
+            "title": "Are you absolutely sure?",
+            "description": "This action cannot be undone. This action will permanently delete {{item}} <b>{{value}}<\/b> from the database.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Continue!"
+        },
+        "close": {
+            "title": "Close Ticket?",
+            "description": "Close ticket <b>{{id}}<\/b>.",
+            "cancel-button": "Cancel",
+            "confirm-button": "Yes, Close!"
+        }
+    }
+}

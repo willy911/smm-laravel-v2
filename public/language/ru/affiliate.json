@@ -1,0 +1,31 @@
+{
+    "information": {
+        "referral-description": "Пользователи, зарегистрировавшиеся по этой ссылке, автоматически станут вашими рефералами.",
+        "balance-transfer-notice": "Комиссия будет переведена на ваш основной баланс.",
+        "bank-transfer-notice": "Комиссия будет переведена на ваш банковский счет."
+    },
+    "labels": {
+        "affiliate-balance": "Партнерский Баланс",
+        "commission-available": "Доступная Комиссия",
+        "total-referrals": "Всего Рефералов",
+        "total-earnings": "Общий Доход",
+        "withdrawal-history": "История Выводов",
+        "your-affiliate-link": "Ваша Партнерская Ссылка",
+        "withdraw-commission": "Вывести Комиссию"
+    },
+    "log": {
+        "requested-commission-withdrawal": "Запрошен вывод комиссии в размере <b>{{amount}}<\/b>.",
+        "commission-withdrawal-to-bank-successful": "Вывод комиссии в размере <b>{{amount}}<\/b> на банковский счет выполнен успешно.",
+        "commission-withdrawal-to-balance-successful": "Вывод комиссии в размере <b>{{amount}}<\/b> на основной баланс выполнен успешно.",
+        "commission-received": "Получена комиссия <b>{{amount}}<\/b> с депозита пользователя <b>{{user}}<\/b>."
+    },
+    "toast": {
+        "amount-required": "Сумма обязательна.",
+        "bank-name-required": "Название банка обязательно.",
+        "bank-account-name-required": "Имя владельца счета обязательно.",
+        "bank-account-number-required": "Номер банковского счета обязателен.",
+        "min-withdrawal": "Минимальная сумма вывода составляет <b>{{amount}}<\/b>.",
+        "max-withdrawal": "Максимальная сумма вывода составляет <b>{{amount}}<\/b>.",
+        "commission-withdrawal-successful": "Запрос на вывод комиссии успешно создан."
+    }
+}

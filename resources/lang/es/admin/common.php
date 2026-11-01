@@ -1,0 +1,113 @@
+<?php
+
+return [
+    'labels' => [
+        'admins' => 'Administrador',
+        'admin' => 'Administrador',
+        'provider' => 'Proveedor',
+        'updated_columns' => 'Columnas Actualizadas',
+        'is_api_access_enabled' => 'Acceso API',
+        'custom_price_type' => 'Tipo de Precio Personalizado',
+        'custom_price_value' => 'Valor de Precio Personalizado',
+        'custom_price_fixed' => 'Cantidad Fija',
+        'custom_price_percentage' => 'Porcentaje',
+        'profit_configs' => 'Configuración de Beneficios',
+        'profit_type' => 'Tipo de Beneficio',
+        'profit_value' => 'Valor del Beneficio',
+        'profit_fixed' => 'Cantidad Fija',
+        'profit_percentage' => 'Porcentaje',
+        'alias' => 'Alias',
+        'last_balance' => 'Saldo Final',
+        'original_price' => 'Precio de Compra',
+        'sell_price' => 'Precio de Venta',
+    ],
+
+    'actions' => [
+        'mark_item_as' => 'Marcar como <item>:as</item>',
+        'sort_item' => 'Ordenar :item',
+        'create_item' => 'Agregar :item',
+        'edit_item' => 'Editar :item',
+        'fetch_item' => 'Obtener :item',
+        'delete_item' => 'Eliminar :item',
+        'trash' => 'Mover a papelera',
+        'close' => 'Cerrar Ticket',
+        'restore' => 'Restaurar',
+        'destroy' => 'Eliminar Permanentemente',
+    ],
+
+    'toast' => [
+        'create_successful'    => ':item con ID <b>:id</b> agregado exitosamente.',
+        'update_successful'    => ':item con ID <b>:id</b> actualizado exitosamente.',
+        'switch_successful'    => ':column :item con ID <b>:id</b> actualizado exitosamente.',
+        'trash_successful'    => ':item con ID <b>:id</b> movido a papelera exitosamente.',
+        'close_successful'    => ':item con ID <b>:id</b> cerrado exitosamente.',
+        'restore_successful'    => ':item con ID <b>:id</b> restaurado exitosamente.',
+        'destroy_successful'    => ':item con ID <b>:id</b> eliminado permanentemente exitosamente.',
+        'sort_successful'    => 'Orden de :item actualizado exitosamente.',
+    ],
+
+    'log' => [
+        'create_successful' => 'Creando :item con ID <b>:id</b>.',
+        'update_successful' => 'Actualizando :item con ID <b>:id</b>.',
+        'switch_successful' => 'Actualizando :item con ID <b>:id</b>, columna <b>:column:</b> :from → :to.',
+        'trash_successful'    => 'Moviendo :item con ID <b>:id</b> a papelera.',
+        'close_successful'    => 'Cerrando :item con ID <b>:id</b>.',
+        'restore_successful'    => 'Restaurando :item con ID <b>:id</b>.',
+        'destroy_successful'    => 'Eliminando :item con ID <b>:id</b> permanentemente.',
+        'sort_successful'    => 'Actualizando orden de :item.',
+    ],
+
+    'status' => [
+        'pending' => 'Pendiente',
+        'waiting' => 'En espera',
+        'success' => 'Exitoso',
+        'approved' => 'Aprobado',
+        'expired' => 'Expirado',
+        'canceled' => 'Cancelado',
+        'open' => 'Abierto',
+        'answered' => 'Respondido',
+        'user_reply' => 'Respuesta del usuario',
+        'closed' => 'Cerrado',
+        'completed' => 'Completado',
+        'processing' => 'Procesando',
+        'in_progress' => 'En progreso',
+        'error' => 'Error',
+        'partial' => 'Parcial',
+        'rejected' => 'Rechazado',
+        'active' => 'Activo',
+        'inactive' => 'Inactivo',
+    ],
+
+    'dialog' => [
+        'unsaved' => [
+            'title' => '¿Cerrar formulario?',
+            'description' => 'Tienes cambios sin guardar.',
+            'cancel_button' => 'No, Cancelar',
+            'confirm_button' => '¡Sí, Cerrar sin guardar!',
+        ],
+        'trash' => [
+            'title' => '¿Estás completamente seguro?',
+            'description' => 'Mover :item <b>:value</b> a la papelera.',
+            'cancel_button' => 'Cancelar',
+            'confirm_button' => '¡Sí, Continuar!',
+        ],
+        'restore' => [
+            'title' => '¿Estás completamente seguro?',
+            'description' => 'Restaurar :item <b>:value</b> de la papelera.',
+            'cancel_button' => 'Cancelar',
+            'confirm_button' => '¡Sí, Continuar!',
+        ],
+        'destroy' => [
+            'title' => '¿Estás completamente seguro?',
+            'description' => 'Esta acción no se puede deshacer. Esta acción eliminará :item <b>:value</b> permanentemente de la base de datos.',
+            'cancel_button' => 'Cancelar',
+            'confirm_button' => '¡Sí, Continuar!',
+        ],
+        'close' => [
+            'title' => '¿Cerrar Ticket?',
+            'description' => 'Cerrar ticket <b>:id</b>.',
+            'cancel_button' => 'Cancelar',
+            'confirm_button' => '¡Sí, Cerrar!',
+        ],
+    ]
+];
