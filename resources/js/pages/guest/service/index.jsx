@@ -125,7 +125,15 @@ export default function Index({ pageProps }) {
                 },
             });
             if (response.data.status) {
-                setServiceCategories((response.data.serviceCategories ?? []).flatMap((group) => group.options ?? []));
+                const flatCategories = (response.data.serviceCategories ?? []).flatMap((group) => group.options ?? []);
+                // Sort client-side (localeCompare + spasi dinormalkan) agar daftar flat benar-benar alfabetis di UI.
+                flatCategories.sort((a, b) =>
+                    String(a.label)
+                        .replace(/\s+/g, ' ')
+                        .trim()
+                        .localeCompare(String(b.label).replace(/\s+/g, ' ').trim(), 'id', { sensitivity: 'base', numeric: true }),
+                );
+                setServiceCategories(flatCategories);
             } else {
                 setServiceCategories([]);
                 toast({

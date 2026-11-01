@@ -44,12 +44,12 @@ class ServiceCategoryController extends Controller
                 if ($request->filled('order.type') && $request->input('order.type') == 'mass') {
                     $query->where('type', 'primary');
                 }
-            })->where('status', 1)->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC');
+            })->where('status', 1)->orderBy('name', 'asc');
         })->when($request->input(), function ($query) use ($request) {
             if ($request->filled('service.category.group.id') && $request->input('service.category.group.id') <> 'all') {
                 $query->where('id', $request->input('service.category.group.id'));
             }
-        })->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC')->get()->map(function ($group) {
+        })->orderBy('name', 'asc')->get()->map(function ($group) {
             return [
                 'label' => $group->name,
                 'type' => $group->type,
