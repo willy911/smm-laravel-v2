@@ -24,6 +24,8 @@ use App\Models\Admin\AdminActivityLog;
 use App\Models\Service\Service;
 use App\Models\Service\ServiceType;
 use App\Models\Service\ServiceCategory;
+use App\Jobs\Service\UpsertProviderServiceJob;
+use App\Jobs\Service\SyncServicesFromProviderJob;
 use App\Services\Admin\Service\TypeService;
 use App\Services\General\Service\CategoryService;
 use App\Services\Admin\Service\IconLibraryService;
@@ -743,6 +745,151 @@ class ServiceController extends Controller implements HasMiddleware
             'status'   => true,
             'message' => 'Service retrieved successfully.',
             'services' => $services
+        ]);
+    }
+
+    /**
+     * Sync manual layanan dari semua provider type=auto (tombol Sync Services).
+     * Menjalankan rantai yang sama dengan cron service:sync-service, tetapi INLINE
+     * (tanpa queue worker): fetch HTTP -> upsert service_provider_services ->
+     * finalize (hapus layanan provider yang tiada) -> sync ke tabel services.
+     */
+    public function syncProviderServices(Request $request)
+    {
+        abort_unless(auth('admin')->user()->hasRole('service.update'), 403);
+
+        $providers = \App\Models\Service\ServiceProvider::query()
+            ->whereHas('serviceProviderConfiguration')
+            ->where('type', 'auto')
+            ->where('status', '1')
+            ->with(['serviceProviderConfiguration', 'locale'])
+            ->get();
+
+        if ($providers->isEmpty()) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('admin/common.toast.service_sync_no_provider'),
+            ], 400);
+        }
+
+        set_time_limit(0);
+        $results = [];
+        $totalUpserted = 0;
+        $allOk = true;
+
+        foreach ($providers as $serviceProvider) {
+            $result = [
+                'provider' => $serviceProvider->name,
+                'ok'       => false,
+                'fetched'  => 0,
+            ];
+
+            try {
+                $config = optional($serviceProvider->serviceProviderConfiguration->services_configuration);
+                $formData = collect($config->params)->mapWithKeys(function ($param) use ($serviceProvider) {
+                    if ($param->type === 'custom') {
+                        return [$param->key => $param->value];
+                    }
+                    if ($param->type === 'default_parameter') {
+                        return [
+                            $param->key => collect($serviceProvider->default_parameters)
+                                ->pluck('value', 'key')
+                                ->get($param->key),
+                        ];
+                    }
+                    return [];
+                })->toArray();
+
+                $response = Http::asForm()
+                    ->withoutVerifying()
+                    ->timeout(120)
+                    ->send($config->method, $config->endpoint, ['form_params' => $formData]);
+
+                if (!$response->successful() || empty($response->body())) {
+                    $results[] = $result + ['error' => 'HTTP gagal'];
+                    $allOk = false;
+                    continue;
+                }
+
+                $rawServices = data_get($response->object(), $config->parse_response->looping, []);
+                if (!is_array($rawServices) || empty($rawServices)) {
+                    $results[] = $result + ['error' => 'Respons tidak berisi layanan'];
+                    $allOk = false;
+                    continue;
+                }
+
+                $rate = $serviceProvider->locale->usd_rate;
+                $profitConfig = $config->profit_configs;
+                $mappedServices = [];
+
+                foreach ($rawServices as $service) {
+                    $serviceId = data_get($service, $config->parse_response->id);
+                    if (!$serviceId) {
+                        continue;
+                    }
+                    $basePrice = data_get($service, $config->parse_response->price) / $rate;
+                    $profit = $profitConfig->type === 'fixed'
+                        ? $profitConfig->value
+                        : ($profitConfig->value / 100) * $basePrice;
+                    $mappedServices[] = [
+                        'service_provider_service_id' => $serviceId,
+                        'original_price' => $basePrice,
+                        'price' => $basePrice + $profit,
+                        'profit' => $profit,
+                        'min' => (int) data_get($service, $config->parse_response->min),
+                        'max' => (int) data_get($service, $config->parse_response->max),
+                    ];
+                }
+
+                if (empty($mappedServices)) {
+                    $results[] = $result + ['error' => 'Tidak ada layanan valid'];
+                    $allOk = false;
+                    continue;
+                }
+
+                $result['fetched'] = count($mappedServices);
+
+                // 1) Upsert ke service_provider_services (logika UpsertProviderServiceJob, inline)
+                $upsertJob = new UpsertProviderServiceJob($serviceProvider->id, $mappedServices);
+                $upsertJob->handle();
+
+                // 2) Finalize: hapus layanan provider yang sudah tiada di respons + sync services (logika FinalizeProviderServiceSyncJob, inline)
+                $incomingServiceIds = collect($mappedServices)->pluck('service_provider_service_id')->unique()->values()->toArray();
+                \App\Models\Service\ServiceProviderService::where('service_provider_id', $serviceProvider->id)
+                    ->whereNotIn('service_provider_service_id', $incomingServiceIds)
+                    ->delete();
+                $syncJob = new SyncServicesFromProviderJob($serviceProvider->id);
+                $syncJob->handle();
+
+                $result['ok'] = true;
+                $totalUpserted += $result['fetched'];
+                $results[] = $result;
+            } catch (Exception $e) {
+                $results[] = $result + ['error' => $e->getMessage()];
+                $allOk = false;
+            }
+        }
+
+        // Ringkasan perubahan services dari service_updates yang baru dibuat sync job
+        $recentUpdates = \App\Models\Service\ServiceUpdate::query()
+            ->where('created_at', '>=', now()->subSeconds(60))
+            ->whereIn('type', ['disabled', 'enabled', 'price_increased', 'price_decreased'])
+            ->get(['type']);
+
+        $summary = [
+            'fetched' => $totalUpserted,
+            'disabled' => $recentUpdates->where('type', 'disabled')->count(),
+            'enabled'  => $recentUpdates->where('type', 'enabled')->count(),
+            'price_changed' => $recentUpdates->whereIn('type', ['price_increased', 'price_decreased'])->count(),
+        ];
+
+        return response()->json([
+            'status'  => $allOk,
+            'message' => $allOk
+                ? __('admin/common.toast.service_sync_successful')
+                : __('admin/common.toast.service_sync_partial'),
+            'providers' => $results,
+            'summary'   => $summary,
         ]);
     }
 

@@ -33,6 +33,7 @@ return [
         'create_item' => 'Add :item',
         'edit_item' => 'Edit :item',
         'fetch_item' => 'Fetch :item',
+        'sync-services' => 'Sync Services',
         'delete_item' => 'Delete :item',
         'trash' => 'Move to trash',
         'close' => 'Close Ticket',
@@ -51,6 +52,9 @@ return [
         'sort_successful' => ':item order successfully updated.',
         'kurs_sync_successful' => 'Currency rates synced successfully.',
         'kurs_sync_failed' => 'Currency rate sync failed, try again later.',
+        'service_sync_successful' => 'Services synced successfully from providers.',
+        'service_sync_partial' => 'Some providers failed to sync, check details.',
+        'service_sync_no_provider' => 'No active automatic provider found.',
     ],
 
     'log' => [

@@ -30,6 +30,7 @@
         "create-item": "Add {{item}}",
         "edit-item": "Edit {{item}}",
         "fetch-item": "Fetch {{item}}",
+        "sync-services": "Sync Services",
         "delete-item": "Delete {{item}}",
         "trash": "Move to trash",
         "close": "Close Ticket",
@@ -46,7 +47,10 @@
         "destroy-successful": "{{item}} with ID <b>{{id}}<\/b> successfully deleted permanently.",
         "sort-successful": "{{item}} order successfully updated.",
         "kurs-sync-successful": "Currency rates synced successfully.",
-        "kurs-sync-failed": "Currency rate sync failed, try again later."
+        "kurs-sync-failed": "Currency rate sync failed, try again later.",
+        "service-sync-successful": "Services synced successfully from providers.",
+        "service-sync-partial": "Some providers failed to sync, check details.",
+        "service-sync-no-provider": "No active automatic provider found."
     },
     "log": {
         "create-successful": "Created {{item}} with ID <b>{{id}}<\/b>.",

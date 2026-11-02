@@ -38,6 +38,8 @@ import {
     Delete02Icon,
     Delete04Icon,
     FileEditIcon,
+    Loading03Icon,
+    RefreshIcon,
     RestoreBinIcon,
     SortByDown01Icon,
     TagsIcon,
@@ -479,6 +481,7 @@ export default function Index({ pageProps }) {
     const [isCreateDialogOpened, setIsCreateDialogOpened] = useState(false);
     const [isEditCategoryDialogOpened, setIsEditCategoryDialogOpened] = useState(false);
     const [isEditDescriptionDialogOpened, setIsEditDescriptionDialogOpened] = useState(false);
+    const [isSyncing, setIsSyncing] = useState(false);
     const [targets, setTargets] = useState([]);
 
     const [target, setTarget] = useState({});
@@ -649,6 +652,38 @@ export default function Index({ pageProps }) {
             actionType: '',
         });
     }, []);
+
+    const handleSyncServices = useCallback(async () => {
+        setIsSyncing(true);
+        try {
+            const { data } = await axios.post(route('admin.services.sync'));
+            if (data?.status) {
+                const s = data.summary ?? {};
+                toast({
+                    variant: 'success',
+                    description: toHTML(
+                        data.message +
+                            (s.fetched ? ` — ${s.fetched} layanan diproses` : '') +
+                            (s.enabled ? `, ${s.enabled} aktif` : '') +
+                            (s.disabled ? `, ${s.disabled} nonaktif` : '') +
+                            (s.price_changed ? `, ${s.price_changed} harga berubah` : ''),
+                    ),
+                });
+            } else {
+                toast({ variant: 'error', description: toHTML(data?.message ?? 'Sync gagal.') });
+            }
+        } catch (error) {
+            toast({
+                variant: 'error',
+                description: toHTML(error.response?.data?.message ?? 'Terjadi kesalahan, silahkan muat ulang halaman ini.'),
+            });
+        } finally {
+            setIsSyncing(false);
+            if (tableStateRef.current) {
+                fetchData(tableStateRef.current);
+            }
+        }
+    }, [fetchData]);
 
     const columns = useMemo(
         () => [
@@ -1110,6 +1145,12 @@ export default function Index({ pageProps }) {
                                         {t('admin/common:actions.fetch-item', {
                                             item: t('common:labels.services'),
                                         })}
+                                    </Button>
+                                )}
+                                {hasRole('service.update') && (
+                                    <Button variant="outline" size="sm" onClick={handleSyncServices} disabled={isSyncing}>
+                                        {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
+                                        {t('admin/common:actions.sync-services')}
                                     </Button>
                                 )}
                             </div>

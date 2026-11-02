@@ -33,6 +33,7 @@ return [
         'create_item' => 'Tambah :item',
         'edit_item' => 'Ubah :item',
         'fetch_item' => 'Ambil :item',
+        'sync-services' => 'Sync Services',
         'delete_item' => 'Hapus :item',
         'trash' => 'Pindahkan ke sampah',
         'close' => 'Tutup Tiket',
@@ -51,6 +52,9 @@ return [
         'sort_successful'    => 'Urutan :item berhasil diperbarui.',
         'kurs_sync_successful' => 'Kurs berhasil disinkronkan.',
         'kurs_sync_failed'    => 'Kurs gagal disinkronkan, coba lagi nanti.',
+        'service_sync_successful' => 'Layanan berhasil disinkronkan dari provider.',
+        'service_sync_partial'    => 'Sebagian provider gagal disinkronkan, cek detail.',
+        'service_sync_no_provider' => 'Tidak ada provider otomatis yang aktif.',
     ],
 
     'log' => [

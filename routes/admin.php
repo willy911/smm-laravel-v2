@@ -135,6 +135,7 @@ Route::group(['middleware' => ['auth:admin', 'auth.session']], function () {
         Route::get('options', [\App\Http\Controllers\Admin\Service\ServiceController::class, 'options'])->name('options');
         Route::post('sort', [\App\Http\Controllers\Admin\Service\ServiceController::class, 'sort'])->name('sort');
         Route::post('fetch', [\App\Http\Controllers\Admin\Service\ServiceController::class, 'fetch'])->name('fetch');
+        Route::post('sync', [\App\Http\Controllers\Admin\Service\ServiceController::class, 'syncProviderServices'])->name('sync');
         Route::get('updates', \App\Http\Controllers\Admin\Service\UpdateController::class)->name('updates');
         Route::get('monitoring', \App\Http\Controllers\Admin\Service\MonitoringController::class)->name('monitoring');
 
