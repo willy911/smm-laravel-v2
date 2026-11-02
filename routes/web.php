@@ -517,6 +517,9 @@ Route::get('export-translations', function () {
 Route::prefix('cron')->name('cron.')->group(function () {
     Route::get('bca-mutation', \App\Http\Controllers\Cronjob\BCAMutationController::class)->name('bca-mutation');
     Route::get('update-mobile-notification', [\App\Http\Controllers\Cronjob\MobileNotificationController::class, 'update'])->name('update-mobile-notification');
+    Route::get('check-status', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatus'])->name('check-status');
+    Route::get('check-status-refill', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatusRefill'])->name('check-status-refill');
+    Route::get('send-order', [\App\Http\Controllers\Cronjob\OrderController::class, 'sendOrder'])->name('send-order');
 });
 
 /*
