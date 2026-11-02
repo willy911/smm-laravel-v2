@@ -43,7 +43,9 @@ const getBonusFromConfigs = (amount, bonusConfigs = []) => {
 export default function Create({ pageProps }) {
     const { locales } = usePage().props;
     const { t, i18n } = useTranslation('deposits');
-    const formatCurrency = createCurrencyFormatter(locales, i18n.language);
+    const locale = locales.find((item) => item.locale === i18n.language);
+    const depositRate = Number(locale?.usd_rate_buy) > 0 ? Number(locale.usd_rate_buy) : Number(locale?.usd_rate || 1);
+    const formatCurrency = createCurrencyFormatter(locales, i18n.language, depositRate);
     const [lastDeposit, setLastDeposit] = useState(pageProps?.lastDeposit ?? {});
 
     const form = useForm('post', route('user.deposits.store'), {
@@ -170,9 +172,7 @@ export default function Create({ pageProps }) {
                                                                             deposit: {
                                                                                 ...data.deposit,
                                                                                 amount,
-                                                                                display_amount:
-                                                                                    locales.find((item) => item.locale === i18n.language).usd_rate *
-                                                                                    minimum,
+                                                                                display_amount: depositRate * minimum,
                                                                                 total_balance: amount,
                                                                                 total_payment: amount + adminFee,
                                                                             },
@@ -310,7 +310,7 @@ export default function Create({ pageProps }) {
                                                 value={form.data.deposit.display_amount}
                                                 onValueChange={(values) => {
                                                     const { admin_fee_type, admin_fee_amount, bonus_configs } = form.data.payment_method;
-                                                    const rate = locales.find((item) => item.locale === i18n.language).usd_rate;
+                                                    const rate = depositRate;
                                                     const amount = Number((values.floatValue ?? 0) / rate);
                                                     const adminFee =
                                                         admin_fee_type === 'fixed'

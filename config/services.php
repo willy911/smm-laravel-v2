@@ -79,4 +79,17 @@ return [
     'cron' => [
         'secret' => env('CRON_SECRET', ''),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Kurs Scheduler (command artisan kurs:sync)
+    |--------------------------------------------------------------------------
+    | Menarik kurs tengah per 1 USD (Yahoo Finance -> fallback open.er-api.com)
+    | lalu menulis kurs jual/beli ke tabel locales. Spread dalam % selisih
+    | total jual-beli (default 1.0 → jual = tengah*(1+0.005), beli = tengah*(1-0.005)).
+    */
+    'kurs' => [
+        'enabled' => env('KURS_SYNC_ENABLED', true),
+        'spread_percent' => env('KURS_SPREAD_PERCENT', 1.0),
+    ],
 ];

@@ -123,12 +123,14 @@ class DepositController extends Controller
             return redirect()->back()->with('responseError', __('deposits.toast.unpaid_payment'));
         }
         $localeId = Locale::find(1);
+        $kursBeli = (float) ($localeId->usd_rate_buy > 0 ? $localeId->usd_rate_buy : $localeId->usd_rate);
         $credentials = [
             'user_id'           => auth()->id(),
             'payment_method_id' => $request->input('payment_method.id'),
             'amount'            => $request->input('deposit.amount'),
             'bonus'             => 0,
             'unique_code'       => 0,
+            'kurs_rate'         => $kursBeli,
             'ip_address'        => $request->ip(),
             'user_agent'        => $request->header('User-Agent'),
             'initial_balance'   => auth()->user()->balance,
@@ -190,12 +192,12 @@ class DepositController extends Controller
                 'request'       => 'new',
                 'unique_code'   => $credentials['payment_gateway_payment_id'],
                 'service'       => $paymentMethod->payment_gateway_payment_code,
-                'amount'        => intval($credentials['total_payment'] * $localeId->usd_rate),
+                'amount'        => intval($credentials['total_payment'] * $kursBeli),
                 'note'          => $paymentMethod->name,
                 'valid_time'    => '10800',
                 'type_fee'      => '1',
                 'payment_guide' => true,
-                'signature'     => md5(website_config('payment_gateway')->paydisini->api_key . $credentials['payment_gateway_payment_id'] . $paymentMethod->payment_gateway_payment_code . intval($credentials['total_payment'] * $localeId->usd_rate) . '10800' . 'NewTransaction'),
+                'signature'     => md5(website_config('payment_gateway')->paydisini->api_key . $credentials['payment_gateway_payment_id'] . $paymentMethod->payment_gateway_payment_code . intval($credentials['total_payment'] * $kursBeli) . '10800' . 'NewTransaction'),
                 // 'return_url'    => route('user.deposits.show', ['target' => $credentials['id']]),
                 'return_url'    => route('user.deposits.index'),
             ];
@@ -212,13 +214,13 @@ class DepositController extends Controller
         }
         if ($paymentMethod->payment_gateway === 'tripay') {
             if (in_array($paymentMethod->payment_gateway_payment_code, ['QRIS', 'QRISC', 'QRIS2'])) {
-                $credentials['admin_fee'] = (($paymentMethod->admin_fee_configs->value / 100) * $credentials['amount']) + (750 / $localeId->usd_rate);
+                $credentials['admin_fee'] = (($paymentMethod->admin_fee_configs->value / 100) * $credentials['amount']) + (750 / $kursBeli);
                 $credentials['total_payment'] = $amount + $credentials['admin_fee'] + $credentials['unique_code'];
             }
             $paymentGatewayCredentials = [
                 'method'        => $paymentMethod->payment_gateway_payment_code,
                 'merchant_ref'  => $credentials['payment_gateway_payment_id'],
-                'amount'        => intval($credentials['total_payment'] * $localeId->usd_rate),
+                'amount'        => intval($credentials['total_payment'] * $kursBeli),
                 'customer_name' => auth()->user()->full_name,
                 'customer_email' => auth()->user()->email,
                 'customer_phone' => $paymentMethod->type === 'e_wallet' ? $request->input('deposit.phone_number') : auth()->user()->whatsapp,
@@ -227,11 +229,11 @@ class DepositController extends Controller
                 'order_items'   => [[
                     'sku'      => 'Deposit',
                     'name'     => $paymentMethod->name,
-                    'price'    => intval($credentials['total_payment'] * $localeId->usd_rate),
+                    'price'    => intval($credentials['total_payment'] * $kursBeli),
                     'quantity' => 1,
                 ]],
                 'expired_time'  => (time() + (3 * 60 * 60)),
-                'signature'     => hash_hmac('sha256', website_config('payment_gateway')->tripay->merchant_id . $credentials['payment_gateway_payment_id'] . intval($credentials['total_payment'] * $localeId->usd_rate), website_config('payment_gateway')->tripay->private_key),
+                'signature'     => hash_hmac('sha256', website_config('payment_gateway')->tripay->merchant_id . $credentials['payment_gateway_payment_id'] . intval($credentials['total_payment'] * $kursBeli), website_config('payment_gateway')->tripay->private_key),
             ];
             $curl = Http::asForm()->withHeaders([
                 'Authorization' => 'Bearer ' . website_config('payment_gateway')->tripay->api_key,
@@ -246,13 +248,13 @@ class DepositController extends Controller
         }
         if ($paymentMethod->payment_gateway === 'tokopay') {
             if (in_array($paymentMethod->payment_gateway_payment_code, ['QRIS_CUSTOM'])) {
-                $credentials['admin_fee'] = (($paymentMethod->admin_fee_configs->value / 100) * $credentials['amount']) + (250 / $localeId->usd_rate);
+                $credentials['admin_fee'] = (($paymentMethod->admin_fee_configs->value / 100) * $credentials['amount']) + (250 / $kursBeli);
                 $credentials['total_payment'] = $amount + $credentials['admin_fee'] + $credentials['unique_code'];
             }
             $paymentGatewayCredentials = [
                 'kode_channel'   => $paymentMethod->payment_gateway_payment_code,
                 'reff_id'        => $credentials['payment_gateway_payment_id'],
-                'amount'         => intval($credentials['total_payment'] * $localeId->usd_rate),
+                'amount'         => intval($credentials['total_payment'] * $kursBeli),
                 'merchant_id'    => website_config('payment_gateway')->tokopay->merchant_id,
                 'customer_name'  => auth()->check() ? auth()->user()->full_name : website_config()->name,
                 'customer_email' => auth()->user()->email,
@@ -261,7 +263,7 @@ class DepositController extends Controller
                 'signature'      => md5(website_config('payment_gateway')->tokopay->merchant_id . ':' . website_config('payment_gateway')->tokopay->secret_key . ':' . $credentials['payment_gateway_payment_id']),
             ];
             // $curl = Http::post('https://api.tokopay.id/v1/order', $paymentGatewayCredentials);
-            $curl = Http::get('https://api.tokopay.id/v1/order?merchant=' . website_config('payment_gateway')->tokopay->merchant_id . '&secret=' . website_config('payment_gateway')->tokopay->secret_key . '&ref_id=' . $credentials['payment_gateway_payment_id'] . '&nominal=' . intval($credentials['total_payment'] * $localeId->usd_rate) . '&metode=' . $paymentMethod->payment_gateway_payment_code . '');
+            $curl = Http::get('https://api.tokopay.id/v1/order?merchant=' . website_config('payment_gateway')->tokopay->merchant_id . '&secret=' . website_config('payment_gateway')->tokopay->secret_key . '&ref_id=' . $credentials['payment_gateway_payment_id'] . '&nominal=' . intval($credentials['total_payment'] * $kursBeli) . '&metode=' . $paymentMethod->payment_gateway_payment_code . '');
             if (!$curl->json()['status']) {
                 return redirect()->back()->with('responseError', __('deposits.toast.payment_not_available'));
             }
@@ -275,7 +277,7 @@ class DepositController extends Controller
             $duitkuConfig->setSandboxMode(true);
             $duitkuConfig->setSanitizedMode(false);
             $duitkuConfig->setDuitkuLogs(false);
-            $paymentAmount      = $credentials['amount'] * Locale::find(1)->usd_rate;
+            $paymentAmount      = $credentials['amount'] * $kursBeli;
             $paymentMethod      = $paymentMethod->payment_gateway_payment_code;
             $email              = auth()->user()->email;
             $phoneNumber        = auth()->user()->whatsapp;
@@ -323,7 +325,7 @@ class DepositController extends Controller
             $paymentGatewayCredentials = array(
                 'transaction_details' => array(
                     'order_id'     =>  $credentials['payment_gateway_payment_id'],
-                    'gross_amount' => intval($credentials['total_payment'] * $localeId->usd_rate),
+                    'gross_amount' => intval($credentials['total_payment'] * $kursBeli),
                 ),
                 'customer_details'    => array(
                     'first_name'       => auth()->user()->full_name,
@@ -374,7 +376,7 @@ class DepositController extends Controller
             // Flazpay menerima nominal dalam Rupiah (min. 100) — konsisten dengan
             // gateway lain yang mengirim `total_payment * usd_rate`. Nilai dasar
             // USD tetap yang disimpan ke DB.
-            $flazpayAmount = intval(round($credentials['total_payment'] * $localeId->usd_rate));
+            $flazpayAmount = intval(round($credentials['total_payment'] * $kursBeli));
             $paymentGatewayCredentials = [
                 'mid'           => $flazpayCredentials->merchant_id,
                 'client_id'     => $flazpayCredentials->client_id,
@@ -615,7 +617,7 @@ class DepositRequest extends FormRequest
         $display = (float) $request->input('deposit.display_amount');
         $rate = ($amount > 0 && $display > 0)
             ? $display / $amount
-            : (float) (Locale::find(1)?->usd_rate ?? 1);
+            : (float) ((Locale::find(1)?->usd_rate_buy > 0 ? Locale::find(1)?->usd_rate_buy : Locale::find(1)?->usd_rate) ?? 1);
 
         return [
             'payment_method.id' => ['required', 'exists:payment_methods,id'],

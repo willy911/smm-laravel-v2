@@ -20,6 +20,11 @@ return [
         'last_balance' => 'Last Balance',
         'original_price' => 'Original Price',
         'sell_price' => 'Sell Price',
+        'usd_buy_rate' => 'USD Buy Rate',
+        'kurs_sync' => 'Kurs Sync',
+        'kurs_auto_sync' => 'Auto-sync rate via cron',
+        'kurs_auto_sync_description' => 'When enabled, this currency rate is updated automatically by the kurs:sync scheduled job. Disable to manage the rate manually.',
+        'kurs_last_sync' => 'Last sync',
     ],
 
     'actions' => [
@@ -44,6 +49,8 @@ return [
         'restore_successful' => ':item with ID <b>:id</b> successfully restored.',
         'destroy_successful' => ':item with ID <b>:id</b> successfully deleted permanently.',
         'sort_successful' => ':item order successfully updated.',
+        'kurs_sync_successful' => 'Currency rates synced successfully.',
+        'kurs_sync_failed' => 'Currency rate sync failed, try again later.',
     ],
 
     'log' => [

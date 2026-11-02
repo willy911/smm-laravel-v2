@@ -69,7 +69,7 @@ class LocaleController extends Controller implements HasMiddleware
                 }
             })->orderBy($request->input('order.column'), $request->input('order.direction'))->paginate($request->input('length'))->onEachSide(1);
             $tableItems->getCollection()->transform(function ($item) {
-                $item->setVisible([]);
+                $item->setVisible(array_merge($item->getVisible(), ['usd_rate_buy', 'kurs_tengah', 'kurs_source', 'kurs_synced_at', 'kurs_auto']));
                 return $item;
             });
             return response()->json([
@@ -84,11 +84,39 @@ class LocaleController extends Controller implements HasMiddleware
         ]);
     }
 
+    public function store(LocaleRequest $request)
+    {
+        abort_unless(auth('admin')->user()->group->is_primary, 403);
+        $insertData = Locale::create([
+            'usd_rate' => escape_input($request->input('locale.usd_rate')),
+        ]);
+        $insertActivityLog =  AdminActivityLog::create([
+            'admin_id'   => auth('admin')->user()->id,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->header('User-Agent'),
+            'content_key'  => 'admin/common:log.create-successful',
+            'content_params'  => (object) [
+                'item' => 'common:labels.currency',
+                'id' => $insertData->id,
+            ],
+            'updated_columns'  => (object) get_updated_columns([], $insertData->getChanges()),
+        ]);
+        return response()->json([
+            'status'  => true,
+            'message' => __('admin/common.toast.create_successful', [
+                'item' => __('common.labels.currency'),
+                'id' => $insertData->id,
+            ]),
+        ]);
+    }
+
     public function update(Locale $target, LocaleRequest $request)
     {
         abort_unless(auth('admin')->user()->group->is_primary, 403);
         $credentials = [
             'usd_rate'     => escape_input($request->input('locale.usd_rate')),
+            'usd_rate_buy' => escape_input($request->input('locale.usd_rate_buy')),
+            'kurs_auto'    => $request->boolean('locale.kurs_auto') ? '1' : '0',
         ];
         $updateData = $target->update($credentials);
         if ($target->wasChanged()) {
@@ -250,6 +278,41 @@ class LocaleController extends Controller implements HasMiddleware
             ]),
         ]);
     }
+
+    /**
+     * Memicu kurs:sync manual dari tombol Sync di halaman /admin/locales.
+     * Opsi --locale bila dikirim (menguji satu locale), tanpa opsi = semua locale.
+     */
+    public function syncKurs(Request $request)
+    {
+        abort_unless(auth('admin')->user()->group->is_primary, 403);
+
+        try {
+            $localeCode = $request->input('locale');
+            ob_start();
+            $exitCode = \Illuminate\Support\Facades\Artisan::call(
+                'kurs:sync',
+                $localeCode ? ['--locale' => (string) $localeCode] : []
+            );
+            $output = trim(ob_get_clean());
+
+            $synced = Locale::whereNotNull('kurs_synced_at')->count();
+
+            return response()->json([
+                'status'  => $exitCode === 0,
+                'message' => $exitCode === 0
+                    ? __('admin/common.toast.kurs_sync_successful')
+                    : __('admin/common.toast.kurs_sync_failed'),
+                'output'  => $output,
+                'synced'  => $synced,
+            ], $exitCode === 0 ? 200 : 500);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('admin/common.toast.kurs_sync_failed'),
+            ], 500);
+        }
+    }
 }
 
 class LocaleRequest extends FormRequest
@@ -267,6 +330,11 @@ class LocaleRequest extends FormRequest
                 'required',
                 'numeric',
             ],
+            'locale.usd_rate_buy' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
         ];
     }
 
@@ -274,6 +342,7 @@ class LocaleRequest extends FormRequest
     {
         return [
             'locale.usd_rate' => 'USD Rate',
+            'locale.usd_rate_buy' => 'USD Buy Rate',
         ];
     }
 }

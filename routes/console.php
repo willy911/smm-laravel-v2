@@ -21,3 +21,4 @@ Schedule::command('order:status-order')->everyTenSeconds()->withoutOverlapping()
 Schedule::command('order:status-order-refill')->everyMinute()->withoutOverlapping();
 Schedule::command('service:sync-service')->everyThirtyMinutes()->withoutOverlapping();
 Schedule::command('deposit:cancel-deposit')->everyTenMinutes()->withoutOverlapping();
+Schedule::command('kurs:sync')->everyFiveMinutes()->withoutOverlapping();

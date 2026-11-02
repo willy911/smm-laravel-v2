@@ -39,13 +39,18 @@ export function formatRupiah(amount) {
     });
 }
 
-export function createCurrencyFormatter(locales, language) {
+export function createCurrencyFormatter(locales, language, rateOverride = null) {
     const target = locales.find((l) => l.locale === language);
     const base = locales.find((l) => parseFloat(l.usd_rate) === 1.0);
     if (!target || !base) {
         return (amount) => amount;
     }
-    const targetRate = parseFloat(target.usd_rate);
+    let targetRate;
+    if (Number.isFinite(Number(rateOverride)) && Number(rateOverride) > 0) {
+        targetRate = Number(rateOverride);
+    } else {
+        targetRate = parseFloat(target.usd_rate);
+    }
     const baseRate = parseFloat(base.usd_rate);
     const localeCode = target.locale_code;
     const currencyCode = target.currency_code;

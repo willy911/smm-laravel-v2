@@ -26,10 +26,11 @@ import {
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { userStatuses, userStatusOptions } from '@/enums/user';
 import { toast } from '@/hooks/use-toast';
-import { cn, config, createCurrencyFormatter, formatAmount, toHTML } from '@/lib/utils';
+import { cn, config, createCurrencyFormatter, formatAmount, formatDate, toHTML } from '@/lib/utils';
 import { Deferred, usePage } from '@inertiajs/react';
 import axios from 'axios';
-import { Alert01Icon, ArrowDown01Icon, Delete04Icon, FileEditIcon, RestoreBinIcon } from 'hugeicons-react';
+import dayjs from 'dayjs';
+import { Alert01Icon, ArrowDown01Icon, Delete04Icon, FileEditIcon, Loading03Icon, RefreshIcon, RestoreBinIcon } from 'hugeicons-react';
 import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -354,6 +355,7 @@ export default function Index({ pageProps }) {
     const [target, setTarget] = useState({});
     const [tableData, setTableData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSyncing, setIsSyncing] = useState(false);
     const [bulkActionDialog, setBulkActionDialog] = useState({
         isOpen: false,
         action: null,
@@ -504,6 +506,28 @@ export default function Index({ pageProps }) {
         [handleAction],
     );
 
+    const handleSyncKurs = useCallback(async () => {
+        setIsSyncing(true);
+        try {
+            const { data } = await axios.post(route('admin.locales.sync-kurs'));
+            if (data?.status) {
+                toast({ title: data.message, variant: 'success' });
+            } else {
+                toast({ title: data?.message ?? t('admin/common:toast.kurs_sync_failed'), variant: 'destructive' });
+            }
+        } catch (error) {
+            toast({
+                title: error?.response?.data?.message ?? t('admin/common:toast.kurs_sync_failed'),
+                variant: 'destructive',
+            });
+        } finally {
+            setIsSyncing(false);
+            if (tableStateRef.current) {
+                fetchData(tableStateRef.current);
+            }
+        }
+    }, [t, fetchData, tableStateRef]);
+
     const closeBulkActionDialog = useCallback(() => {
         setBulkActionDialog({
             isOpen: false,
@@ -535,6 +559,40 @@ export default function Index({ pageProps }) {
                 headerName: 'USD Rate',
                 header: ({ column }) => <DataTableColumnHeader column={column} title={'USD Rate'} />,
                 cell: ({ row }) => `${row.original.currency_symbol} ${formatAmount(row.original.usd_rate)} / USD`,
+            },
+            {
+                accessorFn: (row) => row.usd_rate_buy,
+                id: 'usd_rate_buy',
+                headerName: t('admin/common:labels.usd-buy-rate'),
+                header: ({ column }) => <DataTableColumnHeader column={column} title={t('admin/common:labels.usd-buy-rate')} />,
+                cell: ({ row }) =>
+                    row.original.usd_rate_buy !== null && row.original.usd_rate_buy !== undefined && row.original.usd_rate_buy !== ''
+                        ? `${row.original.currency_symbol} ${formatAmount(row.original.usd_rate_buy)} / USD`
+                        : '-',
+            },
+            {
+                accessorFn: (row) => row.kurs_synced_at ?? '',
+                id: 'kurs_synced_at',
+                headerName: t('admin/common:labels.kurs-sync'),
+                header: ({ column }) => <DataTableColumnHeader column={column} title={t('admin/common:labels.kurs-sync')} />,
+                cell: ({ row }) =>
+                    row.original.kurs_synced_at ? (
+                        <TooltipProvider delayDuration={0}>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <span className="cursor-default">{dayjs(row.original.kurs_synced_at).format('DD MMM YYYY')}</span>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>
+                                        {formatDate({ date: row.original.kurs_synced_at })}
+                                        {row.original.kurs_source ? ` — ${row.original.kurs_source}` : ''}
+                                    </p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    ) : (
+                        '-'
+                    ),
             },
             {
                 id: 'actions',
@@ -612,7 +670,12 @@ export default function Index({ pageProps }) {
                         rowSelectionActions={rowSelectionActions}
                         onChange={fetchData}
                         isLoading={isLoading}
-                        additionalButton={[]}
+                        additionalButton={
+                            <Button variant="outline" size="sm" onClick={handleSyncKurs} disabled={isSyncing}>
+                                {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
+                                {t('admin/common:labels.kurs_sync')}
+                            </Button>
+                        }
                     />
                 </Deferred>
             </AppLayout>

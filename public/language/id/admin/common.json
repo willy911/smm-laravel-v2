@@ -17,7 +17,12 @@
         "alias": "Alias",
         "last-balance": "Saldo Terakhir",
         "original-price": "Harga Beli",
-        "sell-price": "Harga Jual"
+        "sell-price": "Harga Jual",
+        "usd-buy-rate": "Kurs Beli",
+        "kurs-sync": "Sync Kurs",
+        "kurs-auto-sync": "Auto-sync kurs via cron",
+        "kurs-auto-sync-description": "Jika aktif, kurs mata uang ini diperbarui otomatis oleh job terjadwal kurs{{sync}}. Matikan untuk mengelola kurs secara manual.",
+        "kurs-last-sync": "Terakhir sync"
     },
     "actions": {
         "mark-item-as": "Tandai sebagai <item>{{as}}<\/item>",
@@ -39,7 +44,9 @@
         "close-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil ditutup.",
         "restore-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil dipulihkan.",
         "destroy-successful": "{{item}} dengan ID <b>{{id}}<\/b> berhasil dihapus secara permanen.",
-        "sort-successful": "Urutan {{item}} berhasil diperbarui."
+        "sort-successful": "Urutan {{item}} berhasil diperbarui.",
+        "kurs-sync-successful": "Kurs berhasil disinkronkan.",
+        "kurs-sync-failed": "Kurs gagal disinkronkan, coba lagi nanti."
     },
     "log": {
         "create-successful": "Membuat {{item}} dengan ID <b>{{id}}<\/b>.",

@@ -23,7 +23,10 @@ import { useTranslation } from 'react-i18next';
 export default function DepositDetail({ pageProps, lastDeposit, setLastDeposit, paymentTarget = {}, paymentGuides = [] }) {
     const { locales } = usePage().props;
     const { t, i18n } = useTranslation('deposits');
-    const formatCurrency = createCurrencyFormatter(locales, i18n.language);
+    // Deposit ditagih memakai kurs beli snapshot saat transaksi dibuat (deposits.kurs_rate);
+    // fallback ke kurs locale bila snapshot tidak ada (deposit lama).
+    const kursSnapshot = Number(lastDeposit?.kurs_rate) > 0 ? Number(lastDeposit.kurs_rate) : null;
+    const formatCurrency = createCurrencyFormatter(locales, i18n.language, kursSnapshot);
     const [timeLeft, setTimeLeft] = useState({});
     const Icon = depositStatuses[lastDeposit.status].icon;
 

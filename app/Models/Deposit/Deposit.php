@@ -26,6 +26,7 @@ class Deposit extends Model
     // protected $appends = ['status_classes'];
     protected $casts = [
         'payment_gateway_api_log' => 'object',
+        'kurs_rate' => 'float',
         // 'payment_information' => 'array',
     ];
     protected $hidden = [

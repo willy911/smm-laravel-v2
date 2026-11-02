@@ -17,7 +17,12 @@
         "alias": "Alias",
         "last-balance": "Last Balance",
         "original-price": "Original Price",
-        "sell-price": "Sell Price"
+        "sell-price": "Sell Price",
+        "usd-buy-rate": "USD Buy Rate",
+        "kurs-sync": "Kurs Sync",
+        "kurs-auto-sync": "Auto-sync rate via cron",
+        "kurs-auto-sync-description": "When enabled, this currency rate is updated automatically by the kurs{{sync}} scheduled job. Disable to manage the rate manually.",
+        "kurs-last-sync": "Last sync"
     },
     "actions": {
         "mark-item-as": "Mark as <item>{{as}}<\/item>",
@@ -39,7 +44,9 @@
         "close-successful": "{{item}} with ID <b>{{id}}<\/b> successfully closed.",
         "restore-successful": "{{item}} with ID <b>{{id}}<\/b> successfully restored.",
         "destroy-successful": "{{item}} with ID <b>{{id}}<\/b> successfully deleted permanently.",
-        "sort-successful": "{{item}} order successfully updated."
+        "sort-successful": "{{item}} order successfully updated.",
+        "kurs-sync-successful": "Currency rates synced successfully.",
+        "kurs-sync-failed": "Currency rate sync failed, try again later."
     },
     "log": {
         "create-successful": "Created {{item}} with ID <b>{{id}}<\/b>.",

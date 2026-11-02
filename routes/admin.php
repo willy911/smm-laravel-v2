@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:admin', 'auth.session']], function () {
         Route::get('options', [\App\Http\Controllers\Admin\LocaleController::class, 'options'])->name('options');
         Route::post('sort', [\App\Http\Controllers\Admin\LocaleController::class, 'sort'])->name('sort');
         Route::post('{target:id}/check-balance', [\App\Http\Controllers\Admin\LocaleController::class, 'checkBalance'])->name('check-balance');
+        Route::post('sync-kurs', [\App\Http\Controllers\Admin\LocaleController::class, 'syncKurs'])->name('sync-kurs');
     });
 
     Route::prefix('affiliates')->name('affiliates.')->group(function () {

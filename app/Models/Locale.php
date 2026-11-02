@@ -26,6 +26,11 @@ class Locale extends Model
     protected $casts = [
         'translations' => 'object',
         'max_decimal_digits' => 'int',
+        'usd_rate' => 'float',
+        'usd_rate_buy' => 'float',
+        'kurs_tengah' => 'float',
+        'kurs_synced_at' => 'datetime',
+        'kurs_auto' => 'boolean',
     ];
 
     public function serviceProviders()

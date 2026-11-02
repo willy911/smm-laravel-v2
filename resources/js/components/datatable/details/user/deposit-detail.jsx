@@ -7,7 +7,10 @@ import { useTranslation } from 'react-i18next';
 export function DepositDetail({ row }) {
     const { locales } = usePage().props;
     const { t, i18n } = useTranslation('deposits');
-    const formatCurrency = createCurrencyFormatter(locales, i18n.language);
+    // Deposit ditagih memakai kurs beli snapshot saat transaksi dibuat (deposits.kurs_rate);
+    // fallback ke kurs locale bila snapshot tidak ada (deposit lama).
+    const kursSnapshot = Number(row.original.kurs_rate) > 0 ? Number(row.original.kurs_rate) : null;
+    const formatCurrency = createCurrencyFormatter(locales, i18n.language, kursSnapshot);
     return (
         <div className="space-y-2 text-sm">
             <div className="grid grid-cols-[200px_1fr] gap-1">

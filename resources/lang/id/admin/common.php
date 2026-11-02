@@ -20,6 +20,11 @@ return [
         'last_balance' => 'Saldo Terakhir',
         'original_price' => 'Harga Beli',
         'sell_price' => 'Harga Jual',
+        'usd_buy_rate' => 'Kurs Beli',
+        'kurs_sync' => 'Sync Kurs',
+        'kurs_auto_sync' => 'Auto-sync kurs via cron',
+        'kurs_auto_sync_description' => 'Jika aktif, kurs mata uang ini diperbarui otomatis oleh job terjadwal kurs:sync. Matikan untuk mengelola kurs secara manual.',
+        'kurs_last_sync' => 'Terakhir sync',
     ],
 
     'actions' => [
@@ -44,6 +49,8 @@ return [
         'restore_successful'    => ':item dengan ID <b>:id</b> berhasil dipulihkan.',
         'destroy_successful'    => ':item dengan ID <b>:id</b> berhasil dihapus secara permanen.',
         'sort_successful'    => 'Urutan :item berhasil diperbarui.',
+        'kurs_sync_successful' => 'Kurs berhasil disinkronkan.',
+        'kurs_sync_failed'    => 'Kurs gagal disinkronkan, coba lagi nanti.',
     ],
 
     'log' => [
