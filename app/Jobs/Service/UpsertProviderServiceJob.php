@@ -53,20 +53,25 @@ class UpsertProviderServiceJob implements ShouldQueue
             return;
         }
 
-        // Deskripsi jangan ditimpa bila fetch baru tidak menyediakan (NULL/kosong):
-        // pertahankan deskripsi lama agar data yang sudah terkumpul tidak hilang.
-        ServiceProviderService::query()->upsert(
-            $payload,
-            ['service_provider_id', 'service_provider_service_id'],
-            [
-                'original_price',
-                'price',
-                'profit',
-                'min',
-                'max',
-                'description' => DB::raw('IF(VALUES(description) IS NULL OR VALUES(description) = \'\', description, VALUES(description))'),
-                'updated_at',
-            ]
-        );
+        // Upsert dipecah per 500 baris: satu upsert massal dengan ribuan baris
+        // menghasilkan placeholder SQL > batas ~65k sehingga MySQL/MariaDB
+        // menolak query (SQLSTATE 1118/1390).
+        foreach (array_chunk($payload, 500) as $chunk) {
+            // Deskripsi jangan ditimpa bila fetch baru tidak menyediakan (NULL/kosong):
+            // pertahankan deskripsi lama agar data yang sudah terkumpul tidak hilang.
+            ServiceProviderService::query()->upsert(
+                $chunk,
+                ['service_provider_id', 'service_provider_service_id'],
+                [
+                    'original_price',
+                    'price',
+                    'profit',
+                    'min',
+                    'max',
+                    'description' => DB::raw('IF(VALUES(description) IS NULL OR VALUES(description) = \'\', description, VALUES(description))'),
+                    'updated_at',
+                ]
+            );
+        }
     }
 }

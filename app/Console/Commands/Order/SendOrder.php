@@ -115,32 +115,38 @@ class SendOrder extends Command
                     $this->line("Order #{$order->id} terkirim (provider order: {$serviceProviderOrderID}).");
                     $sentCount++;
                 } else {
-                    $refundAmount = ($order->price / $order->quantity) * $order->remains;
-                    $reduceProfit = ($order->profit / $order->quantity) * $order->remains;
-                    if ($order->remains == 0 || $order->remains > $order->quantity) {
-                        $refundAmount = $order->price;
-                        $reduceProfit = $order->profit;
-                    }
-                    $initialBalance = $order->user->balance;
-                    $order->user->increment('balance', $refundAmount);
-                    $finalBalance = $initialBalance + $refundAmount;
+                    // Status & remains tetap di-update seperti biasa. Pengaman
+                    // anti-refund-ganda: bila order sudah pernah direfund
+                    // (is_refunded '1'/'0' string atau int dari DB), increment
+                    // saldo dan log DILEWATI agar saldo tidak terpotong dua kali.
                     $updateData['status'] = 'canceled';
                     $updateData['remains'] = 0;
-                    $updateData['is_refunded'] = '1';
-                    $updateData['profit'] = $order->profit - $reduceProfit;
-                    $updateData['price'] = $order->price - $refundAmount;
-                    $insertBalanceLog = UserBalanceLog::create([
-                        'user_id'         => $order->user_id,
-                        'type'            => 'credit',
-                        'category'        => 'order',
-                        'amount'          => $refundAmount,
-                        'initial_balance' => $initialBalance,
-                        'final_balance'   => $finalBalance,
-                        'content_key'  => 'orders:log.refund-successful',
-                        'content_params'  => (object) ['order_id' => $order->id],
-                    ]);
-                    $this->warn("Order #{$order->id} dibatalkan & direfund (provider tidak mengembalikan order id).");
-                    $refundedCount++;
+                    if (empty($order->is_refunded)) {
+                        $refundAmount = ($order->price / $order->quantity) * $order->remains;
+                        $reduceProfit = ($order->profit / $order->quantity) * $order->remains;
+                        if ($order->remains == 0 || $order->remains > $order->quantity) {
+                            $refundAmount = $order->price;
+                            $reduceProfit = $order->profit;
+                        }
+                        $initialBalance = $order->user->balance;
+                        $order->user->increment('balance', $refundAmount);
+                        $finalBalance = $initialBalance + $refundAmount;
+                        $updateData['is_refunded'] = '1';
+                        $updateData['profit'] = $order->profit - $reduceProfit;
+                        $updateData['price'] = $order->price - $refundAmount;
+                        $insertBalanceLog = UserBalanceLog::create([
+                            'user_id'         => $order->user_id,
+                            'type'            => 'credit',
+                            'category'        => 'order',
+                            'amount'          => $refundAmount,
+                            'initial_balance' => $initialBalance,
+                            'final_balance'   => $finalBalance,
+                            'content_key'  => 'orders:log.refund-successful',
+                            'content_params'  => (object) ['order_id' => $order->id],
+                        ]);
+                        $this->warn("Order #{$order->id} dibatalkan & direfund (provider tidak mengembalikan order id).");
+                        $refundedCount++;
+                    }
                 }
                 $updateData['service_provider_order_log'] = $response->json();
             } else {

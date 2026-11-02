@@ -129,30 +129,35 @@ class StatusOrder extends Command
                     $changedCount++;
                 }
                 if (in_array($updateData['status'], ['canceled', 'partial', 'error']) && $order->user_id) {
-                    $refundAmount = ($order->price / $order->quantity) * $updateData['remains'];
-                    $reduceProfit = ($order->profit / $order->quantity) * $updateData['remains'];
-                    if ($updateData['remains'] == 0 || $updateData['remains'] > $order->quantity) {
-                        $refundAmount = $order->price;
-                        $reduceProfit = $order->profit;
+                    // Pengaman anti-refund-ganda: bila order sudah pernah direfund
+                    // (is_refunded '1'/'0' string atau int dari DB), lewati increment
+                    // saldo dan log, tapi status & remains TETAP di-update seperti biasa.
+                    if (empty($order->is_refunded)) {
+                        $refundAmount = ($order->price / $order->quantity) * $updateData['remains'];
+                        $reduceProfit = ($order->profit / $order->quantity) * $updateData['remains'];
+                        if ($updateData['remains'] == 0 || $updateData['remains'] > $order->quantity) {
+                            $refundAmount = $order->price;
+                            $reduceProfit = $order->profit;
+                        }
+                        $initialBalance = $order->user->balance;
+                        $order->user->increment('balance', $refundAmount);
+                        $finalBalance = $initialBalance + $refundAmount;
+                        $updateData['is_refunded'] = '1';
+                        $updateData['profit'] = $order->profit - $reduceProfit;
+                        $updateData['price'] = $order->price - $refundAmount;
+                        $insertBalanceLog = UserBalanceLog::create([
+                            'user_id'         => $order->user_id,
+                            'type'            => 'credit',
+                            'category'        => 'order',
+                            'amount'          => $refundAmount,
+                            'initial_balance' => $initialBalance,
+                            'final_balance'   => $finalBalance,
+                            'content_key'  => 'orders:log.refund-successful',
+                            'content_params'  => (object) ['order_id' => $order->id],
+                        ]);
+                        $this->warn("Order #{$order->id} status {$updateData['status']}, saldo user direfund.");
+                        $refundCount++;
                     }
-                    $initialBalance = $order->user->balance;
-                    $order->user->increment('balance', $refundAmount);
-                    $finalBalance = $initialBalance + $refundAmount;
-                    $updateData['is_refunded'] = '1';
-                    $updateData['profit'] = $order->profit - $reduceProfit;
-                    $updateData['price'] = $order->price - $refundAmount;
-                    $insertBalanceLog = UserBalanceLog::create([
-                        'user_id'         => $order->user_id,
-                        'type'            => 'credit',
-                        'category'        => 'order',
-                        'amount'          => $refundAmount,
-                        'initial_balance' => $initialBalance,
-                        'final_balance'   => $finalBalance,
-                        'content_key'  => 'orders:log.refund-successful',
-                        'content_params'  => (object) ['order_id' => $order->id],
-                    ]);
-                    $this->warn("Order #{$order->id} status {$updateData['status']}, saldo user direfund.");
-                    $refundCount++;
                 }
             } else {
                 $this->line("ID : {$order->service_provider_order_id} | Status: HTTP {$response->status()}");
