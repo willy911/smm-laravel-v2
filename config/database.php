@@ -60,6 +60,8 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            // Samakan sesi MySQL dengan APP_TIMEZONE (Asia/Jakarta) agar now() vs kolom timestamp konsisten lintas server.
+            'timezone' => '+07:00',
         ],
 
         'mysql_second' => [
@@ -73,6 +75,8 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,
+            // Samakan sesi MySQL dengan APP_TIMEZONE (Asia/Jakarta) agar now() vs kolom timestamp konsisten lintas server.
+            'timezone' => '+07:00',
         ],
 
         'mariadb' => [
@@ -93,6 +97,8 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            // Samakan sesi MySQL dengan APP_TIMEZONE (Asia/Jakarta) agar now() vs kolom timestamp konsisten lintas server.
+            'timezone' => '+07:00',
         ],
 
         'pgsql' => [
