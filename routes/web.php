@@ -520,6 +520,9 @@ Route::prefix('cron')->name('cron.')->group(function () {
     Route::get('check-status', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatus'])->name('check-status');
     Route::get('check-status-refill', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatusRefill'])->name('check-status-refill');
     Route::get('send-order', [\App\Http\Controllers\Cronjob\OrderController::class, 'sendOrder'])->name('send-order');
+    Route::get('sync-services', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServices'])->name('sync-services');
+    Route::get('sync-services-by-id/{target:id}', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServicesByID'])->name('sync-services-by-id');
+    Route::get('check-service-status', [\App\Http\Controllers\Cronjob\ServiceController::class, 'checkServiceStatus'])->name('check-service-status');
 });
 
 /*
