@@ -52,6 +52,7 @@ import EditDescription from './edit-descripton';
 import Fetch from './fetch';
 import Form from './form';
 import Sort from './sort';
+import SyncDescription from './sync-description';
 
 const RowExpander = ({ row, t }) => (
     <TooltipProvider delayDuration={0}>
@@ -477,6 +478,7 @@ export default function Index({ pageProps }) {
     const { hasRole } = usePermissions();
 
     const [isFetchDialogOpened, setIsFetchDialogOpened] = useState(false);
+    const [isSyncDescriptionDialogOpened, setIsSyncDescriptionDialogOpened] = useState(false);
     const [isSortDialogOpened, setIsSortDialogOpened] = useState(false);
     const [isCreateDialogOpened, setIsCreateDialogOpened] = useState(false);
     const [isEditCategoryDialogOpened, setIsEditCategoryDialogOpened] = useState(false);
@@ -1073,6 +1075,13 @@ export default function Index({ pageProps }) {
                     fetchData={fetchData}
                     tableStateRef={tableStateRef}
                 />
+                <SyncDescription
+                    pageProps={pageProps}
+                    isSyncDescriptionDialogOpened={isSyncDescriptionDialogOpened}
+                    setIsSyncDescriptionDialogOpened={setIsSyncDescriptionDialogOpened}
+                    fetchData={fetchData}
+                    tableStateRef={tableStateRef}
+                />
                 <Sort
                     pageProps={pageProps}
                     isSortDialogOpened={isSortDialogOpened}
@@ -1151,6 +1160,12 @@ export default function Index({ pageProps }) {
                                     <Button variant="outline" size="sm" onClick={handleSyncServices} disabled={isSyncing}>
                                         {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
                                         {t('admin/common:actions.sync-services')}
+                                    </Button>
+                                )}
+                                {hasRole('service.update') && (
+                                    <Button variant="outline" size="sm" onClick={() => setIsSyncDescriptionDialogOpened(true)}>
+                                        <FileEditIcon className="h-4 w-4" />
+                                        {t('admin/common:actions.sync-descriptions')}
                                     </Button>
                                 )}
                             </div>
