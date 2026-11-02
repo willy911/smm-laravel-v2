@@ -27,7 +27,7 @@ class StatusOrder extends Command
                 ->whereIn('status', ['pending', 'processing', 'in_progress'])
                 ->where('is_sent', true)
                 ->whereNotNull('service_provider_order_id')
-                ->where('updated_at', '<=', now()->subMinutes(5))
+                ->where('updated_at', '<=', now()->subMinutes(1))
                 ->orderBy('id', 'asc')
                 ->limit(50)
                 ->lockForUpdate()

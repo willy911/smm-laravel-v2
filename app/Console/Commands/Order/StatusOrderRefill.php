@@ -27,7 +27,7 @@ class StatusOrderRefill extends Command
                 })
                 ->whereIn('status', ['pending', 'processing', 'in_progress'])
                 ->whereNotNull('service_provider_order_refill_id')
-                ->where('updated_at', '<=', now()->subMinutes(5))
+                ->where('updated_at', '<=', now()->subMinutes(1))
                 ->orderBy('id', 'asc')
                 ->limit(5)
                 ->lockForUpdate()
