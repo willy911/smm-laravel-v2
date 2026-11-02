@@ -80,6 +80,11 @@ class User extends Authenticable
         return $this->hasMany('App\Models\Order\OrderCancel');
     }
 
+    public function orderReviews()
+    {
+        return $this->hasMany('App\Models\Order\OrderReview');
+    }
+
     public function tickets()
     {
         return $this->hasMany('App\Models\Ticket\Ticket');
