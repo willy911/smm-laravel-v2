@@ -14,6 +14,7 @@ return [
         'description' => [
             'min_updated' => 'Minimum quantity updated from :from to :to.',
             'max_updated' => 'Maximum quantity updated from :from to :to.',
+            'description_updated' => 'Service description updated.',
             'price_increased' => 'Price increased from :from to :to.',
             'price_decreased' => 'Price decreased from :from to :to.',
             'enabled' => 'Service enabled.',

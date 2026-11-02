@@ -12,6 +12,7 @@
         "description": {
             "min-updated": "Pembaruan jumlah minimal layanan dari {{from}} ke {{to}}.",
             "max-updated": "Pembaruan jumlah maksimal layanan dari {{from}} ke {{to}}.",
+            "description-updated": "Pembaruan deskripsi layanan.",
             "price-increased": "Kenaikan Harga dari {{from}} ke {{to}}.",
             "price-decreased": "Penurunan Harga dari {{from}} ke {{to}}.",
             "enabled": "Layanan diaktifkan.",

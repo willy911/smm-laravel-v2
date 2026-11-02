@@ -34,6 +34,7 @@ return [
         'edit_item' => 'Edit :item',
         'fetch_item' => 'Fetch :item',
         'sync-services' => 'Sync Services',
+        'sync-descriptions' => 'Sync Descriptions',
         'delete_item' => 'Delete :item',
         'trash' => 'Move to trash',
         'close' => 'Close Ticket',
@@ -55,6 +56,9 @@ return [
         'service_sync_successful' => 'Services synced successfully from providers.',
         'service_sync_partial' => 'Some providers failed to sync, check details.',
         'service_sync_no_provider' => 'No active automatic provider found.',
+        'description_sync_successful' => 'Descriptions successfully synced from provider.',
+        'description_sync_unsupported' => 'Provider does not support description syncing.',
+        'description_sync_failed' => 'Description sync failed, no data from provider.',
     ],
 
     'log' => [

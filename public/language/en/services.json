@@ -12,6 +12,7 @@
         "description": {
             "min-updated": "Minimum quantity updated from {{from}} to {{to}}.",
             "max-updated": "Maximum quantity updated from {{from}} to {{to}}.",
+            "description-updated": "Service description updated.",
             "price-increased": "Price increased from {{from}} to {{to}}.",
             "price-decreased": "Price decreased from {{from}} to {{to}}.",
             "enabled": "Service enabled.",

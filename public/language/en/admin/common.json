@@ -31,6 +31,7 @@
         "edit-item": "Edit {{item}}",
         "fetch-item": "Fetch {{item}}",
         "sync-services": "Sync Services",
+        "sync-descriptions": "Sync Descriptions",
         "delete-item": "Delete {{item}}",
         "trash": "Move to trash",
         "close": "Close Ticket",
@@ -50,7 +51,10 @@
         "kurs-sync-failed": "Currency rate sync failed, try again later.",
         "service-sync-successful": "Services synced successfully from providers.",
         "service-sync-partial": "Some providers failed to sync, check details.",
-        "service-sync-no-provider": "No active automatic provider found."
+        "service-sync-no-provider": "No active automatic provider found.",
+        "description-sync-successful": "Descriptions successfully synced from provider.",
+        "description-sync-unsupported": "Provider does not support description syncing.",
+        "description-sync-failed": "Description sync failed, no data from provider."
     },
     "log": {
         "create-successful": "Created {{item}} with ID <b>{{id}}<\/b>.",

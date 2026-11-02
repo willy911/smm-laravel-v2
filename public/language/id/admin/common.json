@@ -31,6 +31,7 @@
         "edit-item": "Ubah {{item}}",
         "fetch-item": "Ambil {{item}}",
         "sync-services": "Sync Services",
+        "sync-descriptions": "Sync Deskripsi",
         "delete-item": "Hapus {{item}}",
         "trash": "Pindahkan ke sampah",
         "close": "Tutup Tiket",
@@ -50,7 +51,10 @@
         "kurs-sync-failed": "Kurs gagal disinkronkan, coba lagi nanti.",
         "service-sync-successful": "Layanan berhasil disinkronkan dari provider.",
         "service-sync-partial": "Sebagian provider gagal disinkronkan, cek detail.",
-        "service-sync-no-provider": "Tidak ada provider otomatis yang aktif."
+        "service-sync-no-provider": "Tidak ada provider otomatis yang aktif.",
+        "description-sync-successful": "Deskripsi berhasil disinkronkan dari provider.",
+        "description-sync-unsupported": "Provider tidak mendukung sinkronisasi deskripsi.",
+        "description-sync-failed": "Deskripsi gagal disinkronkan, tidak ada data dari provider."
     },
     "log": {
         "create-successful": "Membuat {{item}} dengan ID <b>{{id}}<\/b>.",

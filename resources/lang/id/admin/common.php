@@ -34,6 +34,7 @@ return [
         'edit_item' => 'Ubah :item',
         'fetch_item' => 'Ambil :item',
         'sync-services' => 'Sync Services',
+        'sync-descriptions' => 'Sync Deskripsi',
         'delete_item' => 'Hapus :item',
         'trash' => 'Pindahkan ke sampah',
         'close' => 'Tutup Tiket',
@@ -55,6 +56,9 @@ return [
         'service_sync_successful' => 'Layanan berhasil disinkronkan dari provider.',
         'service_sync_partial'    => 'Sebagian provider gagal disinkronkan, cek detail.',
         'service_sync_no_provider' => 'Tidak ada provider otomatis yang aktif.',
+        'description_sync_successful' => 'Deskripsi berhasil disinkronkan dari provider.',
+        'description_sync_unsupported' => 'Provider tidak mendukung sinkronisasi deskripsi.',
+        'description_sync_failed' => 'Deskripsi gagal disinkronkan, tidak ada data dari provider.',
     ],
 
     'log' => [

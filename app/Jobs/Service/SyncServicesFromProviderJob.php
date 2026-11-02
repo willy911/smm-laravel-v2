@@ -111,6 +111,17 @@ class SyncServicesFromProviderJob implements ShouldQueue
                         $updates['max'] = $newMax;
                     }
 
+                    if ($sps->description !== null
+                        && trim((string) $sps->description) !== trim((string) $service->description)
+                    ) {
+                        $updates['description'] = $sps->description;
+                        $logs[] = [
+                            'type' => 'updated',
+                            'content_key'    => 'services:updates.description.description-updated',
+                            'content_params' => (object) [],
+                        ];
+                    }
+
                     if (!$service->is_auto_update_price && !$service->is_manual_profit) {
                         continue;
                     }

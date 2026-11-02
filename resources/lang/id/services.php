@@ -14,6 +14,7 @@ return [
         'description' => [
             'min_updated' => 'Pembaruan jumlah minimal layanan dari :from ke :to.',
             'max_updated' => 'Pembaruan jumlah maksimal layanan dari :from ke :to.',
+            'description_updated' => 'Pembaruan deskripsi layanan.',
             'price_increased' => 'Kenaikan Harga dari :from ke :to.',
             'price_decreased' => 'Penurunan Harga dari :from ke :to.',
             'enabled' => 'Layanan diaktifkan.',

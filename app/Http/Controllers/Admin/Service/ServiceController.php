@@ -29,6 +29,7 @@ use App\Jobs\Service\SyncServicesFromProviderJob;
 use App\Services\Admin\Service\TypeService;
 use App\Services\General\Service\CategoryService;
 use App\Services\Admin\Service\IconLibraryService;
+use App\Services\General\Service\ProviderServicesFetcher;
 use App\Services\General\Service\ServiceService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Controllers\Middleware;
@@ -641,6 +642,7 @@ class ServiceController extends Controller implements HasMiddleware
                                 $name = str_replace($item->from, $item->to, $name);
                                 $description = str_replace($item->from, $item->to, $description);
                             });
+                            $description = app(ProviderServicesFetcher::class)->normalizeDescription($description);
                             if ($type !== 'primary') {
                                 $types = get_object_vars($serviceProviderConfig->parse_text->type ?? new stdClass());
                                 $lowerTypes = array_map('strtolower', $types);
@@ -785,67 +787,16 @@ class ServiceController extends Controller implements HasMiddleware
             ];
 
             try {
-                $config = optional($serviceProvider->serviceProviderConfiguration->services_configuration);
-                $formData = collect($config->params)->mapWithKeys(function ($param) use ($serviceProvider) {
-                    if ($param->type === 'custom') {
-                        return [$param->key => $param->value];
-                    }
-                    if ($param->type === 'default_parameter') {
-                        return [
-                            $param->key => collect($serviceProvider->default_parameters)
-                                ->pluck('value', 'key')
-                                ->get($param->key),
-                        ];
-                    }
-                    return [];
-                })->toArray();
+                $fetchResult = app(ProviderServicesFetcher::class)
+                    ->fetch($serviceProvider);
 
-                $response = Http::asForm()
-                    ->withoutVerifying()
-                    ->timeout(120)
-                    ->send($config->method, $config->endpoint, ['form_params' => $formData]);
-
-                if (!$response->successful() || empty($response->body())) {
-                    $results[] = $result + ['error' => 'HTTP gagal'];
+                if (!$fetchResult['ok'] || empty($fetchResult['services'])) {
+                    $results[] = $result + ['error' => $fetchResult['error'] ?? 'Fetch gagal'];
                     $allOk = false;
                     continue;
                 }
 
-                $rawServices = data_get($response->object(), $config->parse_response->looping, []);
-                if (!is_array($rawServices) || empty($rawServices)) {
-                    $results[] = $result + ['error' => 'Respons tidak berisi layanan'];
-                    $allOk = false;
-                    continue;
-                }
-
-                $rate = $serviceProvider->locale->usd_rate;
-                $profitConfig = $config->profit_configs;
-                $mappedServices = [];
-
-                foreach ($rawServices as $service) {
-                    $serviceId = data_get($service, $config->parse_response->id);
-                    if (!$serviceId) {
-                        continue;
-                    }
-                    $basePrice = data_get($service, $config->parse_response->price) / $rate;
-                    $profit = $profitConfig->type === 'fixed'
-                        ? $profitConfig->value
-                        : ($profitConfig->value / 100) * $basePrice;
-                    $mappedServices[] = [
-                        'service_provider_service_id' => $serviceId,
-                        'original_price' => $basePrice,
-                        'price' => $basePrice + $profit,
-                        'profit' => $profit,
-                        'min' => (int) data_get($service, $config->parse_response->min),
-                        'max' => (int) data_get($service, $config->parse_response->max),
-                    ];
-                }
-
-                if (empty($mappedServices)) {
-                    $results[] = $result + ['error' => 'Tidak ada layanan valid'];
-                    $allOk = false;
-                    continue;
-                }
+                $mappedServices = $fetchResult['services'];
 
                 $result['fetched'] = count($mappedServices);
 
@@ -891,6 +842,134 @@ class ServiceController extends Controller implements HasMiddleware
             'providers' => $results,
             'summary'   => $summary,
         ]);
+    }
+
+    /**
+     * Sync manual deskripsi layanan dari satu provider (tombol Sync Deskripsi).
+     * Mengambil deskripsi dari sumber provider (scrape bulk -> endpoint per-service
+     * -> API provider) via ProviderServicesFetcher::descriptionsForIds(), memperbarui
+     * service_provider_services lalu menyebarluaskannya ke tabel services dengan log ServiceUpdate.
+     */
+    public function syncProviderDescriptions(Request $request)
+    {
+        abort_unless(auth('admin')->user()->hasRole('service.update'), 403);
+
+        $request->validate(['provider_id' => ['required', 'integer']]);
+
+        try {
+            $provider = ServiceProvider::query()
+                ->whereHas('serviceProviderConfiguration')
+                ->where('type', 'auto')
+                ->where('status', '1')
+                ->with(['serviceProviderConfiguration', 'locale'])
+                ->find($request->input('provider_id'));
+
+            if (!$provider) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => __('admin/common.toast.description_sync_unsupported'),
+                ], 400);
+            }
+
+            $config = optional($provider->serviceProviderConfiguration->services_configuration);
+
+            $hasScrape   = !empty($config->descriptions_scrape->enabled);
+            $hasEndpoint = !empty($config->descriptions_endpoint->enabled);
+            $hasApiDesc  = !empty($config->parse_response->description);
+
+            if (!$hasScrape && !$hasEndpoint && !$hasApiDesc) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => __('admin/common.toast.description_sync_unsupported'),
+                ], 400);
+            }
+
+            $rows = \App\Models\Service\ServiceProviderService::where('service_provider_id', $provider->id)
+                ->get(['id', 'service_provider_service_id', 'description']);
+
+            if ($rows->isEmpty()) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => __('admin/common.toast.description_sync_no_provider'),
+                ], 400);
+            }
+
+            set_time_limit(0);
+
+            $descriptions = app(ProviderServicesFetcher::class)
+                ->descriptionsForIds($provider, $rows->pluck('service_provider_service_id')->all());
+
+            if (empty($descriptions)) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => __('admin/common.toast.description_sync_failed'),
+                ], 400);
+            }
+
+            // 1) Update service_provider_services yang deskripsinya berubah (chunk 200).
+            $providerUpdated = 0;
+
+            foreach ($rows->chunk(200) as $rowChunk) {
+                foreach ($rowChunk as $row) {
+                    $newDescription = $descriptions[$row->service_provider_service_id] ?? null;
+
+                    if ($newDescription === null
+                        || trim((string) $newDescription) === ''
+                        || trim((string) $row->description) === trim($newDescription)
+                    ) {
+                        continue;
+                    }
+
+                    $row->update(['description' => $newDescription]);
+                    $providerUpdated++;
+                }
+            }
+
+            // 2) Sebarluaskan ke tabel services (chunk 200) + log ServiceUpdate (pola SyncServicesFromProviderJob).
+            $servicesUpdated = 0;
+
+            Service::query()
+                ->where('service_provider_id', $provider->id)
+                ->whereIn('service_provider_service_id', array_keys($descriptions))
+                ->select(['id', 'service_provider_service_id', 'description'])
+                ->chunkById(200, function ($services) use ($descriptions, &$servicesUpdated) {
+                    foreach ($services as $service) {
+                        $newDescription = $descriptions[$service->service_provider_service_id] ?? null;
+
+                        if ($newDescription === null
+                            || trim((string) $service->description) === trim($newDescription)
+                        ) {
+                            continue;
+                        }
+
+                        $service->update(['description' => $newDescription]);
+
+                        ServiceUpdate::create([
+                            'service_id'     => $service->id,
+                            'type'           => 'updated',
+                            'content_key'    => 'services:updates.description.description-updated',
+                            'content_params' => (object) [],
+                        ]);
+
+                        $servicesUpdated++;
+                    }
+                });
+
+            return response()->json([
+                'status'  => true,
+                'message' => __('admin/common.toast.description_sync_successful'),
+                'summary' => [
+                    'scraped'          => count($descriptions),
+                    'provider_updated' => $providerUpdated,
+                    'services_updated' => $servicesUpdated,
+                ],
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function updateBatchCategory(ServiceCategoryUpdateRequest $request)
