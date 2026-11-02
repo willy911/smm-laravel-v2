@@ -452,7 +452,8 @@ export default function Index({ pageProps }) {
                                                         {serviceCategoryGroups.map((serviceCategoryGroup, index) => (
                                                             <CommandItem
                                                                 key={index}
-                                                                value={`${serviceCategoryGroup.value}`}
+                                                                // value memuat label agar pencarian di dropdown cocok dgn nama grup (bukan hanya ID)
+                                                                value={`${serviceCategoryGroup.label} ${serviceCategoryGroup.value}`}
                                                                 className={cn(
                                                                     String(filterData.service.category_group_id) ===
                                                                         String(serviceCategoryGroup.value) && 'bg-muted',
@@ -527,7 +528,8 @@ export default function Index({ pageProps }) {
                                                         {serviceCategories.map((serviceCategory, index) => (
                                                             <CommandItem
                                                                 key={index}
-                                                                value={`${serviceCategory.value}`}
+                                                                // value memuat label agar pencarian di dropdown cocok dgn nama kategori (bukan hanya ID)
+                                                                value={`${serviceCategory.label} ${serviceCategory.value}`}
                                                                 className={cn(
                                                                     String(filterData.service.category_id) === String(serviceCategory.value) &&
                                                                         'bg-muted',
