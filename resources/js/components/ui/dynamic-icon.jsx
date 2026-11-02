@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 
 function toPascalCase(str) {
     return str.replace(/(^\w|_\w)/g, (match) => match.replace('_', '').toUpperCase());
@@ -43,24 +43,35 @@ class IconErrorBoundary extends Component {
 
 let iconCache = {};
 
+// State SELALU berbentuk { value: ... }:
+//  - value: null       -> modul sedang dimuat
+//  - value: false      -> icon tidak ditemukan / tidak valid
+//  - value: <komponen> -> icon siap dirender
+// Komponen ikon hugeicons adalah FUNCTION, dan React menafsirkan argumen
+// setState bertipe function sebagai "functional updater" (dipanggil dengan
+// state sebelumnya). Akibatnya fungsi komponen pernah TERSIMPAN SEBAGAI
+// ELEMENT React (`<HugeiconsIcon />` tanpa props) dan placeholder senyap
+// yang selalu dirender. Membungkus nilai dalam object mencegah React
+// memanggilnya sebagai updater.
+
 export default function DynamicIcon({ iconName, fallback = null, ...props }) {
-    const [IconComponent, setIconComponent] = useState(null);
-    const isMounted = useRef(false);
+    const [componentState, setComponentState] = useState(() => {
+        // Lazy init: jika sudah ada di cache, render benar pada paint pertama.
+        const formatted = toPascalCase(String(iconName ?? ''));
+        return { value: (formatted && iconCache[formatted]) || null };
+    });
 
     useEffect(() => {
-        if (isMounted.current) return;
-        isMounted.current = true;
-
         let alive = true;
         const formattedIconName = toPascalCase(String(iconName ?? ''));
 
         if (!formattedIconName) {
-            setIconComponent(false);
+            setComponentState({ value: false });
             return;
         }
 
         if (iconCache[formattedIconName]) {
-            setIconComponent(iconCache[formattedIconName]);
+            setComponentState({ value: iconCache[formattedIconName] });
             return;
         }
 
@@ -73,27 +84,29 @@ export default function DynamicIcon({ iconName, fallback = null, ...props }) {
                     console.warn(
                         `[DynamicIcon] export '${formattedIconName}' bukan komponen (${Object.prototype.toString.call(candidate)}), diabaikan.`,
                     );
-                    setIconComponent(false);
+                    setComponentState({ value: false });
                     return;
                 }
 
                 if (candidate) {
                     iconCache[formattedIconName] = candidate;
-                    setIconComponent(candidate);
+                    setComponentState({ value: candidate });
                 } else {
-                    setIconComponent(false);
+                    setComponentState({ value: false });
                 }
             })
             .catch((error) => {
                 if (!alive) return;
                 console.warn('[DynamicIcon] gagal memuat modul icon:', error?.message);
-                setIconComponent(false);
+                setComponentState({ value: false });
             });
 
         return () => {
             alive = false;
         };
     }, [iconName]);
+
+    const IconComponent = componentState.value;
 
     // null = sedang memuat modul
     if (IconComponent === null) {
