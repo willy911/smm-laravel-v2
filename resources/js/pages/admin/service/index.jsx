@@ -1131,7 +1131,7 @@ export default function Index({ pageProps }) {
                         onChange={fetchData}
                         isLoading={isLoading}
                         additionalButton={
-                            <div className="flex gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                                 {hasRole('service.create') && (
                                     <Button variant="outline" size="sm" onClick={() => setIsCreateDialogOpened(true)}>
                                         <AddCircleIcon className="h-4 w-4" />

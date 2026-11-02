@@ -168,11 +168,11 @@ export function DataTableToolbar({ table, isFilterCardOpen, setIsFilterCardOpen,
                         <MassActionsDropdown table={table} rowSelectionActions={rowSelectionActions} auth={auth} t={t} />
                     </div>
                 )}
-                {additionalButton && <div className="hidden flex-1 xl:flex">{additionalButton}</div>}
+                {additionalButton && <div className="hidden min-w-0 flex-1 xl:flex">{additionalButton}</div>}
             </div>
 
             <div className="flex flex-wrap gap-2">
-                {additionalButton && <div className="flex-1 xl:hidden">{additionalButton}</div>}
+                {additionalButton && <div className="min-w-0 flex-1 xl:hidden">{additionalButton}</div>}
                 <Button
                     variant="outline"
                     size="sm"
