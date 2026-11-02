@@ -32,6 +32,10 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Situs berjalan di belakang reverse proxy (Cloudflare -> aaPanel/Nginx).
+        // Tanpa ini Laravel menganggap koneksi http sehingga URL/asset yang
+        // di-generate bisa http:// (mixed-content) dan skema tidak terdeteksi.
+        $middleware->trustProxies(at: '*');
         $middleware->api(append: [
             \App\Http\Middleware\API::class,
         ]);
