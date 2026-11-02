@@ -39,8 +39,17 @@ class SendOrder extends Command
 
 
         if ($orders->isEmpty()) {
+            $this->info('Tidak ada order pending untuk dikirim.');
+
             return;
         }
+
+        $sentCount = 0;
+        $refundedCount = 0;
+        $failedCount = 0;
+
+        $this->info('SEND ORDER');
+        $this->info("Mengirim {$orders->count()} order ke provider...");
 
         $responses = Http::pool(
             fn(Pool $pool) =>
@@ -103,6 +112,8 @@ class SendOrder extends Command
                 if ($serviceProviderOrderID) {
                     $updateData['is_sent'] = true;
                     $updateData['service_provider_order_id'] = $serviceProviderOrderID;
+                    $this->line("Order #{$order->id} terkirim (provider order: {$serviceProviderOrderID}).");
+                    $sentCount++;
                 } else {
                     $refundAmount = ($order->price / $order->quantity) * $order->remains;
                     $reduceProfit = ($order->profit / $order->quantity) * $order->remains;
@@ -128,10 +139,17 @@ class SendOrder extends Command
                         'content_key'  => 'orders:log.refund-successful',
                         'content_params'  => (object) ['order_id' => $order->id],
                     ]);
+                    $this->warn("Order #{$order->id} dibatalkan & direfund (provider tidak mengembalikan order id).");
+                    $refundedCount++;
                 }
                 $updateData['service_provider_order_log'] = $response->json();
+            } else {
+                $this->warn("Order #{$order->id} gagal dikirim (HTTP {$response->status()}).");
+                $failedCount++;
             }
             $order->update($updateData);
         }
+
+        $this->info("Selesai: {$sentCount} terkirim, {$refundedCount} refund, {$failedCount} gagal.");
     }
 }

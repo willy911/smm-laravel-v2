@@ -36,8 +36,17 @@ class StatusOrderRefill extends Command
         });
 
         if ($orders->isEmpty()) {
+            $this->info('CHECKING REFILL');
+            $this->info('Tidak ada refill yang perlu diperiksa.');
+
             return;
         }
+
+        $changedCount = 0;
+        $checkedCount = 0;
+
+        $this->info('CHECKING REFILL');
+        $this->info("Memeriksa {$orders->count()} refill ke provider...");
 
         $responses = Http::pool(
             fn(Pool $pool) =>
@@ -83,8 +92,11 @@ class StatusOrderRefill extends Command
             $updateData = [
                 'updated_at'     => now(),
             ];
+            $checkedCount++;
             if ($response->ok()) {
-                if ($orderStatus = data_get($response->object(), $order->service->serviceProvider->serviceProviderConfiguration->order_refill_status_configuration->parse_response->status, $order->status)) {
+                $orderStatus = data_get($response->object(), $order->service->serviceProvider->serviceProviderConfiguration->order_refill_status_configuration->parse_response->status, $order->status);
+                $this->line("ID : {$order->service_provider_order_refill_id} | Status: " . ($orderStatus !== null && $orderStatus !== '' ? $orderStatus : $order->status));
+                if ($orderStatus) {
                     $statusesObject = $order
                         ->service
                         ->serviceProvider
@@ -101,8 +113,17 @@ class StatusOrderRefill extends Command
                         : $order->status;
                 }
                 $updateData['service_provider_status_refill_log'] = $response->json();
+                if ($updateData['status'] != $order->status) {
+                    $this->line("Refill #{$order->id}: status {$order->status} -> {$updateData['status']}.");
+                    $changedCount++;
+                }
+            } else {
+                $this->line("ID : {$order->service_provider_order_refill_id} | Status: HTTP {$response->status()}");
+                $this->warn("Refill #{$order->id} gagal diperiksa (HTTP {$response->status()}).");
             }
             $order->update($updateData);
         }
+
+        $this->info("Selesai: {$checkedCount} diperiksa, {$changedCount} berubah status.");
     }
 }

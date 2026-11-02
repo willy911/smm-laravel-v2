@@ -36,8 +36,18 @@ class StatusOrder extends Command
         });
 
         if ($orders->isEmpty()) {
+            $this->info('CHECKING ORDER');
+            $this->info('Tidak ada order yang perlu diperiksa.');
+
             return;
         }
+
+        $this->info('CHECKING ORDER');
+        $this->info("Memeriksa {$orders->count()} order ke provider...");
+
+        $changedCount = 0;
+        $refundCount = 0;
+        $checkedCount = 0;
 
         $responses = Http::pool(
             fn(Pool $pool) =>
@@ -90,8 +100,11 @@ class StatusOrder extends Command
                 $order->update($updateData);
                 continue;
             }
+            $checkedCount++;
             if ($response->ok()) {
-                if ($orderStatus = data_get($response->object(), $order->serviceProvider->serviceProviderConfiguration->order_status_configuration->parse_response->status, $order->status)) {
+                $orderStatus = data_get($response->object(), $order->serviceProvider->serviceProviderConfiguration->order_status_configuration->parse_response->status, $order->status);
+                $this->line("ID : {$order->service_provider_order_id} | Status: " . ($orderStatus !== null && $orderStatus !== '' ? $orderStatus : $order->status));
+                if ($orderStatus) {
                     $statusesObject = $order
                         ->serviceProvider
                         ->serviceProviderConfiguration
@@ -111,6 +124,10 @@ class StatusOrder extends Command
                 $updateData['remains'] = ($rawRemains !== null && $rawRemains !== '') ? $rawRemains : $order->remains;
                 $updateData['service_provider_status_log'] = $response->json();
                 if ($updateData['status'] == 'completed') $updateData['remains'] = 0;
+                if ($updateData['status'] != $order->status) {
+                    $this->line("Order #{$order->id}: status {$order->status} -> {$updateData['status']}.");
+                    $changedCount++;
+                }
                 if (in_array($updateData['status'], ['canceled', 'partial', 'error']) && $order->user_id) {
                     $refundAmount = ($order->price / $order->quantity) * $updateData['remains'];
                     $reduceProfit = ($order->profit / $order->quantity) * $updateData['remains'];
@@ -134,9 +151,16 @@ class StatusOrder extends Command
                         'content_key'  => 'orders:log.refund-successful',
                         'content_params'  => (object) ['order_id' => $order->id],
                     ]);
+                    $this->warn("Order #{$order->id} status {$updateData['status']}, saldo user direfund.");
+                    $refundCount++;
                 }
+            } else {
+                $this->line("ID : {$order->service_provider_order_id} | Status: HTTP {$response->status()}");
+                $this->warn("Order #{$order->id} gagal diperiksa (HTTP {$response->status()}).");
             }
             $order->update($updateData);
         }
+
+        $this->info("Selesai: {$checkedCount} diperiksa, {$changedCount} berubah status, {$refundCount} refund.");
     }
 }
