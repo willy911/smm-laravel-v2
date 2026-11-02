@@ -3,5 +3,6 @@
 return [
     'labels' => [
         'service_provider_service_id' => 'Service Provider Service ID',
+        'api-service-id' => 'API Service ID',
     ],
 ];

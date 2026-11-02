@@ -498,6 +498,20 @@ export default function Index({ pageProps }) {
 
     const tableStateRef = useRef({});
 
+    // Migrasi one-time: tampilkan kolom API Service ID (dulu default disembunyikan & tersimpan false di localStorage)
+    if (typeof window !== 'undefined' && !localStorage.getItem('table_state_migrated_api_service_id_v1')) {
+        try {
+            const saved = JSON.parse(localStorage.getItem('table_state_admin/services') || 'null');
+            if (saved?.columnVisibility && 'service_provider_service_id' in saved.columnVisibility) {
+                delete saved.columnVisibility.service_provider_service_id;
+                localStorage.setItem('table_state_admin/services', JSON.stringify(saved));
+            }
+            localStorage.setItem('table_state_migrated_api_service_id_v1', '1');
+        } catch (e) {
+            /* abaikan */
+        }
+    }
+
     const initialGlobalFilterState = {
         search: '',
         created_at: {
@@ -527,7 +541,6 @@ export default function Index({ pageProps }) {
                 service_category_id: false,
                 min: false,
                 max: false,
-                service_provider_service_id: false,
                 type: false,
                 other: false,
             },
@@ -726,6 +739,13 @@ export default function Index({ pageProps }) {
                 width: '32px',
             },
             {
+                accessorFn: (row) => row.service_provider_service_id,
+                id: 'service_provider_service_id',
+                headerName: t('admin/services:labels.api-service-id'),
+                header: ({ column }) => <DataTableColumnHeader column={column} title={t('admin/services:labels.api-service-id')} />,
+                cell: ({ row }) => row.original.service_provider_service_id,
+            },
+            {
                 accessorKey: 'sort_number',
                 headerName: t('common:labels.sort-number'),
                 header: ({ column }) => <DataTableColumnHeader column={column} title={t('common:labels.sort-number')} />,
@@ -771,13 +791,6 @@ export default function Index({ pageProps }) {
                 headerName: t('admin/common:labels.provider'),
                 header: ({ column }) => <DataTableColumnHeader column={column} title={t('admin/common:labels.provider')} />,
                 cell: ({ row }) => row.original.service_provider?.alias,
-            },
-            {
-                accessorFn: (row) => row.service_provider_service_id,
-                id: 'service_provider_service_id',
-                headerName: t('admin/services:labels.service-provider-service-id'),
-                header: ({ column }) => <DataTableColumnHeader column={column} title={t('admin/services:labels.service-provider-service-id')} />,
-                cell: ({ row }) => row.original.service_provider_service_id,
             },
             {
                 accessorFn: (row) => row.service_category_id,

@@ -1,5 +1,6 @@
 {
     "labels": {
-        "service-provider-service-id": "ID Layanan Penyedia"
+        "service-provider-service-id": "ID Layanan Penyedia",
+        "api-service-id": "API Service ID"
     }
 }
