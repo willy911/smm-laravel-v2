@@ -45,13 +45,19 @@ export function createCurrencyFormatter(locales, language, rateOverride = null) 
     if (!target || !base) {
         return (amount) => amount;
     }
+    const baseRate = parseFloat(base.usd_rate);
     let targetRate;
-    if (Number.isFinite(Number(rateOverride)) && Number(rateOverride) > 0) {
+    // Override kurs hanya berlaku saat mengonversi ke mata uang non-dasar.
+    // Bila bahasa aktif = mata uang dasar (usd_rate = 1, mis. English-USD),
+    // nilai internal (kredit/USD) memang sudah dalam satuan tersebut — jangan
+    // dikalikan kurs override (mis. snapshot kurs beli deposit) karena label
+    // yang dicetak tetap simbol mata uang dasar ("$").
+    const isBaseLocale = parseFloat(target.usd_rate) === baseRate;
+    if (!isBaseLocale && Number.isFinite(Number(rateOverride)) && Number(rateOverride) > 0) {
         targetRate = Number(rateOverride);
     } else {
         targetRate = parseFloat(target.usd_rate);
     }
-    const baseRate = parseFloat(base.usd_rate);
     const localeCode = target.locale_code;
     const currencyCode = target.currency_code;
     const maxFractionDigits = target.max_decimal_digits ?? 4;

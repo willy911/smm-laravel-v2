@@ -44,7 +44,15 @@ export default function Create({ pageProps }) {
     const { locales } = usePage().props;
     const { t, i18n } = useTranslation('deposits');
     const locale = locales.find((item) => item.locale === i18n.language);
-    const depositRate = Number(locale?.usd_rate_buy) > 0 ? Number(locale.usd_rate_buy) : Number(locale?.usd_rate || 1);
+    // Bahasa dasar (usd_rate = 1, mis. English-USD) selalu memakai faktor 1;
+    // kurs beli hanya dipakai untuk mata uang non-dasar (mis. Indonesian-IDR),
+    // karena input nominal user dalam satuan mata uang yang sedang aktif.
+    const isBaseLocale = parseFloat(locale?.usd_rate) === 1;
+    const depositRate = isBaseLocale
+        ? 1
+        : Number(locale?.usd_rate_buy) > 0
+          ? Number(locale.usd_rate_buy)
+          : Number(locale?.usd_rate || 1);
     const formatCurrency = createCurrencyFormatter(locales, i18n.language, depositRate);
     const [lastDeposit, setLastDeposit] = useState(pageProps?.lastDeposit ?? {});
 
