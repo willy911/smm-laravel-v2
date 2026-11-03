@@ -9,6 +9,7 @@ import { Loading01Icon } from 'hugeicons-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { OrderDetail as AdminOrderDetail } from './details/admin/order-detail';
+import { AdminServiceDetail } from './details/admin/service-detail';
 import { UserDetail } from './details/admin/user-detail';
 import { ServiceDetail } from './details/guest/service-detail';
 import { DepositDetail } from './details/user/deposit-detail';
@@ -213,6 +214,7 @@ export function DataTable({
                                                                     {route().current('user.orders.index') && <OrderDetail row={row} />}
                                                                     {route().current('user.deposits.index') && <DepositDetail row={row} />}
                                                                     {route().current('user.tickets.index') && <TicketDetail row={row} />}
+                                                                    {route().current('admin.services.index') && <AdminServiceDetail row={row} />}
                                                                     {route().current('admin.users.index') && <UserDetail row={row} />}
                                                                     {route().current('admin.orders.index') && <AdminOrderDetail row={row} />}
                                                                 </div>
