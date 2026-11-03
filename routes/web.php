@@ -4,10 +4,12 @@ use Inertia\Inertia;
 use App\Models\Locale;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Cache\RateLimiting\Limit;
 use App\Models\Service\Service;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use App\Models\Website\WebsiteSitemap;
 use App\Models\Service\ServiceCategory;
@@ -513,6 +515,8 @@ Route::get('export-translations', function () {
 |--------------------------------------------------------------------------
 | Dipanggil oleh scheduler/hosting via HTTP. Aman tanpa kredensial:
 | controller melewati eksekusi + memberi log jelas bila config kosong.
+| CATATAN: diblok rule nginx/WAF di VPS, tetap dipertahankan; penggantinya
+| di prefix /tasks di atas.
 */
 Route::prefix('cron')->name('cron.')->group(function () {
     Route::get('bca-mutation', \App\Http\Controllers\Cronjob\BCAMutationController::class)->name('bca-mutation');
@@ -520,6 +524,28 @@ Route::prefix('cron')->name('cron.')->group(function () {
     Route::get('check-status', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatus'])->name('check-status');
     Route::get('check-status-refill', [\App\Http\Controllers\Cronjob\OrderController::class, 'checkStatusRefill'])->name('check-status-refill');
     Route::get('send-order', [\App\Http\Controllers\Cronjob\OrderController::class, 'sendOrder'])->name('send-order');
+    Route::get('sync-services', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServices'])->name('sync-services');
+    Route::get('sync-services-by-id/{target:id}', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServicesByID'])->name('sync-services-by-id');
+    Route::get('check-service-status', [\App\Http\Controllers\Cronjob\ServiceController::class, 'checkServiceStatus'])->name('check-service-status');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Tasks via HTTP (pola admin-smm: tanpa secret)
+|--------------------------------------------------------------------------
+| Pengganti /cron/* yang diblok rule nginx/WAF di VPS. Tanpa secret,
+| pengaman: throttle 1x/menit per-IP+path dan atomic lock anti-dobel
+| (panggilan tumpuk hanya 1 yang jalan, lainnya 409).
+*/
+
+// Rate limiter "tasks": maks 1 hit per menit per kombinasi IP + path.
+// Didaftarkan di sini (bukan bootstrap/app.php) karena file route tetap
+// dieksekusi tiap request saat route:cache tidak aktif.
+RateLimiter::for('tasks', function (Request $request) {
+    return Limit::perMinute(1)->by(sha1($request->ip() . '|' . $request->path()));
+});
+
+Route::prefix('tasks')->name('tasks.')->middleware('throttle:tasks')->group(function () {
     Route::get('sync-services', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServices'])->name('sync-services');
     Route::get('sync-services-by-id/{target:id}', [\App\Http\Controllers\Cronjob\ServiceController::class, 'syncServicesByID'])->name('sync-services-by-id');
     Route::get('check-service-status', [\App\Http\Controllers\Cronjob\ServiceController::class, 'checkServiceStatus'])->name('check-service-status');
