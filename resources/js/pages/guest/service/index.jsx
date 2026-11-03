@@ -724,6 +724,7 @@ export default function Index({ pageProps }) {
                                             <thead className="bg-muted text-left">
                                                 <tr>
                                                     <th className="w-16 px-4 py-2 font-medium whitespace-nowrap"></th>
+                                                    <th className="px-4 py-2 font-medium whitespace-nowrap">ID</th>
                                                     <th className="px-4 py-2 font-semibold whitespace-nowrap">Layanan</th>
                                                     <th className="px-4 py-2 font-medium whitespace-nowrap">Min</th>
                                                     <th className="px-4 py-2 font-medium whitespace-nowrap">Maks</th>
@@ -737,7 +738,7 @@ export default function Index({ pageProps }) {
                                                 {groupedServices.map((group) => (
                                                     <Fragment key={group.categoryName}>
                                                         <tr className="bg-primary/10">
-                                                            <td colSpan={8} className="px-4 py-2.5 text-center font-bold">
+                                                            <td colSpan={9} className="px-4 py-2.5 text-center font-bold">
                                                                 {group.categoryName}
                                                             </td>
                                                         </tr>
@@ -761,6 +762,7 @@ export default function Index({ pageProps }) {
                                                                         </button>
                                                                     )}
                                                                 </td>
+                                                                <td className="px-4 py-2 font-medium whitespace-nowrap">{item.id}</td>
                                                                 <td className="px-4 py-2">{item.name}</td>
                                                                 <td className="px-4 py-2">{formatAmount(item.min)}</td>
                                                                 <td className="px-4 py-2">{formatAmount(item.max)}</td>
