@@ -19,15 +19,29 @@ class UpsertProviderServiceJob implements ShouldQueue
         public array $services
     ) {}
 
+    /**
+     * Upsert layanan provider ke tabel service_provider_services.
+     *
+     * Kontrak payload (dari ProviderServicesFetcher — SATU-SATUNYA tempat
+     * profit dihitung, dari profit_configs provider):
+     *   - original_price : harga mentah provider (setelah konversi kurs locale).
+     *   - price          : harga jual = original_price + profit.
+     *   - profit         : keuntungan sesuai profit_configs (persen/fixed).
+     *
+     * Job ini TIDAK menambahkan markup lagi — sebelumnya ia menanduk ×1.1 di
+     * atas price (yang sudah berisi profit), menyebabkan profit dobel.
+     */
     public function handle()
     {
         $now = now();
         $payload = [];
 
         foreach ($this->services as $service) {
-            $originalPrice = (float) $service['price'];
-
-            $sellingPrice = round($originalPrice * 1.1, 8);
+            $originalPrice = isset($service['original_price'])
+                ? (float) $service['original_price']
+                : (float) $service['price'] - (float) ($service['profit'] ?? 0);
+            $sellingPrice = (float) $service['price'];
+            // Jaminan invarian: price = original_price + profit.
             $profit = round($sellingPrice - $originalPrice, 8);
 
             if ($sellingPrice > 999999) {
