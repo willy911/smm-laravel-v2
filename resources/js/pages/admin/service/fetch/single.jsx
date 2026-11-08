@@ -12,13 +12,17 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from '@/hooks/use-toast';
-import { cn, formatRupiah } from '@/lib/utils';
-import { Link } from '@inertiajs/react';
+import { cn, createCurrencyFormatter } from '@/lib/utils';
+import { Link, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { ArrowLeft, Check, ChevronsUpDown, Loader2 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Single({ pageProps }) {
+    const { locales } = usePage().props;
+    const { i18n } = useTranslation();
+    const formatCurrency = createCurrencyFormatter(locales, i18n.language);
     const [loading, setLoading] = useState(false);
     const [storeLoading, setStoreLoading] = useState(false);
     const [services, setServices] = useState([]);
@@ -414,7 +418,7 @@ export default function Single({ pageProps }) {
                                                                             ? JSON.stringify(item.category)
                                                                             : String(item.category)}
                                                                     </TableCell>
-                                                                    <TableCell>{formatRupiah(item.original_price)}</TableCell>
+                                                                    <TableCell>{formatCurrency(item.original_price)}</TableCell>
                                                                     <TableCell>
                                                                         {typeof item.min === 'object' ? JSON.stringify(item.min) : String(item.min)}
                                                                     </TableCell>

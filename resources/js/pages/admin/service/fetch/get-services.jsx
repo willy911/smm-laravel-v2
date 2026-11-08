@@ -12,11 +12,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from '@/hooks/use-toast';
-import { cn, formatRupiah } from '@/lib/utils';
-import { Link } from '@inertiajs/react';
+import { cn, createCurrencyFormatter } from '@/lib/utils';
+import { Link, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { ArrowLeft, Check, ChevronsUpDown, Loader2 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function CategorySearchSelect({ value, options, onChange }) {
     const [open, setOpen] = useState(false);
@@ -78,6 +79,9 @@ function CategorySearchSelect({ value, options, onChange }) {
 }
 
 export default function GetServices({ pageProps }) {
+    const { locales } = usePage().props;
+    const { i18n } = useTranslation();
+    const formatCurrency = createCurrencyFormatter(locales, i18n.language);
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
     const [importing, setImporting] = useState(false);
@@ -526,8 +530,8 @@ export default function GetServices({ pageProps }) {
                                                                     </TableCell>
                                                                     <TableCell className="py-3 align-top">
                                                                         <div className="text-muted-foreground mb-1 text-xs">
-                                                                            Asli API: {formatRupiah(item.original_price)} <br />
-                                                                            Profit: {formatRupiah(item.profit)}
+                                                                            Asli API: {formatCurrency(item.original_price)} <br />
+                                                                            Profit: {formatCurrency(item.profit)}
                                                                         </div>
                                                                         <Input
                                                                             type="number"
