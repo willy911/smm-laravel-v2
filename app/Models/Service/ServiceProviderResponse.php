@@ -20,6 +20,15 @@ class ServiceProviderResponse extends Model
 {
     use HasFactory;
     public $timestamps = true;
+
+    /**
+     * Tabel ini hanya punya kolom created_at (warisan admin-smm) — tanpa
+     * updated_at. UPDATED_AT = null membuat Eloquent hanya mengelola
+     * created_at, sehingga insert tidak lagi gagal dengan
+     * "Unknown column 'updated_at'" (mis. saat order cancel/refill).
+     */
+    public const UPDATED_AT = null;
+
     protected $guarded = [];
     protected $casts = [
         'logs' => 'object',
