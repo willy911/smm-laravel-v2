@@ -112,6 +112,18 @@ class ProviderServicesFetcher
     }
 
     /**
+     * Kurs konversi harga mentah provider -> kredit internal (USD-ekuivalen):
+     * raw selalu dalam mata uang locale provider, jadi konversinya membagi
+     * dengan usd_rate locale (kontrak yang sama dengan fetch()).
+     */
+    public static function resolveKurs(ServiceProvider $serviceProvider): float
+    {
+        $rate = (float) ($serviceProvider->locale?->usd_rate ?? 0);
+
+        return $rate > 0 ? $rate : 1;
+    }
+
+    /**
      * Ambil deskripsi untuk id layanan provider tertentu, urut prioritas sumber:
      * 1. Scrape bulk JSON inline halaman provider (config descriptions_scrape).
      * 2. Endpoint JSON per-layanan (config descriptions_endpoint) untuk id yang masih kosong.

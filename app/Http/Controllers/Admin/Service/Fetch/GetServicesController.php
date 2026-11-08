@@ -10,6 +10,7 @@ use App\Models\Service\Service;
 use App\Models\Service\ServiceCategory;
 use App\Models\Service\ServiceProvider;
 use App\Models\Service\ServiceUpdate;
+use App\Services\General\Service\ProviderServicesFetcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -43,7 +44,7 @@ class GetServicesController extends Controller
         ]);
 
         $provider = ServiceProvider::findOrFail($request->input('provider_id'));
-        $kurs = $this->resolveKurs($provider);
+        $kurs = ProviderServicesFetcher::resolveKurs($provider);
 
         try {
             $config = optional($provider->serviceProviderConfiguration->services_configuration);
@@ -71,8 +72,9 @@ class GetServicesController extends Controller
                 $category = data_get($svc, $parseResponse->category) ?? 'Uncategorized';
                 $serviceId = data_get($svc, $parseResponse->id);
                 $rawPrice = data_get($svc, $parseResponse->price);
-                $price = ceil($rawPrice * $kurs);
-                $profit = $profitType === 'percentage' ? ceil(($profitValue / 100) * $price) : ceil($profitValue);
+                // Kontrak sync (ProviderServicesFetcher::fetch): original = raw / usd_rate locale provider, tanpa pembulatan.
+                $originalPrice = $rawPrice / $kurs;
+                $profit = $profitType === 'percentage' ? ($profitValue / 100) * $originalPrice : $profitValue;
                 $name = data_get($svc, $parseResponse->name);
                 $min = data_get($svc, $parseResponse->min);
                 $max = data_get($svc, $parseResponse->max);
@@ -104,8 +106,8 @@ class GetServicesController extends Controller
                     'service_id'       => $serviceId,
                     'category'         => $category,
                     'name'             => $name,
-                    'original_price'   => $price,
-                    'price'            => $price + $profit,
+                    'original_price'   => $originalPrice,
+                    'price'            => $originalPrice + $profit,
                     'profit'           => $profit,
                     'min'              => $min,
                     'max'              => $max,
@@ -290,17 +292,6 @@ class GetServicesController extends Controller
             'currency' => $provider->locale?->currency_code ?? 'IDR',
             'rate'     => (float) ($provider->locale?->usd_rate ?? 1),
         ]);
-    }
-
-    /**
-     * Kurs konversi mengikuti perilaku admin-smm (currency USD memakai rate provider).
-     * Provider wuzzuser menyimpan mata uang & kurs pada relasi locale.
-     */
-    private function resolveKurs(ServiceProvider $provider): float
-    {
-        $currency = $provider->currency ?? $provider->locale?->currency_code ?? 'IDR';
-        $rate = (float) ($provider->rate ?? $provider->locale?->usd_rate ?? 1);
-        return strtoupper($currency) === 'USD' ? $rate : 1;
     }
 
     /**

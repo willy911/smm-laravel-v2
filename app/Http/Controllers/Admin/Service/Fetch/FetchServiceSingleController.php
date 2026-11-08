@@ -10,6 +10,7 @@ use App\Models\Service\Service;
 use App\Models\Service\ServiceCategory;
 use App\Models\Service\ServiceProvider;
 use App\Models\Service\ServiceUpdate;
+use App\Services\General\Service\ProviderServicesFetcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -88,7 +89,7 @@ class FetchServiceSingleController extends Controller
         ]);
 
         $provider = ServiceProvider::findOrFail($request->input('provider_id'));
-        $kurs = $this->resolveKurs($provider);
+        $kurs = ProviderServicesFetcher::resolveKurs($provider);
         $profitInput = (float) ($request->input('profit') ?? 0);
 
         try {
@@ -124,7 +125,8 @@ class FetchServiceSingleController extends Controller
                 $category = data_get($svc, $parseResponse->category);
                 $name = data_get($svc, $parseResponse->name);
                 $rawPrice = data_get($svc, $parseResponse->price);
-                $price = ceil($rawPrice * $kurs);
+                // Kontrak sync (ProviderServicesFetcher::fetch): original = raw / usd_rate locale provider, tanpa pembulatan.
+                $originalPrice = $rawPrice / $kurs;
                 $min = data_get($svc, $parseResponse->min);
                 $max = data_get($svc, $parseResponse->max);
                 $description = isset($parseResponse->description) ? data_get($svc, $parseResponse->description) : '';
@@ -139,18 +141,18 @@ class FetchServiceSingleController extends Controller
                     $description = str_replace($item->from, $item->to, $description);
                 });
 
-                // Calculate profit
+                // Calculate profit — kontrak sync: percentage dihitung dari original, fixed apa adanya, tanpa pembulatan.
                 $profit = 0;
                 if ($profitSettings) {
-                    $profit = ceil($profitSettings->type === 'fixed' ? $profitSettings->amount : ($profitSettings->amount / 100) * $price);
+                    $profit = $profitSettings->type === 'fixed' ? $profitSettings->amount : ($profitSettings->amount / 100) * $originalPrice;
                 }
 
                 $result[] = [
                     'service_id'     => $serviceId,
                     'category'       => $category,
                     'name'           => $name,
-                    'original_price' => $price,
-                    'price'          => $price + $profit,
+                    'original_price' => $originalPrice,
+                    'price'          => $originalPrice + $profit,
                     'profit'         => $profit,
                     'min'            => $min,
                     'max'            => $max,
@@ -349,17 +351,6 @@ class FetchServiceSingleController extends Controller
             'currency' => $provider->locale?->currency_code ?? 'IDR',
             'rate'     => (float) ($provider->locale?->usd_rate ?? 1),
         ]);
-    }
-
-    /**
-     * Kurs konversi mengikuti perilaku admin-smm (currency USD memakai rate provider).
-     * Provider wuzzuser menyimpan mata uang & kurs pada relasi locale.
-     */
-    private function resolveKurs(ServiceProvider $provider): float
-    {
-        $currency = $provider->currency ?? $provider->locale?->currency_code ?? 'IDR';
-        $rate = (float) ($provider->rate ?? $provider->locale?->usd_rate ?? 1);
-        return strtoupper($currency) === 'USD' ? $rate : 1;
     }
 
     /**

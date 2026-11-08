@@ -10,6 +10,7 @@ use App\Models\Service\Service;
 use App\Models\Service\ServiceCategory;
 use App\Models\Service\ServiceProvider;
 use App\Models\Service\ServiceUpdate;
+use App\Services\General\Service\ProviderServicesFetcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -42,7 +43,7 @@ class FetchServiceMassalController extends Controller
         ]);
 
         $provider = ServiceProvider::findOrFail($request->input('provider_id'));
-        $kurs = $this->resolveKurs($provider);
+        $kurs = ProviderServicesFetcher::resolveKurs($provider);
 
         try {
             $config = optional($provider->serviceProviderConfiguration->services_configuration);
@@ -77,8 +78,9 @@ class FetchServiceMassalController extends Controller
 
                 $serviceId = data_get($svc, $parseResponse->id);
                 $rawPrice = data_get($svc, $parseResponse->price);
-                $price = ceil($rawPrice * $kurs);
-                $profit = $profitType === 'percentage' ? ceil(($profitValue / 100) * $price) : ceil($profitValue);
+                // Kontrak sync (ProviderServicesFetcher::fetch): original = raw / usd_rate locale provider, tanpa pembulatan.
+                $originalPrice = $rawPrice / $kurs;
+                $profit = $profitType === 'percentage' ? ($profitValue / 100) * $originalPrice : $profitValue;
                 $name = data_get($svc, $parseResponse->name);
                 $min = data_get($svc, $parseResponse->min);
                 $max = data_get($svc, $parseResponse->max);
@@ -102,9 +104,9 @@ class FetchServiceMassalController extends Controller
 
                 if ($existing) {
                     $previousPrice = (float) $existing->price;
-                    $newPrice = $price + $profit;
+                    $newPrice = $originalPrice + $profit;
                     $existing->update([
-                        'original_price' => $price, 'price' => $newPrice,
+                        'original_price' => $originalPrice, 'price' => $newPrice,
                         'profit' => $profit, 'min' => $min, 'max' => $max,
                         'is_auto_update_price' => '1',
                     ]);
@@ -129,8 +131,8 @@ class FetchServiceMassalController extends Controller
                         'service_provider_id'         => $provider->id,
                         'service_provider_service_id' => $serviceId,
                         'name'                        => $name,
-                        'original_price'              => $price,
-                        'price'                       => $price + $profit,
+                        'original_price'              => $originalPrice,
+                        'price'                       => $originalPrice + $profit,
                         'profit'                      => $profit,
                         'min'                         => $min,
                         'max'                         => $max,
@@ -184,17 +186,6 @@ class FetchServiceMassalController extends Controller
             'currency' => $provider->locale?->currency_code ?? 'IDR',
             'rate'     => (float) ($provider->locale?->usd_rate ?? 1),
         ]);
-    }
-
-    /**
-     * Kurs konversi mengikuti perilaku admin-smm (currency USD memakai rate provider).
-     * Provider wuzzuser menyimpan mata uang & kurs pada relasi locale.
-     */
-    private function resolveKurs(ServiceProvider $provider): float
-    {
-        $currency = $provider->currency ?? $provider->locale?->currency_code ?? 'IDR';
-        $rate = (float) ($provider->rate ?? $provider->locale?->usd_rate ?? 1);
-        return strtoupper($currency) === 'USD' ? $rate : 1;
     }
 
     /**
