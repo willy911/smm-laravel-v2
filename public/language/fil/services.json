@@ -12,6 +12,9 @@
         "description": {
             "min-updated": "Na-update ang minimum na dami ng serbisyo mula {{from}} hanggang {{to}}.",
             "max-updated": "Na-update ang maximum na dami ng serbisyo mula {{from}} hanggang {{to}}.",
+            "type-updated": "Type updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "refill-support-updated": "Refill support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "cancel-support-updated": "Cancel support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
             "price-increased": "Tumaas ang presyo mula {{from}} hanggang {{to}}.",
             "price-decreased": "Bumaba ang presyo mula {{from}} hanggang {{to}}.",
             "enabled": "Ang serbisyo ay pinagana.",

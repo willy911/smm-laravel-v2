@@ -10,6 +10,8 @@
     "toast": {
         "refill-successful": "Permintaan isi ulang pesanan berhasil dibuat.",
         "cancel-successful": "Permintaan pembatalan pesanan berhasil dibuat.",
+        "cancel-failed": "Permintaan pembatalan pesanan ID {{order_id}} gagal diproses oleh provider. Coba lagi nanti atau hubungi admin.",
+        "refill-failed": "Permintaan isi ulang pesanan ID {{order_id}} gagal diproses oleh provider. Coba lagi nanti atau hubungi admin.",
         "invalid-order-id": "ID Pesanan tidak valid.",
         "wait-previous-order": "Silahkan tunggu pesanan sebelumnya diproses terlebih dahulu.",
         "min-quantity": "Jumlah minimal adalah {{min}}.",

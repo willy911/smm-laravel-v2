@@ -17,6 +17,8 @@
     "toast": {
         "refill-successful": "Order refill request created successfully.",
         "cancel-successful": "Order cancellation request created successfully.",
+        "cancel-failed": "The cancellation request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
+        "refill-failed": "The refill request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
         "invalid-order-id": "Invalid order ID.",
         "wait-previous-order": "Please wait for the previous order to be processed first.",
         "min-quantity": "Minimum quantity is {{min}}.",

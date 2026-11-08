@@ -10,6 +10,8 @@
     "toast": {
         "refill-successful": "Запрос на пополнение заказа успешно создан.",
         "cancel-successful": "Запрос на отмену заказа успешно создан.",
+        "cancel-failed": "The cancellation request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
+        "refill-failed": "The refill request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
         "invalid-order-id": "Недействительный ID заказа.",
         "wait-previous-order": "Пожалуйста, дождитесь, пока предыдущий заказ будет обработан.",
         "min-quantity": "Минимальное количество: {{min}}.",

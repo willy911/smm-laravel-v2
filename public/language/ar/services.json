@@ -12,6 +12,9 @@
         "description": {
             "min-updated": "تحديث الحد الأدنى للكمية للخدمة من {{from}} إلى {{to}}.",
             "max-updated": "تحديث الحد الأقصى للكمية للخدمة من {{from}} إلى {{to}}.",
+            "type-updated": "Type updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "refill-support-updated": "Refill support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "cancel-support-updated": "Cancel support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
             "price-increased": "زيادة السعر من {{from}} إلى {{to}}.",
             "price-decreased": "انخفاض السعر من {{from}} إلى {{to}}.",
             "enabled": "تم تفعيل الخدمة.",

@@ -10,6 +10,8 @@
     "toast": {
         "refill-successful": "ऑर्डर रिफिल अनुरोध सफलतापूर्वक बनाया गया।",
         "cancel-successful": "ऑर्डर रद्द करने का अनुरोध सफलतापूर्वक बनाया गया।",
+        "cancel-failed": "The cancellation request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
+        "refill-failed": "The refill request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
         "invalid-order-id": "ऑर्डर ID अमान्य है।",
         "wait-previous-order": "कृपया पिछले ऑर्डर के पहले संसाधित होने तक प्रतीक्षा करें।",
         "min-quantity": "न्यूनतम मात्रा {{min}} है।",

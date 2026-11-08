@@ -12,6 +12,9 @@
         "description": {
             "min-updated": "{{from}} से {{to}} तक सेवा की न्यूनतम मात्रा अपडेट।",
             "max-updated": "{{from}} से {{to}} तक सेवा की अधिकतम मात्रा अपडेट।",
+            "type-updated": "Type updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "refill-support-updated": "Refill support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
+            "cancel-support-updated": "Cancel support updated from <b>{{from}}<\/b> to <b>{{to}}<\/b>.",
             "price-increased": "{{from}} से {{to}} तक मूल्य वृद्धि।",
             "price-decreased": "{{from}} से {{to}} तक मूल्य कमी।",
             "enabled": "सेवा सक्षम की गई।",

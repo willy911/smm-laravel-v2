@@ -10,6 +10,8 @@
     "toast": {
         "refill-successful": "تم إنشاء طلب إعادة تعبئة الطلب بنجاح.",
         "cancel-successful": "تم إنشاء طلب إلغاء الطلب بنجاح.",
+        "cancel-failed": "The cancellation request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
+        "refill-failed": "The refill request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
         "invalid-order-id": "رقم الطلب غير صالح.",
         "wait-previous-order": "يرجى انتظار معالجة الطلب السابق أولاً.",
         "min-quantity": "الحد الأدنى للكمية هو {{min}}.",

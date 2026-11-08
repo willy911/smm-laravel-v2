@@ -10,6 +10,8 @@
     "toast": {
         "refill-successful": "Matagumpay na nagawa ang request para sa refill ng order.",
         "cancel-successful": "Matagumpay na nagawa ang request para sa pagkansela ng order.",
+        "cancel-failed": "The cancellation request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
+        "refill-failed": "The refill request for order ID {{order_id}} failed to be processed by the provider. Please try again later or contact support.",
         "invalid-order-id": "Hindi valid ang Order ID.",
         "wait-previous-order": "Mangyaring hintayin munang maproseso ang nakaraang order.",
         "min-quantity": "Ang minimum na dami ay {{min}}.",
