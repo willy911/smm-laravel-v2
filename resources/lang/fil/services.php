@@ -14,6 +14,9 @@ return [
         'description' => [
             'min_updated' => 'Na-update ang minimum na dami ng serbisyo mula :from hanggang :to.',
             'max_updated' => 'Na-update ang maximum na dami ng serbisyo mula :from hanggang :to.',
+            'type_updated' => 'Type updated from <b>:from</b> to <b>:to</b>.',
+            'refill_support_updated' => 'Refill support updated from <b>:from</b> to <b>:to</b>.',
+            'cancel_support_updated' => 'Cancel support updated from <b>:from</b> to <b>:to</b>.',
             'price_increased' => 'Tumaas ang presyo mula :from hanggang :to.',
             'price_decreased' => 'Bumaba ang presyo mula :from hanggang :to.',
             'enabled' => 'Ang serbisyo ay pinagana.',

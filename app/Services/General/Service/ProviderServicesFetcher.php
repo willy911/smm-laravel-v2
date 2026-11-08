@@ -2,6 +2,7 @@
 
 namespace App\Services\General\Service;
 
+use App\Enums\Service\Service as ServiceEnum;
 use App\Models\Service\ServiceProvider;
 use Illuminate\Support\Facades\Http;
 
@@ -78,6 +79,16 @@ class ProviderServicesFetcher
                 ? $profitConfig->value
                 : ($profitConfig->value / 100) * $basePrice;
 
+            $rawType = $config->parse_response->type
+                ? data_get($service, $config->parse_response->type)
+                : null;
+            $rawRefill = $config->parse_response->is_refill_support
+                ? data_get($service, $config->parse_response->is_refill_support)
+                : null;
+            $rawCancel = $config->parse_response->is_cancel_support
+                ? data_get($service, $config->parse_response->is_cancel_support)
+                : null;
+
             $mappedServices[] = [
                 'service_provider_service_id' => $serviceId,
                 'original_price' => $basePrice,
@@ -88,6 +99,13 @@ class ProviderServicesFetcher
                 'description' => $config->parse_response->description
                     ? data_get($service, $config->parse_response->description)
                     : null,
+                'type' => self::normalizeProviderType($rawType, $config->parse_text->type ?? null),
+                'is_refill_support' => $rawRefill === null
+                    ? null
+                    : (filter_var($rawRefill, FILTER_VALIDATE_BOOLEAN) ? 1 : 0),
+                'is_cancel_support' => $rawCancel === null
+                    ? null
+                    : (filter_var($rawCancel, FILTER_VALIDATE_BOOLEAN) ? 1 : 0),
             ];
         }
 
@@ -121,6 +139,46 @@ class ProviderServicesFetcher
         $rate = (float) ($serviceProvider->locale?->usd_rate ?? 0);
 
         return $rate > 0 ? $rate : 1;
+    }
+
+    /**
+     * Normalisasi type mentah dari API provider menjadi kunci enum yang dikenal:
+     * - Sudah kunci enum ("custom_comments") -> dipakai apa adanya.
+     * - Label enum ("Custom Comments" — pola GOP) -> dipetakan balik ke kunci.
+     * - Value config parse_text.type ({kunci: label}) yang cocok -> kuncinya.
+     * - Kosong/tidak dikenal -> 'primary' (nilai tak dikenal tidak boleh masuk
+     *   services.type — pola sama dengan normalizeType GetServicesController).
+     */
+    public static function normalizeProviderType(?string $rawType, ?object $parseTextType): string
+    {
+        $rawType = $rawType === null ? '' : trim(mb_strtolower($rawType));
+
+        if ($rawType === '') {
+            return 'primary';
+        }
+
+        // Sudah berupa kunci enum ("custom_comments").
+        if (in_array($rawType, ServiceEnum::getValue('ARRAY_TYPE_KEYS'), true)) {
+            return $rawType;
+        }
+
+        // Berupa label enum ("Custom Comments") -> petakan balik ke kunci.
+        foreach (ServiceEnum::getValue('ARRAY_TYPE_LABELS') as $key => $label) {
+            if (mb_strtolower($label) === $rawType) {
+                return $key;
+            }
+        }
+
+        // Cocok dengan value config parse_text.type ({kunci: label}).
+        if ($parseTextType !== null) {
+            foreach (get_object_vars($parseTextType) as $key => $label) {
+                if (mb_strtolower((string) $label) === $rawType) {
+                    return $key;
+                }
+            }
+        }
+
+        return 'primary';
     }
 
     /**

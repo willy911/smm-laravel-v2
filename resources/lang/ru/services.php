@@ -14,6 +14,9 @@ return [
         'description' => [
             'min_updated' => 'Обновление минимального количества услуги с :from до :to.',
             'max_updated' => 'Обновление максимального количества услуги с :from до :to.',
+            'type_updated' => 'Type updated from <b>:from</b> to <b>:to</b>.',
+            'refill_support_updated' => 'Refill support updated from <b>:from</b> to <b>:to</b>.',
+            'cancel_support_updated' => 'Cancel support updated from <b>:from</b> to <b>:to</b>.',
             'price_increased' => 'Повышение цены с :from до :to.',
             'price_decreased' => 'Снижение цены с :from до :to.',
             'enabled' => 'Услуга включена.',

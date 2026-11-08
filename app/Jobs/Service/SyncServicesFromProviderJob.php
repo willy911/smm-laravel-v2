@@ -122,6 +122,46 @@ class SyncServicesFromProviderJob implements ShouldQueue
                         ];
                     }
 
+                    if ($sps->type !== null && $service->type !== $sps->type) {
+                        $updates['type'] = $sps->type;
+                        $logs[] = [
+                            'type' => 'updated',
+                            'content_key'    => 'services:updates.description.type-updated',
+                            'content_params' => (object) [
+                                'from' => $service->type,
+                                'to'   => $sps->type,
+                            ],
+                        ];
+                    }
+
+                    if ($sps->is_refill_support !== null
+                        && (int) $service->is_refill_support !== (int) $sps->is_refill_support
+                    ) {
+                        $updates['is_refill_support'] = $sps->is_refill_support;
+                        $logs[] = [
+                            'type' => 'updated',
+                            'content_key'    => 'services:updates.description.refill-support-updated',
+                            'content_params' => (object) [
+                                'from' => (int) $service->is_refill_support,
+                                'to'   => (int) $sps->is_refill_support,
+                            ],
+                        ];
+                    }
+
+                    if ($sps->is_cancel_support !== null
+                        && (int) $service->is_cancel_support !== (int) $sps->is_cancel_support
+                    ) {
+                        $updates['is_cancel_support'] = $sps->is_cancel_support;
+                        $logs[] = [
+                            'type' => 'updated',
+                            'content_key'    => 'services:updates.description.cancel-support-updated',
+                            'content_params' => (object) [
+                                'from' => (int) $service->is_cancel_support,
+                                'to'   => (int) $sps->is_cancel_support,
+                            ],
+                        ];
+                    }
+
                     if (!$service->is_auto_update_price && !$service->is_manual_profit) {
                         continue;
                     }

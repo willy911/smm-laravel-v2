@@ -58,6 +58,9 @@ class UpsertProviderServiceJob implements ShouldQueue
                 'min' => (int) $service['min'],
                 'max' => (int) $service['max'],
                 'description' => $service['description'] ?? null,
+                'type' => $service['type'] ?? null,
+                'is_refill_support' => $service['is_refill_support'] ?? null,
+                'is_cancel_support' => $service['is_cancel_support'] ?? null,
                 'updated_at' => $now,
                 'created_at' => $now,
             ];
@@ -83,6 +86,9 @@ class UpsertProviderServiceJob implements ShouldQueue
                     'min',
                     'max',
                     'description' => DB::raw('IF(VALUES(description) IS NULL OR VALUES(description) = \'\', description, VALUES(description))'),
+                    'type',
+                    'is_refill_support',
+                    'is_cancel_support',
                     'updated_at',
                 ]
             );

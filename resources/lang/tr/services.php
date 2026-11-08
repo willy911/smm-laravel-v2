@@ -14,6 +14,9 @@ return [
         'description' => [
             'min_updated' => 'Hizmetin minimum miktarı :from değerinden :to değerine güncellendi.',
             'max_updated' => 'Hizmetin maksimum miktarı :from değerinden :to değerine güncellendi.',
+            'type_updated' => 'Type updated from <b>:from</b> to <b>:to</b>.',
+            'refill_support_updated' => 'Refill support updated from <b>:from</b> to <b>:to</b>.',
+            'cancel_support_updated' => 'Cancel support updated from <b>:from</b> to <b>:to</b>.',
             'price_increased' => 'Fiyat :from değerinden :to değerine yükseldi.',
             'price_decreased' => 'Fiyat :from değerinden :to değerine düştü.',
             'enabled' => 'Hizmet etkinleştirildi.',

@@ -14,6 +14,9 @@ return [
         'description' => [
             'min_updated' => ':from से :to तक सेवा की न्यूनतम मात्रा अपडेट।',
             'max_updated' => ':from से :to तक सेवा की अधिकतम मात्रा अपडेट।',
+            'type_updated' => 'Type updated from <b>:from</b> to <b>:to</b>.',
+            'refill_support_updated' => 'Refill support updated from <b>:from</b> to <b>:to</b>.',
+            'cancel_support_updated' => 'Cancel support updated from <b>:from</b> to <b>:to</b>.',
             'price_increased' => ':from से :to तक मूल्य वृद्धि।',
             'price_decreased' => ':from से :to तक मूल्य कमी।',
             'enabled' => 'सेवा सक्षम की गई।',

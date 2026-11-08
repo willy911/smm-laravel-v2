@@ -14,6 +14,9 @@ return [
         'description' => [
             'min_updated' => 'Atualização da quantidade mínima de serviço de :from para :to.',
             'max_updated' => 'Atualização da quantidade máxima de serviço de :from para :to.',
+            'type_updated' => 'Type updated from <b>:from</b> to <b>:to</b>.',
+            'refill_support_updated' => 'Refill support updated from <b>:from</b> to <b>:to</b>.',
+            'cancel_support_updated' => 'Cancel support updated from <b>:from</b> to <b>:to</b>.',
             'price_increased' => 'Aumento de Preço de :from para :to.',
             'price_decreased' => 'Diminuição de Preço de :from para :to.',
             'enabled' => 'Serviço ativado.',
