@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful'    => 'Permintaan isi ulang pesanan berhasil dibuat.',
         'cancel_successful'    => 'Permintaan pembatalan pesanan berhasil dibuat.',
+        'cancel_failed'        => 'Permintaan pembatalan pesanan ID :order_id gagal diproses oleh provider. Coba lagi nanti atau hubungi admin.',
+        'refill_failed'        => 'Permintaan isi ulang pesanan ID :order_id gagal diproses oleh provider. Coba lagi nanti atau hubungi admin.',
         'invalid_order_id'     => 'ID Pesanan tidak valid.',
         'wait_previous_order' => 'Silahkan tunggu pesanan sebelumnya diproses terlebih dahulu.',
         'min_quantity' => 'Jumlah minimal adalah :min.',

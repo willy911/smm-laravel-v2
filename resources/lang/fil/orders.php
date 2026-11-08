@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful'    => 'Matagumpay na nagawa ang request para sa refill ng order.',
         'cancel_successful'    => 'Matagumpay na nagawa ang request para sa pagkansela ng order.',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id'     => 'Hindi valid ang Order ID.',
         'wait_previous_order'  => 'Mangyaring hintayin munang maproseso ang nakaraang order.',
         'min_quantity'         => 'Ang minimum na dami ay :min.',

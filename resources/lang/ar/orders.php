@@ -15,6 +15,8 @@ return [
     'toast' => [
         'refill_successful'    => 'تم إنشاء طلب إعادة تعبئة الطلب بنجاح.',
         'cancel_successful'    => 'تم إنشاء طلب إلغاء الطلب بنجاح.',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id'     => 'رقم الطلب غير صالح.',
         'wait_previous_order' => 'يرجى انتظار معالجة الطلب السابق أولاً.',
         'min_quantity' => 'الحد الأدنى للكمية هو :min.',

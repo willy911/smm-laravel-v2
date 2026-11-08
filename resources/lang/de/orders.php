@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful'    => 'Anfrage zur Nachfüllung der Bestellung erfolgreich erstellt.',
         'cancel_successful'    => 'Anfrage zur Stornierung der Bestellung erfolgreich erstellt.',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id'     => 'Bestell-ID ungültig.',
         'wait_previous_order' => 'Bitte warten Sie, bis die vorherige Bestellung zuerst bearbeitet wurde.',
         'min_quantity' => 'Die Mindestmenge beträgt :min.',

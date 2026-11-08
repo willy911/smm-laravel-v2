@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful' => 'Sipariş dolum isteği başarıyla oluşturuldu.',
         'cancel_successful' => 'Sipariş iptal isteği başarıyla oluşturuldu.',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id' => 'Geçersiz Sipariş ID\'si.',
         'wait_previous_order' => 'Lütfen önceki siparişin önce işlenmesini bekleyin.',
         'min_quantity' => 'Minimum miktar :min.',

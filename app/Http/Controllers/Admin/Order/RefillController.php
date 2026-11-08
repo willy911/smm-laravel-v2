@@ -200,6 +200,7 @@ class RefillController extends Controller
                     );
             })->all()
         );
+        $failedOrderIds = [];
         foreach ($responses as $orderId => $response) {
             $order = $filteredOrders->firstWhere('id', $orderId);
             $credentials = [
@@ -241,6 +242,7 @@ class RefillController extends Controller
                     // Response ok tetapi provider tidak mengembalikan refill_id:
                     // tidak ada OrderRefill tercatat, catat SPR 'fail' agar
                     // terlihat di halaman admin/services/providers/response.
+                    $failedOrderIds[] = $order->id;
                     $insertServiceProviderResponse = ServiceProviderResponse::create([
                         'type'                => 'order_refill_create',
                         'status'              => 'fail',
@@ -254,6 +256,7 @@ class RefillController extends Controller
             } else {
                 // Provider error (response tidak ok): catat SPR 'fail' tanpa
                 // order_refill_id, refill tetap boleh dicoba ulang.
+                $failedOrderIds[] = $order->id;
                 $insertServiceProviderResponse = ServiceProviderResponse::create([
                     'type'                => 'order_refill_create',
                     'status'              => 'fail',
@@ -270,6 +273,12 @@ class RefillController extends Controller
         }
         $orderService = new OrderService($request);
         $orderService->invalidateUserOrdersCache();
+        if (!empty($failedOrderIds)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.refill_failed', ['order_id' => implode(', ', array_unique($failedOrderIds))]),
+            ], 422);
+        }
         return response()->json([
             'status'  => true,
             'message' => __('orders.toast.refill_successful')

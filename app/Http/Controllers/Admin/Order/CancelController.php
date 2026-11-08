@@ -127,6 +127,7 @@ class CancelController extends Controller
                     );
             })->all()
         );
+        $failedOrderIds = [];
         foreach ($responses as $orderId => $response) {
             $order = $filteredOrders->firstWhere('id', $orderId);
             $credentials = [
@@ -167,6 +168,7 @@ class CancelController extends Controller
                     // Response ok tetapi provider tidak mengembalikan cancel_id:
                     // tidak ada OrderCancel tercatat, catat SPR 'fail' agar
                     // terlihat di halaman admin/services/providers/response.
+                    $failedOrderIds[] = $order->id;
                     $insertServiceProviderResponse = ServiceProviderResponse::create([
                         'type'                => 'order_cancel_create',
                         'status'              => 'fail',
@@ -180,6 +182,7 @@ class CancelController extends Controller
             } else {
                 // Provider error (response tidak ok): tanpa order_cancel_id,
                 // order tetap boleh di-cancel ulang.
+                $failedOrderIds[] = $order->id;
                 $insertServiceProviderResponse = ServiceProviderResponse::create([
                     'type'                => 'order_cancel_create',
                     'status'              => 'fail',
@@ -196,6 +199,12 @@ class CancelController extends Controller
         }
         $orderService = new OrderService($request);
         $orderService->invalidateUserOrdersCache();
+        if (!empty($failedOrderIds)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.cancel_failed', ['order_id' => implode(', ', array_unique($failedOrderIds))]),
+            ], 422);
+        }
         return response()->json([
             'status'  => true,
             'message' => __('orders.toast.cancel_successful')

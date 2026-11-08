@@ -125,6 +125,7 @@ class OrderController extends Controller
                     );
             })->all()
         );
+        $failedOrderIds = [];
         foreach ($responses as $orderId => $response) {
             $order = $filteredOrders->firstWhere('id', $orderId);
             $credentials = [
@@ -161,6 +162,7 @@ class OrderController extends Controller
                         'logs'                => $response->json(),
                     ]);
                 } else {
+                    $failedOrderIds[] = $order->id;
                     $insertServiceProviderResponse = ServiceProviderResponse::create([
                         'type'                => 'order_refill_create',
                         'status'              => 'fail',
@@ -172,6 +174,7 @@ class OrderController extends Controller
                     ]);
                 }
             } else {
+                $failedOrderIds[] = $order->id;
                 $insertServiceProviderResponse = ServiceProviderResponse::create([
                     'type'                => 'order_refill_create',
                     'status'              => 'fail',
@@ -185,6 +188,12 @@ class OrderController extends Controller
         }
         $orderService = new OrderService($request);
         $orderService->invalidateUserOrdersCache(auth('web')->id());
+        if (!empty($failedOrderIds)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.refill_failed', ['order_id' => implode(', ', array_unique($failedOrderIds))]),
+            ], 422);
+        }
         return response()->json([
             'status'  => true,
             'message' => __('orders.toast.refill_successful')
@@ -270,6 +279,7 @@ class OrderController extends Controller
                     );
             })->all()
         );
+        $failedOrderIds = [];
         foreach ($responses as $orderId => $response) {
             $order = $filteredOrders->firstWhere('id', $orderId);
             $credentials = [
@@ -305,6 +315,7 @@ class OrderController extends Controller
                         'logs'                => $response->json(),
                     ]);
                 } else {
+                    $failedOrderIds[] = $order->id;
                     $insertServiceProviderResponse = ServiceProviderResponse::create([
                         'type'                => 'order_cancel_create',
                         'status'              => 'fail',
@@ -316,6 +327,7 @@ class OrderController extends Controller
                     ]);
                 }
             } else {
+                $failedOrderIds[] = $order->id;
                 $insertServiceProviderResponse = ServiceProviderResponse::create([
                     'type'                => 'order_cancel_create',
                     'status'              => 'fail',
@@ -329,6 +341,12 @@ class OrderController extends Controller
         }
         $orderService = new OrderService($request);
         $orderService->invalidateUserOrdersCache(auth('web')->id());
+        if (!empty($failedOrderIds)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.cancel_failed', ['order_id' => implode(', ', array_unique($failedOrderIds))]),
+            ], 422);
+        }
         return response()->json([
             'status'  => true,
             'message' => __('orders.toast.cancel_successful')

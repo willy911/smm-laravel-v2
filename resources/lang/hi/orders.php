@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful' => 'ऑर्डर रिफिल अनुरोध सफलतापूर्वक बनाया गया।',
         'cancel_successful' => 'ऑर्डर रद्द करने का अनुरोध सफलतापूर्वक बनाया गया।',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id' => 'ऑर्डर ID अमान्य है।',
         'wait_previous_order' => 'कृपया पिछले ऑर्डर के पहले संसाधित होने तक प्रतीक्षा करें।',
         'min_quantity' => 'न्यूनतम मात्रा :min है।',

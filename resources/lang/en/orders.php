@@ -14,6 +14,8 @@ return [
     'toast' => [
         'refill_successful' => 'Order refill request successfully created.',
         'cancel_successful' => 'Order cancellation request successfully created.',
+        'cancel_failed' => 'The cancellation request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
+        'refill_failed' => 'The refill request for order ID :order_id failed to be processed by the provider. Please try again later or contact support.',
         'invalid_order_id' => 'Invalid Order ID.',
         'wait_previous_order' => 'Please wait for the previous order to be processed first.',
         'min_quantity' => 'Minimum quantity is :min.',
