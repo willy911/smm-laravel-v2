@@ -225,37 +225,44 @@ class RefillController extends Controller
                         'content_key'  => 'orders:log.refill-successful',
                         'content_params'  => (object) ['order_refill_id' => $insertOrderRefill->id],
                     ]);
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'success',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $order->id,
-                    //     'order_refill_id'     => $insertOrderRefill->id,
-                    //     'service_id'          => $order->service->id,
-                    //     'service_provider_id' => $order->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Provider menerima permintaan refill (refill_id tersimpan):
+                    // catat SPR 'success' dengan order_refill_id sesuai pola AJAX OrderController.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $order->id,
+                        'order_refill_id'     => $insertOrderRefill->id,
+                        'service_id'          => $order->service->id,
+                        'service_provider_id' => $order->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $order->id,
-                    //     'service_id'          => $order->service->id,
-                    //     'service_provider_id' => $order->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Response ok tetapi provider tidak mengembalikan refill_id:
+                    // tidak ada OrderRefill tercatat, catat SPR 'fail' agar
+                    // terlihat di halaman admin/services/providers/response.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $order->id,
+                        'service_id'          => $order->service->id,
+                        'service_provider_id' => $order->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                 }
             } else {
-                // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                //     'type'                => 'order_refill_create',
-                //     'status'              => 'fail',
-                //     'user_id'             => $credentials['user_id'],
-                //     'order_id'            => $order->id,
-                //     'service_id'          => $order->service->id,
-                //     'service_provider_id' => $order->service->service_provider_id,
-                //     'logs'                => $response->json(),
-                // ]);
+                // Provider error (response tidak ok): catat SPR 'fail' tanpa
+                // order_refill_id, refill tetap boleh dicoba ulang.
+                $insertServiceProviderResponse = ServiceProviderResponse::create([
+                    'type'                => 'order_refill_create',
+                    'status'              => 'fail',
+                    'user_id'             => $credentials['user_id'],
+                    'order_id'            => $order->id,
+                    'service_id'          => $order->service->id,
+                    'service_provider_id' => $order->service->service_provider_id,
+                    'logs'                => $response->json(),
+                ]);
             }
             // Cache::tags([
             //     'user_orders:' . $credentials['user_id'],

@@ -214,7 +214,9 @@ class OrderController extends Controller
             'orderCancel',
         ])->where('user_id', auth()->id())->whereIn('id', $orderIds)->get();
         $filteredOrders = collect($orders)->filter(function ($order) {
-            if ($order->status !== 'pending') {
+            // Cancel boleh diajukan selama status belum terminal
+            // (pending, processing, in_progress) — tanpa jendela tunggu 1 jam.
+            if (!in_array($order->status, ['pending', 'processing', 'in_progress'])) {
                 return false;
             }
             $service = $order->service;
@@ -227,9 +229,6 @@ class OrderController extends Controller
             }
             $serviceProviderConfig = optional($order->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration);
             if (!$serviceProviderConfig->method || !$serviceProviderConfig->endpoint) {
-                return false;
-            }
-            if (now()->lessThan(Carbon::parse($order->created_at)->addHour())) {
                 return false;
             }
             if ($order->orderCancel) {

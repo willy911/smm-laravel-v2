@@ -219,18 +219,18 @@ class Order extends Model
     {
         return new Attribute(
             get: function () {
-                if ($this->status !== 'pending') {
+                // Tombol cancel hanya aktif untuk status non-terminal
+                // (pending, processing, in_progress). Status terminal
+                // (completed, error, partial, canceled) tidak dapat dibatalkan.
+                if (in_array($this->status, ['completed', 'error', 'partial', 'canceled'])) {
                     return 'Pesanan tidak dapat dibatalkan.';
                 }
+                // Permintaan cancel terkunci permanen hanya bila provider sudah
+                // MENERIMA permintaan (baris OrderCancel tercatat = cancel_id
+                // tersimpan). Provider error => tidak ada OrderCancel => boleh retry.
                 $service = $this->service;
                 if ($service && $this->orderCancel) {
                     return 'Permintaan pembatalan untuk pesanan ini sudah dibuat.';
-                }
-                if ($service) {
-                    $remainingSeconds = now()->diffInSeconds(Carbon::parse($this->created_at)->addHour(), false);
-                    if ($remainingSeconds > 0) {
-                        return 'Pembatalan tersedia dalam ' . CarbonInterval::seconds($remainingSeconds)->cascade()->forHumans();
-                    }
                 }
                 return;
             }

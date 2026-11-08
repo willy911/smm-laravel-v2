@@ -330,7 +330,7 @@ export default function Index({ pageProps }) {
                                     <p>{row.getIsExpanded() ? t('common:tooltips.close-detail') : t('common:tooltips.open-detail')}</p>
                                 </TooltipContent>
                             </Tooltip>
-                            {row.original.status === 'pending' && row.original.service && row.original.service.is_cancel_support ? (
+                            {['pending', 'processing', 'in_progress'].includes(row.original.status) && row.original.service && row.original.service.is_cancel_support ? (
                                 <Tooltip>
                                     <TooltipTrigger asChild>
                                         <Button

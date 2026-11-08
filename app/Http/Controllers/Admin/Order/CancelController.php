@@ -71,7 +71,9 @@ class CancelController extends Controller
             'orderCancel',
         ])->whereIn('id', $orderIds)->get();
         $filteredOrders = collect($orders)->filter(function ($order) {
-            if ($order->status !== 'pending') {
+            // Cancel boleh diajukan selama status belum terminal
+            // (pending, processing, in_progress) — tanpa jendela tunggu 1 jam.
+            if (!in_array($order->status, ['pending', 'processing', 'in_progress'])) {
                 return false;
             }
             $service = $order->service;
@@ -84,9 +86,6 @@ class CancelController extends Controller
             }
             $serviceProviderConfig = optional($order->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration);
             if (!$serviceProviderConfig->method || !$serviceProviderConfig->endpoint) {
-                return false;
-            }
-            if (now()->lessThan(Carbon::parse($order->created_at)->addHour())) {
                 return false;
             }
             if ($order->orderCancel) {
@@ -145,6 +144,18 @@ class CancelController extends Controller
                 $credentials['service_provider_order_cancel_log'] = $response->json();
                 if ($serviceProviderOrderCancelID) {
                     $insertOrderCancel = OrderCancel::create($credentials);
+                    // Provider menerima permintaan (cancel_id tersimpan): catat SPR 'success'
+                    // dengan order_cancel_id sesuai pola AJAX OrderController.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $order->id,
+                        'order_cancel_id'     => $insertOrderCancel->id,
+                        'service_id'          => $order->service->id,
+                        'service_provider_id' => $order->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     $insertActivityLog = AdminActivityLog::create([
                         'admin_id'   => auth('admin')->user()->id,
                         'ip_address'  => $credentials['ip_address'],
@@ -153,26 +164,31 @@ class CancelController extends Controller
                         'content_params'  => (object) ['order_cancel_id' => $insertOrderCancel->id ?? 0],
                     ]);
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_cancel_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $order->id,
-                    //     'service_id'          => $order->service->id,
-                    //     'service_provider_id' => $order->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Response ok tetapi provider tidak mengembalikan cancel_id:
+                    // tidak ada OrderCancel tercatat, catat SPR 'fail' agar
+                    // terlihat di halaman admin/services/providers/response.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $order->id,
+                        'service_id'          => $order->service->id,
+                        'service_provider_id' => $order->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                 }
             } else {
-                // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                //     'type'                => 'order_cancel_create',
-                //     'status'              => 'fail',
-                //     'user_id'             => $credentials['user_id'],
-                //     'order_id'            => $order->id,
-                //     'service_id'          => $order->service->id,
-                //     'service_provider_id' => $order->service->service_provider_id,
-                //     'logs'                => $response->json(),
-                // ]);
+                // Provider error (response tidak ok): tanpa order_cancel_id,
+                // order tetap boleh di-cancel ulang.
+                $insertServiceProviderResponse = ServiceProviderResponse::create([
+                    'type'                => 'order_cancel_create',
+                    'status'              => 'fail',
+                    'user_id'             => $credentials['user_id'],
+                    'order_id'            => $order->id,
+                    'service_id'          => $order->service->id,
+                    'service_provider_id' => $order->service->service_provider_id,
+                    'logs'                => $response->json(),
+                ]);
             }
             // Cache::tags([
             //     'user_orders:' . $credentials['user_id'],

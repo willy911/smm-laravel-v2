@@ -399,7 +399,7 @@ export default function Index({ pageProps }) {
                                 </TooltipContent>
                             </Tooltip>
                             {hasRole('order.update') &&
-                            row.original.status === 'pending' &&
+                            ['pending', 'processing', 'in_progress'].includes(row.original.status) &&
                             row.original.service &&
                             row.original.service.is_cancel_support ? (
                                 <Tooltip>
