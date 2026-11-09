@@ -13,6 +13,7 @@ class Locale extends Model
     public $timestamps = true;
     protected $guarded = [];
     protected $visible = [
+        'id',
         'currency_code',
         'currency_symbol',
         'language_name',

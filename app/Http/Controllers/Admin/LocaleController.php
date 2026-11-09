@@ -23,6 +23,7 @@ use App\Models\Locale;
 use App\Services\Admin\Admin\GroupService;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Foundation\Http\FormRequest;
@@ -88,7 +89,14 @@ class LocaleController extends Controller implements HasMiddleware
     {
         abort_unless(auth('admin')->user()->group->is_primary, 403);
         $insertData = Locale::create([
-            'usd_rate' => escape_input($request->input('locale.usd_rate')),
+            'currency_code'    => escape_input($request->input('locale.currency_code')),
+            'currency_symbol'  => escape_input($request->input('locale.currency_symbol')),
+            'language_name'    => escape_input($request->input('locale.language_name')),
+            'usd_rate'         => escape_input($request->input('locale.usd_rate')),
+            'usd_rate_buy'     => escape_input($request->input('locale.usd_rate_buy')),
+            'kurs_auto'        => $request->boolean('locale.kurs_auto') ? '1' : '0',
+            'locale'           => Str::lower(escape_input($request->input('locale.currency_code'))),
+            'locale_code'      => Str::lower(escape_input($request->input('locale.currency_code'))),
         ]);
         $insertActivityLog =  AdminActivityLog::create([
             'admin_id'   => auth('admin')->user()->id,
@@ -335,6 +343,21 @@ class LocaleRequest extends FormRequest
                 'numeric',
                 'min:0',
             ],
+            'locale.currency_code' => [
+                'required',
+                'string',
+                'max:3',
+            ],
+            'locale.currency_symbol' => [
+                'required',
+                'string',
+                'max:10',
+            ],
+            'locale.language_name' => [
+                'required',
+                'string',
+                'max:100',
+            ],
         ];
     }
 
@@ -343,6 +366,9 @@ class LocaleRequest extends FormRequest
         return [
             'locale.usd_rate' => 'USD Rate',
             'locale.usd_rate_buy' => 'USD Buy Rate',
+            'locale.currency_code' => 'Currency Code',
+            'locale.currency_symbol' => 'Currency Symbol',
+            'locale.language_name' => 'Language Name',
         ];
     }
 }
