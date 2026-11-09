@@ -84,7 +84,7 @@ class OrderController extends Controller
                     'serviceCategoryGroups' => ServiceCategoryGroup::whereHas('serviceCategories.services', function ($query) {
                         $query->where('status', '1');
                     })
-                        ->orderBy('name', 'asc')
+                        ->orderByRaw('ISNULL(sort_number), sort_number ASC, id DESC')
                         ->get()
                         ->map(function ($group) {
                             return $group;

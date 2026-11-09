@@ -168,7 +168,7 @@ class ServiceController extends Controller
                                     'count' => $row->count,
                                 ];
                             }),
-                        'serviceCategoryGroups' => ServiceCategoryGroup::orderBy('name', 'asc')->get(['id', 'name', 'type', 'icon', 'emoji']),
+                        'serviceCategoryGroups' => ServiceCategoryGroup::orderByRaw('ISNULL(sort_number), sort_number ASC, id DESC')->get(['id', 'name', 'type', 'icon', 'emoji']),
                         'others' => array_values(array_filter([
                             auth()->check() ? [
                                 'value' => 'favorite',

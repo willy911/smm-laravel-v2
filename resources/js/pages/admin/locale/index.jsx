@@ -30,7 +30,7 @@ import { cn, config, createCurrencyFormatter, formatAmount, formatDate, toHTML }
 import { Deferred, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { Alert01Icon, ArrowDown01Icon, Delete04Icon, FileEditIcon, Loading03Icon, RefreshIcon, RestoreBinIcon } from 'hugeicons-react';
+import { AddCircleIcon, Alert01Icon, ArrowDown01Icon, Delete04Icon, FileEditIcon, Loading03Icon, RefreshIcon, RestoreBinIcon } from 'hugeicons-react';
 import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -671,10 +671,25 @@ export default function Index({ pageProps }) {
                         onChange={fetchData}
                         isLoading={isLoading}
                         additionalButton={
-                            <Button variant="outline" size="sm" onClick={handleSyncKurs} disabled={isSyncing}>
-                                {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
-                                {t('admin/common:labels.kurs_sync')}
-                            </Button>
+                            <div className="flex items-center gap-2">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => {
+                                        setTarget({});
+                                        setIsCreateDialogOpened(true);
+                                    }}
+                                >
+                                    <AddCircleIcon className="h-4 w-4" />
+                                    {t('admin/common:actions.create-item', {
+                                        item: t('common:labels.currency'),
+                                    })}
+                                </Button>
+                                <Button variant="outline" size="sm" onClick={handleSyncKurs} disabled={isSyncing}>
+                                    {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
+                                    {t('admin/common:labels.kurs_sync')}
+                                </Button>
+                            </div>
                         }
                     />
                 </Deferred>
