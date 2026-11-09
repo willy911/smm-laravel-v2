@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -41,7 +42,7 @@ import {
     SortByDown01Icon,
 } from 'hugeicons-react';
 import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import Form from './form';
 import Sort from './sort';
@@ -171,6 +172,59 @@ const StatusDropdown = ({ row, handleSwitch, t }) => {
                     })}
             </DropdownMenuContent>
         </DropdownMenu>
+    );
+};
+
+const SortNumberInput = ({ row, handleSwitch }) => {
+    const { hasRole } = usePermissions();
+    const initialValue = row.original.sort_number === null || row.original.sort_number === undefined ? '' : String(row.original.sort_number);
+    const [value, setValue] = useState(initialValue);
+    const [isSaving, setIsSaving] = useState(false);
+
+    // Sinkronkan bila data baris berubah dari server (mis. setelah fetchData).
+    useEffect(() => {
+        setValue(initialValue);
+    }, [initialValue]);
+
+    if (row.original.deleted_at || !hasRole('service.category.update')) {
+        return <span className="text-sm">{initialValue}</span>;
+    }
+
+    const commit = async () => {
+        const raw = String(value ?? '').trim();
+        const parsedNumber = raw === '' ? null : Number(raw);
+        const nextValue = parsedNumber === null || !Number.isFinite(parsedNumber) ? null : String(Math.max(0, Math.floor(parsedNumber)));
+        const currentValue = initialValue === '' ? null : String(Number(initialValue));
+        if (nextValue === currentValue || isSaving) {
+            setValue(initialValue);
+            return;
+        }
+        setIsSaving(true);
+        try {
+            // Route butuh segmen {columnValue}; nilai kosong dikirim sebagai 'null'
+            // dan dinormalisasi menjadi NULL oleh controller.
+            await handleSwitch([row.original.id], 'sort_number', nextValue === null ? 'null' : nextValue);
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
+    return (
+        <Input
+            type="number"
+            min="0"
+            className="h-7 w-16 px-1 text-xs"
+            value={value}
+            disabled={isSaving}
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={commit}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.currentTarget.blur();
+                }
+            }}
+        />
     );
 };
 
@@ -608,8 +662,8 @@ export default function Index({ pageProps }) {
                 accessorKey: 'sort_number',
                 headerName: t('common:labels.sort-number'),
                 header: ({ column }) => <DataTableColumnHeader column={column} title={t('common:labels.sort-number')} />,
-                cell: ({ row }) => row.getValue('sort_number'),
-                width: '32px',
+                cell: ({ row }) => <SortNumberInput row={row} handleSwitch={handleSwitch} />,
+                width: '80px',
             },
             {
                 accessorFn: (row) => row.created_at,
