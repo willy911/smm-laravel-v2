@@ -27,7 +27,7 @@ class CategoryService
     public function getOptions(): array
     {
         $categories = ServiceCategory::where('status', '1')->when($this->request->input(), fn($query) => $this->applyFilters($query))
-            ->orderByRaw('ISNULL(sort_number), sort_number ASC, id DESC')
+            ->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC')
             ->get()
             ->groupBy('service_category_group_id');
 
@@ -68,7 +68,7 @@ class CategoryService
                 $query->where('status', '1');
             }
         ])->when($this->request->input(), fn($query) => $this->applyFilters($query))
-            ->orderByRaw('ISNULL(sort_number), sort_number ASC, id DESC')
+            ->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC')
             ->get()
             ->groupBy('service_category_group_id');
 
