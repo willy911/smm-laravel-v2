@@ -277,21 +277,8 @@ class CategoryController extends Controller implements HasMiddleware
                 $columnNameLabel = 'group';
                 $from = $target->service_category_group_id;
             }
-            if ($columnName == 'sort_number') {
-                $columnNameLabel = 'sort_number';
-                $from = $target->sort_number;
-            }
-            $value = $columnValue;
-            if ($columnName == 'sort_number') {
-                // Kolom sort_number nullable + unsigned: nilai kosong/bukan angka -> NULL, angka di-clamp >= 0.
-                $value = ($columnValue === '' || $columnValue === 'null' || !is_numeric($columnValue)) ? null : max(0, (int) $columnValue);
-            }
-            // Bandingkan null secara eksplisit: NULL != 0 supaya mengosongkan/mengisi 0 tetap tersimpan.
-            $isUnchanged = ($from === null || $value === null)
-                ? ($from === null && $value === null)
-                : ($from == $value);
-            if (!$isUnchanged) {
-                $target->update([$columnName => $value]);
+            if ($from != $columnValue) {
+                $target->update([$columnName => $columnValue]);
                 AdminActivityLog::create([
                     'admin_id'   => auth('admin')->user()->id,
                     'ip_address' => request()->ip(),

@@ -178,7 +178,7 @@ Route::group(['middleware' => ['auth:admin', 'auth.session']], function () {
                 ->whereIn('action', ['trash', 'restore', 'destroy'])
                 ->name('action');
             Route::post('switch/{columnName}/{columnValue}', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'switch'])
-                ->whereIn('columnName', ['status', 'service_category_group_id', 'type', 'sort_number'])->name('switch');
+                ->whereIn('columnName', ['status', 'service_category_group_id', 'type'])->name('switch');
             Route::get('options', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'options'])->name('options');
             Route::post('sort', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'sort'])->name('sort');
 
