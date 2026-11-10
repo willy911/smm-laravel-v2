@@ -428,7 +428,12 @@ export default function Index({ pageProps }) {
 
     const tableStateRef = useRef({});
     const pageIdsRef = useRef([]);
-    const [tableMeta, setTableMeta] = useState({ sorting: [{ id: 'sort_number', desc: false }], isFiltered: false });
+    const [tableMeta, setTableMeta] = useState({
+        sorting: [{ id: 'sort_number', desc: false }],
+        isFiltered: false,
+        pageIndex: 0,
+        pageSize: 10,
+    });
 
     const canReorder =
         hasRole('service.category.update') &&
@@ -501,7 +506,7 @@ export default function Index({ pageProps }) {
                 const g = globalFilter || {};
                 const hasRange = ['created_at', 'updated_at', 'deleted_at'].some((k) => g?.[k]?.start || g?.[k]?.end);
                 const isFiltered = activeFilters || hasRange || Boolean(g.search);
-                setTableMeta({ sorting: sorting || [], isFiltered });
+                setTableMeta({ sorting: sorting || [], isFiltered, pageIndex: pagination.pageIndex, pageSize: pagination.pageSize });
 
                 const response = await fetch(route(route().current(), rawTableRequest));
                 const data = await response.json();
@@ -676,7 +681,12 @@ export default function Index({ pageProps }) {
                 accessorKey: 'sort_number',
                 headerName: t('common:labels.sort-number'),
                 header: ({ column }) => <DataTableColumnHeader column={column} title={t('common:labels.sort-number')} />,
-                cell: ({ row }) => row.getValue('sort_number'),
+                cell: ({ row }) => {
+                    const sortNumber = row.getValue('sort_number');
+                    // Kategori lama bisa belum punya sort_number; tampilkan posisi baris
+                    // saat ini agar kolom Urutan tidak kosong sebelum diurutkan ulang.
+                    return sortNumber ?? tableMeta.pageIndex * tableMeta.pageSize + row.index + 1;
+                },
                 width: '32px',
             },
             {
@@ -774,7 +784,7 @@ export default function Index({ pageProps }) {
                 width: '32px',
             },
         ],
-        [i18n.language, pageProps?.serviceCategoryGroups?.options, canReorder],
+        [i18n.language, pageProps?.serviceCategoryGroups?.options, canReorder, tableMeta.pageIndex, tableMeta.pageSize],
     );
 
     const filters = useMemo(
