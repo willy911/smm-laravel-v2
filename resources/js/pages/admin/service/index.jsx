@@ -962,6 +962,13 @@ export default function Index({ pageProps }) {
                 }),
                 type: 'copy',
             },
+            {
+                label: t('common:actions.copy-item', {
+                    item: t('admin/services:labels.api-service-id'),
+                }),
+                type: 'copy',
+                column: 'service_provider_service_id',
+            },
             ...(hasRole('service.update')
                 ? [
                       {
