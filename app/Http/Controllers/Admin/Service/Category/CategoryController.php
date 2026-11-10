@@ -28,7 +28,9 @@ use App\Services\Admin\Service\CategoryGroupService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller implements HasMiddleware
 {
@@ -78,7 +80,19 @@ class CategoryController extends Controller implements HasMiddleware
                         'name',
                     ], 'LIKE', '%' . ($request->input('filter.search')) . '%');
                 }
-            })->orderBy($request->input('order.column'), $request->input('order.direction'))->paginate($request->input('length'))->onEachSide(1);
+            });
+            $allowedOrderColumns = ['id', 'name', 'sort_number', 'created_at', 'updated_at', 'deleted_at', 'service_category_group_id', 'status'];
+            $orderColumn = $request->input('order.column', 'sort_number');
+            $orderDirection = strtolower((string) $request->input('order.direction', 'asc')) === 'desc' ? 'desc' : 'asc';
+            if (!in_array($orderColumn, $allowedOrderColumns, true)) {
+                $orderColumn = 'sort_number';
+            }
+            if ($orderColumn === 'sort_number') {
+                $tableItems->orderByRaw('ISNULL(sort_number), sort_number ' . strtoupper($orderDirection) . ', name ASC, id ASC');
+            } else {
+                $tableItems->orderBy($orderColumn, $orderDirection)->orderBy('id', 'asc');
+            }
+            $tableItems = $tableItems->paginate($request->input('length'))->onEachSide(1);
             $tableItems->getCollection()->transform(function ($item) {
                 $item->setHidden([]);
                 return $item;
@@ -323,11 +337,33 @@ class CategoryController extends Controller implements HasMiddleware
     public function sort(Request $request)
     {
         abort_unless(auth('admin')->user()->hasRole('service.category.update'), 403);
-        foreach ($request->input('items') as $index => $item) {
-            ServiceCategory::whereId($item['value'])->update([
-                'sort_number' => $index + 1
-            ]);
+        $items = $request->input('items', []);
+        if (!is_array($items) || empty($items)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('common.toast.invalid_input'),
+            ], 422);
         }
+        $orderedIds = [];
+        foreach ($items as $item) {
+            $id = is_array($item) ? ($item['value'] ?? null) : null;
+            if (is_numeric($id)) {
+                $orderedIds[] = (int) $id;
+            }
+        }
+        $orderedIds = array_values(array_unique($orderedIds));
+        if (empty($orderedIds)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('common.toast.invalid_input'),
+            ], 422);
+        }
+        // Dialog "Urutkan" hanya mengirim kategori dari satu group. Urutan yang
+        // diminta hanya berlaku untuk anggota group itu, jadi tiap anggota
+        // ditempatkan kembali ke slot sort_number yang memang sudah ditempati
+        // group tersebut. Dengan begitu group lain tidak bergeser sama sekali
+        // dan penomoran tetap global 1..N (tidak ada sort_number kembar).
+        $this->applyOrderWithinSlots($orderedIds);
         $insertActivityLog = AdminActivityLog::create([
             'admin_id'   => auth('admin')->user()->id,
             'ip_address' => request()->ip(),
@@ -337,6 +373,112 @@ class CategoryController extends Controller implements HasMiddleware
                 'item' => 'common:labels.service, common:labels.category',
             ],
         ]);
+        return response()->json([
+            'status'  => true,
+            'message' => __('admin/common.toast.sort_successful', [
+                'item' => __('common.labels.category'),
+            ]),
+        ]);
+    }
+
+    /**
+     * Terapkan urutan global: pindahkan $ids (urutan dipertahankan) ke posisi $start (1-based)
+     * di antara kategori lain, lalu renumber sort_number 1..N untuk SELURUH baris.
+     * Renumber global mencegah sort_number kembar antar-group.
+     */
+    private function applyGlobalOrder(array $ids, int $start, ?array $globalOrder = null): void
+    {
+        $globalOrder = $globalOrder ?? ServiceCategory::withTrashed()->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')->pluck('id')->all();
+        $remaining = array_values(array_diff($globalOrder, $ids));
+        $position = max(0, min(count($remaining), $start - 1));
+        $newOrder = array_merge(array_slice($remaining, 0, $position), $ids, array_slice($remaining, $position));
+
+        DB::transaction(function () use ($newOrder) {
+            foreach ($newOrder as $index => $id) {
+                ServiceCategory::withTrashed()->whereId($id)->update([
+                    'sort_number' => $index + 1,
+                ]);
+            }
+        });
+    }
+
+    /**
+     * Terapkan urutan untuk subset kategori (dialog "Urutkan" per-group) tanpa
+     * menggeser kategori di luar subset: slot (sort_number) milik subset diisi
+     * ulang sesuai urutan yang diminta. Bila ada baris tanpa sort_number,
+     * seluruh tabel dinormalkan dulu agar penomoran tetap 1..N tanpa kembar.
+     */
+    private function applyOrderWithinSlots(array $orderedIds): void
+    {
+        DB::transaction(function () use ($orderedIds) {
+            $globalOrder = ServiceCategory::withTrashed()->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')->pluck('id')->all();
+            $slots = [];
+            foreach ($orderedIds as $orderedId) {
+                $position = array_search($orderedId, $globalOrder, true);
+                if ($position !== false) {
+                    $slots[] = (int) $position + 1;
+                }
+            }
+            sort($slots);
+
+            $normalize = ServiceCategory::withTrashed()->whereNull('sort_number')->exists();
+            if ($normalize || count($slots) !== count($orderedIds)) {
+                $this->applyGlobalOrder(array_values($orderedIds), 1, $globalOrder);
+                return;
+            }
+
+            foreach ($orderedIds as $index => $id) {
+                ServiceCategory::withTrashed()->whereId($id)->update([
+                    'sort_number' => $slots[$index],
+                ]);
+            }
+        });
+    }
+
+    public function reorder(Request $request)
+    {
+        abort_unless(auth('admin')->user()->hasRole('service.category.update'), 403);
+        $validator = Validator::make($request->all(), [
+            'ids'   => ['required', 'array', 'min:1'],
+            'ids.*' => ['integer'],
+            'start' => ['nullable', 'integer', 'min:1'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('common.toast.invalid_input'),
+            ], 422);
+        }
+
+        $ids = array_values(array_unique(array_map('intval', $request->input('ids', []))));
+        $existing = ServiceCategory::withTrashed()->whereIn('id', $ids)->pluck('id')->all();
+        $ids = array_values(array_intersect($ids, $existing));
+        if (empty($ids)) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('common.empty.no_data_found'),
+            ], 404);
+        }
+
+        try {
+            $this->applyGlobalOrder($ids, (int) $request->input('start', 1));
+
+            AdminActivityLog::create([
+                'admin_id'   => auth('admin')->user()->id,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->header('User-Agent'),
+                'content_key'  => 'admin/common:log.sort-successful',
+                'content_params'  => (object) [
+                    'item' => 'common:labels.service, common:labels.category',
+                ],
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('common.toast.exception'),
+            ], 500);
+        }
+
         return response()->json([
             'status'  => true,
             'message' => __('admin/common.toast.sort_successful', [

@@ -262,6 +262,8 @@ return [
         'remaining_of' => ':percent% - tersisa :remains dari :of',
         'close_detail' => 'Tutup Detail',
         'open_detail'  => 'Buka Detail',
+        'drag_to_reorder'  => 'Seret untuk mengubah urutan',
+        'reorder_disabled' => 'Urutkan tabel berdasarkan kolom Urutan (A-Z) dan kosongkan filter untuk mengubah urutan dengan seret',
     ],
 
     'datatable' => [

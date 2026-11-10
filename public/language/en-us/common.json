@@ -215,7 +215,9 @@
     "tooltips": {
         "remaining-of": "{{percent}}% - remaining {{remains}} of {{of}}",
         "close-detail": "Close Details",
-        "open-detail": "Open Details"
+        "open-detail": "Open Details",
+        "drag-to-reorder": "Drag to reorder",
+        "reorder-disabled": "Sort the table by the Sort Order column (A-Z) and clear filters to reorder by dragging"
     },
     "datatable": {
         "previous": "Previous",

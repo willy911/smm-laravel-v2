@@ -181,6 +181,7 @@ Route::group(['middleware' => ['auth:admin', 'auth.session']], function () {
                 ->whereIn('columnName', ['status', 'service_category_group_id', 'type'])->name('switch');
             Route::get('options', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'options'])->name('options');
             Route::post('sort', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'sort'])->name('sort');
+            Route::post('reorder', [\App\Http\Controllers\Admin\Service\Category\CategoryController::class, 'reorder'])->name('reorder');
 
             Route::prefix('groups')->name('groups.')->group(function () {
                 Route::resource('', \App\Http\Controllers\Admin\Service\Category\GroupController::class)->only([

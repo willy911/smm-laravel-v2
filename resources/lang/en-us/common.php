@@ -228,6 +228,8 @@ return [
         'remaining_of' => ':percent% - remaining :remains of :of',
         'close_detail' => 'Close Details',
         'open_detail' => 'Open Details',
+        'drag_to_reorder' => 'Drag to reorder',
+        'reorder_disabled' => 'Sort the table by the Sort Order column (A-Z) and clear filters to reorder by dragging',
     ],
 
     'datatable' => [

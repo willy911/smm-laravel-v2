@@ -251,7 +251,9 @@
     "tooltips": {
         "remaining-of": "{{percent}}% - tersisa {{remains}} dari {{of}}",
         "close-detail": "Tutup Detail",
-        "open-detail": "Buka Detail"
+        "open-detail": "Buka Detail",
+        "drag-to-reorder": "Seret untuk mengubah urutan",
+        "reorder-disabled": "Urutkan tabel berdasarkan kolom Urutan (A-Z) dan kosongkan filter untuk mengubah urutan dengan seret"
     },
     "datatable": {
         "previous": "Sebelumnya",

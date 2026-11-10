@@ -8,6 +8,7 @@ import { flexRender, getCoreRowModel, getExpandedRowModel, getSortedRowModel, us
 import { Loading01Icon } from 'hugeicons-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Sortable from 'sortablejs';
 import { OrderDetail as AdminOrderDetail } from './details/admin/order-detail';
 import { AdminServiceDetail } from './details/admin/service-detail';
 import { UserDetail } from './details/admin/user-detail';
@@ -27,10 +28,13 @@ export function DataTable({
     isLoading,
     rowSelectionActions = [],
     additionalButton = false,
+    draggableRows = false,
+    onRowReorder = null,
+    storageKey = null,
 }) {
     const { t } = useTranslation();
     const [isFilterCardOpen, setIsFilterCardOpen] = React.useState(false);
-    const STORAGE_KEY = `table_state_${route().current()}`;
+    const STORAGE_KEY = storageKey || `table_state_${route().current()}`;
     const getInitialState = React.useCallback(
         (key, fallback) => {
             try {
@@ -126,6 +130,43 @@ export function DataTable({
         // pageCount: serverPagination?.last_page || -1,
     });
 
+    const handleSortEnd = React.useCallback(
+        (evt) => {
+            const container = evt?.from;
+            if (!container || typeof onRowReorder !== 'function') return;
+            const orderedIds = Array.from(container.querySelectorAll('tr[data-row-id]'))
+                .map((el) => Number(el.getAttribute('data-row-id')))
+                .filter((id) => Number.isFinite(id));
+            if (orderedIds.length > 1) onRowReorder(orderedIds);
+        },
+        [onRowReorder],
+    );
+
+    const tbodyRef = React.useRef(null);
+    const handleSortEndRef = React.useRef(handleSortEnd);
+
+    React.useEffect(() => {
+        handleSortEndRef.current = handleSortEnd;
+    }, [handleSortEnd]);
+
+    React.useEffect(() => {
+        if (!draggableRows) return;
+        const element = tbodyRef.current;
+        if (!element) return;
+
+        const sortable = Sortable.create(element, {
+            handle: '.drag-handle',
+            draggable: 'tr[data-row-id]',
+            animation: 150,
+            ghostClass: 'bg-muted',
+            onEnd: (evt) => handleSortEndRef.current(evt),
+        });
+
+        return () => {
+            sortable.destroy();
+        };
+    }, [draggableRows]);
+
     function countActiveFilters(filters) {
         let count = 0;
 
@@ -150,6 +191,60 @@ export function DataTable({
 
     const isFiltered =
         table.getState().columnFilters.length > 0 || countActiveFilters(table.getState().globalFilter) > 0 || table.getState().globalFilter.search;
+
+    const bodyRows = (
+        <>
+            {!isLoading ? (
+                table.getRowModel().rows?.length ? (
+                    table.getRowModel().rows.map((row) => (
+                        <React.Fragment key={row.id}>
+                            <TableRow
+                                className={cn(row.original.deleted_at && 'bg-red-300/50 hover:bg-red-300/60')}
+                                data-state={cn(row.getIsSelected() ? 'selected' : undefined, row.original.deleted_at ? 'deleted' : undefined)}
+                                data-row-id={row.id}
+                            >
+                                {row.getVisibleCells().map((cell) => (
+                                    <TableCell width={cell.column.columnDef.width ?? 'auto'} key={cell.id}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                            {row.getIsExpanded() && (
+                                <TableRow>
+                                    <TableCell colSpan={row.getVisibleCells().length}>
+                                        <div className="bg-muted/40 rounded-lg p-4">
+                                            {route().current('guest.services.index') && <ServiceDetail row={row} />}
+                                            {route().current('user.orders.index') && <OrderDetail row={row} />}
+                                            {route().current('user.deposits.index') && <DepositDetail row={row} />}
+                                            {route().current('user.tickets.index') && <TicketDetail row={row} />}
+                                            {route().current('admin.services.index') && <AdminServiceDetail row={row} />}
+                                            {route().current('admin.users.index') && <UserDetail row={row} />}
+                                            {route().current('admin.orders.index') && <AdminOrderDetail row={row} />}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </React.Fragment>
+                    ))
+                ) : (
+                    <TableRow>
+                        <TableCell colSpan={columns.length} className="h-24 text-center">
+                            {t('common:empty.no-data-found')}
+                        </TableCell>
+                    </TableRow>
+                )
+            ) : (
+                <TableRow>
+                    <TableCell colSpan={columns.length} className="h-[4rem] text-center">
+                        <div className="flex items-center justify-center">
+                            <Loading01Icon className="mr-2 h-4 w-4 animate-spin duration-2000" />
+                            {t('common:loading.please-wait')}
+                        </div>
+                    </TableCell>
+                </TableRow>
+            )}
+        </>
+    );
 
     return (
         <div className="flex flex-1 flex-col gap-4 lg:grid lg:flex-none lg:grid-cols-12">
@@ -188,59 +283,13 @@ export function DataTable({
                                         </TableRow>
                                     ))}
                                 </TableHeader>
-                                <TableBody>
-                                    {!isLoading ? (
-                                        table.getRowModel().rows?.length ? (
-                                            table.getRowModel().rows.map((row) => (
-                                                <React.Fragment key={row.id}>
-                                                    <TableRow
-                                                        className={cn(row.original.deleted_at && 'bg-red-300/50 hover:bg-red-300/60')}
-                                                        data-state={cn(
-                                                            row.getIsSelected() ? 'selected' : undefined,
-                                                            row.original.deleted_at ? 'deleted' : undefined,
-                                                        )}
-                                                    >
-                                                        {row.getVisibleCells().map((cell) => (
-                                                            <TableCell width={cell.column.columnDef.width ?? 'auto'} key={cell.id}>
-                                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                            </TableCell>
-                                                        ))}
-                                                    </TableRow>
-                                                    {row.getIsExpanded() && (
-                                                        <TableRow>
-                                                            <TableCell colSpan={row.getVisibleCells().length}>
-                                                                <div className="bg-muted/40 rounded-lg p-4">
-                                                                    {route().current('guest.services.index') && <ServiceDetail row={row} />}
-                                                                    {route().current('user.orders.index') && <OrderDetail row={row} />}
-                                                                    {route().current('user.deposits.index') && <DepositDetail row={row} />}
-                                                                    {route().current('user.tickets.index') && <TicketDetail row={row} />}
-                                                                    {route().current('admin.services.index') && <AdminServiceDetail row={row} />}
-                                                                    {route().current('admin.users.index') && <UserDetail row={row} />}
-                                                                    {route().current('admin.orders.index') && <AdminOrderDetail row={row} />}
-                                                                </div>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    )}
-                                                </React.Fragment>
-                                            ))
-                                        ) : (
-                                            <TableRow>
-                                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                                    {t('common:empty.no-data-found')}
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    ) : (
-                                        <TableRow>
-                                            <TableCell colSpan={columns.length} className="h-[4rem] text-center">
-                                                <div className="flex items-center justify-center">
-                                                    <Loading01Icon className="mr-2 h-4 w-4 animate-spin duration-2000" />
-                                                    {t('common:loading.please-wait')}
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
+                                {draggableRows ? (
+                                    <tbody ref={tbodyRef} data-slot="table-body" className="[&_tr:last-child]:border-0">
+                                        {bodyRows}
+                                    </tbody>
+                                ) : (
+                                    <TableBody>{bodyRows}</TableBody>
+                                )}
                             </Table>
                         </div>
                         <DataTablePagination table={table} tableData={tableData} />

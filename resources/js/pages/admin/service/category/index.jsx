@@ -40,7 +40,7 @@ import {
     RestoreBinIcon,
     SortByDown01Icon,
 } from 'hugeicons-react';
-import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronRightIcon, GripVertical } from 'lucide-react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import Form from './form';
@@ -427,6 +427,15 @@ export default function Index({ pageProps }) {
     });
 
     const tableStateRef = useRef({});
+    const pageIdsRef = useRef([]);
+    const [tableMeta, setTableMeta] = useState({ sorting: [{ id: 'sort_number', desc: false }], isFiltered: false });
+
+    const canReorder =
+        hasRole('service.category.update') &&
+        !tableMeta.isFiltered &&
+        tableMeta.sorting.length === 1 &&
+        tableMeta.sorting[0]?.id === 'sort_number' &&
+        !tableMeta.sorting[0]?.desc;
 
     const initialGlobalFilterState = {
         search: '',
@@ -446,7 +455,7 @@ export default function Index({ pageProps }) {
 
     const tableState = useMemo(
         () => ({
-            sorting: [{ id: 'id', desc: true }],
+            sorting: [{ id: 'sort_number', desc: false }],
             columnFilters: [],
             globalFilter: initialGlobalFilterState,
             columnVisibility: {
@@ -488,9 +497,16 @@ export default function Index({ pageProps }) {
                 const currentTableStateRef = { pagination, columnFilters, globalFilter, sorting };
                 tableStateRef.current = currentTableStateRef;
 
+                const activeFilters = (columnFilters || []).length > 0;
+                const g = globalFilter || {};
+                const hasRange = ['created_at', 'updated_at', 'deleted_at'].some((k) => g?.[k]?.start || g?.[k]?.end);
+                const isFiltered = activeFilters || hasRange || Boolean(g.search);
+                setTableMeta({ sorting: sorting || [], isFiltered });
+
                 const response = await fetch(route(route().current(), rawTableRequest));
                 const data = await response.json();
                 setTableData(data.data);
+                pageIdsRef.current = (data.data?.data || []).map((item) => Number(item.id));
             } catch (error) {
                 toast({
                     variant: 'error',
@@ -531,6 +547,28 @@ export default function Index({ pageProps }) {
             }
         },
         [fetchData],
+    );
+
+    const handleReorder = useCallback(
+        async (orderedIds) => {
+            if (!Array.isArray(orderedIds) || orderedIds.length < 2) return;
+            const previous = pageIdsRef.current || [];
+            if (previous.length === orderedIds.length && previous.every((id, index) => Number(id) === Number(orderedIds[index]))) return;
+            try {
+                setIsLoading(true);
+                const pagination = tableStateRef.current?.pagination ?? { pageIndex: 0, pageSize: 10 };
+                const start = pagination.pageIndex * pagination.pageSize + 1;
+                const response = await axios.post(route('admin.services.categories.reorder'), { ids: orderedIds.map(Number), start });
+                toast({ variant: 'success', description: toHTML(response.data.message) });
+                await fetchData(tableStateRef.current);
+            } catch (error) {
+                toast({ variant: 'error', description: toHTML(error.response?.data?.message ?? t('common:toast.exception')) });
+                await fetchData(tableStateRef.current);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [fetchData, t],
     );
 
     const handleAction = useCallback(
@@ -593,6 +631,36 @@ export default function Index({ pageProps }) {
                 id: 'select',
                 header: ({ table }) => <RowSelector table={table} />,
                 cell: ({ row }) => <RowSelector row={row} />,
+                enableSorting: false,
+                enableHiding: false,
+                width: '32px',
+            },
+            {
+                id: 'drag',
+                header: () => null,
+                cell: ({ row }) => (
+                    <TooltipProvider delayDuration={0}>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <span
+                                    className={cn(
+                                        'flex h-6 w-6 items-center justify-center',
+                                        canReorder
+                                            ? 'drag-handle text-muted-foreground hover:text-foreground cursor-grab! active:cursor-grabbing!'
+                                            : 'text-muted-foreground/40 cursor-not-allowed!',
+                                    )}
+                                    aria-label={canReorder ? t('common:tooltips.drag-to-reorder') : t('common:tooltips.reorder-disabled')}
+                                    tabIndex={-1}
+                                >
+                                    <GripVertical className="h-4 w-4" />
+                                </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{canReorder ? t('common:tooltips.drag-to-reorder') : t('common:tooltips.reorder-disabled')}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                ),
                 enableSorting: false,
                 enableHiding: false,
                 width: '32px',
@@ -706,7 +774,7 @@ export default function Index({ pageProps }) {
                 width: '32px',
             },
         ],
-        [i18n.language, pageProps?.serviceCategoryGroups?.options],
+        [i18n.language, pageProps?.serviceCategoryGroups?.options, canReorder],
     );
 
     const filters = useMemo(
@@ -873,6 +941,9 @@ export default function Index({ pageProps }) {
                         rowSelectionActions={rowSelectionActions}
                         onChange={fetchData}
                         isLoading={isLoading}
+                        draggableRows={canReorder}
+                        onRowReorder={handleReorder}
+                        storageKey={canReorder ? `table_state_${route().current()}_sortable` : `table_state_${route().current()}_plain`}
                         additionalButton={
                             <div className="flex gap-2">
                                 {hasRole('service.category.create') && (
