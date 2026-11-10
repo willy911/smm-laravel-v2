@@ -382,19 +382,42 @@ class CategoryController extends Controller implements HasMiddleware
     }
 
     /**
+     * Urutan global saat ini sebagai daftar id (integer). PDO bisa mengembalikan
+     * string tergantung driver, jadi semua id dipaksa int agar perbandingan
+     * array_search(..., true) di helper lain tetap valid.
+     */
+    private function currentGlobalOrder(): array
+    {
+        return ServiceCategory::withTrashed()
+            ->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')
+            ->pluck('id')
+            ->map(fn($id) => (int) $id)
+            ->all();
+    }
+
+    /**
      * Terapkan urutan global: pindahkan $ids (urutan dipertahankan) ke posisi $start (1-based)
      * di antara kategori lain, lalu renumber sort_number 1..N untuk SELURUH baris.
      * Renumber global mencegah sort_number kembar antar-group.
      */
     private function applyGlobalOrder(array $ids, int $start, ?array $globalOrder = null): void
     {
-        $globalOrder = $globalOrder ?? ServiceCategory::withTrashed()->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')->pluck('id')->all();
+        $globalOrder = $globalOrder ?? $this->currentGlobalOrder();
+        $ids = array_values(array_unique(array_map('intval', $ids)));
         $remaining = array_values(array_diff($globalOrder, $ids));
         $position = max(0, min(count($remaining), $start - 1));
         $newOrder = array_merge(array_slice($remaining, 0, $position), $ids, array_slice($remaining, $position));
 
-        DB::transaction(function () use ($newOrder) {
-            foreach ($newOrder as $index => $id) {
+        $this->renumberGlobal($newOrder);
+    }
+
+    /**
+     * Tulis sort_number 1..N sesuai urutan id yang diberikan, dalam satu transaksi.
+     */
+    private function renumberGlobal(array $orderedIds): void
+    {
+        DB::transaction(function () use ($orderedIds) {
+            foreach (array_values($orderedIds) as $index => $id) {
                 ServiceCategory::withTrashed()->whereId($id)->update([
                     'sort_number' => $index + 1,
                 ]);
@@ -410,8 +433,16 @@ class CategoryController extends Controller implements HasMiddleware
      */
     private function applyOrderWithinSlots(array $orderedIds): void
     {
+        $orderedIds = array_values(array_unique(array_map('intval', $orderedIds)));
         DB::transaction(function () use ($orderedIds) {
-            $globalOrder = ServiceCategory::withTrashed()->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')->pluck('id')->all();
+            // Baris tanpa sort_number (kondisi awal data lama) membuat penomoran
+            // tidak bisa dihitung per-slot. Normalkan dulu seluruh tabel mengikuti
+            // urutan tampil saat ini, TANPA memindahkan kategori mana pun.
+            if (ServiceCategory::withTrashed()->whereNull('sort_number')->exists()) {
+                $this->renumberGlobal($this->currentGlobalOrder());
+            }
+
+            $globalOrder = $this->currentGlobalOrder();
             $slots = [];
             foreach ($orderedIds as $orderedId) {
                 $position = array_search($orderedId, $globalOrder, true);
@@ -421,9 +452,9 @@ class CategoryController extends Controller implements HasMiddleware
             }
             sort($slots);
 
-            $normalize = ServiceCategory::withTrashed()->whereNull('sort_number')->exists();
-            if ($normalize || count($slots) !== count($orderedIds)) {
-                $this->applyGlobalOrder(array_values($orderedIds), 1, $globalOrder);
+            if (count($slots) !== count($orderedIds)) {
+                // Ada id yang tidak dikenal; biarkan urutan apa adanya daripada
+                // menebak posisi dan menggeser kategori lain.
                 return;
             }
 
