@@ -33,17 +33,13 @@ class ServiceCategoryController extends Controller
 
     public function index(Request $request)
     {
+        // Mode flat: daftar kategori satu dimensi urutan global (tabel admin kategori).
+        if ($request->boolean('service.category.flat')) {
+            return $this->indexFlat($request);
+        }
         $serviceCategories = ServiceCategoryGroup::withWhereHas('serviceCategories', function ($query) use ($request) {
             $query->whereHas('services', function ($query) use ($request) {
-                $query->where('status', 1);
-                if ($request->boolean('service.is_favorites')) {
-                    $query->whereHas('serviceFavorites', function ($query) {
-                        if (auth()->check()) $query->where('user_id', auth()->id());
-                    });
-                }
-                if ($request->filled('order.type') && $request->input('order.type') == 'mass') {
-                    $query->where('type', 'primary');
-                }
+                $this->applyServiceFilters($query, $request);
             })->where('status', 1)->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC');
         })->when($request->input(), function ($query) use ($request) {
             if ($request->filled('service.category.group.id') && $request->input('service.category.group.id') <> 'all') {
@@ -65,6 +61,50 @@ class ServiceCategoryController extends Controller
             ];
         })->filter(function ($item) {
             return $item['options']->isNotEmpty();
+        })->values();
+        if ($serviceCategories->isEmpty()) return response()->json([
+            'status'  => false,
+            'message' => __('services.toast.no_categories_found')
+        ]);
+        return response()->json([
+            'status'            => true,
+            'serviceCategories' => $serviceCategories,
+        ]);
+    }
+
+    private function applyServiceFilters($query, Request $request)
+    {
+        $query->where('status', 1);
+        if ($request->boolean('service.is_favorites')) {
+            $query->whereHas('serviceFavorites', function ($query) {
+                if (auth()->check()) $query->where('user_id', auth()->id());
+            });
+        }
+        if ($request->filled('order.type') && $request->input('order.type') == 'mass') {
+            $query->where('type', 'primary');
+        }
+    }
+
+    private function indexFlat(Request $request)
+    {
+        $serviceCategories = ServiceCategory::with('serviceCategoryGroup:id,name,type,icon,emoji,image')->whereHas('services', function ($query) use ($request) {
+            $this->applyServiceFilters($query, $request);
+        })->where('status', 1)->when($request->input(), function ($query) use ($request) {
+            if ($request->filled('service.category.group.id') && $request->input('service.category.group.id') <> 'all') {
+                $query->where('service_category_group_id', $request->input('service.category.group.id'));
+            }
+        })->orderByRaw('ISNULL(sort_number), sort_number ASC, name ASC, id ASC')->get()->map(function ($category) {
+            return [
+                'value' => $category->id,
+                'label' => $category->name,
+                'group' => [
+                    'label' => $category->serviceCategoryGroup->name ?? null,
+                    'type'  => $category->serviceCategoryGroup->type ?? null,
+                    'icon'  => $category->serviceCategoryGroup->icon ?? null,
+                    'emoji' => $category->serviceCategoryGroup->emoji ?? null,
+                    'image' => $category->serviceCategoryGroup->image ?? null,
+                ],
+            ];
         })->values();
         if ($serviceCategories->isEmpty()) return response()->json([
             'status'  => false,

@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 // import DynamicIcon from '@/components/ui/dynamic-icon';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -106,6 +106,7 @@ export default function Create({ pageProps }) {
                         group: {
                             id: serviceCategoryGroupID,
                         },
+                        flat: true,
                     },
                     is_favorites: isServiceFavorites,
                 },
@@ -379,7 +380,7 @@ export default function Create({ pageProps }) {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const selectedGroup = serviceCategories.find((group) => group.options.some((item) => item.value === form.data.service.category.id));
+    const selectedCategory = serviceCategories.find((item) => item.value === form.data.service.category.id);
 
     return (
         <AppLayout
@@ -606,39 +607,33 @@ export default function Create({ pageProps }) {
                                                     )}
                                                 >
                                                     <span className="max-w-[300px] truncate md:max-w-[400px] 2xl:max-w-[500px]">
-                                                        {selectedGroup && form.data.service.category.id ? (
+                                                        {selectedCategory && form.data.service.category.id ? (
                                                             <div
                                                                 className={cn(
                                                                     'flex items-center',
-                                                                    selectedGroup?.type === 'image' ? 'space-x-1' : 'space-x-2',
+                                                                    selectedCategory?.group?.type === 'image' ? 'space-x-1' : 'space-x-2',
                                                                 )}
                                                             >
-                                                                {selectedGroup?.type === 'icon' && (
+                                                                {selectedCategory?.group?.type === 'icon' && (
                                                                     <DynamicIcon
-                                                                        key={selectedGroup?.icon}
+                                                                        key={selectedCategory?.group?.icon}
                                                                         className="mr-1.5 h-4 w-4"
-                                                                        iconName={selectedGroup?.icon?.trim()}
+                                                                        iconName={selectedCategory?.group?.icon?.trim()}
                                                                         size={12}
                                                                     />
                                                                 )}
-                                                                {selectedGroup?.type === 'emoji' && (
-                                                                    <span className="-mt-px mr-1">{selectedGroup?.emoji}</span>
+                                                                {selectedCategory?.group?.type === 'emoji' && (
+                                                                    <span className="-mt-px mr-1">{selectedCategory?.group?.emoji}</span>
                                                                 )}
-                                                                {selectedGroup?.type === 'image' && (
+                                                                {selectedCategory?.group?.type === 'image' && (
                                                                     <img
-                                                                        alt={selectedGroup?.image}
+                                                                        alt={selectedCategory?.group?.image}
                                                                         decoding="async"
                                                                         className="max-w-20 object-contain md:max-h-5"
-                                                                        src={getFile('service-category-groups', selectedGroup?.image)}
+                                                                        src={getFile('service-category-groups', selectedCategory?.group?.image)}
                                                                     />
                                                                 )}
-                                                                <span>
-                                                                    {
-                                                                        serviceCategories
-                                                                            .flatMap((group) => group.options)
-                                                                            .find((item) => item.value === form.data.service.category.id)?.label
-                                                                    }
-                                                                </span>
+                                                                <span>{selectedCategory?.label}</span>
                                                             </div>
                                                         ) : (
                                                             t('common:placeholders.select')
@@ -652,68 +647,39 @@ export default function Create({ pageProps }) {
                                                     <CommandInput placeholder={`${t('common:labels.search')} ${t('common:labels.category')}...`} />
                                                     <CommandList>
                                                         <CommandEmpty>{t('common:empty.no-data-found')}</CommandEmpty>
-                                                        {serviceCategories.map((group, index) => (
-                                                            <div key={index}>
-                                                                <CommandGroup
-                                                                    heading={
-                                                                        <div className="flex items-center gap-1">
-                                                                            {group.type === 'icon' && (
-                                                                                <DynamicIcon
-                                                                                    className="h-4 w-4"
-                                                                                    iconName={group.icon?.trim()}
-                                                                                    size={16}
-                                                                                />
-                                                                            )}
-                                                                            {group.type === 'emoji' && <span className="-mt-px">{group.emoji}</span>}
-                                                                            {group.type === 'image' && (
-                                                                                <img
-                                                                                    alt={group.image}
-                                                                                    decoding="async"
-                                                                                    className="-mt-px -mr-px max-w-20 object-contain md:max-h-5"
-                                                                                    src={getFile('service-category-groups', group.image)}
-                                                                                />
-                                                                            )}
-                                                                            {group.label}
-                                                                        </div>
+                                                        <CommandGroup>
+                                                            {serviceCategories.map((serviceCategory, index) => (
+                                                                <CommandItem
+                                                                    key={index}
+                                                                    value={serviceCategory.label}
+                                                                    className={
+                                                                        form.data.service.category.id === serviceCategory.value ? 'bg-muted' : ''
                                                                     }
+                                                                    onSelect={(currentValue) => {
+                                                                        form.setData('service', {
+                                                                            ...form.data.service,
+                                                                            category: {
+                                                                                ...form.data.service.category,
+                                                                                id: serviceCategory.value,
+                                                                            },
+                                                                            id: '',
+                                                                        });
+                                                                        form.forgetError('service.category.id');
+                                                                        setOpenServiceCategoryPopover(false);
+                                                                    }}
                                                                 >
-                                                                    {group.options.map((serviceCategory, index) => (
-                                                                        <CommandItem
-                                                                            key={index}
-                                                                            value={serviceCategory.value}
-                                                                            className={
-                                                                                form.data.service.category.id === serviceCategory.value
-                                                                                    ? 'bg-muted'
-                                                                                    : ''
-                                                                            }
-                                                                            onSelect={(currentValue) => {
-                                                                                form.setData('service', {
-                                                                                    ...form.data.service,
-                                                                                    category: {
-                                                                                        ...form.data.service.category,
-                                                                                        id: serviceCategory.value,
-                                                                                    },
-                                                                                    id: '',
-                                                                                });
-                                                                                form.forgetError('service.category.id');
-                                                                                setOpenServiceCategoryPopover(false);
-                                                                            }}
-                                                                        >
-                                                                            {serviceCategory.label}
-                                                                            <CheckIcon
-                                                                                className={cn(
-                                                                                    'ml-auto h-4 w-4',
-                                                                                    form.data.service.category.id === serviceCategory.value
-                                                                                        ? 'opacity-100'
-                                                                                        : 'opacity-0',
-                                                                                )}
-                                                                            />
-                                                                        </CommandItem>
-                                                                    ))}
-                                                                </CommandGroup>
-                                                                {index < serviceCategories.length - 1 && <CommandSeparator />}
-                                                            </div>
-                                                        ))}
+                                                                    {serviceCategory.label}
+                                                                    <CheckIcon
+                                                                        className={cn(
+                                                                            'ml-auto h-4 w-4',
+                                                                            form.data.service.category.id === serviceCategory.value
+                                                                                ? 'opacity-100'
+                                                                                : 'opacity-0',
+                                                                        )}
+                                                                    />
+                                                                </CommandItem>
+                                                            ))}
+                                                        </CommandGroup>
                                                     </CommandList>
                                                 </Command>
                                             </PopoverContent>
