@@ -43,6 +43,16 @@ return [
             'admin_url'     => 'admin',
             'notif_forward' => 'notif-forwarder',
         ]),
+        'firebase' => json_encode([
+            'enabled'         => false,
+            'api_key'         => '',
+            'project_id'      => '',
+            'server_key'      => '',
+            'sender_id'       => '',
+            'app_id'          => '',
+            'measurement_id'  => '',
+            'js_sdk_version'  => '10.12.2',
+        ]),
         'third_party_plugin' => json_encode([
             'tinymce' => [
                 'api_key'     => '',

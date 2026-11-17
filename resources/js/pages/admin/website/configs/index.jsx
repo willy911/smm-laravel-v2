@@ -8,6 +8,7 @@ import { useForm } from 'laravel-precognition-react-inertia';
 import { useTranslation } from 'react-i18next';
 import { Fragment } from 'react/jsx-runtime';
 import Affiliate from './partials/affialite';
+import Firebase from './partials/firebase';
 import PaymentGateway from './partials/payment-gateway/payment-gateway';
 import Site from './partials/site/site';
 import Smtp from './partials/smtp';
@@ -95,15 +96,17 @@ export default function Index({ pageProps }) {
                                 <Card>
                                     <CardContent>
                                         <div className="hide-scrollbar -mb-px grid w-full transform items-center gap-2 overflow-auto duration-300 ease-in-out">
-                                            {['Site', 'SMTP', 'Third Party Plugin', 'Payment Gateway', 'URL Prefix', 'Affiliate'].map((label) => (
-                                                <Tab key={label} as={Fragment}>
-                                                    {({ selected }) => (
-                                                        <Button size="sm" variant={selected ? 'default' : 'outline'}>
-                                                            {label}
-                                                        </Button>
-                                                    )}
-                                                </Tab>
-                                            ))}
+                                            {['Site', 'SMTP', 'Third Party Plugin', 'Payment Gateway', 'URL Prefix', 'Affiliate', 'Firebase'].map(
+                                                (label) => (
+                                                    <Tab key={label} as={Fragment}>
+                                                        {({ selected }) => (
+                                                            <Button size="sm" variant={selected ? 'default' : 'outline'}>
+                                                                {label}
+                                                            </Button>
+                                                        )}
+                                                    </Tab>
+                                                ),
+                                            )}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -130,6 +133,9 @@ export default function Index({ pageProps }) {
                                         </TabPanel>
                                         <TabPanel>
                                             <Affiliate form={form} />
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <Firebase form={form} />
                                         </TabPanel>
                                         <Button type="submit" className={cn('mt-4 w-full')} disabled={form.processing}>
                                             {!form.processing ? 'Submit' : 'Mohon Tunggu...'}

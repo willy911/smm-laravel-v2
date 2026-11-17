@@ -27,7 +27,7 @@ class ConfigurationController extends Controller implements HasMiddleware
         abort_unless(auth('admin')->user()->group->is_primary, 403);
         return inertia('admin/website/configs/index', [
             'pageProps' => [
-                'configs' => website_config('all')
+                'configs' => array_merge((array) website_config('all'), ['firebase' => website_config('firebase')])
             ]
         ]);
     }
@@ -85,6 +85,7 @@ class ConfigurationController extends Controller implements HasMiddleware
             'reviews'       => $request->input('reviews') ?: [],
             'order_info'    => $request->input('order_info'),
             'order_example_target'    => $request->input('order_example_target'),
+            'firebase'      => $request->input('firebase', website_config('firebase')),
             'banner'        => [],
             'theme'        => [
                 'light' => [
@@ -186,6 +187,12 @@ class ConfigurationController extends Controller implements HasMiddleware
             $credentials['website']['default_news_banner'] =  website_config()->default_news_banner;
         }
         foreach ($credentials as $key => $item) {
+            // Key 'firebase' wajib updateOrCreate karena barisnya belum tentu ada
+            // di tabel configs (config baru), sedangkan key lama selalu sudah ada.
+            if ($key === 'firebase') {
+                Config::updateOrCreate(['key' => 'firebase'], ['value' => json_encode($item)]);
+                continue;
+            }
             if ($websiteConfig = Config::where('key', $key)->first()) $websiteConfig->update([
                 'value' => json_encode($item)
             ]);
@@ -294,6 +301,14 @@ class WebsiteConfigurationRequest extends FormRequest
             'payment_gateway.flazpay.client_id' => ['nullable', 'string', 'max:255'],
             'payment_gateway.flazpay.client_secret' => ['nullable', 'string', 'max:255'],
             'payment_gateway.flazpay.prefix_callback_url' => ['nullable', 'string', 'max:255'],
+            'firebase.enabled' => ['nullable', 'boolean'],
+            'firebase.api_key' => ['nullable', 'string', 'max:255'],
+            'firebase.project_id' => ['nullable', 'string', 'max:255'],
+            'firebase.server_key' => ['nullable', 'string', 'max:1024'],
+            'firebase.sender_id' => ['nullable', 'string', 'max:64'],
+            'firebase.app_id' => ['nullable', 'string', 'max:255'],
+            'firebase.measurement_id' => ['nullable', 'string', 'max:255'],
+            'firebase.js_sdk_version' => ['nullable', 'string', 'max:32', 'regex:/^[\d\.]+$/'],
             // 'prefix.admin_url' => 'required',
             // 'smtp.host' => 'required',
             // 'smtp.encryption' => ['required', 'in:SSL,TLS'],
@@ -330,6 +345,14 @@ class WebsiteConfigurationRequest extends FormRequest
             'smtp.username' => 'Username',
             'smtp.password' => 'Password',
             'tinymce.api_key' => 'API Key',
+            'firebase.enabled' => 'Aktifkan Firebase',
+            'firebase.api_key' => 'API Key',
+            'firebase.project_id' => 'Project ID',
+            'firebase.server_key' => 'Server Key',
+            'firebase.sender_id' => 'Sender ID',
+            'firebase.app_id' => 'App ID',
+            'firebase.measurement_id' => 'Measurement ID',
+            'firebase.js_sdk_version' => 'Versi JS SDK',
             'contact.address'     => 'Alamat',
             'contact.email'     => 'Email',
             'reviews.*.full_name' => 'Nama Lengkap',
