@@ -64,7 +64,7 @@ class OrderCancelController extends Controller
             'order_id'            => $target->id,
             'service_id'          => $target->service_id,
             'ip_address'          => $request->ip(),
-            // 'user_agent'          => $request->header('User-Agent'),
+            'user_agent'          => $request->header('User-Agent', null),
         ];
         if ($target->service && $target->service->serviceProvider && $target->service->serviceProvider->serviceProviderConfiguration && $target->service->serviceProvider->type <> 'manual' && $target->service->is_cancel_support === '1') {
             $orderCancelResponse = false;
@@ -98,14 +98,17 @@ class OrderCancelController extends Controller
                         $credentials['service_provider_order_cancel_log'] = $response->json();
                     }
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_cancel_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Provider error (response tidak ok): catat SPR 'fail' tanpa
+                    // order_cancel_id, cancel tetap boleh dicoba ulang.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'status'  => false,
                         'message' => 'Cancel Failed',
@@ -115,6 +118,22 @@ class OrderCancelController extends Controller
                     ], 422, [], JSON_PRETTY_PRINT);
                 }
             } catch (Exception $error) {
+                // Exception (timeout/koneksi): catat SPR 'fail' dengan pesan
+                // exception di logs, lalu tetap kirim error 500. Pencatatan
+                // dibungkus try agar kegagalan log tidak mengubah response.
+                try {
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => ['exception' => $error->getMessage()],
+                    ]);
+                } catch (Throwable $logError) {
+                    // abaikan: kegagalan pencatatan log tidak boleh mengganti response API.
+                }
                 return response()->json([
                     'status'  => false,
                     'message' => 'Cancel Failed',
@@ -134,14 +153,18 @@ class OrderCancelController extends Controller
             } else {
                 $insertOrderCancel = OrderCancel::create($credentials);
                 if ($insertOrderCancel == true) {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_cancel_create',
-                    //     'status'              => 'success',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Provider menerima permintaan cancel (cancel_id tersimpan):
+                    // catat SPR 'success' dengan order_cancel_id sesuai pola web CancelController.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'order_cancel_id'     => $insertOrderCancel->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     $insertActivityLog = UserActivityLog::create([
                         'user_id'     => $credentials['user_id'],
                         'ip_address'  => $credentials['ip_address'],

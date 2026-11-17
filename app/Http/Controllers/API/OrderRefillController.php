@@ -134,15 +134,17 @@ class OrderRefillController extends Controller
                         $credentials['service_provider_order_refill_log'] = $response->json();
                     }
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $target->id,
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Provider error (response tidak ok): catat SPR 'fail' tanpa
+                    // order_refill_id, refill tetap boleh dicoba ulang.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'status'  => false,
                         'message' => 'Refill Failed',
@@ -152,6 +154,22 @@ class OrderRefillController extends Controller
                     ], 422, [], JSON_PRETTY_PRINT);
                 }
             } catch (Exception $error) {
+                // Exception (timeout/koneksi): catat SPR 'fail' dengan pesan
+                // exception di logs, lalu tetap kirim error 500. Pencatatan
+                // dibungkus try agar kegagalan log tidak mengubah response.
+                try {
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => ['exception' => $error->getMessage()],
+                    ]);
+                } catch (Throwable $logError) {
+                    // abaikan: kegagalan pencatatan log tidak boleh mengganti response API.
+                }
                 return response()->json([
                     'status'  => false,
                     'message' => 'Refill Failed',
@@ -178,16 +196,18 @@ class OrderRefillController extends Controller
                         'content_key'  => 'orders:log.refill-successful',
                         'content_params'  => (object) ['order_refill_id' => $insertOrderRefill->id],
                     ]);
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'success',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $target->id,
-                    //     'order_refill_id'     => $insertOrderRefill->id,
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    // Provider menerima permintaan refill (refill_id tersimpan):
+                    // catat SPR 'success' dengan order_refill_id sesuai pola web RefillController.
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'order_refill_id'     => $insertOrderRefill->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'status' => true,
                         'data'   => [
