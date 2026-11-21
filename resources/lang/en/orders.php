@@ -27,6 +27,8 @@ return [
         'insufficient_balance' => 'Insufficient balance. Deposit Now!',
         'review_successful' => 'Review submitted successfully. It will appear after admin moderation.',
         'already_reviewed' => 'You have already reviewed this service.',
+        'refill_not_available' => 'No eligible order for refill.',
+        'cancel_not_available' => 'No eligible order for cancellation.',
     ],
 
     'log' => [

@@ -22,8 +22,6 @@ use App\Models\Order\OrderCancel;
 use App\Models\Service\ServiceProviderResponse;
 use App\Models\User\User;
 use App\Models\User\UserActivityLog;
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -35,12 +33,14 @@ class OrderCancelController extends Controller
     {
         $checkUser = $user = User::whereJsonContains('api->api_key', $request->input('api_key'))->whereJsonContains('api->secret_key', $request->input('secret_key'))->first();
         $checkOrder = $target = Order::where('user_id', $user->id)->where('id', $request->input('id'))->first();
-        if ($target->service && Carbon::parse($target->created_at)->diffInHours(Carbon::now()) < 1) {
+        // Tanpa jendela tunggu 1 jam: pembatalan langsung bisa diajukan
+        // selama status order belum terminal (pending/processing/in_progress).
+        if (!in_array($target->status, ['pending', 'processing', 'in_progress'])) {
             return response()->json([
                 'status'  => false,
                 'message' => 'Cancel Failed',
                 'errors'  => [
-                    'pembatalan tersedia dalam ' . CarbonInterval::seconds(Carbon::now()->subHours(1)->diffInSeconds($target->created_at))->cascade()->forHumans()
+                    'Pesanan tidak dapat dibatalkan.'
                 ]
             ], 422, [], JSON_PRETTY_PRINT);
         }
@@ -49,15 +49,13 @@ class OrderCancelController extends Controller
             'order_id' => $target->id
         ])->latest()->first();
         if ($checkOrderCancelExists) {
-            if (Carbon::parse($orderCancelExists->created_at)->diffInHours(Carbon::now()) < 1) {
-                return response()->json([
-                    'status'  => false,
-                    'message' => 'Cancel Failed',
-                    'errors'  => [
-                        'Coba lagi dalam ' . CarbonInterval::seconds(Carbon::now()->subHours(1)->diffInSeconds($orderCancelExists->created_at))->cascade()->forHumans()
-                    ]
-                ], 422, [], JSON_PRETTY_PRINT);
-            }
+            return response()->json([
+                'status'  => false,
+                'message' => 'Cancel Failed',
+                'errors'  => [
+                    'Permintaan pembatalan untuk pesanan ini sudah dibuat.'
+                ]
+            ], 422, [], JSON_PRETTY_PRINT);
         }
         $credentials = [
             'user_id'             => $user->id,
@@ -66,7 +64,16 @@ class OrderCancelController extends Controller
             'ip_address'          => $request->ip(),
             'user_agent'          => $request->header('User-Agent', null),
         ];
-        if ($target->service && $target->service->serviceProvider && $target->service->serviceProvider->serviceProviderConfiguration && $target->service->serviceProvider->type <> 'manual' && $target->service->is_cancel_support === '1') {
+        if (
+            $target->service &&
+            $target->service->serviceProvider &&
+            $target->service->serviceProvider->serviceProviderConfiguration &&
+            $target->service->is_cancel_support === '1' &&
+            $target->service->serviceProvider->type === 'auto' &&
+            $target->service->serviceProvider->is_cancel_support &&
+            optional($target->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration)->method &&
+            optional($target->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration)->endpoint
+        ) {
             $orderCancelResponse = false;
             try {
                 $serviceProviderConfig = optional($target->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration);

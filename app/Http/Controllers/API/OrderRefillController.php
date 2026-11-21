@@ -44,21 +44,14 @@ class OrderRefillController extends Controller
                 ]
             ], 422, [], JSON_PRETTY_PRINT);
         }
-        if ($target->service && $target->service->refill_days && Carbon::parse($target->created_at)->diffInDays(Carbon::now()) > $target->service->refill_days) {
+        // Minimum 24 jam sejak pesanan selesai. Tabel orders tidak memiliki
+        // kolom completed_at, maka updated_at dipakai sebagai proksi waktu selesai.
+        if (Carbon::parse($target->updated_at)->diffInHours(Carbon::now()) < 24) {
             return response()->json([
                 'status'  => false,
                 'message' => 'Refill Failed',
                 'errors'  => [
-                    'Layanan hanya mendukung isi ulang selama ' . $target->service->refill_days . ' hari sejak pesanan dibuat.'
-                ]
-            ], 422, [], JSON_PRETTY_PRINT);
-        }
-        if ($target->service && $target->service->refill_available_in_hours && Carbon::parse($target->created_at)->diffInHours(Carbon::now()) < $target->service->refill_available_in_hours) {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Refill Failed',
-                'errors'  => [
-                    'isi ulang tersedia dalam ' . CarbonInterval::seconds(Carbon::now()->subHours($target->service->refill_available_in_hours)->diffInSeconds($target->created_at))->cascade()->forHumans()
+                    'Isi ulang tersedia 24 jam setelah pesanan selesai.'
                 ]
             ], 422, [], JSON_PRETTY_PRINT);
         }
@@ -85,7 +78,7 @@ class OrderRefillController extends Controller
             ], 422, [], JSON_PRETTY_PRINT);
         }
         if ($checkOrderRefillExists && $orderRefillExists->status == 'completed') {
-            if (Carbon::parse($orderRefillExists->created_at)->diffInDays(Carbon::now()) < 1) {
+            if (Carbon::parse($orderRefillExists->created_at)->diffInHours(Carbon::now()) < 24) {
                 return response()->json([
                     'status'  => false,
                     'message' => 'Refill Failed',
@@ -102,7 +95,16 @@ class OrderRefillController extends Controller
             'ip_address'          => $request->ip(),
             'user_agent'          => $request->header('User-Agent', null),
         ];
-        if ($target->service && $target->service->serviceProvider && $target->service->serviceProvider->serviceProviderConfiguration && $target->service->serviceProvider->type <> 'manual' && $target->service->is_refill_support === '1') {
+        if (
+            $target->service &&
+            $target->service->serviceProvider &&
+            $target->service->serviceProvider->serviceProviderConfiguration &&
+            $target->service->is_refill_support === '1' &&
+            $target->service->serviceProvider->type === 'auto' &&
+            $target->service->serviceProvider->is_refill_support &&
+            optional($target->service->serviceProvider->serviceProviderConfiguration->order_refill_create_configuration)->method &&
+            optional($target->service->serviceProvider->serviceProviderConfiguration->order_refill_create_configuration)->endpoint
+        ) {
             $orderRefillRespons = false;
             try {
                 $serviceProviderConfig = optional($target->service->serviceProvider->serviceProviderConfiguration->order_refill_create_configuration);

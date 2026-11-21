@@ -27,6 +27,8 @@ return [
         'insufficient_balance' => 'Saldo anda tidak mencukupi, Deposit Sekarang!',
         'review_successful' => 'Ulasan berhasil dikirim. Ulasan akan tampil setelah ditinjau admin.',
         'already_reviewed' => 'Anda sudah memberikan ulasan untuk layanan ini.',
+        'refill_not_available' => 'Tidak ada pesanan yang memenuhi syarat untuk diisi ulang.',
+        'cancel_not_available' => 'Tidak ada pesanan yang memenuhi syarat untuk dibatalkan.',
     ],
 
     'log' => [

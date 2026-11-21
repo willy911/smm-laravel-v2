@@ -22,7 +22,9 @@
         "order-created": "Order successfully created.",
         "insufficient-balance": "Insufficient balance. Deposit Now!",
         "review-successful": "Review submitted successfully. It will appear after admin moderation.",
-        "already-reviewed": "You have already reviewed this service."
+        "already-reviewed": "You have already reviewed this service.",
+        "refill-not-available": "No eligible order for refill.",
+        "cancel-not-available": "No eligible order for cancellation."
     },
     "log": {
         "create-successful": "Created Order with ID <b>{{order_id}}<\/b>.",

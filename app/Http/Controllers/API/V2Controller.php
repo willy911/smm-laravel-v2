@@ -22,6 +22,7 @@ use App\Models\Order\OrderCancel;
 use App\Models\Order\OrderRefill;
 use App\Models\Service\Service;
 use App\Models\Service\ServiceCustomPrice;
+use App\Models\Service\ServiceProviderResponse;
 use App\Models\User\UserActivityLog;
 use App\Models\User\UserBalanceLog;
 use App\Rules\MultipleOrderRefID;
@@ -504,14 +505,11 @@ class V2Controller extends Controller
                 'error' => 'Pesanan masih berstatus ' . $checkOrder->status . '.'
             ], 422, [], JSON_PRETTY_PRINT);
         }
-        if ($target->service && $target->service->refill_days && Carbon::parse($target->created_at)->diffInDays(Carbon::now()) > $target->service->refill_days) {
+        // Isi ulang hanya tersedia 24 jam setelah pesanan selesai.
+        // Tabel orders tidak punya completed_at — updated_at dipakai sebagai proksi.
+        if (Carbon::parse($target->updated_at)->diffInHours(Carbon::now()) < 24) {
             return response()->json([
-                'error' => 'Layanan hanya mendukung isi ulang selama ' . $target->service->refill_days . ' hari sejak pesanan dibuat.'
-            ], 422, [], JSON_PRETTY_PRINT);
-        }
-        if ($target->service && $target->service->refill_available_in_hours && Carbon::parse($target->created_at)->diffInHours(Carbon::now()) < $target->service->refill_available_in_hours) {
-            return response()->json([
-                'error' => 'isi ulang tersedia dalam ' . CarbonInterval::seconds(Carbon::now()->subHours($target->service->refill_available_in_hours)->diffInSeconds($target->created_at))->cascade()->forHumans()
+                'error' => 'Isi ulang tersedia 24 jam setelah pesanan selesai.'
             ], 422, [], JSON_PRETTY_PRINT);
         }
         $checkOrderRefillExists = $orderRefillExists = OrderRefill::where([
@@ -529,7 +527,7 @@ class V2Controller extends Controller
             ], 422, [], JSON_PRETTY_PRINT);
         }
         if ($checkOrderRefillExists && $orderRefillExists->status == 'completed') {
-            if (Carbon::parse($orderRefillExists->created_at)->diffInDays(Carbon::now()) < 1) {
+            if (Carbon::parse($orderRefillExists->created_at)->diffInHours(Carbon::now()) < 24) {
                 return response()->json([
                     'error' => 'coba lagi dalam ' . CarbonInterval::seconds(Carbon::now()->subHours(24)->diffInSeconds($orderRefillExists->created_at))->cascade()->forHumans()
                 ], 422, [], JSON_PRETTY_PRINT);
@@ -542,7 +540,14 @@ class V2Controller extends Controller
             'ip_address'          => $request->ip(),
             'user_agent'          => $request->header('User-Agent', null),
         ];
-        if ($target->service && $target->service->serviceProvider && $target->service->serviceProvider->serviceProviderConfiguration && $target->service->serviceProvider->type <> 'manual' && $target->service->is_refill_support === '1') {
+        $service = $target->service;
+        $serviceProvider = optional($service)->serviceProvider;
+        $refillConfig = optional(optional($serviceProvider)->serviceProviderConfiguration)->order_refill_create_configuration;
+        if (
+            $service && $service->is_refill_support &&
+            $serviceProvider && $serviceProvider->type === 'auto' && $serviceProvider->is_refill_support &&
+            $refillConfig && $refillConfig->method && $refillConfig->endpoint
+        ) {
             $orderRefillRespons = false;
             try {
                 $serviceProviderConfig = optional($target->service->serviceProvider->serviceProviderConfiguration->order_refill_create_configuration);
@@ -574,15 +579,15 @@ class V2Controller extends Controller
                         $credentials['service_provider_order_refill_log'] = $response->json();
                     }
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $target->id,
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'error' => 'Pesanan tidak dapat diisi ulang, silahkan coba lagi dalam beberapa saat.'
                     ], 422, [], JSON_PRETTY_PRINT);
@@ -593,6 +598,15 @@ class V2Controller extends Controller
                 ], 500, [], JSON_PRETTY_PRINT);
             }
             if ($orderRefillRespons == false) {
+                ServiceProviderResponse::create([
+                    'type'                => 'order_refill_create',
+                    'status'              => 'fail',
+                    'user_id'             => $credentials['user_id'],
+                    'order_id'            => $target->id,
+                    'service_id'          => $target->service->id,
+                    'service_provider_id' => $target->service->service_provider_id,
+                    'logs'                => $response->json(),
+                ]);
                 return response()->json([
                     'error' => 'Pesanan tidak dapat diisi ulang, silahkan coba lagi dalam beberapa saat.'
                 ], 422, [], JSON_PRETTY_PRINT);
@@ -606,16 +620,16 @@ class V2Controller extends Controller
                         'content_key'  => 'orders:log.refill-successful',
                         'content_params'  => (object) ['order_refill_id' => $insertOrderRefill->id],
                     ]);
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_refill_create',
-                    //     'status'              => 'success',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'order_id'            => $target->id,
-                    //     'order_refill_id'     => $insertOrderRefill->id,
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_refill_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'order_refill_id'     => $insertOrderRefill->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'refill' => $insertOrderRefill->id,
                     ], 200, [], JSON_PRETTY_PRINT);
@@ -675,9 +689,11 @@ class V2Controller extends Controller
         }
         $checkUser = $user = User::whereJsonContains('api->api_key', $request->input('key'))->first();
         $checkOrder = $target = Order::where('user_id', $user->id)->where('id', $request->input('order'))->first();
-        if ($target->service && Carbon::parse($target->created_at)->diffInHours(Carbon::now()) < 1) {
+        // Tidak ada jendela tunggu 1 jam — pembatalan bisa langsung diajukan
+        // selama status order belum terminal.
+        if (!in_array($target->status, ['pending', 'processing', 'in_progress'])) {
             return response()->json([
-                'error' => 'pembatalan tersedia dalam ' . CarbonInterval::seconds(Carbon::now()->subHours(1)->diffInSeconds($target->created_at))->cascade()->forHumans()
+                'error' => 'Pesanan tidak dapat dibatalkan.'
             ], 422, [], JSON_PRETTY_PRINT);
         }
         $checkOrderCancelExists = $orderCancelExists = OrderCancel::where([
@@ -685,20 +701,25 @@ class V2Controller extends Controller
             'order_id' => $target->id
         ])->latest()->first();
         if ($checkOrderCancelExists) {
-            if (Carbon::parse($orderCancelExists->created_at)->diffInHours(Carbon::now()) < 1) {
-                return response()->json([
-                    'error' => 'Coba lagi dalam ' . CarbonInterval::seconds(Carbon::now()->subHours(1)->diffInSeconds($orderCancelExists->created_at))->cascade()->forHumans()
-                ], 422, [], JSON_PRETTY_PRINT);
-            }
+            return response()->json([
+                'error' => 'Permintaan pembatalan untuk pesanan ini sudah dibuat.'
+            ], 422, [], JSON_PRETTY_PRINT);
         }
         $credentials = [
             'user_id'             => $user->id,
             'order_id'            => $target->id,
             'service_id'          => $target->service_id,
             'ip_address'          => $request->ip(),
-            // 'user_agent'          => $request->header('User-Agent'),
+            'user_agent'          => $request->header('User-Agent'),
         ];
-        if ($target->service && $target->service->serviceProvider && $target->service->serviceProvider->serviceProviderConfiguration && $target->service->serviceProvider->type <> 'manual' && $target->service->is_cancel_support === '1') {
+        $service = $target->service;
+        $serviceProvider = optional($service)->serviceProvider;
+        $cancelConfig = optional(optional($serviceProvider)->serviceProviderConfiguration)->order_cancel_create_configuration;
+        if (
+            $service && $service->is_cancel_support &&
+            $serviceProvider && $serviceProvider->type === 'auto' && $serviceProvider->is_cancel_support &&
+            $cancelConfig && $cancelConfig->method && $cancelConfig->endpoint
+        ) {
             $orderCancelResponse = false;
             try {
                 $serviceProviderConfig = optional($target->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration);
@@ -730,38 +751,63 @@ class V2Controller extends Controller
                         $credentials['service_provider_order_cancel_log'] = $response->json();
                     }
                 } else {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_cancel_create',
-                    //     'status'              => 'fail',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     return response()->json([
                         'error' => 'Pesanan tidak dapat dibatalkan, silahkan coba lagi dalam beberapa saat.'
                     ], 422, [], JSON_PRETTY_PRINT);
                 }
             } catch (Exception $error) {
+                try {
+                    ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'fail',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => ['error' => $error->getMessage()],
+                    ]);
+                } catch (Exception $logError) {
+                    // Jangan timpa response 500 bila pencatatan gagal.
+                }
                 return response()->json([
                     'error' => 'Terjadi Kesalahan.'
                 ], 500, [], JSON_PRETTY_PRINT);
             }
             if ($orderCancelResponse == false) {
+                ServiceProviderResponse::create([
+                    'type'                => 'order_cancel_create',
+                    'status'              => 'fail',
+                    'user_id'             => $credentials['user_id'],
+                    'order_id'            => $target->id,
+                    'service_id'          => $target->service->id,
+                    'service_provider_id' => $target->service->service_provider_id,
+                    'logs'                => $response->json(),
+                ]);
                 return response()->json([
                     'error' => 'Pesanan tidak dapat dibatalkan, silahkan coba lagi dalam beberapa saat.'
                 ], 422, [], JSON_PRETTY_PRINT);
             } else {
                 $insertOrderCancel = OrderCancel::create($credentials);
                 if ($insertOrderCancel == true) {
-                    // $insertServiceProviderResponse = ServiceProviderResponse::create([
-                    //     'type'                => 'order_cancel_create',
-                    //     'status'              => 'success',
-                    //     'user_id'             => $credentials['user_id'],
-                    //     'service_id'          => $target->service->id,
-                    //     'service_provider_id' => $target->service->service_provider_id,
-                    //     'logs'                => $response->json(),
-                    // ]);
+                    $insertServiceProviderResponse = ServiceProviderResponse::create([
+                        'type'                => 'order_cancel_create',
+                        'status'              => 'success',
+                        'user_id'             => $credentials['user_id'],
+                        'order_id'            => $target->id,
+                        'order_cancel_id'     => $insertOrderCancel->id,
+                        'service_id'          => $target->service->id,
+                        'service_provider_id' => $target->service->service_provider_id,
+                        'logs'                => $response->json(),
+                    ]);
                     $insertActivityLog = UserActivityLog::create([
                         'user_id'     => $credentials['user_id'],
                         'ip_address'  => $credentials['ip_address'],

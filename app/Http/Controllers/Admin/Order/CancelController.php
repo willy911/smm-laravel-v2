@@ -93,6 +93,12 @@ class CancelController extends Controller
             }
             return true;
         });
+        if ($filteredOrders->isEmpty()) {
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.cancel_not_available'),
+            ], 422);
+        }
         $responses = Http::pool(
             fn(Pool $pool) =>
             collect($filteredOrders)->map(function ($order) use ($pool) {

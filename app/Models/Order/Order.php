@@ -190,15 +190,20 @@ class Order extends Model
                 if (!$this->service || !$this->service->is_refill_support || !$this->service->serviceProvider || $this->service->serviceProvider->type !== 'auto' || !$this->service->serviceProvider->is_refill_support) {
                     return 'Layanan tidak mendukung isi ulang.';
                 }
-                if ($this->status == 'completed' && $this->service && $this->service->refill_days && Carbon::parse($this->created_at)->diffInDays(Carbon::now()) > $this->service->refill_days) {
-                    return 'Layanan hanya mendukung isi ulang selama ' . $this->service->refill_days . ' hari sejak pesanan dibuat.';
+                // Refill hanya untuk pesanan selesai. Jendela 24 jam dihitung dari
+                // updated_at sebagai proksi waktu pesanan selesai (tanpa completed_at).
+                if ($this->status !== 'completed') {
+                    return 'Hanya pesanan selesai yang dapat diisi ulang.';
                 }
-                if ($this->status == 'completed' && $this->service && $this->service->refill_available_in_hours && Carbon::parse($this->created_at)->diffInHours(Carbon::now()) < $this->service->refill_available_in_hours) {
-                    return 'isi ulang tersedia dalam ' . CarbonInterval::seconds((int) Carbon::now()->subHours($this->service->refill_available_in_hours)->diffInSeconds($this->created_at))->cascade()->forHumans();
+                $refillAvailableAt = Carbon::parse($this->updated_at)->addHours(24);
+                if (Carbon::parse($this->updated_at)->diffInHours(now()) < 24) {
+                    $remainingSeconds = now()->diffInSeconds($refillAvailableAt, false);
+                    return 'Isi ulang tersedia dalam ' . CarbonInterval::seconds((int) $remainingSeconds)->cascade()->forHumans() . '.';
                 }
                 if ($this->service && !$this->orderRefills->where('user_id', auth()->id())->sortByDesc('id')->isEmpty()) {
                     $orderRefill = $this->orderRefills->where('user_id', auth()->id())->sortByDesc('id')->first();
-                    $cooldownUntil = Carbon::parse($orderRefill->created_at)->addHours($this->service->refill_available_in_hours ?: 24);
+                    // Jeda tetap 24 jam sejak refill sebelumnya dibuat.
+                    $cooldownUntil = Carbon::parse($orderRefill->created_at)->addHours(24);
                     $remainingSeconds = now()->diffInSeconds($cooldownUntil, false);
                     if ($orderRefill->status == 'pending') {
                         return 'Isi ulang pesanan sedang dalam antrian.';
@@ -206,7 +211,7 @@ class Order extends Model
                     if (in_array($orderRefill->status, ['processing', 'in_progress'])) {
                         return 'Isi ulang pesanan sedang dalam proses, mohon tunggu proses selesai.';
                     }
-                    if ($orderRefill->status === 'completed' && $remainingSeconds  > 0) {
+                    if ($orderRefill->status === 'completed' && $remainingSeconds > 0) {
                         return 'Coba lagi dalam ' . CarbonInterval::seconds($remainingSeconds)->cascade()->forHumans();
                     }
                 }

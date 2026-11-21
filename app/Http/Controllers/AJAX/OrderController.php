@@ -59,6 +59,11 @@ class OrderController extends Controller
             if ($order->status !== 'completed') {
                 return false;
             }
+            // Order baru bisa di-refill setelah 24 jam sejak selesai.
+            // Tabel orders tidak punya completed_at, jadi updated_at dipakai sebagai proksi.
+            if (Carbon::parse($order->updated_at)->diffInHours(now()) < 24) {
+                return false;
+            }
             $service = $order->service;
             if (!$service || !$service->is_refill_support) {
                 return false;
@@ -71,17 +76,12 @@ class OrderController extends Controller
             if (!$serviceProviderConfig->method || !$serviceProviderConfig->endpoint) {
                 return false;
             }
-            if (filled($service->refill_days) && Carbon::parse($order->created_at)->diffInDays(now()) > $service->refill_days) {
-                return false;
-            }
-            if (filled($service->refill_available_in_hours) && Carbon::parse($order->created_at)->diffInHours(now()) < $service->refill_available_in_hours) {
-                return false;
-            }
             $refill = $order->orderRefills->first();
             if ($refill) {
                 if (in_array($refill->status, ['pending', 'processing', 'in_progress'])) {
                     return false;
                 }
+                // Cooldak refill berikutnya 24 jam tetap (bukan refill_available_in_hours).
                 if (
                     $refill->status === 'completed' &&
                     Carbon::parse($refill->created_at)->diffInHours(now()) < 24
@@ -91,6 +91,13 @@ class OrderController extends Controller
             }
             return true;
         });
+        if ($filteredOrders->isEmpty()) {
+            RateLimiter::clear($rateKey);
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.refill_not_available'),
+            ], 422);
+        }
         $responses = Http::pool(
             fn(Pool $pool) =>
             collect($filteredOrders)->map(function ($order) use ($pool) {
@@ -245,6 +252,13 @@ class OrderController extends Controller
             }
             return true;
         });
+        if ($filteredOrders->isEmpty()) {
+            RateLimiter::clear($rateKey);
+            return response()->json([
+                'status'  => false,
+                'message' => __('orders.toast.cancel_not_available'),
+            ], 422);
+        }
         $responses = Http::pool(
             fn(Pool $pool) =>
             collect($filteredOrders)->map(function ($order) use ($pool) {
