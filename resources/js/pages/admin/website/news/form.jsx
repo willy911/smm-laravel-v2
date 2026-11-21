@@ -44,6 +44,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
                 only_visible_on: target.only_visible_on ?? '',
                 is_public: !!Number(target.is_public ?? 0),
                 is_popup: !!Number(target.is_popup ?? 0),
+                push_to_app: false,
                 banner: '',
             },
         },
@@ -60,6 +61,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
                 only_visible_on: target.only_visible_on ?? '',
                 is_public: !!Number(target.is_public ?? 0),
                 is_popup: !!Number(target.is_popup ?? 0),
+                push_to_app: false,
                 banner: '',
             },
         }),
@@ -74,7 +76,8 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
             u.news.only_visible_on !== initialData.news.only_visible_on ||
             u.news.is_public !== initialData.news.is_public ||
             u.news.is_popup !== initialData.news.is_popup ||
-            u.news.banner !== initialData.news.banner
+            u.news.banner !== initialData.news.banner ||
+            u.news.push_to_app !== initialData.news.push_to_app
         );
     }, [form.data, initialData]);
 
@@ -136,6 +139,7 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
                     only_visible_on: target.only_visible_on ?? '',
                     is_public: !!Number(target.is_public ?? 0),
                     is_popup: !!Number(target.is_popup ?? 0),
+                    push_to_app: false,
                     banner: '',
                 },
             },
@@ -377,6 +381,30 @@ export default function Form({ pageProps, isCreateDialogOpened, setIsCreateDialo
                                 className="mt-[2px] text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                             >
                                 Show News Popup
+                            </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <Checkbox
+                                id="pushToApp"
+                                checked={form.data.website.news.push_to_app}
+                                onCheckedChange={(checked) => {
+                                    form.setData((data) => ({
+                                        ...data,
+                                        website: {
+                                            ...data.website,
+                                            news: {
+                                                ...data.website.news,
+                                                push_to_app: checked,
+                                            },
+                                        },
+                                    }));
+                                }}
+                            />
+                            <label
+                                htmlFor="pushToApp"
+                                className="mt-[2px] text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                                Push ke Aplikasi
                             </label>
                         </div>
                         <DialogFooter>

@@ -25,8 +25,10 @@ use App\Models\Product\ProductCategory;
 use App\Models\Website\WebsiteNews;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Admin\Product\CategoryGroupService;
+use App\Services\Admin\Website\FcmPushService;
 use App\Services\Admin\Website\NewsService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Storage;
@@ -121,12 +123,26 @@ class NewsController extends Controller implements HasMiddleware
                 'id' => $insertData->id,
             ],
         ]);
+        $message = __('admin/common.toast.create_successful', [
+            'item' => __('common.labels.news'),
+            'id' => $insertData->id,
+        ]);
+
+        $push = $request->boolean('website.news.push_to_app');
+        if ($push === true) {
+            try {
+                $pushResult = FcmPushService::sendNews($insertData);
+                if (!empty($pushResult['ok'])) {
+                    $message .= ' • Dikirim ke aplikasi';
+                }
+            } catch (\Throwable $e) {
+                \Log::warning('Push notifikasi berita gagal: ' . $e->getMessage());
+            }
+        }
+
         return response()->json([
             'status'  => true,
-            'message' => __('admin/common.toast.create_successful', [
-                'item' => __('common.labels.news'),
-                'id' => $insertData->id,
-            ]),
+            'message' => $message,
         ]);
     }
 
@@ -163,12 +179,26 @@ class NewsController extends Controller implements HasMiddleware
                 'updated_columns'  => (object) get_updated_columns($target->getPrevious(), $target->getChanges()),
             ]);
         }
+        $message = __('admin/common.toast.update_successful', [
+            'item' => __('common.labels.news'),
+            'id' => $target->id,
+        ]);
+
+        $push = $request->boolean('website.news.push_to_app');
+        if ($push === true) {
+            try {
+                $pushResult = FcmPushService::sendNews($target);
+                if (!empty($pushResult['ok'])) {
+                    $message .= ' • Dikirim ke aplikasi';
+                }
+            } catch (\Throwable $e) {
+                \Log::warning('Push notifikasi berita gagal: ' . $e->getMessage());
+            }
+        }
+
         return response()->json([
             'status'  => true,
-            'message' => __('admin/common.toast.update_successful', [
-                'item' => __('common.labels.news'),
-                'id' => $target->id,
-            ]),
+            'message' => $message,
         ]);
     }
 
@@ -348,6 +378,28 @@ class NewsController extends Controller implements HasMiddleware
 
 class WebsiteNewsRequest extends FormRequest
 {
+    /**
+     * Axios kirim checkbox sebagai string "true"/"false" lewat multipart,
+     * sedangkan aturan `boolean` pada versi Laravel ini memakai perbandingan
+     * ketat. Normalisasi ke bool agar validasi lolos.
+     */
+    protected function prepareForValidation(): void
+    {
+        $value = $this->input('website.news.push_to_app');
+        if (!is_string($value)) {
+            return;
+        }
+
+        $normalized = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        if ($normalized === null) {
+            return;
+        }
+
+        $website = (array) $this->input('website', []);
+        Arr::set($website, 'news.push_to_app', $normalized);
+        $this->merge(['website' => $website]);
+    }
+
     public function authorize(): bool
     {
         $admin = auth('admin')->user();
@@ -369,8 +421,9 @@ class WebsiteNewsRequest extends FormRequest
     {
         $id = $this->route('target')->id ?? null;
         return [
-            'website.news.title'    => ['required', Rule::unique('website_news', 'title')->ignore($id)],
-            'website.news.content'  => ['required'],
+            'website.news.title'       => ['required', Rule::unique('website_news', 'title')->ignore($id)],
+            'website.news.content'     => ['required'],
+            'website.news.push_to_app' => ['nullable', 'boolean'],
             // 'website.news.banner' => [
             //     ...$this->isPrecognitive() ? [] : [
             //         (!$id ? 'required' : 'nullable'),

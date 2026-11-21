@@ -1,0 +1,147 @@
+<?php
+
+namespace App\Services\Admin\Website;
+
+use App\Models\Website\WebsiteNews;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use RuntimeException;
+use Throwable;
+
+class FcmPushService
+{
+    private const TOPIC = 'indopedia_news';
+
+    private const CHANNEL_ID = 'orders';
+
+    private const SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
+
+    private const DEFAULT_TOKEN_URI = 'https://oauth2.googleapis.com/token';
+
+    private const TOKEN_CACHE_KEY = 'fcm_oauth_token';
+
+    /**
+     * Kirim notifikasi push berita ke topik FCM aplikasi Android.
+     *
+     * @return array{ok: bool, body?: string, error?: string}
+     */
+    public static function sendNews(WebsiteNews $news): array
+    {
+        $path = env('FCM_CREDENTIALS_PATH')
+            ?: env('GOOGLE_APPLICATION_CREDENTIALS')
+            ?: '/etc/indopedia/firebase-adminsdk.json';
+
+        if (!is_file($path)) {
+            return [
+                'ok'    => false,
+                'error' => "File kredensial FCM tidak ditemukan: {$path}",
+            ];
+        }
+
+        $credentials = json_decode((string) file_get_contents($path), true);
+        if (
+            !is_array($credentials)
+            || empty($credentials['client_email'])
+            || empty($credentials['private_key'])
+            || empty($credentials['project_id'])
+        ) {
+            return [
+                'ok'    => false,
+                'error' => 'Kredensial Admin SDK FCM tidak valid.',
+            ];
+        }
+
+        try {
+            $accessToken = self::getAccessToken($credentials);
+
+            $title = (string) $news->title;
+            $body = Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags((string) $news->content))), 120);
+
+            $payload = [
+                'message' => [
+                    'topic'        => self::TOPIC,
+                    'notification' => [
+                        'title' => $title,
+                        'body'  => $body,
+                    ],
+                    'data' => [
+                        'news_id' => (string) $news->id,
+                        'slug'    => (string) $news->slug,
+                        'title'   => $title,
+                    ],
+                    'android' => [
+                        'notification' => [
+                            'channel_id' => self::CHANNEL_ID,
+                        ],
+                    ],
+                ],
+            ];
+
+            $response = Http::withToken($accessToken)
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->post("https://fcm.googleapis.com/v1/projects/{$credentials['project_id']}/messages:send", $payload);
+
+            if (!$response->successful()) {
+                Log::warning('FCM push gagal: ' . $response->body());
+            }
+
+            return [
+                'ok'   => $response->successful(),
+                'body' => $response->body(),
+            ];
+        } catch (Throwable $e) {
+            Log::warning('FCM push gagal: ' . $e->getMessage());
+
+            return [
+                'ok'    => false,
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Ambil (dan cache) OAuth2 access token untuk Firebase Cloud Messaging v1.
+     */
+    private static function getAccessToken(array $credentials): string
+    {
+        return Cache::remember(self::TOKEN_CACHE_KEY, 3300, function () use ($credentials) {
+            $tokenUri = $credentials['token_uri'] ?? self::DEFAULT_TOKEN_URI;
+            $now = time();
+
+            $header = self::base64UrlEncode((string) json_encode(['alg' => 'RS256', 'typ' => 'JWT']));
+            $claim = self::base64UrlEncode((string) json_encode([
+                'iss'   => $credentials['client_email'],
+                'scope' => self::SCOPE,
+                'aud'   => $tokenUri,
+                'iat'   => $now,
+                'exp'   => $now + 3600,
+            ]));
+
+            $unsigned = $header . '.' . $claim;
+            $signature = '';
+            if (!openssl_sign($unsigned, $signature, $credentials['private_key'], OPENSSL_ALGO_SHA256)) {
+                throw new RuntimeException('Gagal menandatangani JWT FCM dengan private key.');
+            }
+            $assertion = $unsigned . '.' . self::base64UrlEncode($signature);
+
+            $response = Http::asForm()->post($tokenUri, [
+                'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+                'assertion'  => $assertion,
+            ]);
+
+            $accessToken = $response->json('access_token');
+            if (!$response->successful() || !is_string($accessToken) || $accessToken === '') {
+                throw new RuntimeException('Gagal memperoleh access token FCM: ' . $response->body());
+            }
+
+            return $accessToken;
+        });
+    }
+
+    private static function base64UrlEncode(string $value): string
+    {
+        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
+    }
+}
