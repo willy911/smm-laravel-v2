@@ -129,6 +129,7 @@ class NewsController extends Controller implements HasMiddleware
         ]);
 
         $push = $request->boolean('website.news.push_to_app');
+        $pushResult = null;
         if ($push === true) {
             try {
                 $pushResult = FcmPushService::sendNews($insertData);
@@ -145,8 +146,9 @@ class NewsController extends Controller implements HasMiddleware
         }
 
         return response()->json([
-            'status'  => true,
-            'message' => $message,
+            'status'      => true,
+            'message'     => $message,
+            'push_result' => $pushResult,
         ]);
     }
 
@@ -189,6 +191,7 @@ class NewsController extends Controller implements HasMiddleware
         ]);
 
         $push = $request->boolean('website.news.push_to_app');
+        $pushResult = null;
         if ($push === true) {
             try {
                 $pushResult = FcmPushService::sendNews($target);
@@ -205,8 +208,9 @@ class NewsController extends Controller implements HasMiddleware
         }
 
         return response()->json([
-            'status'  => true,
-            'message' => $message,
+            'status'      => true,
+            'message'     => $message,
+            'push_result' => $pushResult,
         ]);
     }
 

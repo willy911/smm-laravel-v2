@@ -41,25 +41,25 @@ class FcmPushService
             $path = base_path($path);
         }
 
-        if (!is_file($path)) {
-            Log::warning('FCM push gagal: file kredensial tidak ditemukan: ' . $path);
+        if (!@is_file($path)) {
+            Log::warning('FCM push gagal: file kredensial tidak ditemukan atau tidak dapat dibaca: ' . $path . ' (pastikan path berada di dalam open_basedir yang diizinkan)');
 
             return [
                 'ok'    => false,
-                'error' => "File kredensial FCM tidak ditemukan: {$path}",
+                'error' => 'FCM push gagal: file kredensial tidak ditemukan atau tidak dapat dibaca: ' . $path . ' (pastikan path berada di dalam open_basedir yang diizinkan)',
             ];
         }
 
-        if (!is_readable($path)) {
-            Log::warning('FCM push gagal: file kredensial tidak dapat dibaca: ' . $path);
+        if (!@is_readable($path)) {
+            Log::warning('FCM push gagal: file kredensial tidak ditemukan atau tidak dapat dibaca: ' . $path . ' (pastikan path berada di dalam open_basedir yang diizinkan)');
 
             return [
                 'ok'    => false,
-                'error' => "File kredensial FCM tidak dapat dibaca: {$path}",
+                'error' => 'FCM push gagal: file kredensial tidak ditemukan atau tidak dapat dibaca: ' . $path . ' (pastikan path berada di dalam open_basedir yang diizinkan)',
             ];
         }
 
-        $credentials = json_decode((string) file_get_contents($path), true);
+        $credentials = json_decode((string) @file_get_contents($path), true);
         if (
             !is_array($credentials)
             || empty($credentials['client_email'])
@@ -106,6 +106,12 @@ class FcmPushService
 
             if (!$response->successful()) {
                 Log::warning('FCM push gagal: ' . $response->body());
+            } else {
+                Log::info('FCM push berita terkirim', [
+                    'news_id' => $news->id,
+                    'topic'   => self::TOPIC,
+                    'body'    => Str::limit($response->body(), 500),
+                ]);
             }
 
             return [
@@ -129,7 +135,7 @@ class FcmPushService
     {
         return Cache::remember(self::TOKEN_CACHE_KEY, 3300, function () use ($credentials) {
             $tokenUri = $credentials['token_uri'] ?? self::DEFAULT_TOKEN_URI;
-            $now = time();
+            $now = self::trustedNow() - 600; // buffer 10 menit agar iat tidak dianggap di masa depan bila jam lokal maju
 
             $header = self::base64UrlEncode((string) json_encode(['alg' => 'RS256', 'typ' => 'JWT']));
             $claim = self::base64UrlEncode((string) json_encode([
@@ -159,6 +165,28 @@ class FcmPushService
 
             return $accessToken;
         });
+    }
+
+    /**
+     * Dapatkan waktu tepercaya dari header Date HTTP Google.
+     * Fallback ke waktu lokal bila sumber gagal atau hasilnya tidak wajar.
+     */
+    private static function trustedNow(): int
+    {
+        try {
+            $response = Http::withOptions(['timeout' => 5])->head('https://www.google.com');
+            $dateHeader = $response->header('Date');
+            if (is_string($dateHeader) && $dateHeader !== '') {
+                $parsed = strtotime($dateHeader);
+                if ($parsed !== false && $parsed > 0 && abs($parsed - time()) < 86400) {
+                    return (int) $parsed;
+                }
+            }
+        } catch (Throwable $e) {
+            // Abaikan; gunakan fallback waktu lokal.
+        }
+
+        return time();
     }
 
     private static function base64UrlEncode(string $value): string
