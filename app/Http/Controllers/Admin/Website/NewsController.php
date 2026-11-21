@@ -134,6 +134,10 @@ class NewsController extends Controller implements HasMiddleware
                 $pushResult = FcmPushService::sendNews($insertData);
                 if (!empty($pushResult['ok'])) {
                     $message .= ' • Dikirim ke aplikasi';
+                } else {
+                    $detail = $pushResult['error'] ?? $pushResult['body'] ?? 'tidak diketahui';
+                    $detail = trim(preg_replace('/\s+/', ' ', (string) $detail)) ?: 'tidak diketahui';
+                    $message .= ' • Push gagal: ' . Str::limit($detail, 200);
                 }
             } catch (\Throwable $e) {
                 \Log::warning('Push notifikasi berita gagal: ' . $e->getMessage());
@@ -190,6 +194,10 @@ class NewsController extends Controller implements HasMiddleware
                 $pushResult = FcmPushService::sendNews($target);
                 if (!empty($pushResult['ok'])) {
                     $message .= ' • Dikirim ke aplikasi';
+                } else {
+                    $detail = $pushResult['error'] ?? $pushResult['body'] ?? 'tidak diketahui';
+                    $detail = trim(preg_replace('/\s+/', ' ', (string) $detail)) ?: 'tidak diketahui';
+                    $message .= ' • Push gagal: ' . Str::limit($detail, 200);
                 }
             } catch (\Throwable $e) {
                 \Log::warning('Push notifikasi berita gagal: ' . $e->getMessage());

@@ -6,6 +6,8 @@ return [
     'wuzzpanel_panel_id' => env('WUZZPANEL_PANEL_ID', 0),
     'cdn_url' => env('VITE_CDN_BASE_URL', 'https://jhonroot.dev'),
 
+    'fcm_credentials_path' => env('FCM_CREDENTIALS_PATH', '/etc/indopedia/firebase-adminsdk.json'),
+
     /*
     |--------------------------------------------------------------------------
     | Website Config

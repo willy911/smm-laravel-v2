@@ -29,14 +29,33 @@ class FcmPushService
      */
     public static function sendNews(WebsiteNews $news): array
     {
-        $path = env('FCM_CREDENTIALS_PATH')
+        $path = config('app.fcm_credentials_path')
             ?: env('GOOGLE_APPLICATION_CREDENTIALS')
             ?: '/etc/indopedia/firebase-adminsdk.json';
 
+        // Path relatif dari .env diresolve terhadap root aplikasi.
+        $isAbsolute = str_starts_with($path, '/')
+            || str_starts_with($path, '\\')
+            || (strlen($path) >= 3 && $path[1] === ':' && ($path[2] === '/' || $path[2] === '\\'));
+        if (!$isAbsolute) {
+            $path = base_path($path);
+        }
+
         if (!is_file($path)) {
+            Log::warning('FCM push gagal: file kredensial tidak ditemukan: ' . $path);
+
             return [
                 'ok'    => false,
                 'error' => "File kredensial FCM tidak ditemukan: {$path}",
+            ];
+        }
+
+        if (!is_readable($path)) {
+            Log::warning('FCM push gagal: file kredensial tidak dapat dibaca: ' . $path);
+
+            return [
+                'ok'    => false,
+                'error' => "File kredensial FCM tidak dapat dibaca: {$path}",
             ];
         }
 
@@ -47,6 +66,8 @@ class FcmPushService
             || empty($credentials['private_key'])
             || empty($credentials['project_id'])
         ) {
+            Log::warning('FCM push gagal: kredensial Admin SDK tidak valid atau tidak lengkap.');
+
             return [
                 'ok'    => false,
                 'error' => 'Kredensial Admin SDK FCM tidak valid.',
