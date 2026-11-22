@@ -68,7 +68,7 @@ class OrderCancelController extends Controller
             $target->service &&
             $target->service->serviceProvider &&
             $target->service->serviceProvider->serviceProviderConfiguration &&
-            $target->service->is_cancel_support === '1' &&
+            (bool) $target->service->is_cancel_support &&
             $target->service->serviceProvider->type === 'auto' &&
             $target->service->serviceProvider->is_cancel_support &&
             optional($target->service->serviceProvider->serviceProviderConfiguration->order_cancel_create_configuration)->method &&
