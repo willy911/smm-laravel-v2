@@ -129,6 +129,95 @@ class FcmPushService
     }
 
     /**
+     * Kirim notifikasi data-only balance_update ke topik FCM user_{id}.
+     *
+     * Aplikasi Android menampilkan notifikasinya sendiri dari payload data,
+     * maka sengaja TIDAK menyertakan key `notification` agar tidak dobel.
+     *
+     * @return array{ok: bool, body?: string, error?: string}
+     */
+    public static function sendBalanceUpdate(int $userId): array
+    {
+        $path = config('app.fcm_credentials_path')
+            ?: env('GOOGLE_APPLICATION_CREDENTIALS')
+            ?: '/etc/indopedia/firebase-adminsdk.json';
+
+        // Path relatif dari .env diresolve terhadap root aplikasi.
+        $isAbsolute = str_starts_with($path, '/')
+            || str_starts_with($path, '\\')
+            || (strlen($path) >= 3 && $path[1] === ':' && ($path[2] === '/' || $path[2] === '\\'));
+        if (!$isAbsolute) {
+            $path = base_path($path);
+        }
+
+        if (!@is_file($path) || !@is_readable($path)) {
+            $error = 'FCM saldo gagal: file kredensial tidak ditemukan atau tidak dapat dibaca: ' . $path;
+            Log::warning($error);
+
+            return ['ok' => false, 'error' => $error];
+        }
+
+        $credentials = json_decode((string) @file_get_contents($path), true);
+        if (
+            !is_array($credentials)
+            || empty($credentials['client_email'])
+            || empty($credentials['private_key'])
+            || empty($credentials['project_id'])
+        ) {
+            $error = 'FCM saldo gagal: kredensial Admin SDK tidak valid atau tidak lengkap.';
+            Log::warning($error);
+
+            return ['ok' => false, 'error' => $error];
+        }
+
+        $topic = 'user_' . $userId;
+        $data = [
+            'type'  => 'balance_update',
+            'title' => 'Saldo bertambah',
+            'body'  => 'Saldo Indopedia Anda baru saja diperbarui.',
+        ];
+
+        try {
+            $accessToken = self::getAccessToken($credentials);
+
+            $payload = [
+                'message' => [
+                    'topic'   => $topic,
+                    'data'    => $data,
+                    'android' => ['data' => $data],
+                ],
+            ];
+
+            $response = Http::withToken($accessToken)
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->post("https://fcm.googleapis.com/v1/projects/{$credentials['project_id']}/messages:send", $payload);
+
+            $ok = $response->successful();
+            if (!$ok) {
+                Log::warning('FCM balance_update gagal', [
+                    'topic' => $topic,
+                    'ok'    => false,
+                    'body'  => substr($response->body(), 0, 500),
+                ]);
+            } else {
+                Log::info('FCM balance_update dikirim', [
+                    'topic' => $topic,
+                    'ok'    => $ok,
+                ]);
+            }
+
+            return [
+                'ok'   => $ok,
+                'body' => $response->body(),
+            ];
+        } catch (Throwable $e) {
+            Log::warning('FCM saldo (web) gagal: ' . $e->getMessage());
+
+            return ['ok' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    /**
      * Ambil (dan cache) OAuth2 access token untuk Firebase Cloud Messaging v1.
      */
     private static function getAccessToken(array $credentials): string

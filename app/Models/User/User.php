@@ -13,12 +13,15 @@
 
 namespace App\Models\User;
 
+use App\Services\Admin\Website\FcmPushService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class User extends Authenticable
@@ -163,6 +166,20 @@ class User extends Authenticable
     {
         static::creating(function ($user) {
             $user->referral_code = self::generateReferralCode();
+        });
+
+        static::updated(function ($user) {
+            if (!$user->wasChanged('balance')) {
+                return;
+            }
+
+            DB::afterCommit(function () use ($user) {
+                try {
+                    FcmPushService::sendBalanceUpdate((int) $user->id);
+                } catch (\Throwable $e) {
+                    Log::warning('FCM saldo (web): ' . $e->getMessage());
+                }
+            });
         });
     }
 
