@@ -99,7 +99,7 @@ class OrderRefillController extends Controller
             $target->service &&
             $target->service->serviceProvider &&
             $target->service->serviceProvider->serviceProviderConfiguration &&
-            $target->service->is_refill_support === '1' &&
+            (bool) $target->service->is_refill_support &&
             $target->service->serviceProvider->type === 'auto' &&
             $target->service->serviceProvider->is_refill_support &&
             optional($target->service->serviceProvider->serviceProviderConfiguration->order_refill_create_configuration)->method &&
