@@ -38,7 +38,6 @@ import {
     Delete02Icon,
     Delete04Icon,
     FileEditIcon,
-    Loading03Icon,
     RefreshIcon,
     RestoreBinIcon,
     SortByDown01Icon,
@@ -53,6 +52,7 @@ import Fetch from './fetch';
 import Form from './form';
 import Sort from './sort';
 import SyncDescription from './sync-description';
+import SyncService from './sync-service';
 
 const RowExpander = ({ row, t }) => (
     <TooltipProvider delayDuration={0}>
@@ -479,11 +479,11 @@ export default function Index({ pageProps }) {
 
     const [isFetchDialogOpened, setIsFetchDialogOpened] = useState(false);
     const [isSyncDescriptionDialogOpened, setIsSyncDescriptionDialogOpened] = useState(false);
+    const [isSyncServicesDialogOpened, setIsSyncServicesDialogOpened] = useState(false);
     const [isSortDialogOpened, setIsSortDialogOpened] = useState(false);
     const [isCreateDialogOpened, setIsCreateDialogOpened] = useState(false);
     const [isEditCategoryDialogOpened, setIsEditCategoryDialogOpened] = useState(false);
     const [isEditDescriptionDialogOpened, setIsEditDescriptionDialogOpened] = useState(false);
-    const [isSyncing, setIsSyncing] = useState(false);
     const [targets, setTargets] = useState([]);
 
     const [target, setTarget] = useState({});
@@ -667,38 +667,6 @@ export default function Index({ pageProps }) {
             actionType: '',
         });
     }, []);
-
-    const handleSyncServices = useCallback(async () => {
-        setIsSyncing(true);
-        try {
-            const { data } = await axios.post(route('admin.services.sync'));
-            if (data?.status) {
-                const s = data.summary ?? {};
-                toast({
-                    variant: 'success',
-                    description: toHTML(
-                        data.message +
-                            (s.fetched ? ` — ${s.fetched} layanan diproses` : '') +
-                            (s.enabled ? `, ${s.enabled} aktif` : '') +
-                            (s.disabled ? `, ${s.disabled} nonaktif` : '') +
-                            (s.price_changed ? `, ${s.price_changed} harga berubah` : ''),
-                    ),
-                });
-            } else {
-                toast({ variant: 'error', description: toHTML(data?.message ?? 'Sync gagal.') });
-            }
-        } catch (error) {
-            toast({
-                variant: 'error',
-                description: toHTML(error.response?.data?.message ?? 'Terjadi kesalahan, silahkan muat ulang halaman ini.'),
-            });
-        } finally {
-            setIsSyncing(false);
-            if (tableStateRef.current) {
-                fetchData(tableStateRef.current);
-            }
-        }
-    }, [fetchData]);
 
     const columns = useMemo(
         () => [
@@ -1102,6 +1070,13 @@ export default function Index({ pageProps }) {
                     fetchData={fetchData}
                     tableStateRef={tableStateRef}
                 />
+                <SyncService
+                    pageProps={pageProps}
+                    isSyncServicesDialogOpened={isSyncServicesDialogOpened}
+                    setIsSyncServicesDialogOpened={setIsSyncServicesDialogOpened}
+                    fetchData={fetchData}
+                    tableStateRef={tableStateRef}
+                />
                 <Sort
                     pageProps={pageProps}
                     isSortDialogOpened={isSortDialogOpened}
@@ -1177,8 +1152,8 @@ export default function Index({ pageProps }) {
                                     </Button>
                                 )}
                                 {hasRole('service.update') && (
-                                    <Button variant="outline" size="sm" onClick={handleSyncServices} disabled={isSyncing}>
-                                        {isSyncing ? <Loading03Icon className="h-4 w-4 animate-spin" /> : <RefreshIcon className="h-4 w-4" />}
+                                    <Button variant="outline" size="sm" onClick={() => setIsSyncServicesDialogOpened(true)}>
+                                        <RefreshIcon className="h-4 w-4" />
                                         {t('admin/common:actions.sync-services')}
                                     </Button>
                                 )}

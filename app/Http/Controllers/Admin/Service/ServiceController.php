@@ -760,10 +760,15 @@ class ServiceController extends Controller implements HasMiddleware
     {
         abort_unless(auth('admin')->user()->hasRole('service.update'), 403);
 
+        $request->validate(['provider_id' => ['nullable', 'integer']]);
+
         $providers = \App\Models\Service\ServiceProvider::query()
             ->whereHas('serviceProviderConfiguration')
             ->where('type', 'auto')
             ->where('status', '1')
+            ->when($request->filled('provider_id'), function ($query) use ($request) {
+                $query->whereKey((int) $request->input('provider_id'));
+            })
             ->with(['serviceProviderConfiguration', 'locale'])
             ->get();
 
