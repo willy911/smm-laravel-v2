@@ -1,3 +1,4 @@
+import { AppBreadcrumbs } from '@/components/layouts/app-breadcrumbs';
 import AppHeader from '@/components/layouts/app-header';
 import AppearanceToggleDropdown from '@/components/layouts/appearance-dropdown';
 import LanguageToggleDropdown from '@/components/layouts/language-dropdown';
@@ -476,6 +477,14 @@ export default function Dashboard({ pageProps }) {
             <div>
                 <div className="bg-muted/40 flex min-h-screen w-full flex-col">
                     <Navigation t={t} pageProps={pageProps} />
+                    <div className="container mx-auto px-4 pt-4">
+                        <AppBreadcrumbs
+                            breadcrumbs={[
+                                { title: config().name, href: '/' },
+                                { title: t('landing:nav.home'), href: '/' },
+                            ]}
+                        />
+                    </div>
                     <HeroSection summary={summary} t={t} formatAmount={formatAmount} config={config} />
                     <OurServicesSection t={t} />
                     {pageProps?.serviceBestSellings?.length > 0 ||
